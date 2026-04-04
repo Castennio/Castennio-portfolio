@@ -1,6 +1,7 @@
 "use client";
 
 import FadeIn from "./FadeIn";
+import { WordReveal, GradientReveal, BlurReveal } from "./TextReveal";
 
 const challenges = [
   {
@@ -40,20 +41,37 @@ export default function Challenges() {
 
       <div className="max-w-6xl mx-auto">
         {/* Header - editorial style */}
-        <FadeIn className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
           <div>
-            <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
-              Proyectos Destacados
-            </p>
-            <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em] text-white/90">
-              Construido en<br />
-              <span className="text-gradient">tiempo récord</span>
+            <FadeIn>
+              <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
+                Proyectos Destacados
+              </p>
+            </FadeIn>
+            <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em]">
+              <WordReveal as="span" className="text-white/90 block" delay={0.1}>
+                Construido en
+              </WordReveal>
+              <GradientReveal
+                as="span"
+                className="block"
+                delay={0.3}
+                gradientFrom="#3b82f6"
+                gradientTo="#8b5cf6"
+              >
+                tiempo récord
+              </GradientReveal>
             </h2>
           </div>
-          <p className="text-white/40 text-[15px] max-w-sm leading-relaxed">
+          <BlurReveal
+            as="p"
+            className="text-white/40 text-[15px] max-w-sm leading-relaxed"
+            delay={0.4}
+            stagger={0.01}
+          >
             Proyectos reales de nuestros desafíos internos. Demostramos velocidad sin sacrificar calidad.
-          </p>
-        </FadeIn>
+          </BlurReveal>
+        </div>
 
         {/* Projects - elegant cards */}
         <div className="space-y-4">
@@ -63,7 +81,10 @@ export default function Challenges() {
               delay={index * 0.15}
               className="group relative"
             >
-              <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 p-8 md:p-10 rounded-2xl border border-white/[0.04] bg-white/[0.01] hover:bg-white/[0.02] hover:border-white/[0.08] transition-all duration-500">
+              <div
+                data-cursor="Ver"
+                className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 p-8 md:p-10 rounded-2xl border border-white/[0.04] bg-white/[0.01] hover:bg-white/[0.02] hover:border-white/[0.08] transition-all duration-500 cursor-pointer"
+              >
                 {/* Number */}
                 <div className="text-5xl md:text-6xl font-light text-white/[0.06] tabular-nums">
                   {String(index + 1).padStart(2, "0")}

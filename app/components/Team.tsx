@@ -1,6 +1,7 @@
 "use client";
 
 import FadeIn, { StaggerFadeIn } from "./FadeIn";
+import { WordReveal, GradientReveal } from "./TextReveal";
 
 const team = [
   { name: "Dani", role: "Desarrollo", image: "/images/pixel-art/dani.png" },
@@ -17,14 +18,27 @@ export default function Team() {
 
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <FadeIn className="text-center mb-20">
-          <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
-            Equipo
-          </p>
-          <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em] text-white/90">
-            Quienes <span className="text-gradient">construyen</span>
+        <div className="text-center mb-20">
+          <FadeIn>
+            <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
+              Equipo
+            </p>
+          </FadeIn>
+          <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em]">
+            <WordReveal as="span" className="text-white/90" delay={0.1}>
+              Quienes
+            </WordReveal>{" "}
+            <GradientReveal
+              as="span"
+              className="inline-block"
+              delay={0.3}
+              gradientFrom="#3b82f6"
+              gradientTo="#8b5cf6"
+            >
+              construyen
+            </GradientReveal>
           </h2>
-        </FadeIn>
+        </div>
 
         {/* Team grid - 3 members */}
         <StaggerFadeIn className="flex flex-wrap justify-center gap-12 md:gap-16" stagger={0.12}>

@@ -1,6 +1,7 @@
 "use client";
 
 import FadeIn, { StaggerFadeIn } from "./FadeIn";
+import { WordReveal, GradientReveal } from "./TextReveal";
 
 const differentiators = [
   {
@@ -34,19 +35,34 @@ export default function WhyUs() {
     <section className="py-32 px-6 bg-[#050505] relative">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <FadeIn className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
           <div>
-            <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
-              Diferenciadores
-            </p>
-            <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em] text-white/90">
-              Por qué <span className="text-gradient">elegirnos</span>
+            <FadeIn>
+              <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
+                Diferenciadores
+              </p>
+            </FadeIn>
+            <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em]">
+              <WordReveal as="span" className="text-white/90" delay={0.1}>
+                Por qué
+              </WordReveal>{" "}
+              <GradientReveal
+                as="span"
+                className="inline-block"
+                delay={0.3}
+                gradientFrom="#3b82f6"
+                gradientTo="#8b5cf6"
+              >
+                elegirnos
+              </GradientReveal>
             </h2>
           </div>
-          <p className="text-white/40 text-[15px] max-w-sm leading-relaxed">
-            No somos la única opción. Pero sí la que mejor entiende tu negocio.
-          </p>
-        </FadeIn>
+          <FadeIn delay={0.4}>
+            <p className="text-white/40 text-[15px] max-w-sm leading-relaxed">
+              No somos la única opción. Pero sí la que mejor entiende tu negocio.
+            </p>
+          </FadeIn>
+        </div>
 
         {/* Grid - minimal */}
         <StaggerFadeIn

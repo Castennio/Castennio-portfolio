@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import FadeIn from "./FadeIn";
+import { WordReveal, GradientReveal } from "./TextReveal";
 
 const faqs = [
   {
@@ -101,14 +102,27 @@ export default function FAQ() {
 
       <div className="max-w-3xl mx-auto">
         {/* Header */}
-        <FadeIn className="text-center mb-16">
-          <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
-            Preguntas Frecuentes
-          </p>
-          <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em] text-white/90">
-            Dudas <span className="text-gradient">resueltas</span>
+        <div className="text-center mb-16">
+          <FadeIn>
+            <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
+              Preguntas Frecuentes
+            </p>
+          </FadeIn>
+          <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em]">
+            <WordReveal as="span" className="text-white/90" delay={0.1}>
+              Dudas
+            </WordReveal>{" "}
+            <GradientReveal
+              as="span"
+              className="inline-block"
+              delay={0.3}
+              gradientFrom="#3b82f6"
+              gradientTo="#8b5cf6"
+            >
+              resueltas
+            </GradientReveal>
           </h2>
-        </FadeIn>
+        </div>
 
         {/* FAQ List */}
         <FadeIn delay={0.2}>
@@ -130,6 +144,7 @@ export default function FAQ() {
             href="https://wa.me/51999999999"
             target="_blank"
             rel="noopener noreferrer"
+            data-cursor="Chat"
             className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-300 text-[15px]"
           >
             Escríbenos

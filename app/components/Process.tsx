@@ -1,6 +1,7 @@
 "use client";
 
 import FadeIn, { StaggerFadeIn } from "./FadeIn";
+import { WordReveal, GradientReveal } from "./TextReveal";
 
 const steps = [
   {
@@ -33,14 +34,27 @@ export default function Process() {
 
       <div className="relative max-w-6xl mx-auto">
         {/* Header */}
-        <FadeIn className="text-center mb-24">
-          <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
-            Metodología
-          </p>
-          <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em] text-white/90">
-            Proceso <span className="text-gradient">transparente</span>
+        <div className="text-center mb-24">
+          <FadeIn>
+            <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
+              Metodología
+            </p>
+          </FadeIn>
+          <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em]">
+            <WordReveal as="span" className="text-white/90" delay={0.1}>
+              Proceso
+            </WordReveal>{" "}
+            <GradientReveal
+              as="span"
+              className="inline-block"
+              delay={0.3}
+              gradientFrom="#3b82f6"
+              gradientTo="#8b5cf6"
+            >
+              transparente
+            </GradientReveal>
           </h2>
-        </FadeIn>
+        </div>
 
         {/* Steps - horizontal timeline */}
         <div className="relative">

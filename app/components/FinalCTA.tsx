@@ -2,6 +2,8 @@
 
 import MagneticButton from "./MagneticButton";
 import FadeIn from "./FadeIn";
+import { BlurReveal } from "./TextReveal";
+import { HeroLine } from "./HeroText";
 
 export default function FinalCTA() {
   return (
@@ -16,18 +18,21 @@ export default function FinalCTA() {
 
       <div className="relative max-w-2xl mx-auto text-center">
         {/* Heading */}
-        <FadeIn y={40}>
-          <h2 className="text-4xl md:text-6xl font-medium tracking-[-0.02em] text-white/90 mb-6">
+        <HeroLine delay={0.1} className="mb-6">
+          <h2 className="text-4xl md:text-6xl font-medium tracking-[-0.02em] text-white/90">
             ¿Comenzamos?
           </h2>
-        </FadeIn>
+        </HeroLine>
 
         {/* Subtitle */}
-        <FadeIn delay={0.2} y={30}>
-          <p className="text-white/40 text-lg mb-12 leading-relaxed">
-            Conversemos sobre tu proyecto. Sin compromiso.
-          </p>
-        </FadeIn>
+        <BlurReveal
+          as="p"
+          className="text-white/40 text-lg mb-12 leading-relaxed"
+          delay={0.3}
+          stagger={0.02}
+        >
+          Conversemos sobre tu proyecto. Sin compromiso.
+        </BlurReveal>
 
         {/* CTA Button */}
         <FadeIn delay={0.4} y={20}>
@@ -37,6 +42,7 @@ export default function FinalCTA() {
             target="_blank"
             rel="noopener noreferrer"
             strength={0.5}
+            data-cursor="Ir"
             className="inline-flex items-center gap-3 px-10 py-5 bg-white text-black font-medium text-lg rounded-full transition-all duration-500 hover:shadow-[0_0_60px_rgba(255,255,255,0.15)]"
           >
             Iniciar conversación

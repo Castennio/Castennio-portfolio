@@ -1,8 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useEffect, useState, useRef, useCallback } from "react";
 import MagneticButton from "./MagneticButton";
 import FadeIn from "./FadeIn";
+import { HeroWords, HeroBlur, HeroLine } from "./HeroText";
 
 // Dynamically import the fluid simulation to avoid SSR issues
 const FluidSimulation = dynamic(() => import("fluid-simulation-react"), {
@@ -10,15 +12,58 @@ const FluidSimulation = dynamic(() => import("fluid-simulation-react"), {
 });
 
 function FluidBackground() {
-  // Configuration for the fluid effect
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Detect scroll to reduce visual lag
+  const handleScroll = useCallback(() => {
+    setIsScrolling(true);
+
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
+    }
+
+    scrollTimeoutRef.current = setTimeout(() => {
+      setIsScrolling(false);
+    }, 150);
+  }, []);
+
+  useEffect(() => {
+    // Intersection Observer - pause when not visible
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    // Scroll listener
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, [handleScroll]);
+
+  // Optimized configuration - reduced iterations for better performance
   const fluidConfig = {
-    textureDownsample: 1,
-    densityDissipation: 0.97,
-    velocityDissipation: 0.98,
+    textureDownsample: 2, // Increased from 1 for better performance
+    densityDissipation: 0.98,
+    velocityDissipation: 0.99,
     pressureDissipation: 0.8,
-    pressureIterations: 25,
+    pressureIterations: 20, // Reduced from 25
     curl: 30,
-    splatRadius: 0.004,
+    splatRadius: 0.005,
   };
 
   // Colors: very subtle blues and purples
@@ -31,10 +76,17 @@ function FluidBackground() {
   ];
 
   return (
-    <>
-      {/* Fluid simulation as base layer */}
-      <div className="absolute inset-0">
-        <FluidSimulation config={fluidConfig} color={fluidColors} />
+    <div ref={containerRef} className="absolute inset-0">
+      {/* Fluid simulation - only render when visible */}
+      <div
+        className="absolute inset-0 transition-opacity duration-300"
+        style={{
+          opacity: isScrolling ? 0.6 : 1,
+        }}
+      >
+        {isVisible && (
+          <FluidSimulation config={fluidConfig} color={fluidColors} />
+        )}
       </div>
 
       {/* Edge fade overlay */}
@@ -49,7 +101,7 @@ function FluidBackground() {
           `,
         }}
       />
-    </>
+    </div>
   );
 }
 
@@ -84,21 +136,24 @@ export default function Hero() {
         </FadeIn>
 
         {/* Main heading */}
-        <FadeIn delay={0.4} y={40}>
-          <h1 className="text-[clamp(2.5rem,8vw,5.5rem)] font-medium tracking-[-0.03em] leading-[1.1] mb-8">
-            <span className="text-white/90">Creamos experiencias</span>
-            <br />
-            <span className="text-white/90">digitales que </span>
-            <span className="text-gradient">convierten</span>
-          </h1>
-        </FadeIn>
+        <h1 className="text-[clamp(2.5rem,8vw,5.5rem)] font-medium tracking-[-0.03em] leading-[1.1] mb-8">
+          <HeroLine delay={0.3} className="text-white/90">
+            Creamos experiencias
+          </HeroLine>
+          <HeroLine delay={0.45} className="text-white/90">
+            digitales que <span className="text-gradient">convierten</span>
+          </HeroLine>
+        </h1>
 
         {/* Subtitle */}
-        <FadeIn delay={0.6} y={30}>
-          <p className="text-lg md:text-xl text-white/40 max-w-xl mx-auto mb-14 leading-relaxed font-light">
-            Páginas web y sistemas diseñados para impulsar tu negocio al siguiente nivel
-          </p>
-        </FadeIn>
+        <HeroBlur
+          as="p"
+          className="text-lg md:text-xl text-white/40 max-w-xl mx-auto mb-14 leading-relaxed font-light"
+          delay={0.7}
+          stagger={0.015}
+        >
+          Páginas web y sistemas diseñados para impulsar tu negocio al siguiente nivel
+        </HeroBlur>
 
         {/* CTA buttons - interactive, need pointer events */}
         <FadeIn delay={0.8} y={20}>
@@ -107,6 +162,7 @@ export default function Hero() {
               as="a"
               href="#planes"
               strength={0.4}
+              data-cursor="Ver"
               className="group relative z-30 inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium rounded-full transition-all duration-500 hover:shadow-[0_0_40px_rgba(255,255,255,0.15)]"
             >
               <span>Ver planes</span>
@@ -131,6 +187,7 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               strength={0.3}
+              data-cursor="Chat"
               className="relative z-30 inline-flex items-center gap-3 px-8 py-4 text-white/60 hover:text-white font-medium transition-all duration-500"
             >
               <span>Contactar</span>

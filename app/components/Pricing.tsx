@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import FadeIn, { StaggerFadeIn } from "./FadeIn";
+import { WordReveal, GradientReveal, BlurReveal } from "./TextReveal";
 
 interface Plan {
   id: string;
@@ -198,6 +199,7 @@ function PlanCard({ plan }: { plan: Plan }) {
           )}`}
           target="_blank"
           rel="noopener noreferrer"
+          data-cursor="Elegir"
           className={`block w-full py-4 text-center font-medium text-[15px] rounded-xl transition-all duration-500 ${
             plan.featured
               ? "bg-white text-black hover:shadow-[0_0_40px_rgba(255,255,255,0.1)]"
@@ -219,17 +221,35 @@ export default function Pricing() {
 
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <FadeIn className="text-center mb-20">
-          <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
-            Inversión
-          </p>
-          <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em] text-white/90 mb-6">
-            Planes <span className="text-gradient">flexibles</span>
+        <div className="text-center mb-20">
+          <FadeIn>
+            <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
+              Inversión
+            </p>
+          </FadeIn>
+          <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em] mb-6">
+            <WordReveal as="span" className="text-white/90" delay={0.1}>
+              Planes
+            </WordReveal>{" "}
+            <GradientReveal
+              as="span"
+              className="inline-block"
+              delay={0.3}
+              gradientFrom="#3b82f6"
+              gradientTo="#8b5cf6"
+            >
+              flexibles
+            </GradientReveal>
           </h2>
-          <p className="text-white/40 text-[15px] max-w-md mx-auto">
+          <BlurReveal
+            as="p"
+            className="text-white/40 text-[15px] max-w-md mx-auto"
+            delay={0.4}
+            stagger={0.01}
+          >
             Elige el plan que mejor se adapte a tu etapa de negocio
-          </p>
-        </FadeIn>
+          </BlurReveal>
+        </div>
 
         {/* Plans */}
         <StaggerFadeIn className="grid md:grid-cols-3 gap-6" stagger={0.15}>

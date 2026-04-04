@@ -58,6 +58,7 @@ export default function Navbar() {
             href="https://wa.me/51999999999"
             target="_blank"
             rel="noopener noreferrer"
+            data-cursor="Chat"
             className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-medium text-white/80 hover:text-white border border-white/[0.08] hover:border-white/20 rounded-full transition-all duration-300 hover:bg-white/[0.02]"
           >
             Hablemos
