@@ -20,7 +20,7 @@ export default function FinalCTA() {
         {/* Heading */}
         <HeroLine delay={0.1} className="mb-6">
           <h2 className="text-4xl md:text-6xl font-medium tracking-[-0.02em] text-white/90">
-            ¿Comenzamos?
+            Da el primer paso hoy
           </h2>
         </HeroLine>
 
@@ -31,21 +31,21 @@ export default function FinalCTA() {
           delay={0.3}
           stagger={0.02}
         >
-          Conversemos sobre tu proyecto. Sin compromiso.
+          Escríbenos y te decimos en 5 minutos cómo podemos ayudar a tu negocio. Sin costo, sin compromiso.
         </BlurReveal>
 
         {/* CTA Button */}
         <FadeIn delay={0.4} y={20}>
           <MagneticButton
             as="a"
-            href="https://wa.me/51999999999?text=Hola,%20me%20interesa%20saber%20más%20sobre%20sus%20servicios"
+            href="https://wa.me/51998162677?text=Hola,%20quiero%20saber%20cómo%20pueden%20ayudar%20a%20mi%20negocio"
             target="_blank"
             rel="noopener noreferrer"
             strength={0.5}
-            data-cursor="Ir"
+            data-cursor="Escríbenos"
             className="inline-flex items-center gap-3 px-10 py-5 bg-white text-black font-medium text-lg rounded-full transition-all duration-500 hover:shadow-[0_0_60px_rgba(255,255,255,0.15)]"
           >
-            Iniciar conversación
+            Escríbenos por WhatsApp
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -55,7 +55,7 @@ export default function FinalCTA() {
         {/* Response time */}
         <FadeIn delay={0.6} y={15}>
           <p className="mt-8 text-white/25 text-[13px]">
-            Respuesta en menos de 24 horas
+            Respuesta rápida · Sin presión · Diagnóstico gratis
           </p>
         </FadeIn>
       </div>

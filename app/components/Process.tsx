@@ -6,23 +6,23 @@ import { WordReveal, GradientReveal } from "./TextReveal";
 const steps = [
   {
     number: "01",
-    title: "Descubrimiento",
-    description: "Entendemos tu visión, objetivos y necesidades específicas de tu negocio.",
+    title: "Escríbenos",
+    description: "Nos cuentas tu situación por WhatsApp. Te damos un diagnóstico gratis en minutos.",
   },
   {
     number: "02",
-    title: "Propuesta",
-    description: "Diseñamos una solución a medida con alcance, tiempos y precio transparente.",
+    title: "Recibe tu plan",
+    description: "Te mostramos exactamente qué vamos a hacer y cuánto cuesta. Todo claro desde el inicio.",
   },
   {
     number: "03",
-    title: "Desarrollo",
-    description: "Construimos tu proyecto con avances semanales y comunicación constante.",
+    title: "Nosotros trabajamos",
+    description: "Creamos tu sistema mientras tú sigues con tu negocio. Solo te pedimos aprobaciones.",
   },
   {
     number: "04",
-    title: "Lanzamiento",
-    description: "Entregamos, capacitamos y acompañamos en la puesta en marcha.",
+    title: "Ves los resultados",
+    description: "Tu negocio funcionando mejor. Más clientes, menos trabajo manual, más control.",
   },
 ];
 
@@ -37,12 +37,12 @@ export default function Process() {
         <div className="text-center mb-24">
           <FadeIn>
             <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
-              Metodología
+              Cómo empezar
             </p>
           </FadeIn>
           <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em]">
             <WordReveal as="span" className="text-white/90" delay={0.1}>
-              Proceso
+              4 pasos para
             </WordReveal>{" "}
             <GradientReveal
               as="span"
@@ -51,7 +51,7 @@ export default function Process() {
               gradientFrom="#3b82f6"
               gradientTo="#8b5cf6"
             >
-              transparente
+              transformar tu negocio
             </GradientReveal>
           </h2>
         </div>

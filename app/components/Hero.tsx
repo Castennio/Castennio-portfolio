@@ -107,7 +107,7 @@ function FluidBackground() {
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[100svh] md:min-h-screen flex items-center justify-center overflow-hidden py-16 md:py-0">
       {/* Fluid layer - base, receives mouse events */}
       <div className="absolute inset-0 z-0">
         <FluidBackground />
@@ -127,45 +127,47 @@ export default function Hero() {
       <div className="relative z-20 max-w-5xl mx-auto px-6 text-center pointer-events-none">
         {/* Subtle badge */}
         <FadeIn delay={0.2} y={20}>
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 mb-12 rounded-full border border-white/[0.08] bg-white/[0.02] backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-5 py-2 md:py-2.5 mb-6 md:mb-12 rounded-full border border-white/[0.08] bg-white/[0.02] backdrop-blur-sm">
             <span className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-            <span className="text-[13px] text-white/50 tracking-wide uppercase">
-              Desarrollo Premium
+            <span className="text-[11px] md:text-[13px] text-white/50 tracking-wide uppercase">
+              Soluciones digitales para crecer
             </span>
           </div>
         </FadeIn>
 
         {/* Main heading */}
-        <h1 className="text-[clamp(2.5rem,8vw,5.5rem)] font-medium tracking-[-0.03em] leading-[1.1] mb-8">
+        <h1 className="text-[clamp(2rem,8vw,5.5rem)] font-medium tracking-[-0.03em] leading-[1.1] mb-4 md:mb-8">
           <HeroLine delay={0.3} className="text-white/90">
-            Creamos experiencias
+            Más ventas,
           </HeroLine>
           <HeroLine delay={0.45} className="text-white/90">
-            digitales que <span className="text-gradient">convierten</span>
+            menos <span className="text-gradient">dolores de cabeza</span>
           </HeroLine>
         </h1>
 
         {/* Subtitle */}
         <HeroBlur
           as="p"
-          className="text-lg md:text-xl text-white/40 max-w-xl mx-auto mb-14 leading-relaxed font-light"
+          className="text-sm md:text-xl text-white/40 max-w-[280px] md:max-w-xl mx-auto mb-8 md:mb-14 leading-relaxed font-light"
           delay={0.7}
           stagger={0.015}
         >
-          Páginas web y sistemas diseñados para impulsar tu negocio al siguiente nivel
+          Creamos sistemas que atraen clientes y automatizan tu negocio. Tú solo ves los resultados.
         </HeroBlur>
 
         {/* CTA buttons - interactive, need pointer events */}
         <FadeIn delay={0.8} y={20}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pointer-events-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 pointer-events-auto">
             <MagneticButton
               as="a"
-              href="#planes"
+              href="https://wa.me/51998162677?text=Hola,%20quiero%20saber%20cómo%20pueden%20ayudar%20a%20mi%20negocio"
+              target="_blank"
+              rel="noopener noreferrer"
               strength={0.4}
-              data-cursor="Ver"
-              className="group relative z-30 inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium rounded-full transition-all duration-500 hover:shadow-[0_0_40px_rgba(255,255,255,0.15)]"
+              data-cursor="Escríbenos"
+              className="group relative z-30 inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 bg-white text-black text-sm md:text-base font-medium rounded-full transition-all duration-500 hover:shadow-[0_0_40px_rgba(255,255,255,0.15)]"
             >
-              <span>Ver planes</span>
+              <span>Quiero más clientes</span>
               <svg
                 className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1"
                 fill="none"
@@ -183,14 +185,12 @@ export default function Hero() {
 
             <MagneticButton
               as="a"
-              href="https://wa.me/51999999999"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#planes"
               strength={0.3}
-              data-cursor="Chat"
-              className="relative z-30 inline-flex items-center gap-3 px-8 py-4 text-white/60 hover:text-white font-medium transition-all duration-500"
+              data-cursor="Ver"
+              className="relative z-30 inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-2 md:py-4 text-white/60 hover:text-white text-sm md:text-base font-medium transition-all duration-500"
             >
-              <span>Contactar</span>
+              <span>Ver planes</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
               </svg>
@@ -200,18 +200,18 @@ export default function Hero() {
 
         {/* Trust indicators */}
         <FadeIn delay={1} y={20}>
-          <div className="mt-24 flex items-center justify-center gap-12 text-white/25 text-[13px] tracking-wide">
-            <span>Entrega rápida</span>
+          <div className="mt-8 md:mt-24 flex flex-row items-center justify-center gap-4 md:gap-12 text-white/25 text-[10px] md:text-[13px] tracking-wide">
+            <span>Consulta gratis</span>
             <span className="w-1 h-1 bg-white/20 rounded-full" />
-            <span>Código propio</span>
-            <span className="w-1 h-1 bg-white/20 rounded-full" />
-            <span>Soporte incluido</span>
+            <span>Respuesta en 24h</span>
+            <span className="hidden md:block w-1 h-1 bg-white/20 rounded-full" />
+            <span className="hidden md:block">Sin compromiso</span>
           </div>
         </FadeIn>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
+      {/* Scroll indicator - hidden on mobile */}
+      <div className="hidden md:block absolute bottom-12 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
         <div className="w-px h-16 bg-gradient-to-b from-transparent via-white/20 to-transparent" />
       </div>
     </section>

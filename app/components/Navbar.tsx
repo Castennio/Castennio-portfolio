@@ -55,7 +55,7 @@ export default function Navbar() {
 
           {/* CTA - refined */}
           <a
-            href="https://wa.me/51999999999"
+            href="https://wa.me/51998162677"
             target="_blank"
             rel="noopener noreferrer"
             data-cursor="Chat"

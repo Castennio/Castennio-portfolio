@@ -5,28 +5,28 @@ import { WordReveal, GradientReveal } from "./TextReveal";
 
 const differentiators = [
   {
-    title: "Código propio",
-    description: "Sin plantillas. Cada proyecto es único, construido desde cero.",
+    title: "Más clientes, menos esfuerzo",
+    description: "Creamos un sistema que atrae clientes mientras tú te dedicas a lo que sabes hacer.",
   },
   {
-    title: "Entrega ágil",
-    description: "Avances semanales visibles. Comunicación constante.",
+    title: "Recuperas tu tiempo",
+    description: "Lo que hacías en horas ahora pasa solo. Cotizaciones, citas, seguimientos automáticos.",
   },
   {
-    title: "Soporte real",
-    description: "Acompañamiento post-lanzamiento incluido.",
+    title: "Decisiones con información",
+    description: "Sabes exactamente cuántos clientes tienes, cuánto vendes y qué funciona.",
   },
   {
-    title: "Precio claro",
-    description: "Propuesta detallada sin costos ocultos.",
+    title: "Tú no tocas nada técnico",
+    description: "Nosotros hacemos todo. Tú solo nos dices qué necesitas y apruebas los cambios.",
   },
   {
-    title: "Equipo local",
-    description: "Basados en Perú. Mismo horario, mismo idioma.",
+    title: "Funcionando en días",
+    description: "No esperamos meses. Tu sistema listo rápido porque tu negocio lo necesita ahora.",
   },
   {
-    title: "Acceso directo",
-    description: "Comunicación por WhatsApp. Sin intermediarios.",
+    title: "Atención real por WhatsApp",
+    description: "Hablamos contigo directamente. Respuestas rápidas de personas, no de robots.",
   },
 ];
 
@@ -39,27 +39,27 @@ export default function WhyUs() {
           <div>
             <FadeIn>
               <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
-                Diferenciadores
+                Tu negocio transformado
               </p>
             </FadeIn>
             <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em]">
               <WordReveal as="span" className="text-white/90" delay={0.1}>
-                Por qué
+                Esto es lo que
               </WordReveal>{" "}
               <GradientReveal
                 as="span"
                 className="inline-block"
                 delay={0.3}
-                gradientFrom="#3b82f6"
-                gradientTo="#8b5cf6"
+                gradientFrom="#22c55e"
+                gradientTo="#3b82f6"
               >
-                elegirnos
+                vas a lograr
               </GradientReveal>
             </h2>
           </div>
           <FadeIn delay={0.4}>
             <p className="text-white/40 text-[15px] max-w-sm leading-relaxed">
-              No somos la única opción. Pero sí la que mejor entiende tu negocio.
+              Sin saber nada de tecnología, vas a tener un negocio que crece solo y te da la libertad que buscas.
             </p>
           </FadeIn>
         </div>

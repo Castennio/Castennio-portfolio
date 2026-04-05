@@ -20,72 +20,67 @@ interface Plan {
 
 const plans: Plan[] = [
   {
-    id: "presencia",
-    name: "Presencia",
-    tagline: "Existir online",
-    description: "Para quienes necesitan una presencia digital profesional",
+    id: "starter",
+    name: "Starter",
+    tagline: "Empieza a atraer clientes",
+    description: "Para negocios que quieren dejar de ser invisibles y empezar a recibir contactos",
     features: [
-      "Página web con secciones esenciales",
-      "Diseño responsive optimizado",
-      "Integración de WhatsApp",
-      "SEO básico configurado",
-      "Hosting rápido incluido",
+      "Clientes te encuentran en Google",
+      "Te contactan directo por WhatsApp",
+      "Se ve perfecto en celular",
+      "Listo en pocos días",
+      "Cero conocimiento técnico necesario",
     ],
-    cta: "Comenzar",
+    cta: "Consultar este plan",
     addon: {
-      name: "Setup Básico",
-      services: ["Configuración de dominio", "Setup de hosting"],
+      name: "Puesta en marcha",
+      services: ["Te ayudamos a elegir tu nombre web", "Lo dejamos todo funcionando"],
     },
   },
   {
-    id: "clientes",
-    name: "Conversión",
-    tagline: "Generar clientes",
-    description: "Diseñado para convertir visitantes en clientes",
+    id: "growth",
+    name: "Growth",
+    tagline: "Convierte visitantes en clientes",
+    description: "Para negocios listos para vender más y dejar de perder oportunidades",
     features: [
-      "Página optimizada para conversión",
-      "Copywriting estratégico",
-      "Formularios con integración",
-      "SEO avanzado",
-      "Pasarela de pagos integrada",
-      "Analytics configurado",
+      "Diseño que genera confianza y ventas",
+      "Los interesados te escriben solos",
+      "Recibe pagos sin complicaciones",
+      "Sabes cuántas personas te visitan",
+      "Textos escritos para vender",
     ],
-    cta: "Elegir plan",
+    cta: "Consultar este plan",
     featured: true,
     addon: {
-      name: "Setup Completo",
+      name: "Lanzamiento completo",
       services: [
-        "Dominio personalizado",
-        "Hosting premium",
-        "Emails corporativos",
-        "Pasarela de pagos",
-        "Puesta en marcha",
+        "Tu propio nombre web",
+        "Correos profesionales",
+        "Pagos configurados",
+        "Te enseñamos a usarlo",
       ],
     },
   },
   {
-    id: "sistema",
-    name: "Sistema",
-    tagline: "Escalar negocio",
-    description: "Para digitalizar y automatizar operaciones",
+    id: "scale",
+    name: "Scale",
+    tagline: "Automatiza y libera tu tiempo",
+    description: "Para negocios que quieren crecer sin trabajar más horas",
     features: [
-      "Panel de administración",
-      "Gestión de usuarios y roles",
-      "Autenticación segura",
-      "Dashboard con métricas",
-      "Base de datos escalable",
-      "Automatizaciones",
-      "API documentada",
+      "Tu negocio en un solo panel",
+      "Cotizaciones se envían solas",
+      "Reportes claros de tus ventas",
+      "Tu equipo puede acceder",
+      "Preparado para crecer contigo",
     ],
-    cta: "Escalar",
+    cta: "Consultar este plan",
     addon: {
-      name: "Setup Premium",
+      name: "Transformación completa",
       services: [
-        "Todo de Setup Completo",
-        "Base de datos cloud",
-        "Integraciones API",
-        "Automatizaciones",
-        "Capacitación",
+        "Organizamos tu información",
+        "Conectamos tus herramientas",
+        "Capacitamos a tu equipo",
+        "Atención prioritaria",
       ],
     },
   },
@@ -194,7 +189,7 @@ function PlanCard({ plan }: { plan: Plan }) {
 
         {/* CTA */}
         <a
-          href={`https://wa.me/51999999999?text=${encodeURIComponent(
+          href={`https://wa.me/51998162677?text=${encodeURIComponent(
             `Hola, me interesa el plan ${plan.name}${addonEnabled ? ` con ${plan.addon.name}` : ""}`
           )}`}
           target="_blank"
@@ -224,12 +219,12 @@ export default function Pricing() {
         <div className="text-center mb-20">
           <FadeIn>
             <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
-              Inversión
+              Planes para cada etapa
             </p>
           </FadeIn>
           <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em] mb-6">
             <WordReveal as="span" className="text-white/90" delay={0.1}>
-              Planes
+              ¿Cuál es tu
             </WordReveal>{" "}
             <GradientReveal
               as="span"
@@ -238,7 +233,7 @@ export default function Pricing() {
               gradientFrom="#3b82f6"
               gradientTo="#8b5cf6"
             >
-              flexibles
+              mayor desafío?
             </GradientReveal>
           </h2>
           <BlurReveal
@@ -247,7 +242,7 @@ export default function Pricing() {
             delay={0.4}
             stagger={0.01}
           >
-            Elige el plan que mejor se adapte a tu etapa de negocio
+            No tienes que decidir ahora. Escríbenos y juntos elegimos qué necesita tu negocio
           </BlurReveal>
         </div>
 
@@ -260,7 +255,7 @@ export default function Pricing() {
 
         {/* Disclaimer */}
         <p className="text-center text-white/20 text-[13px] mt-16">
-          No incluye costos de servicios externos (dominio, hosting, pasarelas)
+          ¿No estás seguro? Escríbenos y te decimos cuál te conviene. Sin compromiso ni presión.
         </p>
       </div>
     </section>
