@@ -113,7 +113,7 @@ function PlanCard({ plan }: { plan: Plan }) {
               </span>
             )}
           </div>
-          <p className="text-[13px] text-white/30 tracking-wide">{plan.tagline}</p>
+          <p className="text-[13px] text-white/50 tracking-wide">{plan.tagline}</p>
         </div>
 
         {/* Features */}
@@ -121,7 +121,7 @@ function PlanCard({ plan }: { plan: Plan }) {
           {plan.features.map((feature, index) => (
             <li key={index} className="flex items-start gap-3">
               <div className="w-1 h-1 rounded-full bg-white/30 mt-2.5 flex-shrink-0" />
-              <span className="text-[15px] text-white/50 leading-relaxed">{feature}</span>
+              <span className="text-[15px] text-white/60 leading-relaxed">{feature}</span>
             </li>
           ))}
         </ul>
@@ -152,7 +152,7 @@ function PlanCard({ plan }: { plan: Plan }) {
                 <p className={`text-sm ${addonEnabled ? "text-white/80" : "text-white/50"}`}>
                   {plan.addon.name}
                 </p>
-                <p className="text-[11px] text-white/25">Costo adicional</p>
+                <p className="text-[11px] text-white/40">Costo adicional</p>
               </div>
             </div>
 
@@ -177,7 +177,7 @@ function PlanCard({ plan }: { plan: Plan }) {
             <div className="px-4 pb-4 pt-1 border-t border-white/[0.04]">
               <ul className="space-y-2">
                 {plan.addon.services.map((service, index) => (
-                  <li key={index} className="flex items-center gap-2 text-[13px] text-white/40">
+                  <li key={index} className="flex items-center gap-2 text-[13px] text-white/55">
                     <div className="w-1 h-1 rounded-full bg-blue-500/50" />
                     {service}
                   </li>
@@ -218,7 +218,7 @@ export default function Pricing() {
         {/* Header */}
         <div className="text-center mb-20">
           <FadeIn>
-            <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
+            <p className="text-[13px] text-white/50 tracking-widest uppercase mb-4">
               Planes para cada etapa
             </p>
           </FadeIn>
@@ -238,7 +238,7 @@ export default function Pricing() {
           </h2>
           <BlurReveal
             as="p"
-            className="text-white/40 text-[15px] max-w-md mx-auto"
+            className="text-white/55 text-[15px] max-w-md mx-auto"
             delay={0.4}
             stagger={0.01}
           >
@@ -254,7 +254,7 @@ export default function Pricing() {
         </StaggerFadeIn>
 
         {/* Disclaimer */}
-        <p className="text-center text-white/20 text-[13px] mt-16">
+        <p className="text-center text-white/40 text-[13px] mt-16">
           ¿No estás seguro? Escríbenos y te decimos cuál te conviene. Sin compromiso ni presión.
         </p>
       </div>

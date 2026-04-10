@@ -125,15 +125,6 @@ export default function Hero() {
 
       {/* Content - on top, non-interactive elements are pointer-events-none */}
       <div className="relative z-20 max-w-5xl mx-auto px-6 text-center pointer-events-none">
-        {/* Subtle badge */}
-        <FadeIn delay={0.2} y={20}>
-          <div className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-5 py-2 md:py-2.5 mb-6 md:mb-12 rounded-full border border-white/[0.08] bg-white/[0.02] backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-            <span className="text-[11px] md:text-[13px] text-white/50 tracking-wide uppercase">
-              Soluciones digitales para crecer
-            </span>
-          </div>
-        </FadeIn>
 
         {/* Main heading */}
         <h1 className="text-[clamp(2rem,8vw,5.5rem)] font-medium tracking-[-0.03em] leading-[1.1] mb-4 md:mb-8">
@@ -148,7 +139,7 @@ export default function Hero() {
         {/* Subtitle */}
         <HeroBlur
           as="p"
-          className="text-sm md:text-xl text-white/40 max-w-[280px] md:max-w-xl mx-auto mb-8 md:mb-14 leading-relaxed font-light"
+          className="text-sm md:text-xl text-white/55 max-w-[280px] md:max-w-xl mx-auto mb-8 md:mb-14 leading-relaxed font-light"
           delay={0.7}
           stagger={0.015}
         >
@@ -200,7 +191,7 @@ export default function Hero() {
 
         {/* Trust indicators */}
         <FadeIn delay={1} y={20}>
-          <div className="mt-8 md:mt-24 flex flex-row items-center justify-center gap-4 md:gap-12 text-white/25 text-[10px] md:text-[13px] tracking-wide">
+          <div className="mt-8 md:mt-24 flex flex-row items-center justify-center gap-4 md:gap-12 text-white/40 text-[10px] md:text-[13px] tracking-wide">
             <span>Consulta gratis</span>
             <span className="w-1 h-1 bg-white/20 rounded-full" />
             <span>Respuesta en 24h</span>

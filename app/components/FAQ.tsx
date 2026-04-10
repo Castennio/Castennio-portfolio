@@ -50,7 +50,7 @@ function FAQItem({
         className="w-full flex items-center justify-between py-6 text-left cursor-pointer group"
       >
         <div className="flex items-center gap-6">
-          <span className="text-sm text-white/20 tabular-nums">
+          <span className="text-sm text-white/35 tabular-nums">
             {String(index + 1).padStart(2, "0")}
           </span>
           <span
@@ -84,7 +84,7 @@ function FAQItem({
           isOpen ? "max-h-48 opacity-100 pb-6" : "max-h-0 opacity-0"
         }`}
       >
-        <p className="text-white/40 text-[15px] leading-relaxed pl-12 max-w-2xl">
+        <p className="text-white/55 text-[15px] leading-relaxed pl-12 max-w-2xl">
           {faq.answer}
         </p>
       </div>
@@ -104,7 +104,7 @@ export default function FAQ() {
         {/* Header */}
         <div className="text-center mb-16">
           <FadeIn>
-            <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
+            <p className="text-[13px] text-white/50 tracking-widest uppercase mb-4">
               Preguntas Frecuentes
             </p>
           </FadeIn>
@@ -139,7 +139,7 @@ export default function FAQ() {
 
         {/* Additional help */}
         <div className="mt-16 text-center">
-          <p className="text-white/30 text-[15px] mb-4">¿Otra pregunta?</p>
+          <p className="text-white/50 text-[15px] mb-4">¿Otra pregunta?</p>
           <a
             href="https://wa.me/51999999999"
             target="_blank"

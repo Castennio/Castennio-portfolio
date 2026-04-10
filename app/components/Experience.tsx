@@ -174,7 +174,7 @@ export default function Experience() {
         {/* Header */}
         <div className="text-center mb-16">
           <FadeIn>
-            <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
+            <p className="text-[13px] text-white/50 tracking-widest uppercase mb-4">
               Portafolio
             </p>
           </FadeIn>
@@ -193,7 +193,7 @@ export default function Experience() {
             </GradientReveal>
           </h2>
           <FadeIn delay={0.4}>
-            <p className="text-white/40 text-[15px] mt-4 max-w-xl mx-auto">
+            <p className="text-white/55 text-[15px] mt-4 max-w-xl mx-auto">
               Proyectos destacados de nuestro equipo antes de formar Castennio
             </p>
           </FadeIn>
@@ -257,7 +257,7 @@ export default function Experience() {
                 <div className="text-center md:text-left">
                   <h3 className="text-xl font-medium text-white/90">{currentMember.name}</h3>
                   <p className="text-[13px] text-blue-400 mb-3">{currentMember.role}</p>
-                  <p className="text-white/50 text-[14px] leading-relaxed max-w-xl">
+                  <p className="text-white/60 text-[14px] leading-relaxed max-w-xl">
                     {currentMember.bio}
                   </p>
                 </div>
@@ -311,7 +311,7 @@ export default function Experience() {
 
           {/* Scroll hint for mobile */}
           <div className="flex justify-center mt-6 md:hidden">
-            <p className="text-white/30 text-[12px] flex items-center gap-2">
+            <p className="text-white/45 text-[12px] flex items-center gap-2">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m-12 6h12m-12 6h12M4 7h.01M4 13h.01M4 19h.01" />
               </svg>
@@ -322,7 +322,7 @@ export default function Experience() {
 
         {/* Note */}
         <FadeIn delay={0.6}>
-          <p className="text-center text-white/20 text-[13px] mt-16">
+          <p className="text-center text-white/40 text-[13px] mt-16">
             Proyectos realizados individualmente antes de formar el equipo
           </p>
         </FadeIn>
@@ -380,7 +380,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
           <h3 className="text-[17px] font-medium text-white/90 mb-2 group-hover:text-white transition-colors">
             {project.title}
           </h3>
-          <p className="text-[13px] text-white/40 leading-relaxed mb-4 line-clamp-2">
+          <p className="text-[13px] text-white/55 leading-relaxed mb-4 line-clamp-2">
             {project.description}
           </p>
 
@@ -389,7 +389,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
             {project.technologies.map((tech, idx) => (
               <span
                 key={idx}
-                className="px-2 py-1 text-[10px] rounded-md bg-white/5 text-white/50 border border-white/[0.06]"
+                className="px-2 py-1 text-[10px] rounded-md bg-white/5 text-white/60 border border-white/[0.06]"
               >
                 {tech}
               </span>

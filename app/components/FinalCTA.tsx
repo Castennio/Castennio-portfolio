@@ -27,7 +27,7 @@ export default function FinalCTA() {
         {/* Subtitle */}
         <BlurReveal
           as="p"
-          className="text-white/40 text-lg mb-12 leading-relaxed"
+          className="text-white/55 text-lg mb-12 leading-relaxed"
           delay={0.3}
           stagger={0.02}
         >
@@ -54,7 +54,7 @@ export default function FinalCTA() {
 
         {/* Response time */}
         <FadeIn delay={0.6} y={15}>
-          <p className="mt-8 text-white/25 text-[13px]">
+          <p className="mt-8 text-white/45 text-[13px]">
             Respuesta rápida · Sin presión · Diagnóstico gratis
           </p>
         </FadeIn>

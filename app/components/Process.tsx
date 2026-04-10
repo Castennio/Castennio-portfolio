@@ -36,7 +36,7 @@ export default function Process() {
         {/* Header */}
         <div className="text-center mb-24">
           <FadeIn>
-            <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
+            <p className="text-[13px] text-white/50 tracking-widest uppercase mb-4">
               Cómo empezar
             </p>
           </FadeIn>
@@ -82,7 +82,7 @@ export default function Process() {
                   <h3 className="text-xl font-medium text-white/90 mb-3">
                     {step.title}
                   </h3>
-                  <p className="text-[15px] text-white/40 leading-relaxed">
+                  <p className="text-[15px] text-white/55 leading-relaxed">
                     {step.description}
                   </p>
                 </div>

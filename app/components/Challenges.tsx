@@ -41,7 +41,7 @@ export default function Challenges() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
           <div>
             <FadeIn>
-              <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
+              <p className="text-[13px] text-white/50 tracking-widest uppercase mb-4">
                 Sabemos lo que enfrentas
               </p>
             </FadeIn>
@@ -62,7 +62,7 @@ export default function Challenges() {
           </div>
           <BlurReveal
             as="p"
-            className="text-white/40 text-[15px] max-w-sm leading-relaxed"
+            className="text-white/55 text-[15px] max-w-sm leading-relaxed"
             delay={0.4}
             stagger={0.01}
           >
@@ -96,7 +96,7 @@ export default function Challenges() {
                   <h3 className="text-2xl md:text-3xl font-medium text-white/90 mb-3 group-hover:text-white transition-colors duration-300">
                     {problem.title}
                   </h3>
-                  <p className="text-white/40 text-[15px] leading-relaxed max-w-xl">
+                  <p className="text-white/55 text-[15px] leading-relaxed max-w-xl">
                     {problem.description}
                   </p>
                 </div>

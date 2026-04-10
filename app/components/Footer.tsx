@@ -70,7 +70,7 @@ export default function Footer() {
           <div className="max-w-6xl mx-auto px-6 py-20 md:py-32">
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-12">
               <div className="max-w-2xl">
-                <p className="text-[13px] text-white/30 tracking-widest uppercase mb-6">
+                <p className="text-[13px] text-white/50 tracking-widest uppercase mb-6">
                   Empecemos algo juntos
                 </p>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-[-0.02em] leading-[1.1]">
@@ -125,7 +125,7 @@ export default function Footer() {
                 <img src="/images/Castennio.png" alt="Castennio" className="w-10 h-10" />
                 <span className="text-lg font-medium text-white/90">Castennio</span>
               </div>
-              <p className="text-[14px] text-white/40 leading-relaxed mb-8 max-w-[260px]">
+              <p className="text-[14px] text-white/55 leading-relaxed mb-8 max-w-[260px]">
                 Soluciones digitales que transforman negocios. Desde landing pages hasta sistemas completos.
               </p>
 
@@ -156,7 +156,7 @@ export default function Footer() {
                   <li key={item.name}>
                     <a
                       href={item.href}
-                      className="text-[14px] text-white/40 hover:text-white transition-colors duration-300"
+                      className="text-[14px] text-white/55 hover:text-white transition-colors duration-300"
                     >
                       {item.name}
                     </a>
@@ -175,7 +175,7 @@ export default function Footer() {
                   <li key={item.name}>
                     <a
                       href={item.href}
-                      className="text-[14px] text-white/40 hover:text-white transition-colors duration-300"
+                      className="text-[14px] text-white/55 hover:text-white transition-colors duration-300"
                     >
                       {item.name}
                     </a>
@@ -203,13 +203,13 @@ export default function Footer() {
                 <li>
                   <a
                     href="mailto:castennio@gmail.com"
-                    className="text-[14px] text-white/40 hover:text-white transition-colors duration-300"
+                    className="text-[14px] text-white/55 hover:text-white transition-colors duration-300"
                   >
                     castennio@gmail.com
                   </a>
                 </li>
                 <li>
-                  <span className="text-[14px] text-white/40">
+                  <span className="text-[14px] text-white/55">
                     Lima, Perú
                   </span>
                 </li>
@@ -222,7 +222,7 @@ export default function Footer() {
         <div className="border-t border-white/[0.04]">
           <div className="max-w-6xl mx-auto px-6 py-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              <p className="text-[13px] text-white/25 order-2 md:order-1">
+              <p className="text-[13px] text-white/40 order-2 md:order-1">
                 © {currentYear} Castennio. Todos los derechos reservados.
               </p>
 
@@ -231,7 +231,7 @@ export default function Footer() {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-[13px] text-white/25 hover:text-white/50 transition-colors duration-300"
+                    className="text-[13px] text-white/40 hover:text-white/60 transition-colors duration-300"
                   >
                     {item.name}
                   </a>

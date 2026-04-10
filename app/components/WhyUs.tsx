@@ -38,7 +38,7 @@ export default function WhyUs() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
           <div>
             <FadeIn>
-              <p className="text-[13px] text-white/30 tracking-widest uppercase mb-4">
+              <p className="text-[13px] text-white/50 tracking-widest uppercase mb-4">
                 Tu negocio transformado
               </p>
             </FadeIn>
@@ -58,7 +58,7 @@ export default function WhyUs() {
             </h2>
           </div>
           <FadeIn delay={0.4}>
-            <p className="text-white/40 text-[15px] max-w-sm leading-relaxed">
+            <p className="text-white/55 text-[15px] max-w-sm leading-relaxed">
               Sin saber nada de tecnología, vas a tener un negocio que crece solo y te da la libertad que buscas.
             </p>
           </FadeIn>
@@ -77,7 +77,7 @@ export default function WhyUs() {
                   <h3 className="text-lg font-medium text-white/80 mb-2 group-hover:text-white transition-colors duration-300">
                     {item.title}
                   </h3>
-                  <p className="text-[15px] text-white/40 leading-relaxed">
+                  <p className="text-[15px] text-white/55 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
