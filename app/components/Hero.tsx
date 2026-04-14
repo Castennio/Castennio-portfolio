@@ -115,7 +115,7 @@ function FluidBackground() {
   ];
 
   const fluidColors = theme === "dark" ? darkColors : lightColors;
-  const edgeColor = theme === "dark" ? "#0a0a0f" : "#fafafa";
+  const edgeColor = theme === "dark" ? "#0a0a0f" : "#ffffff";
 
   return (
     <div ref={containerRef} className="absolute inset-0">
@@ -154,7 +154,7 @@ export default function Hero() {
   const isDark = theme === "dark";
 
   return (
-    <section className={`relative min-h-[100svh] md:min-h-screen flex items-center justify-center overflow-hidden py-16 md:py-0 transition-colors duration-500 ${isDark ? "bg-[#0a0a0f]" : "bg-[#fafafa]"}`}>
+    <section className={`relative min-h-[100svh] md:min-h-screen flex items-center justify-center overflow-hidden py-16 md:py-0 transition-colors duration-500 ${isDark ? "bg-[#0a0a0f]" : "bg-[#ffffff]"}`}>
       {/* Fluid layer - always show, colors change based on theme */}
       <div className="absolute inset-0 z-0">
         <FluidBackground />

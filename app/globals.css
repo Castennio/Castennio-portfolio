@@ -47,7 +47,7 @@ html.dark {
 /* Light theme */
 html.light {
   /* Backgrounds - Sistema de capas con profundidad */
-  --background: #fafafa;
+  --background: #ffffff;
   --background-elevated: #ffffff;
   --background-surface: #f5f5f7;
   --background-overlay: #ebebed;
@@ -265,20 +265,20 @@ body {
 
 html.light {
   /* Force light backgrounds on body and main containers */
-  background-color: #fafafa !important;
+  background-color: #ffffff !important;
 }
 
 html.light body {
-  background-color: #fafafa !important;
+  background-color: #ffffff !important;
   color: #0a0a0f !important;
 }
 
 html.light main {
-  background-color: #fafafa !important;
+  background-color: #ffffff !important;
 }
 
 html.light section {
-  background-color: #fafafa !important;
+  background-color: #ffffff !important;
 }
 
 html.light footer {

@@ -2,12 +2,38 @@
 
 import { useEffect, useState, useRef } from "react";
 
+// Hook to detect theme
+function useTheme() {
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  useEffect(() => {
+    const checkTheme = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      setTheme(isDark ? "dark" : "light");
+    };
+
+    checkTheme();
+
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return theme;
+}
+
 export default function WhatsAppButton() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [hasNotification, setHasNotification] = useState(true);
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const theme = useTheme();
+  const isDark = theme === "dark";
 
   // Show button after scroll or delay
   useEffect(() => {
@@ -72,15 +98,32 @@ export default function WhatsAppButton() {
             : "opacity-0 translate-y-2 pointer-events-none"
         }`}
       >
-        <div className="relative bg-white text-gray-900 px-4 py-2.5 rounded-2xl rounded-br-sm shadow-2xl shadow-black/20 max-w-[200px]">
-          <p className="text-sm font-medium whitespace-nowrap">
+        <div
+          className="relative px-4 py-2.5 rounded-2xl rounded-br-sm max-w-[200px]"
+          style={{
+            backgroundColor: isDark ? "#ffffff" : "#0a0a0f",
+            boxShadow: isDark
+              ? "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
+              : "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+          }}
+        >
+          <p
+            className="text-sm font-medium whitespace-nowrap"
+            style={{ color: isDark ? "#111827" : "#ffffff" }}
+          >
             Hola, te ayudo?
           </p>
-          <p className="text-xs text-gray-500 mt-0.5">
+          <p
+            className="text-xs mt-0.5"
+            style={{ color: isDark ? "#6b7280" : "rgba(255,255,255,0.6)" }}
+          >
             Respuesta en minutos
           </p>
           {/* Arrow */}
-          <div className="absolute -bottom-2 right-4 w-4 h-4 bg-white rotate-45" />
+          <div
+            className="absolute -bottom-2 right-4 w-4 h-4 rotate-45"
+            style={{ backgroundColor: isDark ? "#ffffff" : "#0a0a0f" }}
+          />
         </div>
       </div>
 
@@ -101,11 +144,16 @@ export default function WhatsAppButton() {
 
         {/* Glow effect on hover */}
         <div
-          className={`absolute inset-0 rounded-full transition-all duration-500 ${
-            isHovered
-              ? "bg-[#25D366]/30 blur-xl scale-150"
-              : "bg-transparent blur-none scale-100"
-          }`}
+          className="absolute inset-0 rounded-full transition-all duration-500"
+          style={{
+            background: isHovered
+              ? isDark
+                ? "rgba(37, 211, 102, 0.3)"
+                : "rgba(37, 211, 102, 0.15)"
+              : "transparent",
+            filter: isHovered ? (isDark ? "blur(16px)" : "blur(12px)") : "none",
+            transform: isHovered ? "scale(1.5)" : "scale(1)",
+          }}
         />
 
         {/* Main button */}
@@ -117,9 +165,18 @@ export default function WhatsAppButton() {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           data-cursor="Chat"
-          className={`relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-[#25D366] to-[#128C7E] shadow-lg shadow-[#25D366]/20 transition-all duration-300 hover:shadow-xl hover:shadow-[#25D366]/30 ${
+          className={`relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-[#25D366] to-[#128C7E] transition-all duration-300 ${
             isHovered ? "scale-110" : "scale-100"
           }`}
+          style={{
+            boxShadow: isDark
+              ? isHovered
+                ? "0 20px 40px -10px rgba(37, 211, 102, 0.4)"
+                : "0 10px 30px -5px rgba(37, 211, 102, 0.25)"
+              : isHovered
+                ? "0 20px 40px -10px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(37, 211, 102, 0.3)"
+                : "0 10px 30px -5px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(37, 211, 102, 0.2)",
+          }}
         >
           {/* WhatsApp Icon */}
           <svg
