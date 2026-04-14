@@ -93,8 +93,8 @@ function PlanCard({ plan }: { plan: Plan }) {
     <div
       className={`relative rounded-2xl transition-all duration-500 ${
         plan.featured
-          ? "bg-white/[0.03] border border-white/[0.08]"
-          : "bg-white/[0.01] border border-white/[0.04] hover:border-white/[0.08]"
+          ? "bg-[#14151a] border border-white/[0.1] shadow-[0_0_60px_-20px_rgba(59,130,246,0.15)]"
+          : "bg-[#0f1015] border border-white/[0.06] hover:border-white/[0.12] hover:bg-[#14151a]"
       }`}
     >
       {/* Featured indicator */}
@@ -130,8 +130,8 @@ function PlanCard({ plan }: { plan: Plan }) {
         <div
           className={`rounded-xl border transition-all duration-300 mb-8 ${
             addonEnabled
-              ? "border-blue-500/20 bg-blue-500/[0.03]"
-              : "border-white/[0.04] bg-white/[0.01]"
+              ? "border-blue-500/25 bg-blue-500/[0.06]"
+              : "border-white/[0.06] bg-[#0a0a0f]"
           }`}
         >
           <button
@@ -210,7 +210,7 @@ function PlanCard({ plan }: { plan: Plan }) {
 
 export default function Pricing() {
   return (
-    <section id="planes" className="py-32 px-6 bg-[#050505] relative">
+    <section id="planes" className="py-32 px-6 bg-[#0a0a0f] relative">
       {/* Subtle border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 

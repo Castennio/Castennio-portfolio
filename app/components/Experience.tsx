@@ -4,6 +4,32 @@ import { useState, useRef, useEffect } from "react";
 import FadeIn, { StaggerFadeIn } from "./FadeIn";
 import { WordReveal, GradientReveal } from "./TextReveal";
 
+// Hook to detect theme
+function useTheme() {
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  useEffect(() => {
+    const checkTheme = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      setTheme(isDark ? "dark" : "light");
+    };
+
+    checkTheme();
+
+    const observer = new MutationObserver(() => {
+      requestAnimationFrame(checkTheme);
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return theme;
+}
+
 // Datos de los integrantes con su trayectoria y proyectos
 const teamMembers = [
   {
@@ -136,6 +162,8 @@ const allProjects = teamMembers.flatMap((member) =>
 export default function Experience() {
   const [selectedMember, setSelectedMember] = useState<string | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const theme = useTheme();
+  const isDark = theme === "dark";
 
   const currentMember = teamMembers.find((m) => m.id === selectedMember);
   const displayProjects = selectedMember
@@ -166,7 +194,7 @@ export default function Experience() {
   };
 
   return (
-    <section id="experiencias" className="py-32 px-6 bg-[#050505] relative">
+    <section id="experiencias" className="py-32 px-6 bg-[#0a0a0f] relative ambient-glow">
       {/* Subtle top border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -237,10 +265,24 @@ export default function Experience() {
         {/* Member bio panel */}
         {selectedMember && currentMember && (
           <FadeIn>
-            <div className="mb-12 p-6 rounded-2xl bg-gradient-to-br from-white/[0.03] to-transparent border border-white/[0.06]">
+            <div
+              className="mb-12 p-6 rounded-2xl border"
+              style={{
+                background: isDark
+                  ? "linear-gradient(to bottom right, #14151a, #0f1015)"
+                  : "linear-gradient(to bottom right, #ffffff, #f8f9fa)",
+                borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
+              }}
+            >
               <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
                 <div className="relative w-24 h-24 shrink-0">
-                  <div className="w-full h-full rounded-xl overflow-hidden border border-white/10 bg-[#0a0a0a]">
+                  <div
+                    className="w-full h-full rounded-xl overflow-hidden border"
+                    style={{
+                      borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+                      backgroundColor: isDark ? "#0a0a0a" : "#f0f0f5",
+                    }}
+                  >
                     <img
                       src={currentMember.image}
                       alt={currentMember.name}
@@ -255,9 +297,17 @@ export default function Experience() {
                   </div>
                 </div>
                 <div className="text-center md:text-left">
-                  <h3 className="text-xl font-medium text-white/90">{currentMember.name}</h3>
-                  <p className="text-[13px] text-blue-400 mb-3">{currentMember.role}</p>
-                  <p className="text-white/60 text-[14px] leading-relaxed max-w-xl">
+                  <h3
+                    className="text-xl font-medium"
+                    style={{ color: isDark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.9)" }}
+                  >
+                    {currentMember.name}
+                  </h3>
+                  <p className="text-[13px] text-blue-500 mb-3">{currentMember.role}</p>
+                  <p
+                    className="text-[14px] leading-relaxed max-w-xl"
+                    style={{ color: isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)" }}
+                  >
                     {currentMember.bio}
                   </p>
                 </div>
@@ -304,7 +354,7 @@ export default function Experience() {
                 key={`${project.author}-${project.title}-${index}`}
                 className="flex-shrink-0 w-[300px] sm:w-[340px] snap-start"
               >
-                <ProjectCard project={project} index={index} />
+                <ProjectCard project={project} index={index} isDark={isDark} />
               </div>
             ))}
           </div>
@@ -344,43 +394,81 @@ interface ProjectCardProps {
     authorImage: string;
   };
   index: number;
+  isDark: boolean;
 }
 
-function ProjectCard({ project, index }: ProjectCardProps) {
+function ProjectCard({ project, index, isDark }: ProjectCardProps) {
   return (
     <div
       className="group h-full"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
-      <div className="h-full rounded-2xl bg-gradient-to-br from-white/[0.03] to-transparent border border-white/[0.06] overflow-hidden transition-all duration-500 hover:border-white/[0.12] hover:bg-white/[0.02]">
+      <div
+        className="h-full rounded-2xl border overflow-hidden transition-all duration-500"
+        style={{
+          background: isDark
+            ? "linear-gradient(to bottom right, #14151a, #0f1015)"
+            : "linear-gradient(to bottom right, #ffffff, #f8f9fa)",
+          borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
+        }}
+      >
         {/* Project image */}
-        <div className="relative h-48 overflow-hidden bg-[#0a0a0a]">
+        <div
+          className="relative h-48 overflow-hidden"
+          style={{ backgroundColor: isDark ? "#0a0a0a" : "#f0f0f5" }}
+        >
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
-            <svg className="w-16 h-16 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="w-16 h-16"
+              style={{ color: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)" }}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
           {/* Hover overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60" />
+          <div
+            className="absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-60"
+            style={{ background: `linear-gradient(to top, ${isDark ? "#0a0a0f" : "#ffffff"}, transparent)` }}
+          />
 
           {/* Author badge */}
-          <div className="absolute top-3 left-3 flex items-center gap-2 px-2.5 py-1.5 rounded-full bg-black/50 backdrop-blur-sm border border-white/10">
+          <div
+            className="absolute top-3 left-3 flex items-center gap-2 px-2.5 py-1.5 rounded-full backdrop-blur-sm border"
+            style={{
+              backgroundColor: isDark ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.8)",
+              borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+            }}
+          >
             <img
               src={project.authorImage}
               alt={project.author}
               className="w-4 h-4 rounded-full"
               style={{ imageRendering: "pixelated" }}
             />
-            <span className="text-[11px] text-white/80 font-medium">{project.author}</span>
+            <span
+              className="text-[11px] font-medium"
+              style={{ color: isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)" }}
+            >
+              {project.author}
+            </span>
           </div>
         </div>
 
         {/* Content */}
         <div className="p-5">
-          <h3 className="text-[17px] font-medium text-white/90 mb-2 group-hover:text-white transition-colors">
+          <h3
+            className="text-[17px] font-medium mb-2 transition-colors"
+            style={{ color: isDark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.9)" }}
+          >
             {project.title}
           </h3>
-          <p className="text-[13px] text-white/55 leading-relaxed mb-4 line-clamp-2">
+          <p
+            className="text-[13px] leading-relaxed mb-4 line-clamp-2"
+            style={{ color: isDark ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.6)" }}
+          >
             {project.description}
           </p>
 
@@ -389,7 +477,12 @@ function ProjectCard({ project, index }: ProjectCardProps) {
             {project.technologies.map((tech, idx) => (
               <span
                 key={idx}
-                className="px-2 py-1 text-[10px] rounded-md bg-white/5 text-white/60 border border-white/[0.06]"
+                className="px-2 py-1 text-[10px] rounded-md border"
+                style={{
+                  backgroundColor: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.03)",
+                  color: isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)",
+                  borderColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)",
+                }}
               >
                 {tech}
               </span>
@@ -399,7 +492,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
           {/* Link */}
           <a
             href={project.link}
-            className="inline-flex items-center gap-1.5 text-[13px] text-blue-400 hover:text-blue-300 transition-colors group/link"
+            className="inline-flex items-center gap-1.5 text-[13px] text-blue-500 hover:text-blue-400 transition-colors group/link"
           >
             Ver proyecto
             <svg

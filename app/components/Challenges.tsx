@@ -32,7 +32,7 @@ const challenges = [
 
 export default function Challenges() {
   return (
-    <section id="problemas" className="py-32 px-6 bg-[#050505] relative">
+    <section id="problemas" className="py-32 px-6 bg-[#0a0a0f] relative ambient-glow">
       {/* Subtle top border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -79,7 +79,7 @@ export default function Challenges() {
               className="group relative"
             >
               <div
-                className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 p-8 md:p-10 rounded-2xl border border-white/[0.04] bg-white/[0.01] hover:bg-red-500/[0.02] hover:border-red-500/[0.15] transition-all duration-500"
+                className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 p-8 md:p-10 rounded-2xl border border-white/[0.06] bg-[#0f1015] hover:bg-[#14151a] hover:border-red-500/[0.2] transition-all duration-500"
               >
                 {/* Number */}
                 <div className="text-5xl md:text-6xl font-light text-red-500/[0.15] tabular-nums">

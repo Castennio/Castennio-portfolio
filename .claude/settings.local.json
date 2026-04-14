@@ -6,7 +6,11 @@
       "WebSearch",
       "Bash(git commit:*)",
       "Bash(git checkout:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(rm -rf .next)",
+      "Bash(taskkill /PID 27560 /F)"
     ]
   }
 }

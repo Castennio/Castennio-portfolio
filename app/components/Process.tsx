@@ -28,9 +28,9 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="proceso" className="py-32 px-6 bg-[#050505] relative overflow-hidden">
+    <section id="proceso" className="py-32 px-6 bg-[#0a0a0f] relative overflow-hidden">
       {/* Subtle background gradient */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.03)_0%,_transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(99,102,241,0.06)_0%,_transparent_50%)]" />
 
       <div className="relative max-w-6xl mx-auto">
         {/* Header */}
@@ -59,7 +59,7 @@ export default function Process() {
         {/* Steps - horizontal timeline */}
         <div className="relative">
           {/* Connection line */}
-          <div className="hidden md:block absolute top-8 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+          <div className="hidden md:block absolute top-8 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.12] to-transparent" />
 
           <StaggerFadeIn className="grid md:grid-cols-4 gap-12 md:gap-8" stagger={0.15}>
             {steps.map((step, index) => (

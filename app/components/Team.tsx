@@ -13,7 +13,7 @@ const team = [
 
 export default function Team() {
   return (
-    <section className="py-32 px-6 bg-[#050505] relative">
+    <section className="py-32 px-6 bg-[#0a0a0f] relative">
       {/* Subtle top border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -49,7 +49,7 @@ export default function Team() {
               <div key={index} className="group flex flex-col items-center">
                 {/* Pixel Art Avatar */}
                 <div className="relative w-32 h-32 md:w-40 md:h-40">
-                  <div className="w-full h-full rounded-2xl overflow-hidden border border-white/[0.06] bg-[#0a0a0a]">
+                  <div className="w-full h-full rounded-2xl overflow-hidden border border-white/[0.08] bg-[#0f1015]">
                     <img
                       src={member.image}
                       alt={member.name}
@@ -80,7 +80,7 @@ export default function Team() {
               <div key={index} className="group flex flex-col items-center">
                 {/* Pixel Art Avatar */}
                 <div className="relative w-32 h-32 md:w-40 md:h-40">
-                  <div className="w-full h-full rounded-2xl overflow-hidden border border-white/[0.06] bg-[#0a0a0a]">
+                  <div className="w-full h-full rounded-2xl overflow-hidden border border-white/[0.08] bg-[#0f1015]">
                     <img
                       src={member.image}
                       alt={member.name}

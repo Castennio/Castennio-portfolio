@@ -32,7 +32,7 @@ const differentiators = [
 
 export default function WhyUs() {
   return (
-    <section className="py-32 px-6 bg-[#050505] relative">
+    <section className="py-32 px-6 bg-[#0a0a0f] relative section-elevated">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">

@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="bg-[#050505]">
+      <main className="bg-[#0a0a0f]">
         <Hero />
         <Challenges />
         <Diagnosis />

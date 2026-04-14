@@ -125,10 +125,10 @@ export default function Diagnosis() {
     <section
       ref={sectionRef}
       id="diagnostico"
-      className="py-32 px-6 bg-[#050505] relative overflow-hidden"
+      className="py-32 px-6 bg-[#0a0a0f] relative overflow-hidden"
     >
       {/* Background effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(59,130,246,0.04)_0%,_transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.06)_0%,_transparent_60%)]" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="relative max-w-3xl mx-auto">
@@ -216,7 +216,7 @@ export default function Diagnosis() {
 
         {state.started && !state.showResult && (
           <FadeIn>
-            <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 md:p-10">
+            <div className="bg-[#0f1015] border border-white/[0.08] rounded-2xl p-6 md:p-10">
               <DiagnosisQuiz
                 currentStep={state.currentStep}
                 answers={state.answers}
@@ -230,7 +230,7 @@ export default function Diagnosis() {
 
         {state.showResult && state.result && (
           <FadeIn>
-            <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 md:p-10">
+            <div className="bg-[#0f1015] border border-white/[0.08] rounded-2xl p-6 md:p-10">
               <DiagnosisResult result={state.result} onReset={handleReset} />
             </div>
           </FadeIn>

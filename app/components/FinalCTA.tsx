@@ -9,8 +9,8 @@ export default function FinalCTA() {
   return (
     <section className="py-32 px-6 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-[#050505]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(59,130,246,0.06)_0%,_transparent_60%)]" />
+      <div className="absolute inset-0 bg-[#0a0a0f]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.08)_0%,_transparent_60%)]" />
       </div>
 
       {/* Subtle top border */}

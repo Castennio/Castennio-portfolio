@@ -56,9 +56,9 @@ export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
 
   return (
-    <footer ref={footerRef} className="relative bg-[#030303] overflow-hidden">
+    <footer ref={footerRef} className="relative bg-[#07070a] overflow-hidden">
       {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(59,130,246,0.03)_0%,_transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(99,102,241,0.05)_0%,_transparent_50%)]" />
 
       {/* Top border gradient */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -66,7 +66,7 @@ export default function Footer() {
       {/* Main footer content */}
       <div className="relative">
         {/* Big CTA Section */}
-        <div className="border-b border-white/[0.04]">
+        <div className="border-b border-white/[0.08]">
           <div className="max-w-6xl mx-auto px-6 py-20 md:py-32">
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-12">
               <div className="max-w-2xl">
@@ -219,7 +219,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/[0.04]">
+        <div className="border-t border-white/[0.08]">
           <div className="max-w-6xl mx-auto px-6 py-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <p className="text-[13px] text-white/40 order-2 md:order-1">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import SplitType from "split-type";
 
@@ -173,24 +173,33 @@ export function HeroLine({
   const containerRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const hasAnimated = useRef(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     if (!lineRef.current || hasAnimated.current) return;
     hasAnimated.current = true;
+    setIsReady(true);
 
-    gsap.set(lineRef.current, { y: "100%" });
-
-    gsap.to(lineRef.current, {
-      y: "0%",
-      duration: 0.9,
-      ease: "power3.out",
-      delay,
-    });
+    gsap.fromTo(
+      lineRef.current,
+      { y: "100%" },
+      {
+        y: "0%",
+        duration: 0.9,
+        ease: "power3.out",
+        delay,
+      }
+    );
   }, [delay]);
 
   return (
     <div ref={containerRef} className={`overflow-hidden ${className}`}>
-      <div ref={lineRef}>{children}</div>
+      <div
+        ref={lineRef}
+        style={{ transform: isReady ? undefined : "translateY(0)" }}
+      >
+        {children}
+      </div>
     </div>
   );
 }
@@ -217,10 +226,12 @@ export function HeroBlur({
   const containerRef = useRef<HTMLDivElement>(null);
   const splitRef = useRef<SplitType | null>(null);
   const hasAnimated = useRef(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current || hasAnimated.current) return;
     hasAnimated.current = true;
+    setIsReady(true);
 
     const element = containerRef.current.querySelector("[data-hero-blur]");
     if (!element) return;
@@ -233,21 +244,23 @@ export function HeroBlur({
     const chars = splitRef.current.chars;
     if (!chars) return;
 
-    gsap.set(chars, {
-      opacity: 0,
-      filter: "blur(12px)",
-      y: 10,
-    });
-
-    gsap.to(chars, {
-      opacity: 1,
-      filter: "blur(0px)",
-      y: 0,
-      duration: 0.7,
-      ease: "power2.out",
-      stagger,
-      delay,
-    });
+    gsap.fromTo(
+      chars,
+      {
+        opacity: 0,
+        filter: "blur(12px)",
+        y: 10,
+      },
+      {
+        opacity: 1,
+        filter: "blur(0px)",
+        y: 0,
+        duration: 0.7,
+        ease: "power2.out",
+        stagger,
+        delay,
+      }
+    );
 
     return () => {
       splitRef.current?.revert();
@@ -255,7 +268,11 @@ export function HeroBlur({
   }, [children, delay, stagger]);
 
   return (
-    <div ref={containerRef} className={className}>
+    <div
+      ref={containerRef}
+      className={className}
+      style={{ opacity: isReady ? undefined : 1 }}
+    >
       <Component data-hero-blur>{children}</Component>
     </div>
   );

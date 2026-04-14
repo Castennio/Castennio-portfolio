@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -26,37 +26,50 @@ export default function FadeIn({
   once = true,
 }: FadeInProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     if (!ref.current) return;
 
-    gsap.set(ref.current, {
-      opacity: 0,
-      y: y,
-      x: x,
-    });
+    // Mark as ready immediately so initial styles apply
+    setIsReady(true);
 
-    gsap.to(ref.current, {
-      opacity: 1,
-      y: 0,
-      x: 0,
-      duration: duration,
-      delay: delay,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ref.current,
-        start: "top 90%",
-        once: once,
-      },
-    });
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ref.current,
+        {
+          opacity: 0,
+          y: y,
+          x: x,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          duration: duration,
+          delay: delay,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 90%",
+            once: once,
+          },
+        }
+      );
+    }, ref);
 
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
+    return () => ctx.revert();
   }, [delay, duration, y, x, once]);
 
   return (
-    <div ref={ref} className={className}>
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: isReady ? undefined : 1,
+        transform: isReady ? undefined : "none",
+      }}
+    >
       {children}
     </div>
   );
@@ -79,41 +92,53 @@ export function StaggerFadeIn({
   delay = 0,
 }: StaggerFadeInProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current) return;
 
+    setIsReady(true);
+
     const items = containerRef.current.querySelectorAll(".stagger-item");
 
-    gsap.set(items, {
-      opacity: 0,
-      y: 40,
-    });
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        items,
+        {
+          opacity: 0,
+          y: 40,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          stagger: stagger,
+          delay: delay,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+    }, containerRef);
 
-    gsap.to(items, {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-      ease: "power3.out",
-      stagger: stagger,
-      delay: delay,
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 85%",
-        once: true,
-      },
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
+    return () => ctx.revert();
   }, [stagger, delay]);
 
   return (
     <div ref={containerRef} className={className}>
       {Array.isArray(children)
         ? children.map((child, index) => (
-            <div key={index} className={`stagger-item ${childClassName}`}>
+            <div
+              key={index}
+              className={`stagger-item ${childClassName}`}
+              style={{
+                opacity: isReady ? undefined : 1,
+                transform: isReady ? undefined : "none",
+              }}
+            >
               {child}
             </div>
           ))

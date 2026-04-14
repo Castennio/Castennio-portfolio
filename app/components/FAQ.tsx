@@ -44,7 +44,7 @@ function FAQItem({
   index: number;
 }) {
   return (
-    <div className="border-b border-white/[0.04]">
+    <div className="border-b border-white/[0.08]">
       <button
         onClick={onClick}
         className="w-full flex items-center justify-between py-6 text-left cursor-pointer group"
@@ -96,7 +96,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-32 px-6 bg-[#050505] relative">
+    <section className="py-32 px-6 bg-[#0a0a0f] relative">
       {/* Subtle border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 

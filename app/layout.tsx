@@ -44,8 +44,9 @@ export default function RootLayout({
     <html
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-[#050505]">
+      <body className="min-h-full flex flex-col bg-background transition-colors duration-300">
         <Preloader />
         <SmoothScroll>{children}</SmoothScroll>
         <WhatsAppButton />

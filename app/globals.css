@@ -1,20 +1,96 @@
 @import "tailwindcss";
 
-:root {
-  --background: #050505;
+/* Dark theme (default) */
+:root,
+html.dark {
+  /* Backgrounds - Sistema de capas con profundidad */
+  --background: #0a0a0f;
+  --background-elevated: #0f1015;
+  --background-surface: #14151a;
+  --background-overlay: #1a1b22;
   --foreground: #fafafa;
-  --card-bg: #0a0a0a;
-  --card-bg-hover: #0f0f0f;
+
+  /* Legacy support */
+  --card-bg: #0f1015;
+  --card-bg-hover: #14151a;
+
+  /* Primary colors */
   --primary: #3b82f6;
   --primary-hover: #2563eb;
-  --border: #161616;
-  --border-hover: #1f1f1f;
-  --text-muted: #737373;
-  --text-subtle: #525252;
+
+  /* Borders con más presencia */
+  --border: #1e1f26;
+  --border-hover: #2a2b35;
+  --border-active: #3b3d4a;
+
+  /* Textos con mejor contraste */
+  --text-muted: #8b8d9a;
+  --text-subtle: #6b6d7a;
+
+  /* Acentos sutiles para dar vida */
+  --accent-glow: rgba(99, 102, 241, 0.08);
+  --accent-warm: rgba(251, 191, 36, 0.05);
+  --accent-blue: rgba(59, 130, 246, 0.06);
+
+  /* Theme-specific */
+  --text-primary: rgba(255, 255, 255, 0.9);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --text-tertiary: rgba(255, 255, 255, 0.4);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-border-hover: rgba(255, 255, 255, 0.12);
+  --button-bg: #ffffff;
+  --button-text: #000000;
+
+  color-scheme: dark;
+}
+
+/* Light theme */
+html.light {
+  /* Backgrounds - Sistema de capas con profundidad */
+  --background: #fafafa;
+  --background-elevated: #ffffff;
+  --background-surface: #f5f5f7;
+  --background-overlay: #ebebed;
+  --foreground: #0a0a0f;
+
+  /* Legacy support */
+  --card-bg: #ffffff;
+  --card-bg-hover: #f5f5f7;
+
+  /* Primary colors */
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+
+  /* Borders con más presencia */
+  --border: #e5e5e7;
+  --border-hover: #d1d1d3;
+  --border-active: #b8b8ba;
+
+  /* Textos con mejor contraste */
+  --text-muted: #6b6d7a;
+  --text-subtle: #8b8d9a;
+
+  /* Acentos sutiles para dar vida */
+  --accent-glow: rgba(99, 102, 241, 0.12);
+  --accent-warm: rgba(251, 191, 36, 0.1);
+  --accent-blue: rgba(59, 130, 246, 0.1);
+
+  /* Theme-specific */
+  --text-primary: rgba(0, 0, 0, 0.9);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --text-tertiary: rgba(0, 0, 0, 0.4);
+  --card-border: rgba(0, 0, 0, 0.06);
+  --card-border-hover: rgba(0, 0, 0, 0.12);
+  --button-bg: #0a0a0f;
+  --button-text: #ffffff;
+
+  color-scheme: light;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-elevated: var(--background-elevated);
+  --color-background-surface: var(--background-surface);
   --color-foreground: var(--foreground);
   --color-card: var(--card-bg);
   --color-primary: var(--primary);
@@ -26,8 +102,20 @@
 }
 
 html {
-  color-scheme: dark;
   scroll-behavior: smooth;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
+}
+
+html.light ::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: #000;
 }
 
 body {
@@ -44,16 +132,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1a1a1a;
+  background: var(--border);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #252525;
+  background: var(--border-hover);
 }
 
 /* Premium selection */
@@ -110,6 +198,259 @@ body {
   position: absolute;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.02;
+  opacity: 0.03;
   pointer-events: none;
+}
+
+/* Ambient lighting - glow sutil desde arriba */
+.ambient-glow {
+  position: relative;
+}
+
+.ambient-glow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 400px;
+  background: radial-gradient(
+    ellipse 80% 50% at 50% -20%,
+    var(--accent-glow),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* Section with elevated background */
+.section-elevated {
+  background: linear-gradient(
+    180deg,
+    var(--background) 0%,
+    var(--background-elevated) 15%,
+    var(--background-elevated) 85%,
+    var(--background) 100%
+  );
+}
+
+/* Premium glass card */
+.glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+}
+
+.glass-card:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Warm accent glow */
+.warm-glow {
+  box-shadow: 0 0 80px -20px rgba(251, 191, 36, 0.15);
+}
+
+/* ============================================
+   LIGHT THEME OVERRIDES
+   ============================================ */
+
+html.light {
+  /* Force light backgrounds on body and main containers */
+  background-color: #fafafa !important;
+}
+
+html.light body {
+  background-color: #fafafa !important;
+  color: #0a0a0f !important;
+}
+
+html.light main {
+  background-color: #fafafa !important;
+}
+
+html.light section {
+  background-color: #fafafa !important;
+}
+
+html.light footer {
+  background-color: #f0f0f2 !important;
+}
+
+/* Text colors for light mode - exclude hero buttons */
+html.light [class*="text-white"]:not(.hero-btn):not(.hero-btn-gradient):not(.hero-btn *):not(.hero-btn-gradient *) {
+  color: rgba(10, 10, 15, 0.9) !important;
+}
+
+html.light [class*="text-white/9"],
+html.light [class*="text-white/8"] {
+  color: rgba(10, 10, 15, 0.9) !important;
+}
+
+html.light [class*="text-white/6"],
+html.light [class*="text-white/5"] {
+  color: rgba(10, 10, 15, 0.6) !important;
+}
+
+html.light [class*="text-white/4"],
+html.light [class*="text-white/3"],
+html.light [class*="text-white/2"] {
+  color: rgba(10, 10, 15, 0.45) !important;
+}
+
+/* Background overrides for cards and sections */
+html.light [class*="bg-[#0"] {
+  background-color: #ffffff !important;
+}
+
+html.light [class*="bg-[#1"] {
+  background-color: #f5f5f7 !important;
+}
+
+html.light [class*="bg-white/"] {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Border colors */
+html.light [class*="border-white"] {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Button overrides - invert colors */
+html.light .bg-white {
+  background-color: #0a0a0f !important;
+}
+
+html.light .bg-white.text-black,
+html.light .bg-white [class*="text-black"] {
+  color: #ffffff !important;
+}
+
+html.light a.bg-white,
+html.light button.bg-white {
+  background-color: #0a0a0f !important;
+  color: #ffffff !important;
+}
+
+/* Gradients in light mode */
+html.light .text-gradient {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Radial gradients for sections */
+html.light [style*="radial-gradient"] {
+  --tw-gradient-opacity: 0.15;
+}
+
+/* Red accent colors */
+html.light [class*="text-red"] {
+  color: #dc2626 !important;
+}
+
+html.light [class*="border-red"] {
+  border-color: rgba(220, 38, 38, 0.3) !important;
+}
+
+html.light [class*="bg-red"] {
+  background-color: rgba(220, 38, 38, 0.1) !important;
+}
+
+/* Blue accent colors */
+html.light [class*="text-blue"] {
+  color: #2563eb !important;
+}
+
+html.light [class*="bg-blue"] {
+  background-color: rgba(37, 99, 235, 0.1) !important;
+}
+
+/* Scrollbar for light mode */
+html.light ::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: #f5f5f7;
+}
+
+/* Glass cards in light mode */
+html.light .glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.6) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* SVG and icons */
+html.light svg {
+  color: inherit;
+}
+
+/* Theme transitions - only on specific elements, not global */
+body,
+main,
+section,
+footer,
+nav,
+.theme-transition {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hero buttons - protected from theme overrides */
+.hero-btn,
+html.light .hero-btn,
+html.dark .hero-btn {
+  background-color: #0a0a0f !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+.hero-btn:hover,
+html.light .hero-btn:hover,
+html.dark .hero-btn:hover {
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+.hero-btn-gradient,
+html.light .hero-btn-gradient,
+html.dark .hero-btn-gradient {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.35) !important;
+}
+
+.hero-btn-gradient:hover,
+html.light .hero-btn-gradient:hover,
+html.dark .hero-btn-gradient:hover {
+  box-shadow: 0 6px 30px rgba(59, 130, 246, 0.5) !important;
+}
+
+/* Ensure hero button text stays white */
+.hero-btn span,
+.hero-btn svg,
+.hero-btn-gradient span,
+.hero-btn-gradient svg,
+html.light .hero-btn span,
+html.light .hero-btn svg,
+html.light .hero-btn-gradient span,
+html.light .hero-btn-gradient svg {
+  color: #ffffff !important;
 }

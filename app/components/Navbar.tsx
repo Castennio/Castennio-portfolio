@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,7 +18,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
         isScrolled
-          ? "bg-[#050505]/80 backdrop-blur-xl border-b border-white/[0.04]"
+          ? "bg-[var(--background)]/85 backdrop-blur-xl border-b border-[var(--card-border)]"
           : "bg-transparent"
       }`}
     >
@@ -26,7 +27,7 @@ export default function Navbar() {
           {/* Logo - minimal */}
           <a href="#" className="flex items-center gap-3 group">
             <img src="/images/Castennio.png" alt="Castennio" className="w-8 h-8" />
-            <span className="text-[15px] font-medium text-white/80 group-hover:text-white transition-colors duration-300">
+            <span className="text-[15px] font-medium text-[var(--text-secondary)] group-hover:text-[var(--foreground)] transition-colors duration-300">
               Castennio
             </span>
           </a>
@@ -35,34 +36,37 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-10">
             <a
               href="#proyectos"
-              className="text-[13px] text-white/40 hover:text-white/80 transition-colors duration-300 tracking-wide"
+              className="text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors duration-300 tracking-wide"
             >
               Proyectos
             </a>
             <a
               href="#proceso"
-              className="text-[13px] text-white/40 hover:text-white/80 transition-colors duration-300 tracking-wide"
+              className="text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors duration-300 tracking-wide"
             >
               Proceso
             </a>
             <a
               href="#planes"
-              className="text-[13px] text-white/40 hover:text-white/80 transition-colors duration-300 tracking-wide"
+              className="text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors duration-300 tracking-wide"
             >
               Planes
             </a>
           </div>
 
-          {/* CTA - refined */}
-          <a
-            href="https://wa.me/51998162677"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-cursor="Chat"
-            className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-medium text-white/80 hover:text-white border border-white/[0.08] hover:border-white/20 rounded-full transition-all duration-300 hover:bg-white/[0.02]"
-          >
-            Hablemos
-          </a>
+          {/* Actions */}
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <a
+              href="https://wa.me/51998162677"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="Chat"
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-medium text-[var(--text-secondary)] hover:text-[var(--foreground)] border border-[var(--card-border)] hover:border-[var(--card-border-hover)] rounded-full transition-all duration-300 hover:bg-[var(--card-border)]"
+            >
+              Hablemos
+            </a>
+          </div>
         </div>
       </div>
     </nav>

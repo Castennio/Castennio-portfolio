@@ -146,8 +146,8 @@ export default function QuestionCard({
       onClick={onSelect}
       className={`option-card relative w-full p-5 rounded-xl border text-left transition-all duration-300 ${
         isSelected
-          ? "bg-blue-500/[0.08] border-blue-500/30"
-          : "bg-white/[0.02] border-white/[0.06] hover:bg-white/[0.04] hover:border-white/[0.12]"
+          ? "bg-blue-500/[0.1] border-blue-500/35"
+          : "bg-[#14151a] border-white/[0.08] hover:bg-[#1a1b22] hover:border-white/[0.15]"
       }`}
       style={{ animationDelay: `${index * 0.05}s` }}
     >
