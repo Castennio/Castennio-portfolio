@@ -112,7 +112,7 @@ export default function Preloader() {
         <div ref={logoRef} className="mb-6">
           <div className="flex items-center gap-4">
             <img
-              src="/images/Castennio.png"
+              src="/images/logo-castennio-fondo-negro-icono-negro.png"
               alt="Castennio"
               className="w-12 h-12"
             />

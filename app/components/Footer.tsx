@@ -122,7 +122,7 @@ export default function Footer() {
             {/* Brand Column */}
             <div className="col-span-2 md:col-span-1">
               <div className="flex items-center gap-3 mb-6">
-                <img src="/images/Castennio.png" alt="Castennio" className="w-10 h-10" />
+                <img src="/images/logo-castennio-fondo-negro-icono-negro.png" alt="Castennio" className="w-10 h-10" />
                 <span className="text-lg font-medium text-white/90">Castennio</span>
               </div>
               <p className="text-[14px] text-white/55 leading-relaxed mb-8 max-w-[260px]">
