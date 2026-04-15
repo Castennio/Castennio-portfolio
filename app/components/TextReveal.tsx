@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
@@ -104,6 +104,15 @@ export function WordReveal({
 }: WordRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const splitRef = useRef<SplitType | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile for simpler animation
+  useEffect(() => {
+    const mobile = window.matchMedia("(max-width: 768px)").matches ||
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0;
+    setIsMobile(mobile);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -111,6 +120,29 @@ export function WordReveal({
     const element = containerRef.current.querySelector("[data-split]");
     if (!element) return;
 
+    // On mobile: simple fade without word splitting
+    if (isMobile) {
+      gsap.set(element, { opacity: 0, y: 20 });
+
+      const animation = gsap.to(element, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        delay,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 85%",
+          once: true,
+        },
+      });
+
+      return () => {
+        animation.kill();
+      };
+    }
+
+    // Desktop: word-by-word animation
     splitRef.current = new SplitType(element as HTMLElement, {
       types: "words",
       tagName: "span",
@@ -148,7 +180,7 @@ export function WordReveal({
       animation.kill();
       splitRef.current?.revert();
     };
-  }, [children, delay, stagger]);
+  }, [children, delay, stagger, isMobile]);
 
   return (
     <div ref={containerRef} className={className}>
@@ -249,6 +281,15 @@ export function BlurReveal({
 }: BlurRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const splitRef = useRef<SplitType | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile for simpler animation
+  useEffect(() => {
+    const mobile = window.matchMedia("(max-width: 768px)").matches ||
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0;
+    setIsMobile(mobile);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -256,6 +297,29 @@ export function BlurReveal({
     const element = containerRef.current.querySelector("[data-split]");
     if (!element) return;
 
+    // On mobile: simple fade without blur or character splitting (much faster)
+    if (isMobile) {
+      gsap.set(element, { opacity: 0, y: 20 });
+
+      const animation = gsap.to(element, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        delay,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 85%",
+          once: true,
+        },
+      });
+
+      return () => {
+        animation.kill();
+      };
+    }
+
+    // Desktop: full blur animation per character
     splitRef.current = new SplitType(element as HTMLElement, {
       types: "chars",
       tagName: "span",
@@ -289,7 +353,7 @@ export function BlurReveal({
       animation.kill();
       splitRef.current?.revert();
     };
-  }, [children, delay, stagger]);
+  }, [children, delay, stagger, isMobile]);
 
   return (
     <div ref={containerRef} className={className}>

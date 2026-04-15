@@ -242,7 +242,13 @@ body {
     rgba(255, 255, 255, 0.01) 100%
   );
   border: 1px solid rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(20px);
+}
+
+/* backdrop-filter only on devices that can handle it (desktop) */
+@media (hover: hover) and (pointer: fine) {
+  .glass-card {
+    backdrop-filter: blur(20px);
+  }
 }
 
 .glass-card:hover {

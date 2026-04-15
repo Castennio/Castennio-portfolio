@@ -227,6 +227,15 @@ export function HeroBlur({
   const splitRef = useRef<SplitType | null>(null);
   const hasAnimated = useRef(false);
   const [isReady, setIsReady] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile for simpler animation
+  useEffect(() => {
+    const mobile = window.matchMedia("(max-width: 768px)").matches ||
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0;
+    setIsMobile(mobile);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current || hasAnimated.current) return;
@@ -236,6 +245,23 @@ export function HeroBlur({
     const element = containerRef.current.querySelector("[data-hero-blur]");
     if (!element) return;
 
+    // On mobile: simple fade without blur (blur is GPU-heavy)
+    if (isMobile) {
+      gsap.fromTo(
+        element,
+        { opacity: 0, y: 15 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          delay,
+        }
+      );
+      return;
+    }
+
+    // Desktop: full blur animation per character
     splitRef.current = new SplitType(element as HTMLElement, {
       types: "chars",
       tagName: "span",
@@ -265,7 +291,7 @@ export function HeroBlur({
     return () => {
       splitRef.current?.revert();
     };
-  }, [children, delay, stagger]);
+  }, [children, delay, stagger, isMobile]);
 
   return (
     <div

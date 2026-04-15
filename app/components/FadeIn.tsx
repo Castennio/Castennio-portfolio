@@ -6,6 +6,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Check for mobile/touch device once
+const isMobileDevice = () => {
+  if (typeof window === "undefined") return false;
+  return (
+    window.matchMedia("(max-width: 768px)").matches ||
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0
+  );
+};
+
 interface FadeInProps {
   children: React.ReactNode;
   className?: string;
@@ -27,13 +37,32 @@ export default function FadeIn({
 }: FadeInProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isReady, setIsReady] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     if (!ref.current) return;
-
-    // Mark as ready immediately so initial styles apply
     setIsReady(true);
 
+    const isMobile = isMobileDevice();
+
+    // On mobile: use native IntersectionObserver with CSS transitions (much lighter)
+    if (isMobile) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            // Small delay to stagger animations naturally
+            setTimeout(() => setIsVisible(true), delay * 1000);
+            if (once) observer.disconnect();
+          }
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -10% 0px" }
+      );
+
+      observer.observe(ref.current);
+      return () => observer.disconnect();
+    }
+
+    // Desktop: use GSAP with ScrollTrigger for smooth animations
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ref.current,
@@ -61,14 +90,25 @@ export default function FadeIn({
     return () => ctx.revert();
   }, [delay, duration, y, x, once]);
 
+  // Mobile uses CSS transitions instead of GSAP
+  const isMobile = typeof window !== "undefined" && isMobileDevice();
+
   return (
     <div
       ref={ref}
       className={className}
-      style={{
-        opacity: isReady ? undefined : 1,
-        transform: isReady ? undefined : "none",
-      }}
+      style={
+        isMobile
+          ? {
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "none" : `translateY(${y}px)`,
+              transition: `opacity ${duration}s ease-out, transform ${duration}s ease-out`,
+            }
+          : {
+              opacity: isReady ? undefined : 1,
+              transform: isReady ? undefined : "none",
+            }
+      }
     >
       {children}
     </div>
@@ -93,12 +133,36 @@ export function StaggerFadeIn({
 }: StaggerFadeInProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isReady, setIsReady] = useState(false);
+  const [visibleItems, setVisibleItems] = useState<Set<number>>(new Set());
 
   useEffect(() => {
     if (!containerRef.current) return;
 
     setIsReady(true);
+    const isMobile = isMobileDevice();
 
+    // On mobile: use IntersectionObserver with CSS transitions
+    if (isMobile) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            const items = containerRef.current?.querySelectorAll(".stagger-item");
+            items?.forEach((_, index) => {
+              setTimeout(() => {
+                setVisibleItems((prev) => new Set([...prev, index]));
+              }, (delay + index * stagger) * 1000);
+            });
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.1 }
+      );
+
+      observer.observe(containerRef.current);
+      return () => observer.disconnect();
+    }
+
+    // Desktop: use GSAP
     const items = containerRef.current.querySelectorAll(".stagger-item");
 
     const ctx = gsap.context(() => {
@@ -127,6 +191,8 @@ export function StaggerFadeIn({
     return () => ctx.revert();
   }, [stagger, delay]);
 
+  const isMobile = typeof window !== "undefined" && isMobileDevice();
+
   return (
     <div ref={containerRef} className={className}>
       {Array.isArray(children)
@@ -134,10 +200,18 @@ export function StaggerFadeIn({
             <div
               key={index}
               className={`stagger-item ${childClassName}`}
-              style={{
-                opacity: isReady ? undefined : 1,
-                transform: isReady ? undefined : "none",
-              }}
+              style={
+                isMobile
+                  ? {
+                      opacity: visibleItems.has(index) ? 1 : 0,
+                      transform: visibleItems.has(index) ? "none" : "translateY(40px)",
+                      transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+                    }
+                  : {
+                      opacity: isReady ? undefined : 1,
+                      transform: isReady ? undefined : "none",
+                    }
+              }
             >
               {child}
             </div>

@@ -44,8 +44,22 @@ function FluidBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const theme = useTheme();
+
+  // Detect mobile/touch devices - disable fluid simulation for performance
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.matchMedia("(max-width: 768px)").matches ||
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0;
+      setIsMobile(mobile);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Detect scroll to reduce visual lag
   const handleScroll = useCallback(() => {
@@ -117,9 +131,25 @@ function FluidBackground() {
   const fluidColors = theme === "dark" ? darkColors : lightColors;
   const edgeColor = theme === "dark" ? "#0a0a0f" : "#ffffff";
 
+  // Don't render fluid on mobile - just show static gradient
+  if (isMobile) {
+    return (
+      <div ref={containerRef} className="absolute inset-0">
+        <div
+          className="absolute inset-0"
+          style={{
+            background: theme === "dark"
+              ? "radial-gradient(ellipse at center, rgba(59, 130, 246, 0.08) 0%, transparent 70%)"
+              : "radial-gradient(ellipse at center, rgba(99, 102, 241, 0.06) 0%, transparent 70%)",
+          }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div ref={containerRef} className="absolute inset-0">
-      {/* Fluid simulation - only render when visible */}
+      {/* Fluid simulation - only render when visible and NOT on mobile */}
       <div
         className="absolute inset-0 transition-opacity duration-300"
         style={{
