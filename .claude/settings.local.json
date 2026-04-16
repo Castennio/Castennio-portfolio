@@ -10,7 +10,8 @@
       "Bash(npm run:*)",
       "Bash(taskkill /F /IM node.exe)",
       "Bash(rm -rf .next)",
-      "Bash(taskkill /PID 27560 /F)"
+      "Bash(taskkill /PID 27560 /F)",
+      "Bash(dir \"C:\\\\castennio\\\\castennio-portfolio\\\\app\\\\favicon.ico\")"
     ]
   }
 }

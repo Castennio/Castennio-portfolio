@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "./components/SmoothScroll";
-import Preloader from "./components/Preloader";
 import WhatsAppButton from "./components/WhatsAppButton";
 
 const geistSans = Geist({
@@ -47,8 +45,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background transition-colors duration-300">
-        <Preloader />
-        <SmoothScroll>{children}</SmoothScroll>
+        {children}
         <WhatsAppButton />
       </body>
     </html>

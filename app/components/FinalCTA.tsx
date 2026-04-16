@@ -20,7 +20,7 @@ export default function FinalCTA() {
         {/* Heading */}
         <HeroLine delay={0.1} className="mb-6">
           <h2 className="text-4xl md:text-6xl font-medium tracking-[-0.02em] text-white/90">
-            Da el primer paso hoy
+            ¿Listo para empezar?
           </h2>
         </HeroLine>
 
@@ -31,7 +31,7 @@ export default function FinalCTA() {
           delay={0.3}
           stagger={0.02}
         >
-          Escríbenos y te decimos en 5 minutos cómo podemos ayudar a tu negocio. Sin costo, sin compromiso.
+          Cuéntanos qué necesitas. Te respondemos en menos de 24 horas con una propuesta clara.
         </BlurReveal>
 
         {/* CTA Button */}
@@ -55,7 +55,7 @@ export default function FinalCTA() {
         {/* Response time */}
         <FadeIn delay={0.6} y={15}>
           <p className="mt-8 text-white/45 text-[13px]">
-            Respuesta rápida · Sin presión · Diagnóstico gratis
+            Respuesta en 24h · Sin compromiso · Diagnóstico gratis
           </p>
         </FadeIn>
       </div>

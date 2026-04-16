@@ -47,10 +47,10 @@ export default function Navbar() {
               Proceso
             </a>
             <a
-              href="#planes"
+              href="#servicios"
               className="text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors duration-300 tracking-wide"
             >
-              Planes
+              Servicios
             </a>
           </div>
 

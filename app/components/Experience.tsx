@@ -37,21 +37,28 @@ const teamMembers = [
     name: "Dani",
     role: "Desarrollo Frontend",
     image: "/images/pixel-art/dani.png",
-    bio: "Desarrollador frontend con 3 años de experiencia creando interfaces modernas y responsivas. Apasionado por las animaciones y la experiencia de usuario.",
+    bio: "Desarrollador frontend con 2 años de experiencia creando interfaces modernas y responsivas. Apasionado por las animaciones y la experiencia de usuario.",
     projects: [
       {
-        title: "E-commerce Fashion Store",
-        description: "Tienda online completa con carrito de compras, pasarela de pagos y panel de administración.",
-        image: "/images/projects/placeholder-1.jpg",
-        technologies: ["React", "Next.js", "Stripe", "Tailwind"],
-        link: "#",
+        title: "INK BUSINESS - Finanzas personales con escritura natural",
+        description: "Es una aplicación de finanzas personales que transforma la forma tradicional de registrar ingresos y gastos, por medio de la detección de dibujos.",
+        image: "/images/projects/placeholder-1.png",
+        technologies: ["React", "Next.js", "TypeScript", "Tailwind"],
+        link: "https://ink-business.vercel.app",
       },
       {
-        title: "Dashboard Analytics",
-        description: "Panel de control con visualización de datos en tiempo real y reportes automatizados.",
-        image: "/images/projects/placeholder-2.jpg",
-        technologies: ["Vue.js", "D3.js", "Firebase"],
-        link: "#",
+        title: "Proyecto completo - Dr. Cirujano",
+        description: "Landing Page + Panel administrativo + Gestión de reservas (Google Calendar) + Catálogo de servicios + Reportes + CMS de Blogs + Videos integrados + Login/Register",
+        image: "/images/projects/placeholder-2.png",
+        technologies: ["React", "Next.js", "TypeScript", "Tailwind"],
+        link: "https://drmanuelsinchi.com",
+      },
+       {
+        title: "VERIFICARLO - Revisión de autos de segunda, para que compres con confianza",
+        description: "Landing Page + Panel administrativo + Gestión de inspecciones + Catálogo de servicios + Mensajes al correo + CMS de Blogs + Videos integrados + Login/Register",
+        image: "/images/projects/placeholder-3.png",
+        technologies: ["React", "Next.js", "TypeScript", "Tailwind"],
+        link: "https://verificarlo.com",
       },
     ],
   },
@@ -109,18 +116,32 @@ const teamMembers = [
     bio: "Desarrollador fullstack con visión integral de productos digitales. Experiencia desde el diseño de bases de datos hasta interfaces de usuario.",
     projects: [
       {
-        title: "CRM Inmobiliario",
-        description: "Sistema completo de gestión de propiedades con portal para clientes y agentes.",
-        image: "/images/projects/placeholder-7.jpg",
-        technologies: ["Next.js", "Prisma", "PostgreSQL", "AWS"],
-        link: "#",
+        title: "Lifeli - Plataforma de bienestar",
+        description: "Sitio web enfocado en promover un estilo de vida saludable con recursos y contenido sobre bienestar integral.",
+        image: "/images/projects/lifeli.png",
+        technologies: ["Google Sites", "SEO", "Content Design"],
+        link: "https://sites.google.com/view/lifeli/nosotros",
       },
       {
-        title: "App de Delivery",
-        description: "Aplicación de delivery con tracking en tiempo real y sistema de pagos integrado.",
-        image: "/images/projects/placeholder-8.jpg",
-        technologies: ["React Native", "Node.js", "Socket.io", "Stripe"],
-        link: "#",
+        title: "D & S Full Deport",
+        description: "Tienda de artículos deportivos con catálogo de productos y sección de contacto para ventas.",
+        image: "/images/projects/fulldeport.png",
+        technologies: ["Google Sites", "E-commerce", "UX Design"],
+        link: "https://sites.google.com/view/dys-full-deport/nosotros",
+      },
+      {
+        title: "Multinet - Plataforma digital",
+        description: "Aplicación web moderna con interfaz interactiva y diseño responsive para múltiples dispositivos.",
+        image: "/images/projects/multinet.png",
+        technologies: ["React", "Next.js", "Vercel", "Tailwind"],
+        link: "https://multinet-lovat.vercel.app/",
+      },
+      {
+        title: "Explora - Portal educativo",
+        description: "Plataforma educativa interactiva diseñada para facilitar el aprendizaje y la exploración de contenidos.",
+        image: "/images/projects/explora.png",
+        technologies: ["Google Sites", "Education", "UX Research"],
+        link: "https://sites.google.com/view/capa-test/inicio?authuser=3",
       },
     ],
   },
@@ -194,7 +215,7 @@ export default function Experience() {
   };
 
   return (
-    <section id="experiencias" className="py-32 px-6 bg-[#0a0a0f] relative ambient-glow">
+    <section id="proyectos" className="py-32 px-6 bg-[#0a0a0f] relative ambient-glow">
       {/* Subtle top border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -417,17 +438,11 @@ function ProjectCard({ project, index, isDark }: ProjectCardProps) {
           className="relative h-48 overflow-hidden"
           style={{ backgroundColor: isDark ? "#0a0a0a" : "#f0f0f5" }}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
-            <svg
-              className="w-16 h-16"
-              style={{ color: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)" }}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
           {/* Hover overlay */}
           <div
             className="absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-60"

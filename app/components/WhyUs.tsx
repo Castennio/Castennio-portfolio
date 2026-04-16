@@ -5,28 +5,28 @@ import { WordReveal, GradientReveal } from "./TextReveal";
 
 const differentiators = [
   {
-    title: "Más clientes, menos esfuerzo",
-    description: "Creamos un sistema que atrae clientes mientras tú te dedicas a lo que sabes hacer.",
+    title: "Rápido",
+    description: "Semanas, no meses. Tu negocio no puede esperar y nosotros lo entendemos.",
   },
   {
-    title: "Recuperas tu tiempo",
-    description: "Lo que hacías en horas ahora pasa solo. Cotizaciones, citas, seguimientos automáticos.",
+    title: "Precio justo",
+    description: "Sin la inflación de agencia. Sabes cuánto pagas desde el inicio, sin sorpresas.",
   },
   {
-    title: "Decisiones con información",
-    description: "Sabes exactamente cuántos clientes tienes, cuánto vendes y qué funciona.",
+    title: "Sin tecnicismos",
+    description: "Nosotros manejamos lo técnico. Tú solo nos dices qué te gusta y apruebas.",
   },
   {
-    title: "Tú no tocas nada técnico",
-    description: "Nosotros hacemos todo. Tú solo nos dices qué necesitas y apruebas los cambios.",
+    title: "Comunicación directa",
+    description: "Hablamos por WhatsApp. Respuestas rápidas de personas reales, no chatbots.",
   },
   {
-    title: "Funcionando en días",
-    description: "No esperamos meses. Tu sistema listo rápido porque tu negocio lo necesita ahora.",
+    title: "Sprints semanales",
+    description: "Ves progreso real cada semana. Nada de esperar meses para ver resultados.",
   },
   {
-    title: "Atención real por WhatsApp",
-    description: "Hablamos contigo directamente. Respuestas rápidas de personas, no de robots.",
+    title: "Soporte post-entrega",
+    description: "No desaparecemos después de entregar. Te ayudamos con dudas y ajustes.",
   },
 ];
 
@@ -39,12 +39,12 @@ export default function WhyUs() {
           <div>
             <FadeIn>
               <p className="text-[13px] text-white/50 tracking-widest uppercase mb-4">
-                Tu negocio transformado
+                Por qué elegirnos
               </p>
             </FadeIn>
             <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em]">
               <WordReveal as="span" className="text-white/90" delay={0.1}>
-                Esto es lo que
+                Desarrollo web
               </WordReveal>{" "}
               <GradientReveal
                 as="span"
@@ -53,13 +53,13 @@ export default function WhyUs() {
                 gradientFrom="#22c55e"
                 gradientTo="#3b82f6"
               >
-                vas a lograr
+                sin complicaciones
               </GradientReveal>
             </h2>
           </div>
           <FadeIn delay={0.4}>
             <p className="text-white/55 text-[15px] max-w-sm leading-relaxed">
-              Sin saber nada de tecnología, vas a tener un negocio que crece solo y te da la libertad que buscas.
+              No somos una agencia tradicional. Somos un equipo pequeño que entrega rápido y habla claro.
             </p>
           </FadeIn>
         </div>

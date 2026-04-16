@@ -143,7 +143,7 @@ export default function Diagnosis() {
               </FadeIn>
               <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em] mb-6">
                 <WordReveal as="span" className="text-white/90" delay={0.1}>
-                  ¿Cuánto tiempo
+                  ¿Qué necesita
                 </WordReveal>{" "}
                 <GradientReveal
                   as="span"
@@ -152,7 +152,7 @@ export default function Diagnosis() {
                   gradientFrom="#3b82f6"
                   gradientTo="#8b5cf6"
                 >
-                  estás perdiendo?
+                  tu negocio?
                 </GradientReveal>
               </h2>
               <BlurReveal
@@ -161,8 +161,8 @@ export default function Diagnosis() {
                 delay={0.4}
                 stagger={0.01}
               >
-                Responde 4 preguntas rápidas y descubre cuántas horas a la semana
-                podrías recuperar automatizando tu negocio.
+                Responde 4 preguntas y descubre qué tipo de página web
+                te recomendamos y cuánto tiempo tomaría.
               </BlurReveal>
             </div>
 

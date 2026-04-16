@@ -3,8 +3,10 @@ export interface QuestionOption {
   label: string;
   description: string;
   icon: string;
-  hoursImpact: number;
-  automationPotential: number;
+  // Scoring for recommendation
+  projectType: "landing" | "website" | "redesign" | "migration" | "none";
+  complexity: number; // 1-3
+  urgency: number; // 1-3
 }
 
 export interface Question {
@@ -21,287 +23,326 @@ export interface DiagnosisAnswer {
 }
 
 export interface DiagnosisResult {
-  totalHoursLost: number;
-  automationPotential: number;
-  hoursRecoverable: number;
-  category: "critico" | "moderado" | "optimizado";
-  recommendations: string[];
+  projectType: "landing" | "website" | "redesign" | "migration";
+  projectLabel: string;
+  projectDescription: string;
+  suggestedFeatures: string[];
+  timeEstimate: string;
+  urgencyLevel: "alta" | "media" | "baja";
+  urgencyMessage: string;
 }
 
 export const questions: Question[] = [
   {
-    id: "business-type",
-    question: "¿Cuál describe mejor tu negocio?",
-    subtitle: "Esto nos ayuda a personalizar tu diagnóstico",
+    id: "current-website",
+    question: "¿Tienes página web actualmente?",
+    subtitle: "Sé honesto, no juzgamos",
     options: [
       {
-        id: "services",
-        label: "Servicios profesionales",
-        description: "Consultoría, legal, contable, marketing",
-        icon: "briefcase",
-        hoursImpact: 0,
-        automationPotential: 0,
+        id: "no-website",
+        label: "No tengo página web",
+        description: "Nunca he tenido o la dejé morir",
+        icon: "x-circle",
+        projectType: "landing",
+        complexity: 1,
+        urgency: 3,
       },
       {
-        id: "retail",
-        label: "Comercio / Retail",
-        description: "Tienda física u online",
-        icon: "store",
-        hoursImpact: 0,
-        automationPotential: 0,
+        id: "outdated",
+        label: "Sí, pero está desactualizada",
+        description: "Tiene años sin tocarla",
+        icon: "clock",
+        projectType: "redesign",
+        complexity: 2,
+        urgency: 2,
       },
       {
-        id: "health",
-        label: "Salud / Bienestar",
-        description: "Clínica, gimnasio, spa, nutrición",
-        icon: "heart",
-        hoursImpact: 0,
-        automationPotential: 0,
+        id: "not-working",
+        label: "Sí, pero no genera resultados",
+        description: "Nadie me contacta por ahí",
+        icon: "trending-down",
+        projectType: "redesign",
+        complexity: 2,
+        urgency: 3,
       },
       {
-        id: "construction",
-        label: "Construcción / Oficios",
-        description: "Contratista, mantenimiento, reparaciones",
-        icon: "hammer",
-        hoursImpact: 0,
-        automationPotential: 0,
+        id: "different-tech",
+        label: "Sí, pero quiero cambiar de tecnología",
+        description: "WordPress, Wix, u otra plataforma",
+        icon: "refresh",
+        projectType: "migration",
+        complexity: 3,
+        urgency: 1,
       },
       {
-        id: "education",
-        label: "Educación / Capacitación",
-        description: "Cursos, tutoría, coaching",
-        icon: "book",
-        hoursImpact: 0,
-        automationPotential: 0,
-      },
-      {
-        id: "other",
-        label: "Otro tipo de negocio",
-        description: "Mi negocio es diferente",
-        icon: "sparkles",
-        hoursImpact: 0,
-        automationPotential: 0,
+        id: "working-fine",
+        label: "Sí, y funciona bien",
+        description: "Solo quiero mejorarla",
+        icon: "check-circle",
+        projectType: "website",
+        complexity: 2,
+        urgency: 1,
       },
     ],
   },
   {
-    id: "time-consuming-tasks",
-    question: "¿Qué tareas te quitan más tiempo?",
+    id: "main-goal",
+    question: "¿Cuál es tu principal objetivo?",
+    subtitle: "Elige el más importante para ti",
+    options: [
+      {
+        id: "be-found",
+        label: "Que me encuentren en Google",
+        description: "Aparecer cuando buscan mi servicio",
+        icon: "search",
+        projectType: "website",
+        complexity: 2,
+        urgency: 2,
+      },
+      {
+        id: "more-contacts",
+        label: "Generar más contactos",
+        description: "Que me escriban interesados",
+        icon: "users",
+        projectType: "landing",
+        complexity: 1,
+        urgency: 3,
+      },
+      {
+        id: "sell-online",
+        label: "Vender productos online",
+        description: "E-commerce o catálogo con pagos",
+        icon: "shopping-cart",
+        projectType: "website",
+        complexity: 3,
+        urgency: 2,
+      },
+      {
+        id: "show-services",
+        label: "Mostrar mis servicios profesionalmente",
+        description: "Portafolio o presentación de empresa",
+        icon: "briefcase",
+        projectType: "website",
+        complexity: 2,
+        urgency: 1,
+      },
+      {
+        id: "schedule-appointments",
+        label: "Que agenden citas conmigo",
+        description: "Agenda online integrada",
+        icon: "calendar",
+        projectType: "website",
+        complexity: 2,
+        urgency: 2,
+      },
+    ],
+  },
+  {
+    id: "features-needed",
+    question: "¿Qué funcionalidades necesitas?",
     subtitle: "Selecciona todas las que apliquen",
     multiSelect: true,
     options: [
       {
-        id: "quotes",
-        label: "Hacer cotizaciones",
-        description: "Calcular precios, enviar propuestas",
-        icon: "calculator",
-        hoursImpact: 5,
-        automationPotential: 85,
+        id: "contact-form",
+        label: "Formulario de contacto",
+        description: "Para que te escriban desde la web",
+        icon: "mail",
+        projectType: "none",
+        complexity: 1,
+        urgency: 0,
       },
       {
-        id: "scheduling",
-        label: "Agendar citas",
-        description: "Coordinar horarios con clientes",
-        icon: "calendar",
-        hoursImpact: 4,
-        automationPotential: 90,
-      },
-      {
-        id: "follow-ups",
-        label: "Dar seguimiento",
-        description: "Recordatorios, confirmaciones",
-        icon: "bell",
-        hoursImpact: 6,
-        automationPotential: 80,
-      },
-      {
-        id: "invoicing",
-        label: "Facturación y cobranza",
-        description: "Emitir facturas, perseguir pagos",
-        icon: "receipt",
-        hoursImpact: 4,
-        automationPotential: 75,
-      },
-      {
-        id: "social-media",
-        label: "Publicar en redes",
-        description: "Crear contenido, responder mensajes",
-        icon: "megaphone",
-        hoursImpact: 8,
-        automationPotential: 60,
-      },
-      {
-        id: "reports",
-        label: "Hacer reportes",
-        description: "Ventas, inventario, métricas",
-        icon: "chart",
-        hoursImpact: 3,
-        automationPotential: 90,
-      },
-    ],
-  },
-  {
-    id: "client-management",
-    question: "¿Cómo gestionas a tus clientes hoy?",
-    subtitle: "Sé honesto, no juzgamos",
-    options: [
-      {
-        id: "memory",
-        label: "De memoria o notas",
-        description: "Libreta, post-its, memoria",
-        icon: "brain",
-        hoursImpact: 8,
-        automationPotential: 95,
-      },
-      {
-        id: "excel",
-        label: "Excel o Google Sheets",
-        description: "Hojas de cálculo básicas",
-        icon: "table",
-        hoursImpact: 5,
-        automationPotential: 80,
-      },
-      {
-        id: "whatsapp",
-        label: "Solo WhatsApp",
-        description: "Todo por chat, sin sistema",
+        id: "whatsapp-button",
+        label: "Botón de WhatsApp",
+        description: "Contacto directo por chat",
         icon: "chat",
-        hoursImpact: 10,
-        automationPotential: 85,
+        projectType: "none",
+        complexity: 1,
+        urgency: 0,
       },
       {
-        id: "basic-crm",
-        label: "CRM básico",
-        description: "HubSpot Free, Zoho, similar",
-        icon: "database",
-        hoursImpact: 2,
-        automationPotential: 40,
+        id: "online-scheduling",
+        label: "Agenda de citas online",
+        description: "Google Calendar o similar",
+        icon: "calendar",
+        projectType: "none",
+        complexity: 2,
+        urgency: 0,
       },
       {
-        id: "full-system",
-        label: "Sistema completo",
-        description: "ERP o CRM avanzado",
-        icon: "server",
-        hoursImpact: 1,
-        automationPotential: 20,
+        id: "product-catalog",
+        label: "Catálogo de productos/servicios",
+        description: "Mostrar lo que ofreces",
+        icon: "grid",
+        projectType: "none",
+        complexity: 2,
+        urgency: 0,
+      },
+      {
+        id: "payment-gateway",
+        label: "Pasarela de pagos",
+        description: "Cobrar online",
+        icon: "credit-card",
+        projectType: "none",
+        complexity: 3,
+        urgency: 0,
+      },
+      {
+        id: "blog",
+        label: "Blog o noticias",
+        description: "Publicar contenido",
+        icon: "file-text",
+        projectType: "none",
+        complexity: 2,
+        urgency: 0,
       },
     ],
   },
   {
-    id: "repetitive-hours",
-    question: "¿Cuántas horas a la semana pierdes en tareas repetitivas?",
-    subtitle: "Incluye todo lo que podría hacerse automáticamente",
+    id: "timeline",
+    question: "¿Qué tan pronto lo necesitas?",
+    subtitle: "Esto nos ayuda a priorizar",
     options: [
       {
-        id: "5-less",
-        label: "Menos de 5 horas",
-        description: "Tengo buen control",
-        icon: "clock-1",
-        hoursImpact: 3,
-        automationPotential: 50,
+        id: "asap",
+        label: "Lo antes posible",
+        description: "Ya debería tenerlo",
+        icon: "zap",
+        projectType: "none",
+        complexity: 0,
+        urgency: 3,
       },
       {
-        id: "5-10",
-        label: "5 a 10 horas",
-        description: "Me quitan algo de tiempo",
-        icon: "clock-2",
-        hoursImpact: 7,
-        automationPotential: 70,
+        id: "1-2-months",
+        label: "En 1-2 meses",
+        description: "Tengo algo de tiempo",
+        icon: "clock",
+        projectType: "none",
+        complexity: 0,
+        urgency: 2,
       },
       {
-        id: "10-20",
-        label: "10 a 20 horas",
-        description: "Me consumen bastante",
-        icon: "clock-3",
-        hoursImpact: 15,
-        automationPotential: 80,
-      },
-      {
-        id: "20-plus",
-        label: "Más de 20 horas",
-        description: "Es un problema serio",
-        icon: "clock-4",
-        hoursImpact: 25,
-        automationPotential: 90,
+        id: "no-rush",
+        label: "Sin prisa",
+        description: "Estoy explorando opciones",
+        icon: "coffee",
+        projectType: "none",
+        complexity: 0,
+        urgency: 1,
       },
     ],
   },
 ];
 
+const projectLabels = {
+  landing: "Landing Page",
+  website: "Sitio Web Completo",
+  redesign: "Rediseño de Sitio",
+  migration: "Migración Tecnológica",
+};
+
+const projectDescriptions = {
+  landing: "Una página efectiva enfocada en convertir visitantes en contactos. Ideal para empezar rápido.",
+  website: "Un sitio web completo con múltiples páginas y funcionalidades. Para negocios que necesitan más presencia.",
+  redesign: "Renovamos tu sitio actual con diseño moderno y mejor rendimiento. Mantenemos lo que funciona, mejoramos lo demás.",
+  migration: "Pasamos tu sitio a tecnología moderna (NextJS). Más rápido, más seguro, más fácil de mantener.",
+};
+
+const timeEstimates = {
+  landing: "1-2 semanas",
+  website: "3-4 semanas",
+  redesign: "2-3 semanas",
+  migration: "3-5 semanas",
+};
+
 export function calculateDiagnosis(answers: DiagnosisAnswer[]): DiagnosisResult {
-  let totalHours = 0;
-  let totalAutomationWeight = 0;
-  let automationCount = 0;
+  // Determine project type based on first two questions
+  let projectType: "landing" | "website" | "redesign" | "migration" = "landing";
+  let totalComplexity = 0;
+  let totalUrgency = 0;
+  let urgencyCount = 0;
 
-  answers.forEach((answer) => {
-    const question = questions.find((q) => q.id === answer.questionId);
-    if (!question) return;
+  // Get current website status
+  const websiteAnswer = answers.find((a) => a.questionId === "current-website");
+  if (websiteAnswer && websiteAnswer.selectedOptions.length > 0) {
+    const option = questions[0].options.find((o) => o.id === websiteAnswer.selectedOptions[0]);
+    if (option && option.projectType !== "none") {
+      projectType = option.projectType;
+    }
+    if (option) {
+      totalUrgency += option.urgency;
+      urgencyCount++;
+    }
+  }
 
-    answer.selectedOptions.forEach((optionId) => {
-      const option = question.options.find((o) => o.id === optionId);
+  // Get main goal - might override project type
+  const goalAnswer = answers.find((a) => a.questionId === "main-goal");
+  if (goalAnswer && goalAnswer.selectedOptions.length > 0) {
+    const option = questions[1].options.find((o) => o.id === goalAnswer.selectedOptions[0]);
+    if (option) {
+      totalComplexity += option.complexity;
+      totalUrgency += option.urgency;
+      urgencyCount++;
+
+      // If they want to sell online, upgrade to website
+      if (option.id === "sell-online" && projectType === "landing") {
+        projectType = "website";
+      }
+    }
+  }
+
+  // Collect suggested features
+  const suggestedFeatures: string[] = [];
+  const featuresAnswer = answers.find((a) => a.questionId === "features-needed");
+  if (featuresAnswer) {
+    featuresAnswer.selectedOptions.forEach((optionId) => {
+      const option = questions[2].options.find((o) => o.id === optionId);
       if (option) {
-        totalHours += option.hoursImpact;
-        totalAutomationWeight += option.automationPotential;
-        automationCount++;
+        suggestedFeatures.push(option.label);
+        totalComplexity += option.complexity;
       }
     });
-  });
+  }
 
-  const automationPotential =
-    automationCount > 0 ? Math.round(totalAutomationWeight / automationCount) : 0;
-  const hoursRecoverable = Math.round(totalHours * (automationPotential / 100));
+  // Get timeline urgency
+  const timelineAnswer = answers.find((a) => a.questionId === "timeline");
+  if (timelineAnswer && timelineAnswer.selectedOptions.length > 0) {
+    const option = questions[3].options.find((o) => o.id === timelineAnswer.selectedOptions[0]);
+    if (option) {
+      totalUrgency += option.urgency;
+      urgencyCount++;
+    }
+  }
 
-  let category: "critico" | "moderado" | "optimizado";
-  if (hoursRecoverable >= 12) category = "critico";
-  else if (hoursRecoverable >= 6) category = "moderado";
-  else category = "optimizado";
+  // If high complexity features selected and project is landing, upgrade to website
+  if (totalComplexity > 5 && projectType === "landing") {
+    projectType = "website";
+  }
 
-  const recommendations = generateRecommendations(answers, category);
+  // Calculate urgency level
+  const avgUrgency = urgencyCount > 0 ? totalUrgency / urgencyCount : 2;
+  let urgencyLevel: "alta" | "media" | "baja";
+  let urgencyMessage: string;
+
+  if (avgUrgency >= 2.5) {
+    urgencyLevel = "alta";
+    urgencyMessage = "Deberías empezar pronto. Cada día sin presencia web son oportunidades perdidas.";
+  } else if (avgUrgency >= 1.5) {
+    urgencyLevel = "media";
+    urgencyMessage = "Tienes tiempo para planificar bien, pero no lo dejes para después.";
+  } else {
+    urgencyLevel = "baja";
+    urgencyMessage = "Puedes tomarte tu tiempo para decidir. Estamos aquí cuando estés listo.";
+  }
 
   return {
-    totalHoursLost: totalHours,
-    automationPotential,
-    hoursRecoverable,
-    category,
-    recommendations,
+    projectType,
+    projectLabel: projectLabels[projectType],
+    projectDescription: projectDescriptions[projectType],
+    suggestedFeatures: suggestedFeatures.slice(0, 5),
+    timeEstimate: timeEstimates[projectType],
+    urgencyLevel,
+    urgencyMessage,
   };
-}
-
-function generateRecommendations(
-  answers: DiagnosisAnswer[],
-  category: "critico" | "moderado" | "optimizado"
-): string[] {
-  const recs: string[] = [];
-
-  const tasksAnswer = answers.find((a) => a.questionId === "time-consuming-tasks");
-  if (tasksAnswer) {
-    if (tasksAnswer.selectedOptions.includes("quotes")) {
-      recs.push("Sistema de cotizaciones automáticas");
-    }
-    if (tasksAnswer.selectedOptions.includes("scheduling")) {
-      recs.push("Agenda online con confirmaciones automáticas");
-    }
-    if (tasksAnswer.selectedOptions.includes("follow-ups")) {
-      recs.push("Secuencias de seguimiento automatizadas");
-    }
-    if (tasksAnswer.selectedOptions.includes("invoicing")) {
-      recs.push("Facturación y cobranza automática");
-    }
-  }
-
-  const clientAnswer = answers.find((a) => a.questionId === "client-management");
-  if (clientAnswer) {
-    if (
-      clientAnswer.selectedOptions.includes("memory") ||
-      clientAnswer.selectedOptions.includes("whatsapp")
-    ) {
-      recs.push("CRM simple para centralizar clientes");
-    }
-  }
-
-  if (category === "critico") {
-    recs.push("Dashboard de métricas en tiempo real");
-  }
-
-  return recs.slice(0, 4);
 }

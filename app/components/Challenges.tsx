@@ -6,26 +6,26 @@ import { WordReveal, GradientReveal, BlurReveal } from "./TextReveal";
 const challenges = [
   {
     id: 1,
-    title: "Tu negocio es invisible",
+    title: "No tienes presencia digital",
     category: "¿Te pasa esto?",
     description:
-      "Ofreces algo bueno, pero los clientes no te encuentran. Dependes de que alguien te recomiende o de publicar sin saber si funciona.",
+      "Tus clientes buscan en Google y no te encuentran. O te encuentran pero tu página no transmite confianza.",
     icon: "users",
   },
   {
     id: 2,
-    title: "Tu tiempo se va en lo urgente",
+    title: "Tu sitio actual no funciona",
     category: "¿Te pasa esto?",
     description:
-      "Cotizas a mano, respondes mensajes todo el día, agendas citas por WhatsApp. Terminas agotado y sin tiempo para hacer crecer tu negocio.",
+      "Está desactualizado, se ve mal en celular, o simplemente no genera contactos. Sabes que necesitas algo mejor.",
     icon: "clock",
   },
   {
     id: 3,
-    title: "No sabes qué está funcionando",
+    title: "No sabes por dónde empezar",
     category: "¿Te pasa esto?",
     description:
-      "Tienes clientes en WhatsApp, datos en Excel, notas en papel. No puedes tomar decisiones porque no tienes información clara.",
+      "Agencias caras, freelancers que desaparecen, plataformas complicadas. Demasiadas opciones, poca claridad.",
     icon: "puzzle",
   },
 ];
@@ -42,12 +42,12 @@ export default function Challenges() {
           <div>
             <FadeIn>
               <p className="text-[13px] text-white/50 tracking-widest uppercase mb-4">
-                Sabemos lo que enfrentas
+                Problemas comunes
               </p>
             </FadeIn>
             <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em]">
               <WordReveal as="span" className="text-white/90 block" delay={0.1}>
-                Estos obstáculos
+                Estos problemas
               </WordReveal>
               <GradientReveal
                 as="span"
@@ -56,7 +56,7 @@ export default function Challenges() {
                 gradientFrom="#ef4444"
                 gradientTo="#f97316"
               >
-                te están costando dinero
+                te suenan conocidos
               </GradientReveal>
             </h2>
           </div>
@@ -66,7 +66,7 @@ export default function Challenges() {
             delay={0.4}
             stagger={0.01}
           >
-            Cada día que pasa sin resolver esto, pierdes clientes y oportunidades. Pero tiene solución.
+            Si te identificas con alguno, podemos ayudarte. Sin complicaciones.
           </BlurReveal>
         </div>
 
