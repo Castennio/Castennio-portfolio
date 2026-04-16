@@ -221,7 +221,7 @@ export default function Hero() {
           delay={0.7}
           stagger={0.015}
         >
-          Desarrollo web para PYMES. Nos encargamos del diseño, desarrollo e integraciones. Tú solo apruebas.
+          Desarrollo web para MYPES. Nos encargamos del diseño, desarrollo e integraciones. Tú solo apruebas.
         </HeroBlur>
 
         {/* CTA buttons - interactive, need pointer events */}
