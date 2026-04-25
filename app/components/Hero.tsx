@@ -1,34 +1,23 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useState, useRef, useCallback } from "react";
-import MagneticButton from "./MagneticButton";
+import { useEffect, useState } from "react";
 import FadeIn from "./FadeIn";
-import { HeroWords, HeroBlur, HeroLine } from "./HeroText";
+import { HeroBlur, HeroLine } from "./HeroText";
+import SparkleParticles from "./SparkleParticles";
 
-// Dynamically import the fluid simulation to avoid SSR issues
-const FluidSimulation = dynamic(() => import("fluid-simulation-react"), {
-  ssr: false,
-});
-
-// Hook to detect theme - optimized
+// Hook to detect theme
 function useTheme() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
     const checkTheme = () => {
       const isDark = document.documentElement.classList.contains("dark");
-      setTheme(prev => {
-        const newTheme = isDark ? "dark" : "light";
-        return prev === newTheme ? prev : newTheme;
-      });
+      setTheme(isDark ? "dark" : "light");
     };
 
     checkTheme();
 
-    const observer = new MutationObserver(() => {
-      requestAnimationFrame(checkTheme);
-    });
+    const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class"],
@@ -40,154 +29,15 @@ function useTheme() {
   return theme;
 }
 
-function FluidBackground() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(true);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const theme = useTheme();
-
-  // Detect mobile/touch devices - disable fluid simulation for performance
-  useEffect(() => {
-    const checkMobile = () => {
-      const mobile = window.matchMedia("(max-width: 768px)").matches ||
-        "ontouchstart" in window ||
-        navigator.maxTouchPoints > 0;
-      setIsMobile(mobile);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  // Detect scroll to reduce visual lag
-  const handleScroll = useCallback(() => {
-    setIsScrolling(true);
-
-    if (scrollTimeoutRef.current) {
-      clearTimeout(scrollTimeoutRef.current);
-    }
-
-    scrollTimeoutRef.current = setTimeout(() => {
-      setIsScrolling(false);
-    }, 150);
-  }, []);
-
-  useEffect(() => {
-    // Intersection Observer - pause when not visible
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    // Scroll listener
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", handleScroll);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-    };
-  }, [handleScroll]);
-
-  // Optimized configuration - reduced iterations for better performance
-  const fluidConfig = {
-    textureDownsample: 2,
-    densityDissipation: 0.98,
-    velocityDissipation: 0.99,
-    pressureDissipation: 0.8,
-    pressureIterations: 20,
-    curl: 30,
-    splatRadius: 0.005,
-  };
-
-  // Colors based on theme
-  const darkColors = [
-    [0.03, 0.06, 0.15],
-    [0.05, 0.03, 0.12],
-    [0.02, 0.05, 0.1],
-    [0.06, 0.04, 0.14],
-    [0.025, 0.04, 0.09],
-  ];
-
-  // Light mode: dark/black smoke on white background
-  const lightColors = [
-    [0.2, 0.2, 0.22],
-    [0.15, 0.15, 0.18],
-    [0.25, 0.25, 0.28],
-    [0.1, 0.1, 0.12],
-    [0.18, 0.18, 0.2],
-  ];
-
-  const fluidColors = theme === "dark" ? darkColors : lightColors;
-  const edgeColor = theme === "dark" ? "#0a0a0f" : "#ffffff";
-
-  // Don't render fluid on mobile - just show static gradient
-  if (isMobile) {
-    return (
-      <div ref={containerRef} className="absolute inset-0">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: theme === "dark"
-              ? "radial-gradient(ellipse at center, rgba(59, 130, 246, 0.08) 0%, transparent 70%)"
-              : "radial-gradient(ellipse at center, rgba(99, 102, 241, 0.06) 0%, transparent 70%)",
-          }}
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div ref={containerRef} className="absolute inset-0">
-      {/* Fluid simulation - only render when visible and NOT on mobile */}
-      <div
-        className="absolute inset-0 transition-opacity duration-300"
-        style={{
-          opacity: isScrolling ? 0.5 : (theme === "dark" ? 1 : 0.5),
-        }}
-      >
-        {isVisible && (
-          <FluidSimulation config={fluidConfig} color={fluidColors} />
-        )}
-      </div>
-
-      {/* Edge fade overlay - only in dark mode */}
-      {theme === "dark" && (
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `
-              linear-gradient(to bottom, transparent 0%, transparent 70%, ${edgeColor} 100%),
-              linear-gradient(to top, transparent 0%, transparent 92%, ${edgeColor} 100%),
-              linear-gradient(to right, transparent 0%, transparent 92%, ${edgeColor} 100%),
-              linear-gradient(to left, transparent 0%, transparent 92%, ${edgeColor} 100%)
-            `,
-          }}
-        />
-      )}
-    </div>
-  );
-}
-
 export default function Hero() {
   const theme = useTheme();
   const isDark = theme === "dark";
 
   return (
     <section className={`relative min-h-[100svh] md:min-h-screen flex items-center justify-center overflow-hidden py-16 md:py-0 transition-colors duration-500 ${isDark ? "bg-[#0a0a0f]" : "bg-[#ffffff]"}`}>
-      {/* Fluid layer - always show, colors change based on theme */}
-      <div className="absolute inset-0 z-0">
-        <FluidBackground />
+      {/* Premium sparkle particles */}
+      <div className="absolute inset-0 w-full h-full z-[5]">
+        <SparkleParticles count={80} />
       </div>
 
       {/* Minimal grid */}

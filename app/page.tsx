@@ -8,6 +8,7 @@ import WhyUs from "./components/WhyUs";
 import Team from "./components/Team";
 import Experience from "./components/Experience";
 import FAQ from "./components/FAQ";
+import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
         <Team />
         <Experience />
         <FAQ />
+        <Contact />
       </main>
       <Footer />
     </>

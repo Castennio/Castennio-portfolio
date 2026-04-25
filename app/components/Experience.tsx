@@ -47,7 +47,7 @@ const teamMembers = [
         link: "https://ink-business.vercel.app",
       },
       {
-        title: "Proyecto completo - Dr. Cirujano",
+        title: "Proyecto clínica - Dr. Cirujano",
         description: "Landing Page + Panel administrativo + Gestión de reservas (Google Calendar) + Catálogo de servicios + Reportes + CMS de Blogs + Videos integrados + Login/Register",
         image: "/images/projects/placeholder-2.png",
         technologies: ["React", "Next.js", "TypeScript", "Tailwind"],
@@ -69,42 +69,49 @@ const teamMembers = [
     image: "/images/pixel-art/brack.png",
     bio: "Diseñador UI/UX con enfoque en crear experiencias digitales memorables. Especializado en design systems y prototipado interactivo.",
     projects: [
-      {
-        title: "App Fintech Redesign",
-        description: "Rediseño completo de aplicación bancaria mejorando la usabilidad y modernizando la interfaz.",
-        image: "/images/projects/placeholder-3.jpg",
-        technologies: ["Figma", "Principle", "Design System"],
-        link: "#",
-      },
-      {
-        title: "Plataforma Educativa",
-        description: "Diseño de plataforma e-learning con gamificación y seguimiento de progreso.",
-        image: "/images/projects/placeholder-4.jpg",
-        technologies: ["Figma", "Framer", "Lottie"],
-        link: "#",
-      },
+      // {
+      //   title: "App Fintech Redesign",
+      //   description: "Rediseño completo de aplicación bancaria mejorando la usabilidad y modernizando la interfaz.",
+      //   image: "/images/projects/placeholder-3.jpg",
+      //   technologies: ["Figma", "Principle", "Design System"],
+      //   link: "#",
+      // },
+      // {
+      //   title: "Plataforma Educativa",
+      //   description: "Diseño de plataforma e-learning con gamificación y seguimiento de progreso.",
+      //   image: "/images/projects/placeholder-4.jpg",
+      //   technologies: ["Figma", "Framer", "Lottie"],
+      //   link: "#",
+      // },
     ],
   },
   {
     id: "alonso",
     name: "Alonso",
-    role: "Backend Developer",
+    role: "Fullstack Developer",
     image: "/images/pixel-art/alonso.png",
-    bio: "Desarrollador backend especializado en arquitecturas escalables y APIs robustas. Experiencia en sistemas de alta disponibilidad.",
+    bio: "Desarrollador fullstack especializado en arquitecturas escalables y experiencias de usuario. Enfocado en soluciones modernas con Next.js y Supabase.",
     projects: [
       {
-        title: "API Gateway Microservicios",
-        description: "Sistema de microservicios con autenticación centralizada y balanceo de carga.",
-        image: "/images/projects/placeholder-5.jpg",
-        technologies: ["Node.js", "Docker", "Redis", "PostgreSQL"],
-        link: "#",
+        title: "Habity - Gestor de Habitos",
+        description: "Aplicacion de gamificacion de productividad con monitoreo de rachas, visualizaciones de datos y generacion de reportes PDF.",
+        image: "/images/projects/habity.png",
+        technologies: ["Next.js 16", "TypeScript", "Tailwind", "Supabase", "jsPDF"],
+        link: "https://habity-jet.vercel.app",
       },
       {
-        title: "Sistema de Reservas",
-        description: "Backend para sistema de reservas en tiempo real con notificaciones push.",
-        image: "/images/projects/placeholder-6.jpg",
-        technologies: ["Python", "FastAPI", "MongoDB", "WebSockets"],
-        link: "#",
+        title: "EduRate - Evaluacion Docente",
+        description: "Plataforma para centralizar y anonimizar retroalimentacion academica. Sistema de autenticacion por Magic Link y moderacion automatica de contenido.",
+        image: "/images/projects/edurate.png",
+        technologies: ["Next.js 15", "TypeScript", "Tailwind CSS", "Supabase"],
+        link: "https://edurate-zeta.vercel.app",
+      },
+      {
+        title: "Sabor Divino - Restaurante",
+        description: "Plataforma web para restaurante con carta digital interactiva, sistema de reservas en tiempo real y seccion de fidelizacion.",
+        image: "/images/projects/sabor-divino.png",
+        technologies: ["React 18", "Vite", "Supabase", "React Router"],
+        link: "https://github.com/alowincr/sabor-divino",
       },
     ],
   },
@@ -152,20 +159,20 @@ const teamMembers = [
     image: "/images/pixel-art/josue.jpeg",
     bio: "Desarrollador con pasión por crear soluciones eficientes y código limpio. Enfocado en buenas prácticas y arquitectura de software.",
     projects: [
-      {
-        title: "Sistema de Inventarios",
-        description: "Aplicación web para gestión de inventarios con reportes en tiempo real y alertas de stock.",
-        image: "/images/projects/placeholder-9.jpg",
-        technologies: ["React", "Node.js", "MySQL", "Chart.js"],
-        link: "#",
-      },
-      {
-        title: "Portal de Noticias",
-        description: "Plataforma de contenido con CMS personalizado y sistema de suscripciones.",
-        image: "/images/projects/placeholder-10.jpg",
-        technologies: ["Next.js", "Sanity", "Tailwind", "Vercel"],
-        link: "#",
-      },
+      // {
+      //   title: "Sistema de Inventarios",
+      //   description: "Aplicación web para gestión de inventarios con reportes en tiempo real y alertas de stock.",
+      //   image: "/images/projects/placeholder-9.jpg",
+      //   technologies: ["React", "Node.js", "MySQL", "Chart.js"],
+      //   link: "#",
+      // },
+      // {
+      //   title: "Portal de Noticias",
+      //   description: "Plataforma de contenido con CMS personalizado y sistema de suscripciones.",
+      //   image: "/images/projects/placeholder-10.jpg",
+      //   technologies: ["Next.js", "Sanity", "Tailwind", "Vercel"],
+      //   link: "#",
+      // },
     ],
   },
 ];
@@ -215,7 +222,7 @@ export default function Experience() {
   };
 
   return (
-    <section id="proyectos" className="py-32 px-6 bg-[#0a0a0f] relative ambient-glow">
+    <section id="proyectos" className="py-32 px-6 bg-[#0a0a0f] relative">
       {/* Subtle top border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 

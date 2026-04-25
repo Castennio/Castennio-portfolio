@@ -26,7 +26,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo - minimal */}
           <a href="#" className="flex items-center gap-3 group">
-            <img src="/images/logo-castennio-fondo-negro-icono-negro.png" alt="Castennio" className="w-8 h-8" />
+            <img src="/images/logo-castennio-fondo-transparente-icono-negro.png" alt="Castennio" className="w-8 h-8" />
             <span className="text-[15px] font-medium text-[var(--text-secondary)] group-hover:text-[var(--foreground)] transition-colors duration-300">
               Castennio
             </span>
@@ -35,10 +35,10 @@ export default function Navbar() {
           {/* Navigation - minimal */}
           <div className="hidden md:flex items-center gap-10">
             <a
-              href="#proyectos"
+              href="#servicios"
               className="text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors duration-300 tracking-wide"
             >
-              Proyectos
+              Servicios
             </a>
             <a
               href="#proceso"
@@ -47,10 +47,22 @@ export default function Navbar() {
               Proceso
             </a>
             <a
-              href="#servicios"
+              href="#proyectos"
               className="text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors duration-300 tracking-wide"
             >
-              Servicios
+              Proyectos
+            </a>
+            <a
+              href="#faq"
+              className="text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors duration-300 tracking-wide"
+            >
+              FAQ
+            </a>
+            <a
+              href="#contacto"
+              className="text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors duration-300 tracking-wide"
+            >
+              Contacto
             </a>
           </div>
 

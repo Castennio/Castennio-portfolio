@@ -32,7 +32,7 @@ const challenges = [
 
 export default function Challenges() {
   return (
-    <section id="problemas" className="py-32 px-6 bg-[#0a0a0f] relative ambient-glow">
+    <section id="problemas" className="py-32 px-6 bg-[#0a0a0f] relative">
       {/* Subtle top border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 

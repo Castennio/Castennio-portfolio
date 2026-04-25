@@ -29,8 +29,8 @@ const steps = [
 export default function Process() {
   return (
     <section id="proceso" className="py-32 px-6 bg-[#0a0a0f] relative overflow-hidden">
-      {/* Subtle background gradient */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(99,102,241,0.06)_0%,_transparent_50%)]" />
+      {/* Subtle top border */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="relative max-w-6xl mx-auto">
         {/* Header */}
