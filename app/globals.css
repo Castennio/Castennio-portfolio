@@ -460,3 +460,65 @@ html.light .hero-btn-gradient span,
 html.light .hero-btn-gradient svg {
   color: #ffffff !important;
 }
+
+/* ============================================
+   ADMIN THEME STYLES
+   ============================================ */
+
+/* Admin primary color */
+:root {
+  --admin-primary: #7C3AED;
+  --admin-primary-hover: #6D28D9;
+  --admin-primary-light: rgba(124, 58, 237, 0.1);
+  --admin-primary-glow: rgba(124, 58, 237, 0.3);
+}
+
+/* Admin gradient text */
+.admin-text-gradient {
+  background: linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Admin card hover effect */
+.admin-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px -15px rgba(124, 58, 237, 0.2);
+}
+
+/* Admin button glow */
+.admin-btn-glow {
+  box-shadow: 0 0 30px -10px rgba(124, 58, 237, 0.5);
+}
+
+.admin-btn-glow:hover {
+  box-shadow: 0 0 40px -8px rgba(124, 58, 237, 0.6);
+}
+
+/* Admin selection ring */
+.admin-ring {
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.3),
+              0 0 20px -5px rgba(124, 58, 237, 0.3);
+}
+
+/* Admin focus styles */
+.admin-focus:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--admin-primary),
+              0 0 0 4px rgba(124, 58, 237, 0.2);
+}
+
+/* Animate number changes */
+@keyframes pulse-number {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-number {
+  animation: pulse-number 0.3s ease-in-out;
+}

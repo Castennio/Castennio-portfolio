@@ -12,7 +12,10 @@
       "Bash(rm -rf .next)",
       "Bash(taskkill /PID 27560 /F)",
       "Bash(dir \"C:\\\\castennio\\\\castennio-portfolio\\\\app\\\\favicon.ico\")",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "mcp__Neon__create_project",
+      "mcp__Neon__run_sql",
+      "Bash(npx tsx:*)"
     ]
   }
 }
