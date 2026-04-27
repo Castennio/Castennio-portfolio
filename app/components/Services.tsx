@@ -10,7 +10,7 @@ const services = [
     number: "01",
     title: "Rediseño de sitios existentes",
     description:
-      "Si ya tienes web pero se ve anticuada o no convierte, la renovamos con un diseno profesional.",
+      "Si ya tienes web pero se ve anticuada o no convierte, la renovamos con un diseño profesional.",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -20,7 +20,7 @@ const services = [
       fullDescription: "Transformamos tu sitio web actual en una experiencia moderna que refleje la calidad de tu negocio y genere mas conversiones.",
       includes: [
         "Analisis de tu sitio actual",
-        "Nuevo diseno visual completo",
+        "Nuevo diseño visual completo",
         "Mejora de velocidad de carga",
         "Optimizacion de conversion",
         "Migracion de contenido existente",
@@ -364,7 +364,7 @@ export default function Services() {
             delay={0.4}
             stagger={0.01}
           >
-            Rediseno, migracion e integraciones para llevar tu sitio actual al siguiente nivel.
+            Rediseño, migracion e integraciones para llevar tu sitio actual al siguiente nivel.
           </BlurReveal>
         </div>
 

@@ -262,7 +262,7 @@ const plans: Record<string, PlanRecommendation> = {
     description: "Landing page simple y efectiva para empezar a captar clientes. Ideal para validar tu idea de negocio rapidamente.",
     includes: [
       "1 pagina tipo landing",
-      "Diseno responsive (celular + PC)",
+      "Diseño responsive (celular + PC)",
       "Boton de WhatsApp",
       "Informacion de contacto",
       "Redes sociales",
@@ -273,8 +273,8 @@ const plans: Record<string, PlanRecommendation> = {
   profesional: {
     id: "profesional",
     name: "Web Profesional",
-    tagline: "Disenada para generar confianza y ventas",
-    description: "Sitio web completo con diseno premium. Para negocios que quieren destacar y generar mas contactos.",
+    tagline: "Diseñada para generar confianza y ventas",
+    description: "Sitio web completo con diseño premium. Para negocios que quieren destacar y generar mas contactos.",
     includes: [
       "Todo lo del plan Express",
       "Google Maps (ubicacion)",
@@ -329,7 +329,7 @@ const plans: Record<string, PlanRecommendation> = {
 const services: Record<string, ServiceRecommendation> = {
   redesign: {
     id: "redesign",
-    name: "Rediseno de Sitio",
+    name: "Rediseño de Sitio",
     description: "Renovamos tu sitio actual con diseno moderno y mejor rendimiento. Mantenemos lo que funciona, mejoramos lo demas.",
     deliveryTime: "2-3 semanas",
   },

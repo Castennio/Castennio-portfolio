@@ -8,50 +8,50 @@ const plans = [
   {
     id: "express",
     name: "Web Express",
-    description: "Landing page simple y efectiva para empezar a captar clientes. Ideal para validar tu idea de negocio.",
+    description: "Tu negocio online en tiempo record. Landing page con presencia basica para captar tus primeros clientes.",
     badge: null,
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
-    features: ["1 pagina", "Diseno responsive", "Entrega rapida"],
+    features: ["1 pagina tipo landing", "Diseno responsive", "Boton de WhatsApp"],
   },
   {
     id: "profesional",
     name: "Web Profesional",
-    description: "Sitio web completo con diseno premium y funcionalidades avanzadas para negocios que quieren destacar.",
+    description: "No solo presencia digital, una web disenada para generar confianza y convertir visitas en ventas.",
     badge: "Mas elegido",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
     ),
-    features: ["Hasta 5 paginas", "SEO optimizado", "Formularios"],
+    features: ["Google Maps y SEO local", "Formularios y testimonios", "CTAs estrategicos"],
   },
   {
     id: "empresarial",
     name: "Web Empresarial",
-    description: "Solucion robusta para negocios en crecimiento con multiples paginas y funcionalidades escalables.",
+    description: "Tu negocio se ve serio, completo y mas competitivo. Ideal para negocios en crecimiento.",
     badge: "Escalable",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
       </svg>
     ),
-    features: ["Hasta 10 paginas", "Integraciones", "Panel admin"],
+    features: ["Pagina por cada servicio", "Blog y reservas", "SEO potente y Analytics"],
   },
   {
     id: "elite",
     name: "Web Corporativa Elite",
-    description: "Plataforma empresarial completa con integraciones avanzadas y funcionalidades totalmente a medida.",
+    description: "Tu negocio opera digitalmente. Plataforma completa con automatizacion y panel administrativo.",
     badge: "Premium",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
       </svg>
     ),
-    features: ["Paginas ilimitadas", "A medida", "Soporte prioritario"],
+    features: ["Panel admin y dashboard", "Roles, usuarios y pagos", "Automatizacion completa"],
   },
 ];
 
