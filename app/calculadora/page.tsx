@@ -10,6 +10,7 @@ import {
   QuoteSummary,
 } from '@/app/components/admin/calculator';
 import { calculateQuote, isQuoteComplete } from '@/lib/pricing';
+import { logoutAction } from '@/app/actions/auth';
 import type {
   PlanId,
   ClientType,
@@ -119,6 +120,17 @@ function CalculatorContent() {
               <span className="px-3 py-1.5 text-[11px] font-medium tracking-wider uppercase bg-[#7C3AED]/10 text-[#A78BFA] rounded-full">
                 Admin
               </span>
+              <form action={logoutAction}>
+                <button
+                  type="submit"
+                  className="p-2 rounded-lg text-white/40 hover:text-white/70 hover:bg-white/[0.04] transition-colors cursor-pointer"
+                  title="Cerrar sesión"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                  </svg>
+                </button>
+              </form>
             </div>
           </div>
         </div>
