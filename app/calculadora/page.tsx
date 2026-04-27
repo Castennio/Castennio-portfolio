@@ -170,6 +170,7 @@ function CalculatorContent() {
                 selected={formState.selectedAddons}
                 onToggle={handleAddonToggle}
                 disabled={!formState.selectedUrgency}
+                selectedPlan={formState.selectedPlan}
               />
             </section>
           </div>

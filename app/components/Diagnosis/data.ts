@@ -4,9 +4,12 @@ export interface QuestionOption {
   description: string;
   icon: string;
   // Scoring for recommendation
-  projectType: "landing" | "website" | "redesign" | "migration" | "none";
-  complexity: number; // 1-3
+  projectType: "new-website" | "redesign" | "migration" | "none";
+  complexity: number; // 1-5 (affects plan recommendation)
   urgency: number; // 1-3
+  // For addons that have dependencies or discounts
+  requires?: string[]; // IDs of required features
+  discountWith?: string[]; // IDs of features that give discount when combined
 }
 
 export interface Question {
@@ -61,7 +64,7 @@ export const questions: Question[] = [
         label: "No tengo página web",
         description: "Nunca he tenido o la dejé morir",
         icon: "x-circle",
-        projectType: "landing",
+        projectType: "new-website",
         complexity: 1,
         urgency: 3,
       },
@@ -97,7 +100,7 @@ export const questions: Question[] = [
         label: "Sí, y funciona bien",
         description: "Solo quiero mejorarla",
         icon: "check-circle",
-        projectType: "website",
+        projectType: "new-website",
         complexity: 2,
         urgency: 1,
       },
@@ -113,7 +116,7 @@ export const questions: Question[] = [
         label: "Que me encuentren en Google",
         description: "Aparecer cuando buscan mi servicio",
         icon: "search",
-        projectType: "website",
+        projectType: "new-website",
         complexity: 2,
         urgency: 2,
       },
@@ -122,7 +125,7 @@ export const questions: Question[] = [
         label: "Generar más contactos",
         description: "Que me escriban interesados",
         icon: "users",
-        projectType: "landing",
+        projectType: "new-website",
         complexity: 1,
         urgency: 3,
       },
@@ -131,8 +134,8 @@ export const questions: Question[] = [
         label: "Vender productos online",
         description: "E-commerce o catálogo con pagos",
         icon: "shopping-cart",
-        projectType: "website",
-        complexity: 3,
+        projectType: "new-website",
+        complexity: 4,
         urgency: 2,
       },
       {
@@ -140,7 +143,7 @@ export const questions: Question[] = [
         label: "Mostrar mis servicios profesionalmente",
         description: "Portafolio o presentación de empresa",
         icon: "briefcase",
-        projectType: "website",
+        projectType: "new-website",
         complexity: 2,
         urgency: 1,
       },
@@ -149,8 +152,17 @@ export const questions: Question[] = [
         label: "Que agenden citas conmigo",
         description: "Agenda online integrada",
         icon: "calendar",
-        projectType: "website",
-        complexity: 2,
+        projectType: "new-website",
+        complexity: 3,
+        urgency: 2,
+      },
+      {
+        id: "manage-business",
+        label: "Gestionar mi negocio digitalmente",
+        description: "Panel admin, usuarios, automatizaciones",
+        icon: "settings",
+        projectType: "new-website",
+        complexity: 5,
         urgency: 2,
       },
     ],
@@ -176,7 +188,7 @@ export const questions: Question[] = [
         description: "Contacto directo por chat",
         icon: "chat",
         projectType: "none",
-        complexity: 1,
+        complexity: 0,
         urgency: 0,
       },
       {
@@ -185,7 +197,7 @@ export const questions: Question[] = [
         description: "Google Calendar o similar",
         icon: "calendar",
         projectType: "none",
-        complexity: 2,
+        complexity: 3,
         urgency: 0,
       },
       {
@@ -200,19 +212,70 @@ export const questions: Question[] = [
       {
         id: "payment-gateway",
         label: "Pasarela de pagos",
-        description: "Cobrar online",
+        description: "Cobrar online (Culqi)",
         icon: "credit-card",
         projectType: "none",
-        complexity: 3,
+        complexity: 5,
         urgency: 0,
       },
       {
-        id: "blog",
-        label: "Blog o noticias",
-        description: "Publicar contenido",
+        id: "blog-view",
+        label: "Sección de Blog (solo ver)",
+        description: "Mostrar articulos y noticias",
         icon: "file-text",
         projectType: "none",
         complexity: 2,
+        urgency: 0,
+        discountWith: ["blog-cms"],
+      },
+      {
+        id: "blog-cms",
+        label: "Blog con panel de gestión",
+        description: "Crear, editar y eliminar articulos",
+        icon: "edit-3",
+        projectType: "none",
+        complexity: 4,
+        urgency: 0,
+        requires: ["roles-permissions"],
+        discountWith: ["blog-view"],
+      },
+      {
+        id: "reels-view",
+        label: "Sección de Reels (solo ver)",
+        description: "Mostrar videos cortos",
+        icon: "video",
+        projectType: "none",
+        complexity: 2,
+        urgency: 0,
+        discountWith: ["reels-cms"],
+      },
+      {
+        id: "reels-cms",
+        label: "Reels con panel de gestión",
+        description: "Subir y administrar videos",
+        icon: "film",
+        projectType: "none",
+        complexity: 4,
+        urgency: 0,
+        requires: ["roles-permissions"],
+        discountWith: ["reels-view"],
+      },
+      {
+        id: "roles-permissions",
+        label: "Roles y permisos",
+        description: "Control de acceso por usuario",
+        icon: "shield",
+        projectType: "none",
+        complexity: 4,
+        urgency: 0,
+      },
+      {
+        id: "admin-panel",
+        label: "Panel administrativo",
+        description: "Gestionar contenido desde un dashboard",
+        icon: "layout",
+        projectType: "none",
+        complexity: 5,
         urgency: 0,
       },
     ],
@@ -347,6 +410,68 @@ const services: Record<string, ServiceRecommendation> = {
   },
 };
 
+// Helper to check for feature dependencies and discounts
+interface FeatureAnalysis {
+  selectedFeatures: string[];
+  missingDependencies: { feature: string; requires: string }[];
+  discountPairs: { feature1: string; feature2: string }[];
+}
+
+function analyzeFeatures(selectedOptionIds: string[]): FeatureAnalysis {
+  const featuresQuestion = questions.find((q) => q.id === "features-needed");
+  if (!featuresQuestion) {
+    return { selectedFeatures: [], missingDependencies: [], discountPairs: [] };
+  }
+
+  const selectedFeatures: string[] = [];
+  const missingDependencies: { feature: string; requires: string }[] = [];
+  const discountPairs: { feature1: string; feature2: string }[] = [];
+  const processedDiscounts = new Set<string>();
+
+  selectedOptionIds.forEach((optionId) => {
+    const option = featuresQuestion.options.find((o) => o.id === optionId);
+    if (!option) return;
+
+    selectedFeatures.push(option.label);
+
+    // Check dependencies
+    if (option.requires) {
+      option.requires.forEach((requiredId) => {
+        if (!selectedOptionIds.includes(requiredId)) {
+          const requiredOption = featuresQuestion.options.find((o) => o.id === requiredId);
+          if (requiredOption) {
+            missingDependencies.push({
+              feature: option.label,
+              requires: requiredOption.label,
+            });
+          }
+        }
+      });
+    }
+
+    // Check for discount pairs
+    if (option.discountWith) {
+      option.discountWith.forEach((discountWithId) => {
+        if (selectedOptionIds.includes(discountWithId)) {
+          const pairKey = [optionId, discountWithId].sort().join("-");
+          if (!processedDiscounts.has(pairKey)) {
+            processedDiscounts.add(pairKey);
+            const discountOption = featuresQuestion.options.find((o) => o.id === discountWithId);
+            if (discountOption) {
+              discountPairs.push({
+                feature1: option.label,
+                feature2: discountOption.label,
+              });
+            }
+          }
+        }
+      });
+    }
+  });
+
+  return { selectedFeatures, missingDependencies, discountPairs };
+}
+
 export function calculateDiagnosis(answers: DiagnosisAnswer[]): DiagnosisResult {
   let hasWebsite = false;
   let serviceType: "redesign" | "migration" | "integration" | null = null;
@@ -374,6 +499,7 @@ export function calculateDiagnosis(answers: DiagnosisAnswer[]): DiagnosisResult 
     }
 
     if (option) {
+      totalComplexity += option.complexity;
       totalUrgency += option.urgency;
       urgencyCount++;
     }
@@ -390,14 +516,17 @@ export function calculateDiagnosis(answers: DiagnosisAnswer[]): DiagnosisResult 
     }
   }
 
-  // Collect suggested features and add to complexity
-  const suggestedFeatures: string[] = [];
+  // Collect and analyze features
   const featuresAnswer = answers.find((a) => a.questionId === "features-needed");
-  if (featuresAnswer) {
+  const selectedFeatureIds = featuresAnswer?.selectedOptions || [];
+  const featureAnalysis = analyzeFeatures(selectedFeatureIds);
+
+  // Add complexity from features
+  const featuresQuestion = questions.find((q) => q.id === "features-needed");
+  if (featuresQuestion && featuresAnswer) {
     featuresAnswer.selectedOptions.forEach((optionId) => {
-      const option = questions[2].options.find((o) => o.id === optionId);
+      const option = featuresQuestion.options.find((o) => o.id === optionId);
       if (option) {
-        suggestedFeatures.push(option.label);
         totalComplexity += option.complexity;
       }
     });
@@ -431,45 +560,80 @@ export function calculateDiagnosis(answers: DiagnosisAnswer[]): DiagnosisResult 
 
   // Determine recommendation based on whether they have a website or not
   if (!hasWebsite) {
-    // Recommend a PLAN based on complexity
+    // Recommend a PLAN based on complexity thresholds
+    // Express: 1-3 | Profesional: 4-6 | Empresarial: 7-10 | Elite: 11+
     let planId: "express" | "profesional" | "empresarial" | "elite";
 
-    if (totalComplexity <= 2) {
+    if (totalComplexity <= 3) {
       planId = "express";
-    } else if (totalComplexity <= 5) {
+    } else if (totalComplexity <= 6) {
       planId = "profesional";
-    } else if (totalComplexity <= 9) {
+    } else if (totalComplexity <= 10) {
       planId = "empresarial";
     } else {
       planId = "elite";
     }
 
-    // Upgrade based on specific features
-    const hasPaymentGateway = suggestedFeatures.includes("Pasarela de pagos");
-    const hasBlog = suggestedFeatures.includes("Blog o noticias");
-    const hasScheduling = suggestedFeatures.includes("Agenda de citas online");
+    // Force upgrades based on specific features
+    const hasPaymentGateway = selectedFeatureIds.includes("payment-gateway");
+    const hasAdminPanel = selectedFeatureIds.includes("admin-panel");
+    const hasRolesPermissions = selectedFeatureIds.includes("roles-permissions");
+    const hasBlogCms = selectedFeatureIds.includes("blog-cms");
+    const hasReelsCms = selectedFeatureIds.includes("reels-cms");
+    const hasScheduling = selectedFeatureIds.includes("online-scheduling");
+    const hasBlogView = selectedFeatureIds.includes("blog-view");
 
-    if (hasPaymentGateway) {
+    // Elite: payment gateway, admin panel, roles, or any CMS
+    if (hasPaymentGateway || hasAdminPanel || hasRolesPermissions || hasBlogCms || hasReelsCms) {
       planId = "elite";
-    } else if ((hasBlog || hasScheduling) && planId === "express") {
-      planId = "empresarial";
-    } else if (hasScheduling && planId === "profesional") {
+    }
+    // Empresarial: scheduling or blog view (included in plan 3)
+    else if ((hasScheduling || hasBlogView) && (planId === "express" || planId === "profesional")) {
       planId = "empresarial";
     }
+
+    // Build suggested features with dependency warnings
+    const suggestedFeatures = [...featureAnalysis.selectedFeatures];
+
+    // Add dependency warnings
+    featureAnalysis.missingDependencies.forEach((dep) => {
+      if (!suggestedFeatures.includes(`⚠️ ${dep.requires} (requerido)`)) {
+        suggestedFeatures.push(`⚠️ ${dep.requires} (requerido)`);
+      }
+    });
+
+    // Add discount notes
+    featureAnalysis.discountPairs.forEach((pair) => {
+      suggestedFeatures.push(`💰 Descuento: ${pair.feature1} + ${pair.feature2}`);
+    });
 
     return {
       hasWebsite: false,
       recommendedPlan: plans[planId],
-      suggestedFeatures: suggestedFeatures.slice(0, 5),
+      suggestedFeatures: suggestedFeatures.slice(0, 8),
       urgencyLevel,
       urgencyMessage,
     };
   } else {
-    // Recommend a SERVICE for existing websites
+    // Recommend a SERVICE for existing websites (redesign, migration, integration)
+    // But also recommend a plan tier for the work
+    let planId: "express" | "profesional" | "empresarial" | "elite" = "profesional";
+
+    if (totalComplexity <= 3) {
+      planId = "express";
+    } else if (totalComplexity <= 6) {
+      planId = "profesional";
+    } else if (totalComplexity <= 10) {
+      planId = "empresarial";
+    } else {
+      planId = "elite";
+    }
+
     return {
       hasWebsite: true,
       recommendedService: services[serviceType || "redesign"],
-      suggestedFeatures: suggestedFeatures.slice(0, 5),
+      recommendedPlan: plans[planId],
+      suggestedFeatures: featureAnalysis.selectedFeatures.slice(0, 5),
       urgencyLevel,
       urgencyMessage,
     };

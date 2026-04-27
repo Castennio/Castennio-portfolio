@@ -230,9 +230,10 @@ export const ADDONS: Record<AddonId, AddonConfig> = {
     id: 'blog',
     name: 'Sección de Blogs',
     description: 'Sección de artículos y noticias',
-    minPrice: 10,
-    maxPrice: 20,
+    minPrice: 5,
+    maxPrice: 15,
     icon: 'edit',
+    bundleWith: 'blog-cms',
   },
   'blog-cms': {
     id: 'blog-cms',
@@ -242,14 +243,16 @@ export const ADDONS: Record<AddonId, AddonConfig> = {
     maxPrice: 100,
     note: 'Requiere adicional de roles y permisos',
     icon: 'layout',
+    bundleWith: 'blog',
   },
   'reels': {
     id: 'reels',
     name: 'Sección de Reels',
     description: 'Sección de videos cortos estilo reels',
-    minPrice: 10,
-    maxPrice: 20,
+    minPrice: 5,
+    maxPrice: 15,
     icon: 'video',
+    bundleWith: 'reels-cms',
   },
   'reels-cms': {
     id: 'reels-cms',
@@ -259,6 +262,7 @@ export const ADDONS: Record<AddonId, AddonConfig> = {
     maxPrice: 80,
     note: 'Requiere adicional de roles y permisos',
     icon: 'video',
+    bundleWith: 'reels',
   },
   'roles-permissions': {
     id: 'roles-permissions',
@@ -279,3 +283,44 @@ export const ADDONS: Record<AddonId, AddonConfig> = {
 };
 
 export const ADDON_LIST = Object.values(ADDONS);
+
+// ============================================
+// BUNDLE DISCOUNTS
+// Cuando se seleccionan ambos addons, se aplica precio especial
+// ============================================
+
+import type { BundleConfig } from '@/types/pricing';
+
+export const BUNDLES: BundleConfig[] = [
+  {
+    id: 'blog-bundle',
+    addons: ['blog', 'blog-cms'],
+    bundlePrice: 35, // Blog (5) + Blog CMS (40) = 45, pero juntos = 35
+    bundleName: 'Blog Completo',
+  },
+  {
+    id: 'reels-bundle',
+    addons: ['reels', 'reels-cms'],
+    bundlePrice: 35, // Reels (5) + Reels CMS (40) = 45, pero juntos = 35
+    bundleName: 'Reels Completo',
+  },
+];
+
+// ============================================
+// ADDONS INCLUDED BY PLAN
+// Estos addons ya vienen incluidos en ciertos planes
+// ============================================
+
+export const PLAN_INCLUDED_ADDONS: Record<PlanId, AddonId[]> = {
+  'web-express': [],
+  'web-profesional': [],
+  'web-empresarial': ['blog', 'reels'], // Plan 3 incluye Blog y Reels (ver)
+  'web-corporativa-elite': ['blog', 'reels'], // Plan 4 también incluye Blog y Reels (ver)
+};
+
+// Descuento cuando el plan ya incluye un addon del bundle
+// Ej: Si plan incluye 'blog', el 'blog-cms' tiene descuento
+export const CMS_DISCOUNT_PRICE: Record<AddonId, number> = {
+  'blog-cms': 30, // Precio con descuento (normal 40) porque blog ya está incluido
+  'reels-cms': 30, // Precio con descuento (normal 40) porque reels ya está incluido
+} as Record<AddonId, number>;

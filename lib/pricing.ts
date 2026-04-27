@@ -8,6 +8,9 @@ import {
   CLIENT_TYPES,
   URGENCY_LEVELS,
   ADDONS,
+  BUNDLES,
+  PLAN_INCLUDED_ADDONS,
+  CMS_DISCOUNT_PRICE,
   CURRENCY_CONFIG,
 } from '@/config/pricing';
 
@@ -21,6 +24,8 @@ import type {
   UrgencyConfig,
   AddonConfig,
   QuoteCalculation,
+  BundleConfig,
+  AppliedBundle,
 } from '@/types/pricing';
 
 // ============================================
@@ -47,8 +52,81 @@ export function getAddonsConfigs(addonIds: AddonId[]): AddonConfig[] {
   return addonIds.map((id) => ADDONS[id]);
 }
 
+/**
+ * Detect which bundles apply based on selected addon IDs
+ */
+export function detectAppliedBundles(addonIds: AddonId[]): BundleConfig[] {
+  return BUNDLES.filter((bundle) => {
+    const [addon1, addon2] = bundle.addons;
+    return addonIds.includes(addon1) && addonIds.includes(addon2);
+  });
+}
+
+/**
+ * Calculate addons total with bundle discounts and plan-included addons
+ */
+export function calculateAddonsWithBundles(
+  addonIds: AddonId[],
+  planId?: PlanId
+): {
+  total: number;
+  discount: number;
+  appliedBundles: AppliedBundle[];
+  includedAddons: AddonId[];
+} {
+  const appliedBundles: AppliedBundle[] = [];
+  const bundledAddonIds = new Set<AddonId>();
+  let bundleTotal = 0;
+
+  // Get addons included in the plan
+  const includedAddons = planId ? PLAN_INCLUDED_ADDONS[planId] || [] : [];
+
+  // Filter out included addons from the calculation
+  const billableAddonIds = addonIds.filter(id => !includedAddons.includes(id));
+
+  // First, check for bundles (only if both addons are billable)
+  const detectedBundles = detectAppliedBundles(billableAddonIds);
+  for (const bundle of detectedBundles) {
+    const [addon1Id, addon2Id] = bundle.addons;
+    const addon1 = ADDONS[addon1Id];
+    const addon2 = ADDONS[addon2Id];
+    const normalPrice = addon1.minPrice + addon2.minPrice;
+    const savings = normalPrice - bundle.bundlePrice;
+
+    appliedBundles.push({ bundle, savings });
+    bundledAddonIds.add(addon1Id);
+    bundledAddonIds.add(addon2Id);
+    bundleTotal += bundle.bundlePrice;
+  }
+
+  // Then, add non-bundled addons (with CMS discount if applicable)
+  let nonBundledTotal = 0;
+  for (const addonId of billableAddonIds) {
+    if (!bundledAddonIds.has(addonId)) {
+      // Check for CMS discount (when the view addon is included in plan)
+      let addonPrice = ADDONS[addonId].minPrice;
+
+      if (addonId === 'blog-cms' && includedAddons.includes('blog')) {
+        addonPrice = CMS_DISCOUNT_PRICE['blog-cms'] || addonPrice;
+      } else if (addonId === 'reels-cms' && includedAddons.includes('reels')) {
+        addonPrice = CMS_DISCOUNT_PRICE['reels-cms'] || addonPrice;
+      }
+
+      nonBundledTotal += addonPrice;
+    }
+  }
+
+  const total = bundleTotal + nonBundledTotal;
+
+  // Calculate discount (comparing with normal prices of billable addons only)
+  const normalTotal = billableAddonIds.reduce((sum, id) => sum + ADDONS[id].minPrice, 0);
+  const discount = normalTotal - total;
+
+  return { total, discount, appliedBundles, includedAddons };
+}
+
 export function calculateAddonsTotal(addons: AddonConfig[]): number {
-  // Usa el precio mínimo para el cálculo base
+  // Usa el precio mínimo para el cálculo base (sin descuentos)
   return addons.reduce((total, addon) => total + addon.minPrice, 0);
 }
 
@@ -126,7 +204,10 @@ export function calculateQuote(
   const clientTypeAdjustment = calculateClientTypeAdjustment(basePrice, clientType);
   const urgencyAdjustment = calculateUrgencyAdjustment(basePrice, urgency);
   const subtotal = calculateFinalPrice(basePrice, clientTypeAdjustment, urgencyAdjustment);
-  const addonsTotal = calculateAddonsTotal(addons);
+
+  // Calculate addons with bundle discounts and plan-included addons
+  const { total: addonsTotal, discount: addonsDiscount, appliedBundles, includedAddons } = calculateAddonsWithBundles(addonIds, planId);
+
   const finalPrice = roundToDecimal(subtotal + addonsTotal);
   const deliveryTime = calculateDeliveryTime(plan, urgencyId);
 
@@ -146,6 +227,11 @@ export function calculateQuote(
     notes.push('La entrega urgente está sujeta a validación técnica del equipo.');
   }
 
+  // Add bundle discount notes
+  appliedBundles.forEach(({ bundle, savings }) => {
+    notes.push(`${bundle.bundleName}: Ahorro de ${formatCurrency(savings)} por bundle`);
+  });
+
   // Check for addons with notes (dependencies)
   const addonsWithNotes = addons.filter((a) => a.note);
   addonsWithNotes.forEach((addon) => {
@@ -153,7 +239,7 @@ export function calculateQuote(
   });
 
   // Note about addon prices
-  if (addons.length > 0) {
+  if (addons.length > 0 && appliedBundles.length === 0) {
     notes.push('El precio final de los adicionales puede variar según la complejidad del proyecto.');
   }
 
@@ -168,6 +254,9 @@ export function calculateQuote(
     clientTypeAdjustment,
     urgencyAdjustment,
     addonsTotal,
+    addonsDiscount,
+    appliedBundles,
+    includedAddons,
     subtotal,
     finalPrice,
     deliveryTime,

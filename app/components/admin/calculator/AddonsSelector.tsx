@@ -1,13 +1,14 @@
 'use client';
 
-import { ADDON_LIST } from '@/config/pricing';
+import { ADDON_LIST, PLAN_INCLUDED_ADDONS, CMS_DISCOUNT_PRICE } from '@/config/pricing';
 import { formatCurrency } from '@/lib/pricing';
-import type { AddonId, AddonConfig } from '@/types/pricing';
+import type { AddonId, AddonConfig, PlanId } from '@/types/pricing';
 
 interface AddonsSelectorProps {
   selected: AddonId[];
   onToggle: (addonId: AddonId) => void;
   disabled?: boolean;
+  selectedPlan: PlanId | null;
 }
 
 const ADDON_ICONS: Record<string, React.ReactNode> = {
@@ -88,38 +89,74 @@ function AddonCard({
   isSelected,
   onToggle,
   disabled,
+  isIncluded,
+  hasDiscount,
+  discountPrice,
 }: {
   addon: AddonConfig;
   isSelected: boolean;
   onToggle: () => void;
   disabled?: boolean;
+  isIncluded?: boolean;
+  hasDiscount?: boolean;
+  discountPrice?: number;
 }) {
+  const isDisabled = disabled || isIncluded;
+  const displayPrice = hasDiscount && discountPrice ? discountPrice : addon.minPrice;
+
   return (
     <button
       onClick={onToggle}
-      disabled={disabled}
+      disabled={isDisabled}
       className={`
         relative w-full text-left p-4 rounded-xl border transition-all duration-300
-        ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-        ${isSelected
-          ? 'bg-[#7C3AED]/10 border-[#7C3AED]/50'
-          : 'bg-[#0f1015] border-white/[0.06] hover:border-white/[0.12] hover:bg-[#14151a]'
+        ${isDisabled ? 'opacity-60 cursor-not-allowed' : ''}
+        ${isIncluded
+          ? 'bg-green-500/5 border-green-500/20'
+          : isSelected
+            ? 'bg-[#7C3AED]/10 border-[#7C3AED]/50'
+            : 'bg-[#0f1015] border-white/[0.06] hover:border-white/[0.12] hover:bg-[#14151a]'
         }
       `}
     >
+      {/* Included badge */}
+      {isIncluded && (
+        <div className="absolute -top-2 right-3 px-2 py-0.5 text-[9px] font-medium uppercase tracking-wider bg-green-500/20 text-green-400 rounded-full border border-green-500/30">
+          Incluido
+        </div>
+      )}
+
+      {/* Discount badge with tooltip */}
+      {hasDiscount && !isIncluded && (
+        <div className="absolute -top-2 right-3 group/tooltip">
+          <div className="px-2 py-0.5 text-[9px] font-medium uppercase tracking-wider bg-amber-500/20 text-amber-400 rounded-full border border-amber-500/30 cursor-help">
+            Descuento
+          </div>
+          {/* Tooltip */}
+          <div className="absolute bottom-full right-0 mb-2 w-48 p-2 bg-[#1a1a1f] border border-white/10 rounded-lg shadow-xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-200 z-50">
+            <p className="text-[11px] text-white/70 leading-relaxed">
+              Precio rebajado porque tu plan ya incluye la visualización. Solo pagas por el panel de gestión.
+            </p>
+            <div className="absolute -bottom-1 right-4 w-2 h-2 bg-[#1a1a1f] border-r border-b border-white/10 transform rotate-45"></div>
+          </div>
+        </div>
+      )}
+
       <div className="flex items-center gap-3">
         {/* Checkbox */}
         <div
           className={`
             w-5 h-5 rounded-md border-2 transition-all duration-300 flex-shrink-0
             flex items-center justify-center
-            ${isSelected
-              ? 'border-[#7C3AED] bg-[#7C3AED]'
-              : 'border-white/20'
+            ${isIncluded
+              ? 'border-green-500 bg-green-500'
+              : isSelected
+                ? 'border-[#7C3AED] bg-[#7C3AED]'
+                : 'border-white/20'
             }
           `}
         >
-          {isSelected && (
+          {(isSelected || isIncluded) && (
             <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
             </svg>
@@ -130,9 +167,11 @@ function AddonCard({
         <div
           className={`
             w-9 h-9 rounded-lg flex items-center justify-center transition-colors flex-shrink-0
-            ${isSelected
-              ? 'bg-[#7C3AED]/20 text-[#A78BFA]'
-              : 'bg-white/[0.04] text-white/40'
+            ${isIncluded
+              ? 'bg-green-500/20 text-green-400'
+              : isSelected
+                ? 'bg-[#7C3AED]/20 text-[#A78BFA]'
+                : 'bg-white/[0.04] text-white/40'
             }
           `}
         >
@@ -145,28 +184,39 @@ function AddonCard({
             <h4
               className={`
                 text-sm font-medium transition-colors truncate
-                ${isSelected ? 'text-white' : 'text-white/70'}
+                ${isIncluded ? 'text-green-400' : isSelected ? 'text-white' : 'text-white/70'}
               `}
             >
               {addon.name}
             </h4>
           </div>
-          <p className="text-[11px] text-white/40 truncate">{addon.description}</p>
-          {addon.note && (
+          <p className="text-[11px] text-white/40 truncate">
+            {isIncluded ? 'Ya incluido en tu plan' : addon.description}
+          </p>
+          {addon.note && !isIncluded && (
             <p className="text-[10px] text-amber-400/70 mt-1 truncate">{addon.note}</p>
           )}
         </div>
 
         {/* Price */}
         <div className="text-right flex-shrink-0">
-          <p
-            className={`
-              text-[11px] transition-colors
-              ${isSelected ? 'text-[#A78BFA]' : 'text-white/40'}
-            `}
-          >
-            +{formatCurrency(addon.minPrice)}
-          </p>
+          {isIncluded ? (
+            <p className="text-[11px] text-green-400">Gratis</p>
+          ) : hasDiscount ? (
+            <div>
+              <p className="text-[10px] text-white/30 line-through">+{formatCurrency(addon.minPrice)}</p>
+              <p className="text-[11px] text-amber-400">+{formatCurrency(displayPrice)}</p>
+            </div>
+          ) : (
+            <p
+              className={`
+                text-[11px] transition-colors
+                ${isSelected ? 'text-[#A78BFA]' : 'text-white/40'}
+              `}
+            >
+              +{formatCurrency(addon.minPrice)}
+            </p>
+          )}
         </div>
       </div>
     </button>
@@ -177,8 +227,28 @@ export default function AddonsSelector({
   selected,
   onToggle,
   disabled,
+  selectedPlan,
 }: AddonsSelectorProps) {
   const totalAddons = selected.length;
+
+  // Get addons included in the selected plan
+  const includedAddons = selectedPlan ? PLAN_INCLUDED_ADDONS[selectedPlan] || [] : [];
+
+  // Check if an addon has a discount (its paired addon is included in the plan)
+  const getAddonDiscount = (addonId: AddonId): { hasDiscount: boolean; discountPrice?: number } => {
+    if (!selectedPlan) return { hasDiscount: false };
+
+    // Blog CMS gets discount if 'blog' is included in plan
+    if (addonId === 'blog-cms' && includedAddons.includes('blog')) {
+      return { hasDiscount: true, discountPrice: CMS_DISCOUNT_PRICE['blog-cms'] };
+    }
+    // Reels CMS gets discount if 'reels' is included in plan
+    if (addonId === 'reels-cms' && includedAddons.includes('reels')) {
+      return { hasDiscount: true, discountPrice: CMS_DISCOUNT_PRICE['reels-cms'] };
+    }
+
+    return { hasDiscount: false };
+  };
 
   return (
     <div className="space-y-4">
@@ -218,16 +288,36 @@ export default function AddonsSelector({
         )}
       </div>
 
+      {/* Show included addons info */}
+      {includedAddons.length > 0 && (
+        <div className="flex items-center gap-2 p-3 rounded-lg bg-green-500/10 border border-green-500/20 mb-4">
+          <svg className="w-4 h-4 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+          <p className="text-[12px] text-green-400">
+            Tu plan ya incluye: {includedAddons.map(id => ADDON_LIST.find(a => a.id === id)?.name).join(', ')}
+          </p>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        {ADDON_LIST.map((addon) => (
-          <AddonCard
-            key={addon.id}
-            addon={addon}
-            isSelected={selected.includes(addon.id)}
-            onToggle={() => onToggle(addon.id)}
-            disabled={disabled}
-          />
-        ))}
+        {ADDON_LIST.map((addon) => {
+          const isIncluded = includedAddons.includes(addon.id);
+          const { hasDiscount, discountPrice } = getAddonDiscount(addon.id);
+
+          return (
+            <AddonCard
+              key={addon.id}
+              addon={addon}
+              isSelected={selected.includes(addon.id)}
+              onToggle={() => onToggle(addon.id)}
+              disabled={disabled}
+              isIncluded={isIncluded}
+              hasDiscount={hasDiscount}
+              discountPrice={discountPrice}
+            />
+          );
+        })}
       </div>
 
       {/* Info note */}

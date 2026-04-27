@@ -64,6 +64,20 @@ export interface AddonConfig {
   maxPrice: number;
   note?: string; // Notas adicionales (ej: requiere otro addon)
   icon: string;
+  bundleWith?: AddonId; // ID del addon con el que hace bundle/descuento
+}
+
+// Configuración de bundles/descuentos
+export interface BundleConfig {
+  id: string;
+  addons: [AddonId, AddonId]; // Los dos addons que forman el bundle
+  bundlePrice: number; // Precio especial del bundle
+  bundleName: string; // Nombre del bundle para mostrar
+}
+
+export interface AppliedBundle {
+  bundle: BundleConfig;
+  savings: number; // Cuánto se ahorró
 }
 
 export interface QuoteCalculation {
@@ -75,6 +89,9 @@ export interface QuoteCalculation {
   clientTypeAdjustment: number;
   urgencyAdjustment: number;
   addonsTotal: number;
+  addonsDiscount: number; // Descuento por bundles o plan
+  appliedBundles: AppliedBundle[]; // Bundles aplicados
+  includedAddons: AddonId[]; // Addons incluidos en el plan
   subtotal: number; // base + adjustments (before addons)
   finalPrice: number;
   deliveryTime: string;

@@ -9,7 +9,8 @@ import {
   StyleSheet,
   pdf,
 } from '@react-pdf/renderer';
-import type { QuoteCalculation } from '@/types/pricing';
+import type { QuoteCalculation, AddonId } from '@/types/pricing';
+import { ADDONS } from '@/config/pricing';
 
 // ============================================
 // COLORS
@@ -313,6 +314,52 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
+  includedHeader: {
+    backgroundColor: '#ecfdf5',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+  },
+  includedHeaderText: {
+    fontSize: 8,
+    fontFamily: 'Helvetica-Bold',
+    color: '#059669',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  includedValue: {
+    fontSize: 10,
+    fontFamily: 'Helvetica-Bold',
+    color: '#059669',
+  },
+  discountRow: {
+    backgroundColor: '#fef3c7',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+  },
+  discountLabel: {
+    fontSize: 9,
+    color: '#92400e',
+  },
+  discountValue: {
+    fontSize: 10,
+    fontFamily: 'Helvetica-Bold',
+    color: '#059669',
+  },
+  bundleNote: {
+    fontSize: 8,
+    color: '#6b7280',
+    paddingLeft: 16,
+    paddingBottom: 8,
+    fontStyle: 'italic',
+  },
 
   // Total
   totalRow: {
@@ -519,24 +566,72 @@ function QuotePDFDocument({ quote, logoUrl, clientName }: QuotePDFProps) {
               </View>
             )}
 
+            {/* Included Addons (free with plan) */}
+            {quote.includedAddons.length > 0 && (
+              <>
+                <View style={styles.includedHeader}>
+                  <Text style={styles.includedHeaderText}>Incluido en el Plan</Text>
+                  <Text style={styles.includedHeaderText}>Gratis</Text>
+                </View>
+                {quote.includedAddons.map((addonId) => {
+                  const addonName = ADDONS[addonId]?.name || addonId;
+                  return (
+                    <View key={addonId} style={styles.priceRow}>
+                      <Text style={styles.priceLabelSub}>✓ {addonName}</Text>
+                      <Text style={styles.includedValue}>S/ 0</Text>
+                    </View>
+                  );
+                })}
+              </>
+            )}
+
             {/* Addons */}
-            {quote.addons.length > 0 && (
+            {quote.addons.filter(a => !quote.includedAddons.includes(a.id)).length > 0 && (
               <>
                 <View style={styles.addonsHeader}>
                   <Text style={styles.addonsHeaderText}>Servicios Adicionales</Text>
-                  <Text style={styles.addonsHeaderText}>{quote.addons.length} items</Text>
+                  <Text style={styles.addonsHeaderText}>
+                    {quote.addons.filter(a => !quote.includedAddons.includes(a.id)).length} items
+                  </Text>
                 </View>
-                {quote.addons.map((addon, index) => (
-                  <View
-                    key={addon.id}
-                    style={index === quote.addons.length - 1 ? [styles.priceRow, styles.priceRowLast] : styles.priceRow}
-                  >
-                    <Text style={styles.priceLabelSub}>
-                      + {addon.name}
+
+                {/* Bundles */}
+                {quote.appliedBundles.map((appliedBundle) => (
+                  <View key={appliedBundle.bundle.id}>
+                    <View style={styles.priceRow}>
+                      <Text style={styles.priceLabelSub}>
+                        + {appliedBundle.bundle.bundleName}
+                      </Text>
+                      <Text style={styles.priceValueAdd}>+{formatCurrency(appliedBundle.bundle.bundlePrice)}</Text>
+                    </View>
+                    <Text style={styles.bundleNote}>
+                      Incluye: {appliedBundle.bundle.addons.join(' + ')} (Ahorro: {formatCurrency(appliedBundle.savings)})
                     </Text>
-                    <Text style={styles.priceValueAdd}>+{formatCurrency(addon.minPrice)}</Text>
                   </View>
                 ))}
+
+                {/* Non-bundled, non-included addons */}
+                {quote.addons
+                  .filter(addon =>
+                    !quote.includedAddons.includes(addon.id) &&
+                    !quote.appliedBundles.some(b => b.bundle.addons.includes(addon.id))
+                  )
+                  .map((addon) => (
+                    <View key={addon.id} style={styles.priceRow}>
+                      <Text style={styles.priceLabelSub}>+ {addon.name}</Text>
+                      <Text style={styles.priceValueAdd}>+{formatCurrency(addon.minPrice)}</Text>
+                    </View>
+                  ))}
+
+                {/* Discount row */}
+                {quote.addonsDiscount > 0 && (
+                  <View style={[styles.discountRow, styles.priceRowLast]}>
+                    <Text style={styles.discountLabel}>
+                      Descuento por servicios combinados
+                    </Text>
+                    <Text style={styles.discountValue}>-{formatCurrency(quote.addonsDiscount)}</Text>
+                  </View>
+                )}
               </>
             )}
           </View>

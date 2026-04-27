@@ -201,20 +201,72 @@ export default function QuoteSummary({
               />
             )}
 
+            {/* Included addons (free with plan) */}
+            {quote.includedAddons.length > 0 && (
+              <>
+                <div className="pt-3 mt-3 border-t border-white/[0.04]">
+                  <p className="text-[10px] text-white/30 uppercase tracking-wider mb-2">Incluido en el plan</p>
+                </div>
+                {quote.includedAddons.map((addonId) => {
+                  const addon = quote.addons.find(a => a.id === addonId) || { name: addonId };
+                  return (
+                    <div key={addonId} className="flex items-center justify-between py-2">
+                      <span className="text-green-400/70 text-sm pl-4">✓ {addon.name || addonId}</span>
+                      <span className="font-mono text-green-400 text-sm">Gratis</span>
+                    </div>
+                  );
+                })}
+              </>
+            )}
+
             {/* Addons */}
-            {quote.addons.length > 0 && (
+            {quote.addons.filter(a => !quote.includedAddons.includes(a.id)).length > 0 && (
               <>
                 <div className="pt-3 mt-3 border-t border-white/[0.04]">
                   <p className="text-[10px] text-white/30 uppercase tracking-wider mb-2">Servicios adicionales</p>
                 </div>
-                {quote.addons.map((addon) => (
-                  <SummaryRow
-                    key={addon.id}
-                    label={`+ ${addon.name}`}
-                    value={`+${formatCurrency(addon.minPrice)}`}
-                    variant="adjustment"
-                  />
+                {/* Show bundles first */}
+                {quote.appliedBundles.map(({ bundle, savings }) => (
+                  <div key={bundle.id} className="py-2">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="text-white/50 text-sm pl-4">+ {bundle.bundleName}</span>
+                        <span className="px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-400 rounded-full">
+                          -{formatCurrency(savings)}
+                        </span>
+                      </div>
+                      <span className="font-mono text-green-400/80 text-sm">
+                        +{formatCurrency(bundle.bundlePrice)}
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-white/30 pl-4 mt-0.5">
+                      {bundle.addons.join(' + ')}
+                    </p>
+                  </div>
                 ))}
+                {/* Show non-bundled, non-included addons */}
+                {quote.addons
+                  .filter(addon =>
+                    !quote.includedAddons.includes(addon.id) &&
+                    !quote.appliedBundles.some(b => b.bundle.addons.includes(addon.id))
+                  )
+                  .map((addon) => (
+                    <SummaryRow
+                      key={addon.id}
+                      label={`+ ${addon.name}`}
+                      value={`+${formatCurrency(addon.minPrice)}`}
+                      variant="adjustment"
+                    />
+                  ))}
+                {/* Show total savings if any */}
+                {quote.addonsDiscount > 0 && (
+                  <div className="flex items-center justify-between py-2 mt-2 px-3 rounded-lg bg-green-500/10 border border-green-500/20">
+                    <span className="text-green-400 text-sm">Ahorro total</span>
+                    <span className="font-mono text-green-400 font-medium">
+                      -{formatCurrency(quote.addonsDiscount)}
+                    </span>
+                  </div>
+                )}
               </>
             )}
 
