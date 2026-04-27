@@ -6,34 +6,8 @@ import { WordReveal, GradientReveal, BlurReveal } from "./TextReveal";
 
 const services = [
   {
-    id: "web-new",
-    number: "01",
-    title: "Paginas web desde cero",
-    description:
-      "Landing pages o sitios completos. Diseno moderno que se ve bien en cualquier dispositivo.",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
-      </svg>
-    ),
-    popular: true,
-    details: {
-      fullDescription: "Creamos tu presencia digital desde cero con un diseno moderno, rápido y optimizado para convertir visitantes en clientes.",
-      includes: [
-        "Diseno personalizado y unico",
-        "Responsive (movil, tablet, desktop)",
-        "Optimizacion SEO basica",
-        "Formulario de contacto",
-        "Integracion con redes sociales",
-        "Certificado SSL incluido",
-      ],
-      timeline: "1-2 semanas",
-      ideal: "Negocios nuevos o que nunca han tenido presencia web",
-    },
-  },
-  {
     id: "redesign",
-    number: "02",
+    number: "01",
     title: "Rediseño de sitios existentes",
     description:
       "Si ya tienes web pero se ve anticuada o no convierte, la renovamos con un diseno profesional.",
@@ -58,7 +32,7 @@ const services = [
   },
   {
     id: "migration",
-    number: "03",
+    number: "02",
     title: "Migraciones",
     description:
       "Pasamos tu sitio a tecnología moderna (NextJS) para que sea rápido, seguro y facil de mantener.",
@@ -83,7 +57,7 @@ const services = [
   },
   {
     id: "integrations",
-    number: "04",
+    number: "03",
     title: "Integraciones",
     description:
       "Conectamos tu sitio con pagos, agenda (Google Calendar), formularios y lo que tu negocio necesite.",
@@ -171,16 +145,6 @@ function ServiceCard({ service, index, onClick }: ServiceCardProps) {
             background: `radial-gradient(circle at ${glowPosition.x}% ${glowPosition.y}%, rgba(59, 130, 246, 0.15) 0%, transparent 50%)`,
           }}
         />
-
-        {/* Popular badge */}
-        {service.popular && (
-          <div className="absolute -top-3 right-6">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-medium tracking-wider uppercase bg-gradient-to-r from-blue-500 to-violet-500 text-white rounded-full shadow-lg shadow-blue-500/25">
-              <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-              Mas solicitado
-            </span>
-          </div>
-        )}
 
         {/* Number */}
         <span className="absolute top-6 right-6 text-[11px] font-mono text-white/20 tracking-wider">
@@ -377,12 +341,12 @@ export default function Services() {
         <div className="text-center mb-20">
           <FadeIn>
             <p className="text-[13px] text-white/50 tracking-widest uppercase mb-4">
-              Nuestros servicios
+              Servicios adicionales
             </p>
           </FadeIn>
           <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em] mb-6">
             <WordReveal as="span" className="text-white/90" delay={0.1}>
-              Soluciones
+              Ya tienes web?
             </WordReveal>{" "}
             <GradientReveal
               as="span"
@@ -391,7 +355,7 @@ export default function Services() {
               gradientFrom="#3b82f6"
               gradientTo="#8b5cf6"
             >
-              a tu medida
+              La mejoramos
             </GradientReveal>
           </h2>
           <BlurReveal
@@ -400,7 +364,7 @@ export default function Services() {
             delay={0.4}
             stagger={0.01}
           >
-            Cada negocio es diferente. Por eso no vendemos paquetes cerrados, sino lo que realmente necesitas.
+            Rediseno, migracion e integraciones para llevar tu sitio actual al siguiente nivel.
           </BlurReveal>
         </div>
 

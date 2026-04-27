@@ -22,12 +22,30 @@ export interface DiagnosisAnswer {
   selectedOptions: string[];
 }
 
+export interface PlanRecommendation {
+  id: "express" | "profesional" | "empresarial" | "elite";
+  name: string;
+  tagline: string;
+  description: string;
+  includes: string[];
+  priceRange: string;
+  deliveryTime: string;
+}
+
+export interface ServiceRecommendation {
+  id: "redesign" | "migration" | "integration";
+  name: string;
+  description: string;
+  deliveryTime: string;
+}
+
 export interface DiagnosisResult {
-  projectType: "landing" | "website" | "redesign" | "migration";
-  projectLabel: string;
-  projectDescription: string;
+  hasWebsite: boolean;
+  // For new websites
+  recommendedPlan?: PlanRecommendation;
+  // For existing websites
+  recommendedService?: ServiceRecommendation;
   suggestedFeatures: string[];
-  timeEstimate: string;
   urgencyLevel: "alta" | "media" | "baja";
   urgencyMessage: string;
 }
@@ -235,30 +253,103 @@ export const questions: Question[] = [
   },
 ];
 
-const projectLabels = {
-  landing: "Landing Page",
-  website: "Sitio Web Completo",
-  redesign: "Rediseño de Sitio",
-  migration: "Migración Tecnológica",
+// Plans for NEW websites
+const plans: Record<string, PlanRecommendation> = {
+  express: {
+    id: "express",
+    name: "Web Express",
+    tagline: "Tu negocio online en tiempo record",
+    description: "Landing page simple y efectiva para empezar a captar clientes. Ideal para validar tu idea de negocio rapidamente.",
+    includes: [
+      "1 pagina tipo landing",
+      "Diseno responsive (celular + PC)",
+      "Boton de WhatsApp",
+      "Informacion de contacto",
+      "Redes sociales",
+    ],
+    priceRange: "S/. 49 - S/. 149",
+    deliveryTime: "3-5 dias",
+  },
+  profesional: {
+    id: "profesional",
+    name: "Web Profesional",
+    tagline: "Disenada para generar confianza y ventas",
+    description: "Sitio web completo con diseno premium. Para negocios que quieren destacar y generar mas contactos.",
+    includes: [
+      "Todo lo del plan Express",
+      "Google Maps (ubicacion)",
+      "Formulario de contacto con envio por correo",
+      "SEO local basico",
+      "Seccion de testimonios",
+      "Sobre nosotros",
+      "Llamadas a la accion estrategicas",
+    ],
+    priceRange: "S/. 199 - S/. 299",
+    deliveryTime: "1-2 semanas",
+  },
+  empresarial: {
+    id: "empresarial",
+    name: "Web Empresarial",
+    tagline: "Tu negocio se ve serio y competitivo",
+    description: "Solucion completa para negocios en crecimiento. Multiples paginas, blog, reservas y mas funcionalidades.",
+    includes: [
+      "Todo lo del plan Profesional",
+      "Pagina individual por servicio",
+      "Blog o seccion de noticias",
+      "Sistema de reservas",
+      "Seccion de FAQ",
+      "SEO mas potente",
+      "Google Analytics",
+      "Google Sheets para datos",
+    ],
+    priceRange: "S/. 399 - S/. 899",
+    deliveryTime: "2-4 semanas",
+  },
+  elite: {
+    id: "elite",
+    name: "Web Corporativa Elite",
+    tagline: "Tu negocio opera digitalmente",
+    description: "Plataforma empresarial completa con panel administrativo, base de datos, pagos online y automatizaciones.",
+    includes: [
+      "Todo lo del plan Empresarial",
+      "Base de datos",
+      "Panel administrativo completo",
+      "Login y gestion de usuarios",
+      "Roles y permisos",
+      "Integracion de pagos (Culqi)",
+      "Dashboard con metricas",
+      "Automatizaciones",
+    ],
+    priceRange: "Desde S/. 900",
+    deliveryTime: "4-8 semanas",
+  },
 };
 
-const projectDescriptions = {
-  landing: "Una página efectiva enfocada en convertir visitantes en contactos. Ideal para empezar rápido.",
-  website: "Un sitio web completo con múltiples páginas y funcionalidades. Para negocios que necesitan más presencia.",
-  redesign: "Renovamos tu sitio actual con diseño moderno y mejor rendimiento. Mantenemos lo que funciona, mejoramos lo demás.",
-  migration: "Pasamos tu sitio a tecnología moderna (NextJS). Más rápido, más seguro, más fácil de mantener.",
-};
-
-const timeEstimates = {
-  landing: "1-2 semanas",
-  website: "3-4 semanas",
-  redesign: "2-3 semanas",
-  migration: "3-5 semanas",
+// Services for EXISTING websites
+const services: Record<string, ServiceRecommendation> = {
+  redesign: {
+    id: "redesign",
+    name: "Rediseno de Sitio",
+    description: "Renovamos tu sitio actual con diseno moderno y mejor rendimiento. Mantenemos lo que funciona, mejoramos lo demas.",
+    deliveryTime: "2-3 semanas",
+  },
+  migration: {
+    id: "migration",
+    name: "Migracion Tecnologica",
+    description: "Pasamos tu sitio de WordPress, Wix u otra plataforma a tecnologia moderna (NextJS). Mas rapido, mas seguro.",
+    deliveryTime: "3-5 semanas",
+  },
+  integration: {
+    id: "integration",
+    name: "Integraciones",
+    description: "Conectamos tu sitio con pagos, agenda, formularios y las herramientas que tu negocio necesita.",
+    deliveryTime: "1-2 semanas",
+  },
 };
 
 export function calculateDiagnosis(answers: DiagnosisAnswer[]): DiagnosisResult {
-  // Determine project type based on first two questions
-  let projectType: "landing" | "website" | "redesign" | "migration" = "landing";
+  let hasWebsite = false;
+  let serviceType: "redesign" | "migration" | "integration" | null = null;
   let totalComplexity = 0;
   let totalUrgency = 0;
   let urgencyCount = 0;
@@ -266,17 +357,29 @@ export function calculateDiagnosis(answers: DiagnosisAnswer[]): DiagnosisResult 
   // Get current website status
   const websiteAnswer = answers.find((a) => a.questionId === "current-website");
   if (websiteAnswer && websiteAnswer.selectedOptions.length > 0) {
-    const option = questions[0].options.find((o) => o.id === websiteAnswer.selectedOptions[0]);
-    if (option && option.projectType !== "none") {
-      projectType = option.projectType;
+    const selectedId = websiteAnswer.selectedOptions[0];
+    const option = questions[0].options.find((o) => o.id === selectedId);
+
+    if (selectedId === "no-website") {
+      hasWebsite = false;
+    } else if (selectedId === "outdated" || selectedId === "not-working") {
+      hasWebsite = true;
+      serviceType = "redesign";
+    } else if (selectedId === "different-tech") {
+      hasWebsite = true;
+      serviceType = "migration";
+    } else if (selectedId === "working-fine") {
+      hasWebsite = true;
+      serviceType = "integration";
     }
+
     if (option) {
       totalUrgency += option.urgency;
       urgencyCount++;
     }
   }
 
-  // Get main goal - might override project type
+  // Get main goal - affects complexity
   const goalAnswer = answers.find((a) => a.questionId === "main-goal");
   if (goalAnswer && goalAnswer.selectedOptions.length > 0) {
     const option = questions[1].options.find((o) => o.id === goalAnswer.selectedOptions[0]);
@@ -284,15 +387,10 @@ export function calculateDiagnosis(answers: DiagnosisAnswer[]): DiagnosisResult 
       totalComplexity += option.complexity;
       totalUrgency += option.urgency;
       urgencyCount++;
-
-      // If they want to sell online, upgrade to website
-      if (option.id === "sell-online" && projectType === "landing") {
-        projectType = "website";
-      }
     }
   }
 
-  // Collect suggested features
+  // Collect suggested features and add to complexity
   const suggestedFeatures: string[] = [];
   const featuresAnswer = answers.find((a) => a.questionId === "features-needed");
   if (featuresAnswer) {
@@ -315,11 +413,6 @@ export function calculateDiagnosis(answers: DiagnosisAnswer[]): DiagnosisResult 
     }
   }
 
-  // If high complexity features selected and project is landing, upgrade to website
-  if (totalComplexity > 5 && projectType === "landing") {
-    projectType = "website";
-  }
-
   // Calculate urgency level
   const avgUrgency = urgencyCount > 0 ? totalUrgency / urgencyCount : 2;
   let urgencyLevel: "alta" | "media" | "baja";
@@ -327,22 +420,58 @@ export function calculateDiagnosis(answers: DiagnosisAnswer[]): DiagnosisResult 
 
   if (avgUrgency >= 2.5) {
     urgencyLevel = "alta";
-    urgencyMessage = "Deberías empezar pronto. Cada día sin presencia web son oportunidades perdidas.";
+    urgencyMessage = "Deberias empezar pronto. Cada dia sin presencia web son oportunidades perdidas.";
   } else if (avgUrgency >= 1.5) {
     urgencyLevel = "media";
-    urgencyMessage = "Tienes tiempo para planificar bien, pero no lo dejes para después.";
+    urgencyMessage = "Tienes tiempo para planificar bien, pero no lo dejes para despues.";
   } else {
     urgencyLevel = "baja";
-    urgencyMessage = "Puedes tomarte tu tiempo para decidir. Estamos aquí cuando estés listo.";
+    urgencyMessage = "Puedes tomarte tu tiempo para decidir. Estamos aqui cuando estes listo.";
   }
 
-  return {
-    projectType,
-    projectLabel: projectLabels[projectType],
-    projectDescription: projectDescriptions[projectType],
-    suggestedFeatures: suggestedFeatures.slice(0, 5),
-    timeEstimate: timeEstimates[projectType],
-    urgencyLevel,
-    urgencyMessage,
-  };
+  // Determine recommendation based on whether they have a website or not
+  if (!hasWebsite) {
+    // Recommend a PLAN based on complexity
+    let planId: "express" | "profesional" | "empresarial" | "elite";
+
+    if (totalComplexity <= 2) {
+      planId = "express";
+    } else if (totalComplexity <= 5) {
+      planId = "profesional";
+    } else if (totalComplexity <= 9) {
+      planId = "empresarial";
+    } else {
+      planId = "elite";
+    }
+
+    // Upgrade based on specific features
+    const hasPaymentGateway = suggestedFeatures.includes("Pasarela de pagos");
+    const hasBlog = suggestedFeatures.includes("Blog o noticias");
+    const hasScheduling = suggestedFeatures.includes("Agenda de citas online");
+
+    if (hasPaymentGateway) {
+      planId = "elite";
+    } else if ((hasBlog || hasScheduling) && planId === "express") {
+      planId = "empresarial";
+    } else if (hasScheduling && planId === "profesional") {
+      planId = "empresarial";
+    }
+
+    return {
+      hasWebsite: false,
+      recommendedPlan: plans[planId],
+      suggestedFeatures: suggestedFeatures.slice(0, 5),
+      urgencyLevel,
+      urgencyMessage,
+    };
+  } else {
+    // Recommend a SERVICE for existing websites
+    return {
+      hasWebsite: true,
+      recommendedService: services[serviceType || "redesign"],
+      suggestedFeatures: suggestedFeatures.slice(0, 5),
+      urgencyLevel,
+      urgencyMessage,
+    };
+  }
 }

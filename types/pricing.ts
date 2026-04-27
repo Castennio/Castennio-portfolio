@@ -19,7 +19,11 @@ export type AddonId =
   | 'google-sheets'
   | 'dark-mode'
   | 'blog'
-  | 'blog-cms';
+  | 'blog-cms'
+  | 'reels'
+  | 'reels-cms'
+  | 'roles-permissions'
+  | 'whatsapp-float';
 
 export interface DeliveryTime {
   estandar: string;
