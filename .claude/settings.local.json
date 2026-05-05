@@ -15,7 +15,8 @@
       "Bash(npm install:*)",
       "mcp__Neon__create_project",
       "mcp__Neon__run_sql",
-      "Bash(npx tsx:*)"
+      "Bash(npx tsx:*)",
+      "Bash(grep -E \"\\\\.tsx$\")"
     ]
   }
 }

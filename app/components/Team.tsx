@@ -5,10 +5,10 @@ import { WordReveal, GradientReveal } from "./TextReveal";
 
 const team = [
   { name: "Dani", role: "Desarrollo", image: "/images/pixel-art/dani.png" },
-  { name: "Brack", role: "Diseño", image: "/images/pixel-art/brack.png" },
-  { name: "Alonso", role: "Backend", image: "/images/pixel-art/alonso.png" },
   { name: "Gabriel", role: "Desarrollo", image: "/images/pixel-art/gabriel.png" },
-  { name: "Josue", role: "Desarrollo", image: "/images/pixel-art/josue.jpeg" },
+  { name: "Alonso", role: "Backend", image: "/images/pixel-art/alonso.png" },
+  { name: "Michell", role: "Analista de datos", image: "/images/pixel-art/michell.png" },
+  { name: "Josue", role: "Desarrollo", image: "/images/pixel-art/josue.png" },
 ];
 
 export default function Team() {

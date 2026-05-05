@@ -5,19 +5,19 @@ import MagneticButton from "./MagneticButton";
 
 const navigation = {
   servicios: [
-    { name: "Landing Pages", href: "#planes" },
-    { name: "Sistemas Web", href: "#planes" },
-    { name: "Automatizaciones", href: "#planes" },
-    { name: "E-commerce", href: "#planes" },
+    { name: "Landing Pages", href: "/#planes" },
+    { name: "Sistemas Web", href: "/#planes" },
+    { name: "Automatizaciones", href: "/#planes" },
+    { name: "E-commerce", href: "/#planes" },
   ],
   empresa: [
-    { name: "Proceso", href: "#proceso" },
-    { name: "Planes", href: "#planes" },
-    { name: "Nosotros", href: "#" },
+    { name: "Proceso", href: "/#proceso" },
+    { name: "Planes", href: "/#planes" },
+    { name: "Equipo", href: "/equipo" },
   ],
   legal: [
-    { name: "Privacidad", href: "#" },
-    { name: "Términos", href: "#" },
+    { name: "Privacidad", href: "/#" },
+    { name: "Términos", href: "/#" },
   ],
 };
 

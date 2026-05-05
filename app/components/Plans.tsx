@@ -7,59 +7,139 @@ import { WordReveal, GradientReveal, BlurReveal } from "./TextReveal";
 const plans = [
   {
     id: "express",
-    name: "Web Express",
-    description: "Tu negocio online en tiempo record. Landing page con presencia basica para captar tus primeros clientes.",
+    name: "Express",
+    price: "49",
+    idealFor: "Emprendedores que inician",
+    outcome: "Presencia basica para captar tus primeros clientes.",
     badge: null,
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    ),
-    features: ["1 pagina tipo landing", "Diseno responsive", "Boton de WhatsApp"],
+    features: [
+      "Landing page",
+      "Diseño responsive",
+      "WhatsApp directo",
+      "Redes sociales",
+      "Contacto básico",
+    ],
   },
   {
     id: "profesional",
-    name: "Web Profesional",
-    description: "No solo presencia digital, una web disenada para generar confianza y convertir visitas en ventas.",
-    badge: "Mas elegido",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
-    features: ["Google Maps y SEO local", "Formularios y testimonios", "CTAs estrategicos"],
+    name: "Profesional",
+    price: "199",
+    idealFor: "Negocios locales",
+    outcome: "Genera confianza y convierte visitas en clientes",
+    badge: "Recomendado",
+    features: [
+      "Todo de Express",
+      "Google Maps integrado",
+      "SEO local optimizado",
+      "Testimonios reales",
+      "Página Sobre Nosotros",
+      "CTAs estratégicos",
+    ],
   },
   {
     id: "empresarial",
-    name: "Web Empresarial",
-    description: "Tu negocio se ve serio, completo y mas competitivo. Ideal para negocios en crecimiento.",
-    badge: "Escalable",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-      </svg>
-    ),
-    features: ["Pagina por cada servicio", "Blog y reservas", "SEO potente y Analytics"],
+    name: "Empresarial",
+    price: "399",
+    idealFor: "PYMES en crecimiento",
+    outcome: "Escala y automatiza",
+    badge: null,
+    features: [
+      "Todo de Profesional",
+      "Página por servicio",
+      "Blog integrado",
+      "Reservas online",
+      "SEO + Analytics",
+      "FAQ section",
+      "Google Sheets",
+    ],
   },
   {
     id: "elite",
-    name: "Web Corporativa Elite",
-    description: "Tu negocio opera digitalmente. Plataforma completa con automatizacion y panel administrativo.",
-    badge: "Premium",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-      </svg>
-    ),
-    features: ["Panel admin y dashboard", "Roles, usuarios y pagos", "Automatizacion completa"],
+    name: "Elite",
+    price: "900",
+    idealFor: "Empresas que digitalizan",
+    outcome: "Control total de tu operación",
+    badge: "Exclusive",
+    features: [
+      "Todo de Empresarial",
+      "Panel admin custom",
+      "Base de datos",
+      "Usuarios y roles",
+      "Pagos online",
+      "Dashboard métricas",
+      "Automatización",
+      "Seguridad avanzada",
+    ],
   },
 ];
 
-const WHATSAPP_NUMBER = "51939603821";
+const WHATSAPP_NUMBER = "51998162677";
 
-function PlanCard({ plan, index }: { plan: typeof plans[0]; index: number }) {
+// ============================================
+// EXPRESS CARD - Minimalista, outline, rápido
+// ============================================
+function ExpressCard({ plan }: { plan: typeof plans[0] }) {
+  const whatsappMessage = encodeURIComponent(`Hola! Me interesa el plan ${plan.name}. ¿Podrían darme más información?`);
+  const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+
+  return (
+    <div className="group relative flex flex-col h-full">
+      <div className="relative flex-1 flex flex-col p-6 lg:p-7 rounded-2xl border border-white/[0.08] bg-transparent hover:border-white/[0.15] transition-all duration-500">
+        {/* Minimal dot accent */}
+        <div className="absolute top-6 right-6 w-2 h-2 rounded-full bg-white/20 group-hover:bg-white/40 transition-colors" />
+
+        {/* Header - Light weight */}
+        <div className="mb-8">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-2 font-light">Inicio rápido</p>
+          <h3 className="text-xl font-light text-white/80 tracking-wide">
+            {plan.name}
+          </h3>
+        </div>
+
+        {/* Price - Clean */}
+        <div className="mb-6">
+          <div className="flex items-baseline gap-1">
+            <span className="text-xs text-white/40 font-light">Desde S/.</span>
+            <span className="text-4xl font-extralight text-white/90 tracking-tight">{plan.price}</span>
+          </div>
+          <p className="text-xs text-white/40 mt-2 font-light">{plan.outcome}</p>
+        </div>
+
+        {/* Minimal divider */}
+        <div className="w-8 h-px bg-white/15 mb-6" />
+
+        {/* Features - Minimal list */}
+        <ul className="space-y-2.5 mb-8 flex-1">
+          {plan.features.map((feature, idx) => (
+            <li key={idx} className="flex items-center gap-2.5 text-[13px] text-white/55 font-light">
+              <span className="w-1 h-1 rounded-full bg-white/30" />
+              {feature}
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA - Outline style */}
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-white/[0.15] text-white/60 text-sm font-light hover:border-white/[0.3] hover:text-white/80 transition-all duration-300"
+        >
+          Comenzar
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  );
+}
+
+// ============================================
+// PROFESIONAL CARD - Vivo, gradientes, el hero
+// ============================================
+function ProfesionalCard({ plan }: { plan: typeof plans[0] }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [transform, setTransform] = useState("");
   const [glowPosition, setGlowPosition] = useState({ x: 50, y: 50 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -67,184 +147,345 @@ function PlanCard({ plan, index }: { plan: typeof plans[0]; index: number }) {
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = (y - centerY) / 25;
-    const rotateY = (centerX - x) / 25;
-    setTransform(`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`);
     setGlowPosition({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
   };
 
-  const handleMouseLeave = () => {
-    setTransform("");
-    setGlowPosition({ x: 50, y: 50 });
-  };
-
-  const whatsappMessage = encodeURIComponent(`Hola! Me interesa el plan ${plan.name}. Me gustaria recibir mas informacion.`);
+  const whatsappMessage = encodeURIComponent(`Hola! Me interesa el plan ${plan.name}. ¿Podrían darme más información?`);
   const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
-
-  const isPopular = plan.badge === "Mas elegido";
 
   return (
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="group relative"
-      style={{
-        transform,
-        transition: transform ? "none" : "transform 0.5s ease-out",
-      }}
+      className="group relative flex flex-col h-full lg:-mt-4 lg:mb-4"
     >
       {/* Animated gradient border */}
       <div
-        className={`absolute -inset-[1px] rounded-2xl transition-opacity duration-500 ${
-          isPopular ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-        }`}
+        className="absolute -inset-[2px] rounded-3xl opacity-100"
         style={{
-          background: "linear-gradient(135deg, #7C3AED, #A78BFA, #7C3AED)",
-          backgroundSize: "200% 200%",
-          animation: "gradientFlow 3s ease infinite",
+          background: "linear-gradient(135deg, #7C3AED, #EC4899, #7C3AED, #3B82F6)",
+          backgroundSize: "300% 300%",
+          animation: "gradientFlow 6s ease infinite",
         }}
       />
 
-      {/* Card content */}
-      <div className={`relative h-full p-8 rounded-2xl bg-[#0f1015] border transition-colors duration-500 ${
-        isPopular ? "border-transparent" : "border-white/[0.06] group-hover:border-transparent"
-      }`}>
-        {/* Glow effect */}
+      {/* Outer glow */}
+      <div className="absolute -inset-4 bg-[#7C3AED]/20 rounded-[2rem] blur-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
+
+      <div className="relative flex-1 flex flex-col p-7 lg:p-9 rounded-3xl bg-[#0c0c12]">
+        {/* Dynamic glow */}
         <div
-          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          className="absolute inset-0 rounded-3xl opacity-30 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none"
           style={{
-            background: `radial-gradient(circle at ${glowPosition.x}% ${glowPosition.y}%, rgba(124, 58, 237, 0.15) 0%, transparent 50%)`,
+            background: `radial-gradient(circle at ${glowPosition.x}% ${glowPosition.y}%, rgba(124, 58, 237, 0.4) 0%, transparent 60%)`,
           }}
         />
 
         {/* Badge */}
-        {plan.badge && (
-          <div className="absolute -top-3 right-6">
-            <span className={`inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-medium tracking-wider uppercase rounded-full shadow-lg ${
-              isPopular
-                ? "bg-gradient-to-r from-[#7C3AED] to-[#A78BFA] text-white shadow-[#7C3AED]/25"
-                : "bg-white/10 text-white/70"
-            }`}>
-              {isPopular && <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />}
-              {plan.badge}
-            </span>
-          </div>
-        )}
-
-        {/* Icon */}
-        <div className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-[#7C3AED]/10 to-[#A78BFA]/10 border border-white/[0.06] flex items-center justify-center text-white/50 group-hover:text-[#A78BFA] transition-all duration-500 mb-6 group-hover:scale-110">
-          <div className="transition-transform duration-500 group-hover:scale-110">
-            {plan.icon}
-          </div>
-          <div className="absolute inset-0 rounded-xl bg-[#7C3AED]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+          <span className="inline-flex items-center gap-2 px-5 py-2 text-xs font-semibold tracking-wider uppercase rounded-full bg-gradient-to-r from-[#7C3AED] via-[#EC4899] to-[#7C3AED] text-white shadow-lg shadow-[#7C3AED]/40"
+            style={{ backgroundSize: "200% 100%", animation: "gradientFlow 3s ease infinite" }}>
+            <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
+            {plan.badge}
+          </span>
         </div>
 
-        {/* Content */}
-        <h3 className="text-xl font-semibold text-white/90 mb-3 group-hover:text-white transition-colors duration-300">
-          {plan.name}
-        </h3>
-        <p className="text-[15px] text-white/50 leading-relaxed mb-6 group-hover:text-white/60 transition-colors duration-300">
-          {plan.description}
-        </p>
+        {/* Header */}
+        <div className="mt-4 mb-6">
+          <p className="text-xs uppercase tracking-[0.15em] text-[#A78BFA] mb-2 font-medium">{plan.idealFor}</p>
+          <h3 className="text-2xl font-semibold text-white tracking-tight">
+            {plan.name}
+          </h3>
+        </div>
 
-        {/* Features */}
-        <ul className="space-y-2 mb-8">
+        {/* Price - Prominent */}
+        <div className="mb-4">
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-sm text-white/50">Desde S/.</span>
+            <span className="text-5xl font-bold text-white tracking-tight">{plan.price}</span>
+          </div>
+        </div>
+
+        {/* Outcome - Highlighted */}
+        <div className="mb-6 pb-6 border-b border-white/[0.08]">
+          <p className="text-sm text-white/70 leading-relaxed">
+            {plan.outcome}
+          </p>
+        </div>
+
+        {/* Features - Rich checkmarks */}
+        <ul className="space-y-3 mb-8 flex-1">
           {plan.features.map((feature, idx) => (
-            <li key={idx} className="flex items-center gap-2 text-[13px] text-white/40 group-hover:text-white/50 transition-colors">
-              <svg className="w-4 h-4 text-[#7C3AED]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-              {feature}
+            <li key={idx} className="flex items-start gap-3 text-sm text-white/80">
+              <div className="w-5 h-5 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#EC4899] flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span>{feature}</span>
             </li>
           ))}
         </ul>
 
-        {/* CTA Button */}
+        {/* CTA - Vibrant */}
         <a
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
-          className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-medium text-sm transition-all duration-300 ${
-            isPopular
-              ? "bg-gradient-to-r from-[#7C3AED] to-[#A78BFA] text-white shadow-lg shadow-[#7C3AED]/25 hover:shadow-[#7C3AED]/40 hover:scale-[1.02]"
-              : "bg-white/[0.04] text-white/70 border border-white/[0.08] hover:bg-[#7C3AED]/10 hover:border-[#7C3AED]/30 hover:text-white"
-          }`}
+          className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl font-semibold text-sm bg-gradient-to-r from-[#7C3AED] via-[#A855F7] to-[#EC4899] text-white shadow-xl shadow-[#7C3AED]/30 hover:shadow-[#7C3AED]/50 hover:scale-[1.02] transition-all duration-300"
+          style={{ backgroundSize: "200% 100%", animation: "gradientFlow 4s ease infinite" }}
         >
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          Empezar ahora
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
-          Consultar ahora
         </a>
-
-        {/* Bottom accent */}
-        <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#7C3AED]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
     </div>
   );
 }
 
+// ============================================
+// EMPRESARIAL CARD - Geométrico, estructurado
+// ============================================
+function EmpresarialCard({ plan }: { plan: typeof plans[0] }) {
+  const whatsappMessage = encodeURIComponent(`Hola! Me interesa el plan ${plan.name}. ¿Podrían darme más información?`);
+  const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+
+  return (
+    <div className="group relative flex flex-col h-full">
+      {/* Geometric corner accents */}
+      <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-[#3B82F6]/30 rounded-tl-2xl pointer-events-none group-hover:border-[#3B82F6]/50 transition-colors" />
+      <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-[#3B82F6]/30 rounded-br-2xl pointer-events-none group-hover:border-[#3B82F6]/50 transition-colors" />
+
+      <div className="relative flex-1 flex flex-col p-6 lg:p-7 rounded-2xl bg-[#0a0a10]/80 border border-[#3B82F6]/10 hover:border-[#3B82F6]/25 transition-all duration-500">
+        {/* Grid pattern overlay */}
+        <div
+          className="absolute inset-0 rounded-2xl opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: "linear-gradient(#3B82F6 1px, transparent 1px), linear-gradient(90deg, #3B82F6 1px, transparent 1px)",
+            backgroundSize: "20px 20px",
+          }}
+        />
+
+        {/* Header - Structured */}
+        <div className="mb-6 relative">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-1.5 h-1.5 bg-[#3B82F6]" />
+            <p className="text-[10px] uppercase tracking-[0.2em] text-[#3B82F6]/70 font-medium">Escalable</p>
+          </div>
+          <h3 className="text-xl font-medium text-white/90 tracking-tight">
+            {plan.name}
+          </h3>
+          <p className="text-xs text-white/40 mt-1">{plan.idealFor}</p>
+        </div>
+
+        {/* Price - Technical */}
+        <div className="mb-5 p-4 rounded-lg bg-[#3B82F6]/[0.05] border border-[#3B82F6]/10">
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-xs text-[#3B82F6]/60 font-mono">S/.</span>
+            <span className="text-3xl font-semibold text-white/90 font-mono tracking-tight">{plan.price}</span>
+            <span className="text-xs text-white/30 font-mono">+</span>
+          </div>
+          <p className="text-[11px] text-[#3B82F6]/50 mt-1.5 font-mono">{plan.outcome}</p>
+        </div>
+
+        {/* Features - Technical list */}
+        <ul className="space-y-2 mb-8 flex-1">
+          {plan.features.map((feature, idx) => (
+            <li key={idx} className="flex items-center gap-2.5 text-[13px] text-white/60">
+              <div className="w-4 h-4 rounded border border-[#3B82F6]/30 flex items-center justify-center">
+                <svg className="w-2.5 h-2.5 text-[#3B82F6]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              {feature}
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA - Geometric */}
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-lg bg-[#3B82F6]/10 border border-[#3B82F6]/20 text-[#3B82F6] text-sm font-medium hover:bg-[#3B82F6]/20 hover:border-[#3B82F6]/40 transition-all duration-300"
+        >
+          Solicitar propuesta
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  );
+}
+
+// ============================================
+// ELITE CARD - Premium, dorado, exclusivo
+// ============================================
+function EliteCard({ plan }: { plan: typeof plans[0] }) {
+  const whatsappMessage = encodeURIComponent(`Hola! Me interesa el plan ${plan.name}. ¿Podrían darme más información?`);
+  const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+
+  return (
+    <div className="group relative flex flex-col h-full">
+      {/* Subtle gold glow */}
+      <div className="absolute -inset-1 bg-gradient-to-b from-[#D4AF37]/10 via-transparent to-[#D4AF37]/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl" />
+
+      <div className="relative flex-1 flex flex-col p-6 lg:p-7 rounded-2xl bg-[#08080a] border border-[#D4AF37]/10 hover:border-[#D4AF37]/25 transition-all duration-500 overflow-hidden">
+        {/* Premium texture */}
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage: "radial-gradient(circle at 2px 2px, #D4AF37 1px, transparent 0)",
+            backgroundSize: "24px 24px",
+          }}
+        />
+
+        {/* Exclusive badge */}
+        <div className="absolute top-4 right-4">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[9px] font-medium tracking-[0.15em] uppercase rounded bg-[#D4AF37]/10 text-[#D4AF37]/80 border border-[#D4AF37]/20">
+            <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+            </svg>
+            {plan.badge}
+          </span>
+        </div>
+
+        {/* Header - Premium */}
+        <div className="mb-6 mt-2">
+          <h3 className="text-xl font-medium text-[#E5C158] tracking-wide">
+            {plan.name}
+          </h3>
+          <p className="text-xs text-white/55 mt-1.5">{plan.idealFor}</p>
+        </div>
+
+        {/* Price - Gold accent */}
+        <div className="mb-5">
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-xs text-[#D4AF37]/80">Desde S/.</span>
+            <span className="text-3xl font-light text-[#E5C158] tracking-tight">{plan.price}</span>
+          </div>
+          <p className="text-[11px] text-white/50 mt-2 italic">{plan.outcome}</p>
+        </div>
+
+        {/* Gold divider */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent mb-5" />
+
+        {/* Features - Premium marks */}
+        <ul className="space-y-2.5 mb-8 flex-1">
+          {plan.features.map((feature, idx) => (
+            <li key={idx} className="flex items-center gap-2.5 text-[12px] text-white/70">
+              <span className="text-[#E5C158]">◆</span>
+              {feature}
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA - Premium */}
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-lg bg-gradient-to-r from-[#D4AF37]/20 to-[#B8860B]/20 border border-[#D4AF37]/30 text-[#E5C158] text-sm font-medium hover:border-[#D4AF37]/60 hover:bg-[#D4AF37]/25 transition-all duration-300"
+        >
+          Contactar
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  );
+}
+
+// Card renderer based on plan type
+function PlanCard({ plan }: { plan: typeof plans[0] }) {
+  switch (plan.id) {
+    case "express":
+      return <ExpressCard plan={plan} />;
+    case "profesional":
+      return <ProfesionalCard plan={plan} />;
+    case "empresarial":
+      return <EmpresarialCard plan={plan} />;
+    case "elite":
+      return <EliteCard plan={plan} />;
+    default:
+      return <ExpressCard plan={plan} />;
+  }
+}
+
 export default function Plans() {
   return (
-    <section id="planes" className="py-32 px-6 bg-[#0a0a0f] relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#7C3AED]/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+    <section id="planes" className="py-24 lg:py-32 px-4 sm:px-6 bg-[#0a0a0f] relative overflow-hidden">
+      {/* Ambient background */}
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#7C3AED]/[0.04] rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#3B82F6]/[0.03] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
-      <div className="max-w-6xl mx-auto relative">
-        {/* Header */}
-        <div className="text-center mb-20">
+      <div className="max-w-7xl mx-auto relative">
+        {/* Header - Minimal */}
+        <div className="text-center mb-20 lg:mb-24">
           <FadeIn>
-            <p className="text-[13px] text-[#A78BFA] tracking-widest uppercase mb-4">
-              Planes de desarrollo
+            <p className="text-[11px] text-white/30 tracking-[0.3em] uppercase mb-5 font-light">
+              Planes
             </p>
           </FadeIn>
-          <h2 className="text-4xl md:text-5xl font-medium tracking-[-0.02em] mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-[-0.02em] mb-6">
             <WordReveal as="span" className="text-white/90" delay={0.1}>
-              Elige el plan
+              Elige cómo
             </WordReveal>{" "}
             <GradientReveal
               as="span"
-              className="inline-block"
+              className="inline-block font-normal"
               delay={0.3}
               gradientFrom="#7C3AED"
-              gradientTo="#A78BFA"
+              gradientTo="#EC4899"
             >
-              perfecto para ti
+              empezar
             </GradientReveal>
           </h2>
           <BlurReveal
             as="p"
-            className="text-white/55 text-[15px] max-w-lg mx-auto"
+            className="text-white/40 text-base max-w-md mx-auto leading-relaxed font-light"
             delay={0.4}
             stagger={0.01}
           >
-            Desde landing pages simples hasta plataformas empresariales completas. Encuentra la solucion ideal para tu negocio.
+            Cada negocio es diferente. Encuentra tu punto de partida.
           </BlurReveal>
         </div>
 
         {/* Plans grid */}
-        <StaggerFadeIn className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" stagger={0.1}>
-          {plans.map((plan, index) => (
-            <PlanCard key={plan.id} plan={plan} index={index} />
+        <StaggerFadeIn className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-4 xl:gap-5 items-stretch" stagger={0.12}>
+          {plans.map((plan) => (
+            <PlanCard key={plan.id} plan={plan} />
           ))}
         </StaggerFadeIn>
 
-        {/* Bottom CTA */}
+        {/* Bottom section - Minimal */}
         <FadeIn delay={0.6}>
-          <div className="text-center mt-16">
-            <p className="text-white/40 text-[15px] mb-4">
-              No estas seguro de cual elegir?
+          <div className="mt-20 lg:mt-24 text-center">
+            {/* Simple trust line */}
+            <div className="flex items-center justify-center gap-6 text-[11px] text-white/25 tracking-wide mb-8">
+              <span>Precio fijo</span>
+              <span className="w-1 h-1 rounded-full bg-white/10" />
+              <span>Sin sorpresas</span>
+              <span className="w-1 h-1 rounded-full bg-white/10" />
+              <span>Soporte 30 días</span>
+            </div>
+
+            {/* CTA */}
+            <p className="text-white/30 text-sm mb-3 font-light">
+              ¿No estás seguro?
             </p>
             <a
               href="#diagnostico"
-              className="inline-flex items-center gap-2 text-[#A78BFA] hover:text-[#C4B5FD] transition-colors duration-300 text-[15px] font-medium group"
+              className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-300 text-sm group"
             >
-              Haz el diagnostico gratuito y te recomendamos
-              <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              Te ayudamos a elegir
+              <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
           </div>

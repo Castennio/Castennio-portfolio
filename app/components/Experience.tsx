@@ -53,65 +53,12 @@ const teamMembers = [
         technologies: ["React", "Next.js", "TypeScript", "Tailwind"],
         link: "https://drmanuelsinchi.com",
       },
-       {
+      {
         title: "VERIFICARLO - Revisión de autos de segunda, para que compres con confianza",
         description: "Landing Page + Panel administrativo + Gestión de inspecciones + Catálogo de servicios + Mensajes al correo + CMS de Blogs + Videos integrados + Login/Register",
         image: "/images/projects/placeholder-3.png",
         technologies: ["React", "Next.js", "TypeScript", "Tailwind"],
         link: "https://verificarlo.com",
-      },
-    ],
-  },
-  {
-    id: "brack",
-    name: "Brack",
-    role: "Diseño UI/UX",
-    image: "/images/pixel-art/brack.png",
-    bio: "Diseñador UI/UX con enfoque en crear experiencias digitales memorables. Especializado en design systems y prototipado interactivo.",
-    projects: [
-      // {
-      //   title: "App Fintech Redesign",
-      //   description: "Rediseño completo de aplicación bancaria mejorando la usabilidad y modernizando la interfaz.",
-      //   image: "/images/projects/placeholder-3.jpg",
-      //   technologies: ["Figma", "Principle", "Design System"],
-      //   link: "#",
-      // },
-      // {
-      //   title: "Plataforma Educativa",
-      //   description: "Diseño de plataforma e-learning con gamificación y seguimiento de progreso.",
-      //   image: "/images/projects/placeholder-4.jpg",
-      //   technologies: ["Figma", "Framer", "Lottie"],
-      //   link: "#",
-      // },
-    ],
-  },
-  {
-    id: "alonso",
-    name: "Alonso",
-    role: "Fullstack Developer",
-    image: "/images/pixel-art/alonso.png",
-    bio: "Desarrollador fullstack especializado en arquitecturas escalables y experiencias de usuario. Enfocado en soluciones modernas con Next.js y Supabase.",
-    projects: [
-      {
-        title: "Habity - Gestor de Habitos",
-        description: "Aplicacion de gamificacion de productividad con monitoreo de rachas, visualizaciones de datos y generacion de reportes PDF.",
-        image: "/images/projects/habity.png",
-        technologies: ["Next.js 16", "TypeScript", "Tailwind", "Supabase", "jsPDF"],
-        link: "https://habity-jet.vercel.app",
-      },
-      {
-        title: "EduRate - Evaluacion Docente",
-        description: "Plataforma para centralizar y anonimizar retroalimentacion academica. Sistema de autenticacion por Magic Link y moderacion automatica de contenido.",
-        image: "/images/projects/edurate.png",
-        technologies: ["Next.js 15", "TypeScript", "Tailwind CSS", "Supabase"],
-        link: "https://edurate-zeta.vercel.app",
-      },
-      {
-        title: "Sabor Divino - Restaurante",
-        description: "Plataforma web para restaurante con carta digital interactiva, sistema de reservas en tiempo real y seccion de fidelizacion.",
-        image: "/images/projects/sabor-divino.png",
-        technologies: ["React 18", "Vite", "Supabase", "React Router"],
-        link: "https://github.com/alowincr/sabor-divino",
       },
     ],
   },
@@ -153,11 +100,64 @@ const teamMembers = [
     ],
   },
   {
+    id: "alonso",
+    name: "Alonso",
+    role: "Fullstack Developer",
+    image: "/images/pixel-art/alonso.png",
+    bio: "Desarrollador fullstack especializado en arquitecturas escalables y experiencias de usuario. Enfocado en soluciones modernas con Next.js y Supabase.",
+    projects: [
+      {
+        title: "Habity - Gestor de Habitos",
+        description: "Aplicacion de gamificacion de productividad con monitoreo de rachas, visualizaciones de datos y generacion de reportes PDF.",
+        image: "/images/projects/habity.png",
+        technologies: ["Next.js 16", "TypeScript", "Tailwind", "Supabase", "jsPDF"],
+        link: "https://habity-jet.vercel.app",
+      },
+      {
+        title: "EduRate - Evaluacion Docente",
+        description: "Plataforma para centralizar y anonimizar retroalimentacion academica. Sistema de autenticacion por Magic Link y moderacion automatica de contenido.",
+        image: "/images/projects/edurate.png",
+        technologies: ["Next.js 15", "TypeScript", "Tailwind CSS", "Supabase"],
+        link: "https://edurate-zeta.vercel.app",
+      },
+      {
+        title: "Sabor Divino - Restaurante",
+        description: "Plataforma web para restaurante con carta digital interactiva, sistema de reservas en tiempo real y seccion de fidelizacion.",
+        image: "/images/projects/sabor-divino.png",
+        technologies: ["React 18", "Vite", "Supabase", "React Router"],
+        link: "https://github.com/alowincr/sabor-divino",
+      },
+    ],
+  },
+  {
+    id: "michell",
+    name: "Michell",
+    role: "Analista de datos",
+    image: "/images/pixel-art/michell.png",
+    bio: "Analista de datos con experiencia en visualización y análisis de información. Apasionado por transformar datos en insights accionables.",
+    projects: [
+      // {
+      //   title: "Sistema de Inventarios",
+      //   description: "Aplicación web para gestión de inventarios con reportes en tiempo real y alertas de stock.",
+      //   image: "/images/projects/placeholder-9.jpg",
+      //   technologies: ["React", "Node.js", "MySQL", "Chart.js"],
+      //   link: "#",
+      // },
+      // {
+      //   title: "Portal de Noticias",
+      //   description: "Plataforma de contenido con CMS personalizado y sistema de suscripciones.",
+      //   image: "/images/projects/placeholder-10.jpg",
+      //   technologies: ["Next.js", "Sanity", "Tailwind", "Vercel"],
+      //   link: "#",
+      // },
+    ],
+  },
+{
     id: "josue",
     name: "Josue",
     role: "Desarrollo",
-    image: "/images/pixel-art/josue.jpeg",
-    bio: "Desarrollador con pasión por crear soluciones eficientes y código limpio. Enfocado en buenas prácticas y arquitectura de software.",
+    image: "/images/pixel-art/josue.png",
+    bio: "Desarrollador fullstack con experiencia en tecnologías modernas. Apasionado por crear soluciones innovadoras y de alta calidad.",
     projects: [
       // {
       //   title: "Sistema de Inventarios",
@@ -260,11 +260,10 @@ export default function Experience() {
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             <button
               onClick={closeMemberView}
-              className={`px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-300 ${
-                !selectedMember
+              className={`px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-300 ${!selectedMember
                   ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
                   : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white/80 border border-white/10"
-              }`}
+                }`}
             >
               Todos
             </button>
@@ -272,11 +271,10 @@ export default function Experience() {
               <button
                 key={member.id}
                 onClick={() => setSelectedMember(member.id)}
-                className={`px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-300 flex items-center gap-2 ${
-                  selectedMember === member.id
+                className={`px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-300 flex items-center gap-2 ${selectedMember === member.id
                     ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
                     : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white/80 border border-white/10"
-                }`}
+                  }`}
               >
                 <img
                   src={member.image}

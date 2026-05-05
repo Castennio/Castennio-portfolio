@@ -57,10 +57,10 @@ export default function Hero() {
         {/* Main heading */}
         <h1 className="text-[clamp(2rem,8vw,5.5rem)] font-medium tracking-[-0.03em] leading-[1.1] mb-4 md:mb-8">
           <HeroLine delay={0.3} className={isDark ? "text-white/90" : "text-black/90"}>
-            Tu página web
+            La web<span className="text-gradient"></span> que tu negocio
           </HeroLine>
           <HeroLine delay={0.45} className={isDark ? "text-white/90" : "text-black/90"}>
-            profesional <span className="text-gradient">en semanas</span>
+            necesita <span className="text-gradient">para crecer</span>
           </HeroLine>
         </h1>
 

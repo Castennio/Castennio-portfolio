@@ -25,7 +25,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo - minimal */}
-          <a href="#" className="flex items-center gap-3 group">
+          <a href="/" className="flex items-center gap-3 group">
             <img src="/images/logo-castennio-fondo-transparente-icono-negro.png" alt="Castennio" className="w-8 h-8" />
             <span className="text-[15px] font-medium text-[var(--text-secondary)] group-hover:text-[var(--foreground)] transition-colors duration-300">
               Castennio
@@ -35,34 +35,41 @@ export default function Navbar() {
           {/* Navigation - minimal */}
           <div className="hidden md:flex items-center gap-10">
             <a
-              href="#servicios"
-              className="text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors duration-300 tracking-wide"
+              href="/#planes"
+              className="text-[13px] text-white/70 hover:text-white transition-colors duration-300 tracking-wide"
             >
-              Servicios
+              Planes
             </a>
             <a
-              href="#proceso"
-              className="text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors duration-300 tracking-wide"
+              href="/#proceso"
+              className="text-[13px] text-white/70 hover:text-white transition-colors duration-300 tracking-wide"
             >
               Proceso
             </a>
             <a
-              href="#proyectos"
-              className="text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors duration-300 tracking-wide"
+              href="/#diagnostico"
+              className="text-[13px] text-white/70 hover:text-white transition-colors duration-300 tracking-wide"
             >
-              Proyectos
+              Diagnóstico
             </a>
             <a
-              href="#faq"
-              className="text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors duration-300 tracking-wide"
+              href="/#faq"
+              className="text-[13px] text-white/70 hover:text-white transition-colors duration-300 tracking-wide"
             >
               FAQ
             </a>
+
+
+
             <a
-              href="#contacto"
-              className="text-[13px] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors duration-300 tracking-wide"
+              href="/equipo"
+              className="text-[13px] text-white/70 hover:text-white transition-colors duration-300 tracking-wide flex items-center gap-1.5"
+              target="_blank"
             >
-              Contacto
+              Equipo
+              <svg className="w-3 h-3 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+              </svg>
             </a>
           </div>
 
