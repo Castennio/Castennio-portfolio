@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Challenges from "./components/Challenges";
+import Problems from "./components/Problems";
 import Plans from "./components/Plans";
 import Services from "./components/Services";
 import Process from "./components/Process";
@@ -14,7 +14,7 @@ export default function Home() {
       <Navbar />
       <main className="bg-[#0a0a0f]">
         <Hero />
-        <Challenges />
+        <Problems />
         <Plans />
         <Services />
         <Process />
