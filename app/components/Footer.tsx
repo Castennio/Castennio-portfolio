@@ -5,14 +5,14 @@ import MagneticButton from "./MagneticButton";
 
 const navigation = {
   servicios: [
-    { name: "Landing Pages", href: "/#planes" },
-    { name: "Sistemas Web", href: "/#planes" },
-    { name: "Automatizaciones", href: "/#planes" },
-    { name: "E-commerce", href: "/#planes" },
+    { name: "Web express", href: "/#planes" },
+    { name: "Web profesional", href: "/#planes" },
+    { name: "Web empresarial", href: "/#planes" },
+    { name: "Web elite", href: "/#planes" },
   ],
   empresa: [
-    { name: "Proceso", href: "/#proceso" },
     { name: "Planes", href: "/#planes" },
+    { name: "Proceso", href: "/#proceso" },
     { name: "Equipo", href: "/equipo" },
   ],
   legal: [
@@ -173,12 +173,26 @@ export default function Footer() {
               <ul className="space-y-4">
                 {navigation.empresa.map((item) => (
                   <li key={item.name}>
-                    <a
-                      href={item.href}
-                      className="text-[14px] text-white/55 hover:text-white transition-colors duration-300"
-                    >
-                      {item.name}
-                    </a>
+                    {item.name === "Equipo" ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[14px] text-white/55 hover:text-white transition-colors duration-300 inline-flex items-center gap-1.5"
+                      >
+                        {item.name}
+                        <svg className="w-3 h-3 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                        </svg>
+                      </a>
+                    ) : (
+                      <a
+                        href={item.href}
+                        className="text-[14px] text-white/55 hover:text-white transition-colors duration-300"
+                      >
+                        {item.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

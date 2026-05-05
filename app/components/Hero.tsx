@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import FadeIn from "./FadeIn";
 import { HeroBlur, HeroLine } from "./HeroText";
 import SparkleParticles from "./SparkleParticles";
@@ -27,6 +27,74 @@ function useTheme() {
   }, []);
 
   return theme;
+}
+
+// Animated "web" text with particles
+function AnimatedWebText() {
+  const containerRef = useRef<HTMLSpanElement>(null);
+  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; delay: number }>>([]);
+
+  useEffect(() => {
+    // Generate particles around the text
+    const newParticles = Array.from({ length: 12 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      delay: Math.random() * 2,
+    }));
+    setParticles(newParticles);
+  }, []);
+
+  return (
+    <span ref={containerRef} className="relative inline-block">
+      {/* Particles around text */}
+      <span className="absolute -inset-4 pointer-events-none">
+        {particles.map((p) => (
+          <span
+            key={p.id}
+            className="absolute w-1 h-1 rounded-full bg-emerald-400 animate-pulse"
+            style={{
+              left: `${p.x}%`,
+              top: `${p.y}%`,
+              animationDelay: `${p.delay}s`,
+              opacity: 0.6,
+              boxShadow: "0 0 6px 2px rgba(52, 211, 153, 0.5)",
+            }}
+          />
+        ))}
+      </span>
+
+      {/* Glow effect behind text */}
+      <span
+        className="absolute inset-0 blur-2xl opacity-60 animate-pulse"
+        style={{
+          background: "radial-gradient(ellipse, rgba(52, 211, 153, 0.4) 0%, transparent 70%)",
+          animationDuration: "3s",
+        }}
+      />
+
+      {/* Main text with shimmer */}
+      <span
+        className="relative font-semibold"
+        style={{
+          color: "#34D399",
+          textShadow: "0 0 30px rgba(52, 211, 153, 0.5), 0 0 60px rgba(52, 211, 153, 0.3)",
+          animation: "shimmer 3s ease-in-out infinite",
+        }}
+      >
+        web
+      </span>
+
+      {/* Orbiting particle */}
+      <span
+        className="absolute w-1.5 h-1.5 rounded-full bg-emerald-300"
+        style={{
+          animation: "orbit 4s linear infinite",
+          boxShadow: "0 0 8px 2px rgba(110, 231, 183, 0.6)",
+        }}
+      />
+    </span>
+  );
 }
 
 export default function Hero() {
@@ -57,10 +125,10 @@ export default function Hero() {
         {/* Main heading */}
         <h1 className="text-[clamp(2rem,8vw,5.5rem)] font-medium tracking-[-0.03em] leading-[1.1] mb-4 md:mb-8">
           <HeroLine delay={0.3} className={isDark ? "text-white/90" : "text-black/90"}>
-            La web<span className="text-gradient"></span> que tu negocio
+            Creamos tu <AnimatedWebText />
           </HeroLine>
           <HeroLine delay={0.45} className={isDark ? "text-white/90" : "text-black/90"}>
-            necesita <span className="text-gradient">para crecer</span>
+            <span className="text-gradient">para que crezcas</span>
           </HeroLine>
         </h1>
 
@@ -135,6 +203,26 @@ export default function Hero() {
       <div className="hidden md:block absolute bottom-12 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
         <div className={`w-px h-16 bg-gradient-to-b from-transparent to-transparent ${isDark ? "via-white/20" : "via-black/20"}`} />
       </div>
+
+      {/* CSS Animations */}
+      <style jsx>{`
+        @keyframes shimmer {
+          0%, 100% {
+            filter: brightness(1);
+          }
+          50% {
+            filter: brightness(1.3);
+          }
+        }
+        @keyframes orbit {
+          0% {
+            transform: rotate(0deg) translateX(40px) rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg) translateX(40px) rotate(-360deg);
+          }
+        }
+      `}</style>
     </section>
   );
 }
