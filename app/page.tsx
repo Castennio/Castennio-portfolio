@@ -4,6 +4,7 @@ import Problems from "./components/Problems";
 import Plans from "./components/Plans";
 import Services from "./components/Services";
 import Process from "./components/Process";
+import PreviewCTA from "./components/PreviewCTA";
 import Diagnosis from "./components/Diagnosis";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
@@ -18,6 +19,7 @@ export default function Home() {
         <Plans />
         <Services />
         <Process />
+        <PreviewCTA />
         <Diagnosis />
         <FAQ />
       </main>
