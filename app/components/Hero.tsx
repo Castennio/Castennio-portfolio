@@ -2,8 +2,6 @@
 
 import { useEffect, useState, useRef } from "react";
 import FadeIn from "./FadeIn";
-import { HeroBlur, HeroLine } from "./HeroText";
-import SparkleParticles from "./SparkleParticles";
 
 // Hook to detect theme
 function useTheme() {
@@ -29,71 +27,213 @@ function useTheme() {
   return theme;
 }
 
-// Animated "web" text with particles
+// Animated "web" text with teal glow
 function AnimatedWebText() {
-  const containerRef = useRef<HTMLSpanElement>(null);
-  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; delay: number }>>([]);
-
-  useEffect(() => {
-    // Generate particles around the text
-    const newParticles = Array.from({ length: 12 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      delay: Math.random() * 2,
-    }));
-    setParticles(newParticles);
-  }, []);
-
   return (
-    <span ref={containerRef} className="relative inline-block">
-      {/* Particles around text */}
-      <span className="absolute -inset-4 pointer-events-none">
-        {particles.map((p) => (
-          <span
-            key={p.id}
-            className="absolute w-1 h-1 rounded-full bg-emerald-400 animate-pulse"
-            style={{
-              left: `${p.x}%`,
-              top: `${p.y}%`,
-              animationDelay: `${p.delay}s`,
-              opacity: 0.6,
-              boxShadow: "0 0 6px 2px rgba(52, 211, 153, 0.5)",
-            }}
-          />
-        ))}
-      </span>
-
-      {/* Glow effect behind text */}
+    <span className="relative inline-block">
       <span
-        className="absolute inset-0 blur-2xl opacity-60 animate-pulse"
+        className="absolute inset-0 blur-2xl opacity-50"
         style={{
-          background: "radial-gradient(ellipse, rgba(52, 211, 153, 0.4) 0%, transparent 70%)",
-          animationDuration: "3s",
+          background: "radial-gradient(ellipse, rgba(20, 184, 166, 0.5) 0%, transparent 70%)",
         }}
       />
-
-      {/* Main text with shimmer */}
       <span
-        className="relative font-semibold"
+        className="relative"
         style={{
-          color: "#34D399",
-          textShadow: "0 0 30px rgba(52, 211, 153, 0.5), 0 0 60px rgba(52, 211, 153, 0.3)",
-          animation: "shimmer 3s ease-in-out infinite",
+          color: "#2DD4BF",
+          textShadow: "0 0 40px rgba(20, 184, 166, 0.4)",
         }}
       >
         web
       </span>
-
-      {/* Orbiting particle */}
-      <span
-        className="absolute w-1.5 h-1.5 rounded-full bg-emerald-300"
-        style={{
-          animation: "orbit 4s linear infinite",
-          boxShadow: "0 0 8px 2px rgba(110, 231, 183, 0.6)",
-        }}
-      />
     </span>
+  );
+}
+
+// Browser mockup with animated content
+function BrowserMockup() {
+  const [activeTab, setActiveTab] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveTab((prev) => (prev + 1) % 3);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const screens = [
+    { label: "Landing", color: "#14B8A6" },
+    { label: "E-commerce", color: "#F59E0B" },
+    { label: "Dashboard", color: "#2DD4BF" },
+  ];
+
+  return (
+    <div className="relative w-full max-w-[500px] mx-auto">
+      {/* Glow behind */}
+      <div
+        className="absolute -inset-8 opacity-30 blur-3xl transition-colors duration-1000"
+        style={{ background: `radial-gradient(ellipse, ${screens[activeTab].color}40 0%, transparent 70%)` }}
+      />
+
+      {/* Browser window */}
+      <div className="relative bg-[#0D1414] border border-white/[0.08] rounded-xl overflow-hidden shadow-2xl">
+        {/* Browser chrome */}
+        <div className="flex items-center justify-between px-4 py-3 bg-[#080C0C] border-b border-white/[0.06]">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
+            <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
+            <div className="w-3 h-3 rounded-full bg-[#28CA41]" />
+          </div>
+          <div className="flex-1 mx-4">
+            <div className="bg-[#152020] rounded-md px-3 py-1.5 text-[11px] text-white/30 text-center">
+              tunegocio.com
+            </div>
+          </div>
+          <div className="w-16" />
+        </div>
+
+        {/* Tab indicators */}
+        <div className="flex gap-1 px-4 py-2 bg-[#0A0E0E]">
+          {screens.map((screen, i) => (
+            <button
+              key={screen.label}
+              onClick={() => setActiveTab(i)}
+              className={`px-3 py-1 text-[10px] rounded-md transition-all duration-300 ${
+                activeTab === i
+                  ? "text-white/90"
+                  : "text-white/30 hover:text-white/50"
+              }`}
+              style={{
+                background: activeTab === i ? `${screen.color}20` : "transparent",
+                color: activeTab === i ? screen.color : undefined,
+              }}
+            >
+              {screen.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Content area */}
+        <div className="relative h-[280px] md:h-[320px] overflow-hidden">
+          {/* Screen 0: Landing */}
+          <div
+            className={`absolute inset-0 p-6 transition-all duration-500 ${
+              activeTab === 0 ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+            }`}
+          >
+            <div className="space-y-4">
+              <div className="h-4 w-3/4 rounded bg-gradient-to-r from-teal-500/30 to-transparent" />
+              <div className="h-3 w-1/2 rounded bg-white/[0.06]" />
+              <div className="h-3 w-2/3 rounded bg-white/[0.04]" />
+              <div className="mt-6 flex gap-3">
+                <div className="h-10 w-32 rounded-full bg-gradient-to-r from-amber-500/80 to-amber-600/80" />
+                <div className="h-10 w-28 rounded-full border border-white/[0.1]" />
+              </div>
+              <div className="mt-8 grid grid-cols-3 gap-3">
+                <div className="h-20 rounded-lg bg-white/[0.03] border border-white/[0.05]" />
+                <div className="h-20 rounded-lg bg-white/[0.03] border border-white/[0.05]" />
+                <div className="h-20 rounded-lg bg-white/[0.03] border border-white/[0.05]" />
+              </div>
+            </div>
+          </div>
+
+          {/* Screen 1: E-commerce */}
+          <div
+            className={`absolute inset-0 p-6 transition-all duration-500 ${
+              activeTab === 1 ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
+            }`}
+          >
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <div className="h-4 w-24 rounded bg-white/[0.08]" />
+                <div className="h-8 w-8 rounded-full bg-amber-500/20 border border-amber-500/30" />
+              </div>
+              <div className="grid grid-cols-2 gap-3 mt-4">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="rounded-lg bg-white/[0.02] border border-white/[0.05] p-3">
+                    <div className="h-16 rounded bg-gradient-to-br from-white/[0.04] to-transparent mb-2" />
+                    <div className="h-2 w-3/4 rounded bg-white/[0.06]" />
+                    <div className="h-2 w-1/2 rounded bg-amber-500/30 mt-2" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Screen 2: Dashboard */}
+          <div
+            className={`absolute inset-0 p-6 transition-all duration-500 ${
+              activeTab === 2 ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
+            }`}
+          >
+            <div className="space-y-4">
+              <div className="flex gap-3">
+                <div className="flex-1 h-16 rounded-lg bg-teal-500/10 border border-teal-500/20 p-3">
+                  <div className="h-2 w-12 rounded bg-teal-500/40 mb-2" />
+                  <div className="h-4 w-16 rounded bg-teal-500/60" />
+                </div>
+                <div className="flex-1 h-16 rounded-lg bg-amber-500/10 border border-amber-500/20 p-3">
+                  <div className="h-2 w-12 rounded bg-amber-500/40 mb-2" />
+                  <div className="h-4 w-16 rounded bg-amber-500/60" />
+                </div>
+              </div>
+              <div className="h-32 rounded-lg bg-white/[0.02] border border-white/[0.05] p-4">
+                <div className="flex items-end justify-between h-full gap-2">
+                  {[40, 65, 45, 80, 55, 70, 90, 60].map((h, i) => (
+                    <div
+                      key={i}
+                      className="flex-1 rounded-t transition-all duration-500"
+                      style={{
+                        height: `${h}%`,
+                        background: `linear-gradient(to top, ${screens[2].color}60, ${screens[2].color}20)`,
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Floating elements */}
+      <div className="absolute -right-4 top-1/4 w-20 h-20 rounded-xl bg-[#0D1414] border border-white/[0.08] p-3 shadow-xl animate-float">
+        <div className="text-[10px] text-white/40 mb-1">Visitas</div>
+        <div className="text-lg font-semibold text-teal-400">+247%</div>
+      </div>
+
+      <div className="absolute -left-4 bottom-1/4 w-24 h-16 rounded-xl bg-[#0D1414] border border-white/[0.08] p-3 shadow-xl animate-float-delayed">
+        <div className="text-[10px] text-white/40 mb-1">Conversión</div>
+        <div className="text-lg font-semibold text-amber-400">12.4%</div>
+      </div>
+    </div>
+  );
+}
+
+// Client logos
+function ClientLogos() {
+  const logos = [
+    "TechStart",
+    "Sonríe",
+    "ImportaLima",
+    "MR Contable",
+    "+8 más",
+  ];
+
+  return (
+    <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 text-[11px] text-white/30 tracking-wide">
+      {/*
+      <span className="text-white/20">Confían en nosotros:</span>
+      {logos.map((logo, i) => (
+        <span
+          key={logo}
+          className={`${i === logos.length - 1 ? "text-teal-500/50" : ""}`}
+        >
+          {logo}
+        </span>
+      ))}
+      */}
+    </div>
   );
 }
 
@@ -102,125 +242,127 @@ export default function Hero() {
   const isDark = theme === "dark";
 
   return (
-    <section className={`relative min-h-[100svh] md:min-h-screen flex items-center justify-center overflow-hidden py-16 md:py-0 transition-colors duration-500 ${isDark ? "bg-[#0a0a0f]" : "bg-[#ffffff]"}`}>
-      {/* Premium sparkle particles */}
-      <div className="absolute inset-0 w-full h-full z-[5]">
-        <SparkleParticles count={80} />
-      </div>
+    <section
+      className={`relative min-h-[100svh] md:min-h-screen flex items-center overflow-hidden py-20 md:py-0 transition-colors duration-500 ${
+        isDark ? "bg-[#050A0A]" : "bg-[#ffffff]"
+      }`}
+    >
+      {/* Ambient glow */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-teal-500/[0.03] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-amber-500/[0.02] rounded-full blur-[100px] pointer-events-none" />
 
-      {/* Minimal grid */}
+      {/* Subtle grid */}
       <div
-        className={`absolute inset-0 z-10 pointer-events-none transition-opacity duration-300 ${isDark ? "opacity-[0.012]" : "opacity-[0.03]"}`}
+        className="absolute inset-0 opacity-[0.015] pointer-events-none"
         style={{
-          backgroundImage: isDark
-            ? `linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)`
-            : `linear-gradient(rgba(99,102,241,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.3) 1px, transparent 1px)`,
-          backgroundSize: "100px 100px",
+          backgroundImage: `linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)`,
+          backgroundSize: "80px 80px",
         }}
       />
 
-      {/* Content - on top, non-interactive elements are pointer-events-none */}
-      <div className="relative z-20 max-w-5xl mx-auto px-6 text-center pointer-events-none">
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          {/* Left: Text content */}
+          <div className="order-2 lg:order-1">
+           
 
-        {/* Main heading */}
-        <h1 className="text-[clamp(2rem,8vw,5.5rem)] font-medium tracking-[-0.03em] leading-[1.1] mb-4 md:mb-8">
-          <HeroLine delay={0.3} className={isDark ? "text-white/90" : "text-black/90"}>
-            Creamos tu <AnimatedWebText />
-          </HeroLine>
-          <HeroLine delay={0.45} className={isDark ? "text-white/90" : "text-black/90"}>
-            <span className="text-gradient">para que crezcas</span>
-          </HeroLine>
-        </h1>
+            <FadeIn delay={0.2}>
+              <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-medium tracking-[-0.03em] leading-[1.1] mb-6">
+                <span className={isDark ? "text-white/90" : "text-black/90"}>
+                  Creamos tu <AnimatedWebText />
+                </span>
+                <br />
+                <span className="text-gradient">para que crezcas</span>
+              </h1>
+            </FadeIn>
 
-        {/* Subtitle */}
-        <HeroBlur
-          as="p"
-          className={`text-sm md:text-xl max-w-[280px] md:max-w-xl mx-auto mb-8 md:mb-14 leading-relaxed font-light transition-colors duration-300 ${isDark ? "text-white/55" : "text-black/60"}`}
-          delay={0.7}
-          stagger={0.015}
-        >
-          Desarrollo web para MYPES. Nos encargamos del diseño, desarrollo e integraciones. Tú solo apruebas.
-        </HeroBlur>
-
-        {/* CTA buttons - interactive, need pointer events */}
-        <FadeIn delay={0.8} y={20}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 pointer-events-auto">
-            <a
-              href="#diagnostico"
-              className="group relative z-50 inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 text-sm md:text-base font-medium rounded-full transition-transform duration-300 hover:scale-105"
-              style={{
-                background: "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)",
-                color: "#ffffff",
-                boxShadow: "0 4px 20px rgba(59, 130, 246, 0.35)",
-              }}
-            >
-              <span style={{ color: "#ffffff" }}>Diagnóstico gratuito</span>
-              <svg
-                className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="#ffffff"
+            <FadeIn delay={0.3}>
+              <p
+                className={`text-base md:text-lg max-w-md mb-8 leading-relaxed ${
+                  isDark ? "text-white/50" : "text-black/50"
+                }`}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </a>
+                Nos encargamos del diseño, desarrollo e integraciones.
+                <span className="text-white/70"> Tú solo apruebas.</span>
+              </p>
+            </FadeIn>
 
-            <a
-              href="#proceso"
-              className="group relative z-50 inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 text-sm md:text-base font-medium rounded-full transition-transform duration-300 hover:scale-105"
-              style={{
-                backgroundColor: "#0a0a0f",
-                color: "#ffffff",
-                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.25)",
-              }}
-            >
-              <span style={{ color: "#ffffff" }}>Ver cómo trabajamos</span>
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="#ffffff">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-              </svg>
-            </a>
-          </div>
-        </FadeIn>
+            {/* CTA buttons */}
+            <FadeIn delay={0.4}>
+              <div className="flex flex-col sm:flex-row gap-3 mb-10">
+                <a
+                  href="#diagnostico"
+                  className="group inline-flex items-center justify-center gap-2 px-7 py-4 text-sm font-semibold rounded-full transition-all duration-300 hover:scale-105"
+                  style={{
+                    background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+                    color: "#050A0A",
+                    boxShadow: "0 4px 24px rgba(245, 158, 11, 0.3)",
+                  }}
+                >
+                  <span>Diagnóstico gratuito</span>
+                  <svg
+                    className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
 
-        {/* Trust indicators */}
-        <FadeIn delay={1} y={20}>
-          <div className={`mt-8 md:mt-24 flex flex-row items-center justify-center gap-4 md:gap-12 text-[10px] md:text-[13px] tracking-wide transition-colors duration-300 ${isDark ? "text-white/40" : "text-black/40"}`}>
-            <span>Respuesta en 24h</span>
-            <span className={`w-1 h-1 rounded-full ${isDark ? "bg-white/20" : "bg-black/20"}`} />
-            <span>Precio fijo</span>
-            <span className={`hidden md:block w-1 h-1 rounded-full ${isDark ? "bg-white/20" : "bg-black/20"}`} />
-            <span className="hidden md:block">Sin tecnicismos</span>
+                <a
+                  href="#portafolio"
+                  className="group inline-flex items-center justify-center gap-2 px-7 py-4 text-sm font-medium rounded-full border border-white/[0.1] text-white/70 hover:text-white hover:border-white/[0.2] transition-all duration-300"
+                >
+                  <span>Ver proyectos</span>
+                  <svg
+                    className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.5}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                  </svg>
+                </a>
+              </div>
+            </FadeIn>
+
+           
+
+            {/* Client logos */}
+            <FadeIn delay={0.6}>
+              <ClientLogos />
+            </FadeIn>
           </div>
-        </FadeIn>
+
+          {/* Right: Visual mockup */}
+          <div className="order-1 lg:order-2">
+            <FadeIn delay={0.3} y={30}>
+              <BrowserMockup />
+            </FadeIn>
+          </div>
+        </div>
       </div>
 
-      {/* Scroll indicator - hidden on mobile */}
-      <div className="hidden md:block absolute bottom-12 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
-        <div className={`w-px h-16 bg-gradient-to-b from-transparent to-transparent ${isDark ? "via-white/20" : "via-black/20"}`} />
-      </div>
-
-      {/* CSS Animations */}
+      {/* CSS for floating animation */}
       <style jsx>{`
-        @keyframes shimmer {
+        @keyframes float {
           0%, 100% {
-            filter: brightness(1);
+            transform: translateY(0px);
           }
           50% {
-            filter: brightness(1.3);
+            transform: translateY(-10px);
           }
         }
-        @keyframes orbit {
-          0% {
-            transform: rotate(0deg) translateX(40px) rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg) translateX(40px) rotate(-360deg);
-          }
+        .animate-float {
+          animation: float 4s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+          animation: float 4s ease-in-out infinite;
+          animation-delay: 2s;
         }
       `}</style>
     </section>

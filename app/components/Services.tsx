@@ -89,7 +89,7 @@ export default function Services() {
   };
 
   return (
-    <section id="servicios" className="py-20 lg:py-24 px-4 sm:px-6 bg-[#0a0a0f] relative">
+    <section id="servicios" className="py-12 lg:py-16 px-4 sm:px-6 bg-[#050A0A] relative">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <FadeIn>

@@ -96,7 +96,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-32 px-6 bg-[#0a0a0f] relative">
+    <section id="faq" className="py-16 lg:py-20 px-6 bg-[#050A0A] relative">
       {/* Subtle border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -116,8 +116,8 @@ export default function FAQ() {
               as="span"
               className="inline-block"
               delay={0.3}
-              gradientFrom="#3b82f6"
-              gradientTo="#8b5cf6"
+              gradientFrom="#14B8A6"
+              gradientTo="#2DD4BF"
             >
               resueltas
             </GradientReveal>

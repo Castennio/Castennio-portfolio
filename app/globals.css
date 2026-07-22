@@ -1,45 +1,56 @@
 @import "tailwindcss";
 
-/* Dark theme (default) */
+/* Dark theme (default) — Teal + Amber */
 :root,
 html.dark {
-  /* Backgrounds - Sistema de capas con profundidad */
-  --background: #0a0a0f;
-  --background-elevated: #0f1015;
-  --background-surface: #14151a;
-  --background-overlay: #1a1b22;
-  --foreground: #fafafa;
+  /* Backgrounds - Negro con tinte teal */
+  --background: #050A0A;
+  --background-elevated: #0D1414;
+  --background-surface: #152020;
+  --background-overlay: #1E2A2A;
+  --foreground: #F1F5F9;
 
   /* Legacy support */
-  --card-bg: #0f1015;
-  --card-bg-hover: #14151a;
+  --card-bg: #0D1414;
+  --card-bg-hover: #152020;
 
-  /* Primary colors */
-  --primary: #3b82f6;
-  --primary-hover: #2563eb;
+  /* Primary colors (Teal) */
+  --primary: #14B8A6;
+  --primary-light: #2DD4BF;
+  --primary-dark: #0D9488;
+  --primary-hover: #0D9488;
 
-  /* Borders con más presencia */
-  --border: #1e1f26;
-  --border-hover: #2a2b35;
-  --border-active: #3b3d4a;
+  /* CTA (Amber) */
+  --cta: #F59E0B;
+  --cta-hover: #D97706;
 
-  /* Textos con mejor contraste */
-  --text-muted: #8b8d9a;
-  --text-subtle: #6b6d7a;
+  /* Borders con tinte teal */
+  --border: #1E2A2A;
+  --border-hover: #2A3838;
+  --border-active: #3A4848;
 
-  /* Acentos sutiles para dar vida */
-  --accent-glow: rgba(99, 102, 241, 0.08);
-  --accent-warm: rgba(251, 191, 36, 0.05);
-  --accent-blue: rgba(59, 130, 246, 0.06);
+  /* Textos */
+  --text-muted: #94A3B8;
+  --text-subtle: #64748B;
+
+  /* Acentos sutiles */
+  --accent-glow: rgba(20, 184, 166, 0.08);
+  --accent-warm: rgba(245, 158, 11, 0.05);
+  --accent-teal: rgba(20, 184, 166, 0.06);
 
   /* Theme-specific */
-  --text-primary: rgba(255, 255, 255, 0.9);
-  --text-secondary: rgba(255, 255, 255, 0.6);
-  --text-tertiary: rgba(255, 255, 255, 0.4);
+  --text-primary: rgba(241, 245, 249, 0.9);
+  --text-secondary: rgba(241, 245, 249, 0.6);
+  --text-tertiary: rgba(241, 245, 249, 0.4);
   --card-border: rgba(255, 255, 255, 0.06);
   --card-border-hover: rgba(255, 255, 255, 0.12);
-  --button-bg: #ffffff;
-  --button-text: #000000;
+  --button-bg: #F59E0B;
+  --button-text: #050A0A;
+
+  /* Semantic */
+  --success: #10B981;
+  --error: #EF4444;
+  --warning: #F59E0B;
 
   color-scheme: dark;
 }
@@ -97,8 +108,8 @@ html.light {
   --color-primary-hover: var(--primary-hover);
   --color-border: var(--border);
   --color-muted: var(--text-muted);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
 }
 
 html {
@@ -121,9 +132,14 @@ html.light ::selection {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Display font for headings */
+h1, h2, h3, .font-display {
+  font-family: var(--font-display), Georgia, serif;
 }
 
 /* Premium scrollbar */
@@ -150,20 +166,20 @@ body {
   color: #fff;
 }
 
-/* Premium text gradient utility */
+/* Premium text gradient utility — Teal */
 .text-gradient {
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
+  background: linear-gradient(135deg, #2DD4BF 0%, #14B8A6 50%, #0D9488 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Subtle glow effect */
+/* Subtle glow effect — Teal */
 .glow {
-  box-shadow: 0 0 60px -15px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 60px -15px rgba(20, 184, 166, 0.3);
 }
 
-/* Premium border gradient */
+/* Premium border gradient — Teal */
 .border-gradient {
   position: relative;
 }
@@ -174,7 +190,7 @@ body {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), transparent 50%);
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.3), transparent 50%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;

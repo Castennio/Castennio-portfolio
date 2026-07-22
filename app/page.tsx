@@ -1,11 +1,9 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Problems from "./components/Problems";
-import Plans from "./components/Plans";
-import Services from "./components/Services";
 import Process from "./components/Process";
 import PreviewCTA from "./components/PreviewCTA";
-import Diagnosis from "./components/Diagnosis";
+import Documentation from "./components/Documentation";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 
@@ -13,14 +11,12 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="bg-[#0a0a0f]">
+      <main className="bg-[#050A0A]">
         <Hero />
         <Problems />
-        <Plans />
-        <Services />
         <Process />
         <PreviewCTA />
-        <Diagnosis />
+        <Documentation />
         <FAQ />
       </main>
       <Footer />

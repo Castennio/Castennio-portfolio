@@ -5,9 +5,9 @@ import { WordReveal, GradientReveal, BlurReveal } from './TextReveal';
 
 export default function PreviewCTA() {
   return (
-    <section className="py-24 lg:py-32 px-4 sm:px-6 bg-[#0a0a0f] relative overflow-hidden">
+    <section className="py-16 lg:py-20 px-4 sm:px-6 bg-[#050A0A] relative overflow-hidden">
       {/* Background effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(59,130,246,0.06)_0%,_transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(20,184,166,0.06)_0%,_transparent_60%)]" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="relative max-w-4xl mx-auto text-center">
@@ -26,8 +26,8 @@ export default function PreviewCTA() {
             as="span"
             className="inline-block font-normal"
             delay={0.3}
-            gradientFrom="#3b82f6"
-            gradientTo="#8b5cf6"
+            gradientFrom="#14B8A6"
+            gradientTo="#2DD4BF"
           >
             en minutos
           </GradientReveal>
@@ -47,7 +47,7 @@ export default function PreviewCTA() {
         <FadeIn delay={0.5}>
           <a
             href="/preview"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-500 to-violet-500 text-white font-medium text-base rounded-full transition-all duration-500 hover:shadow-[0_0_40px_rgba(59,130,246,0.3)]"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-[#050A0A] font-semibold text-base rounded-full transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)]"
           >
             <span>Crear mi diseño</span>
             <svg

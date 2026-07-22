@@ -28,13 +28,13 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="proceso" className="py-32 px-6 bg-[#0a0a0f] relative overflow-hidden">
+    <section id="proceso" className="py-16 lg:py-20 px-6 bg-[#050A0A] relative overflow-hidden">
       {/* Subtle top border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="relative max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-24">
+        <div className="text-center mb-16">
           <FadeIn>
             <p className="text-[13px] text-white/50 tracking-widest uppercase mb-4">
               Cómo trabajamos
@@ -48,8 +48,8 @@ export default function Process() {
               as="span"
               className="inline-block"
               delay={0.3}
-              gradientFrom="#3b82f6"
-              gradientTo="#8b5cf6"
+              gradientFrom="#14B8A6"
+              gradientTo="#2DD4BF"
             >
               sin sorpresas
             </GradientReveal>
@@ -72,7 +72,7 @@ export default function Process() {
                     </span>
                     {/* Active dot on line */}
                     <div className="hidden md:block absolute -bottom-[1.35rem] left-1/2 -translate-x-1/2">
-                      <div className="w-2 h-2 rounded-full bg-white/20 group-hover:bg-blue-500/50 transition-colors duration-500" />
+                      <div className="w-2 h-2 rounded-full bg-white/20 group-hover:bg-teal-500/50 transition-colors duration-500" />
                     </div>
                   </div>
                 </div>

@@ -32,7 +32,7 @@ const challenges = [
 
 export default function Challenges() {
   return (
-    <section id="problemas" className="py-32 px-6 bg-[#0a0a0f] relative">
+    <section id="problemas" className="py-16 lg:py-20 px-6 bg-[#050A0A] relative">
       {/* Subtle top border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -53,8 +53,8 @@ export default function Challenges() {
                 as="span"
                 className="block"
                 delay={0.3}
-                gradientFrom="#ef4444"
-                gradientTo="#f97316"
+                gradientFrom="#14B8A6"
+                gradientTo="#2DD4BF"
               >
                 te suenan conocidos
               </GradientReveal>
@@ -79,17 +79,17 @@ export default function Challenges() {
               className="group relative"
             >
               <div
-                className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 p-8 md:p-10 rounded-2xl border border-white/[0.06] bg-[#0f1015] hover:bg-[#14151a] hover:border-red-500/[0.2] transition-all duration-500"
+                className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 p-8 md:p-10 rounded-2xl border border-white/[0.06] bg-[#0D1414] hover:bg-[#152020] hover:border-teal-500/[0.2] transition-all duration-500"
               >
                 {/* Number */}
-                <div className="text-5xl md:text-6xl font-light text-red-500/[0.15] tabular-nums">
+                <div className="text-5xl md:text-6xl font-light text-teal-500/[0.15] tabular-nums">
                   {String(index + 1).padStart(2, "0")}
                 </div>
 
                 {/* Content */}
                 <div className="flex-1">
                   <div className="flex items-center gap-4 mb-3">
-                    <span className="text-[11px] text-red-400/50 tracking-widest uppercase">
+                    <span className="text-[11px] text-teal-400/50 tracking-widest uppercase">
                       {problem.category}
                     </span>
                   </div>
@@ -103,9 +103,9 @@ export default function Challenges() {
 
                 {/* Icon indicator */}
                 <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full border border-red-500/[0.15] bg-red-500/[0.05] flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full border border-teal-500/[0.15] bg-teal-500/[0.05] flex items-center justify-center">
                     <svg
-                      className="w-5 h-5 text-red-400/60"
+                      className="w-5 h-5 text-teal-400/60"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
