@@ -1,7 +1,148 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import FadeIn from "./FadeIn";
+
+// ── Neural Network Background ──────────────────────────────────────
+function NeuralBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouse = useRef({ x: -1000, y: -1000 });
+  const animRef = useRef<number>(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d")!;
+
+    let w = 0, h = 0;
+    const resize = () => {
+      const dpr = window.devicePixelRatio || 1;
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + "px";
+      canvas.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const onMouseMove = (e: MouseEvent) => {
+      mouse.current.x = e.clientX;
+      mouse.current.y = e.clientY;
+    };
+    window.addEventListener("mousemove", onMouseMove);
+
+    // ponytail: 90 nodes, O(n²) connections — spatial hash if >200
+    const NODE_COUNT = 90;
+    const CONNECTION_DIST = 160;
+    const MOUSE_RADIUS = 220;
+
+    interface Node { x: number; y: number; vx: number; vy: number; r: number }
+
+    const nodes: Node[] = Array.from({ length: NODE_COUNT }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: Math.random() * 1.5 + 0.8,
+    }));
+
+    const animate = () => {
+      ctx.clearRect(0, 0, w, h);
+      const mx = mouse.current.x;
+      const my = mouse.current.y;
+
+      // Draw connections first (behind nodes)
+      for (let i = 0; i < NODE_COUNT; i++) {
+        for (let j = i + 1; j < NODE_COUNT; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist > CONNECTION_DIST) continue;
+
+          const midX = (nodes[i].x + nodes[j].x) / 2;
+          const midY = (nodes[i].y + nodes[j].y) / 2;
+          const mouseDist = Math.sqrt((midX - mx) ** 2 + (midY - my) ** 2);
+          const mouseBoost = Math.max(0, 1 - mouseDist / (MOUSE_RADIUS * 1.5));
+          const fade = 1 - dist / CONNECTION_DIST;
+
+          const alpha = fade * (0.08 + mouseBoost * 0.35);
+          const width = 0.5 + mouseBoost * 1.5;
+
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(45, 212, 191, ${alpha})`;
+          ctx.lineWidth = width;
+          ctx.stroke();
+        }
+      }
+
+      // Update & draw nodes
+      for (const node of nodes) {
+        node.x += node.vx;
+        node.y += node.vy;
+        if (node.x < 0 || node.x > w) node.vx *= -1;
+        if (node.y < 0 || node.y > h) node.vy *= -1;
+
+        const dx = node.x - mx;
+        const dy = node.y - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        // Mouse repulsion
+        if (dist < MOUSE_RADIUS && dist > 0) {
+          const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.025;
+          node.vx += (dx / dist) * force;
+          node.vy += (dy / dist) * force;
+        }
+        node.vx *= 0.998;
+        node.vy *= 0.998;
+
+        const proximity = Math.max(0, 1 - dist / MOUSE_RADIUS);
+        const radius = node.r + proximity * 3;
+        const alpha = 0.25 + proximity * 0.75;
+
+        // Outer glow
+        if (proximity > 0.1) {
+          const gradient = ctx.createRadialGradient(
+            node.x, node.y, 0, node.x, node.y, radius + 8
+          );
+          gradient.addColorStop(0, `rgba(45, 212, 191, ${proximity * 0.3})`);
+          gradient.addColorStop(1, "rgba(45, 212, 191, 0)");
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, radius + 8, 0, Math.PI * 2);
+          ctx.fillStyle = gradient;
+          ctx.fill();
+        }
+
+        // Core dot
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(45, 212, 191, ${alpha})`;
+        ctx.fill();
+      }
+
+      animRef.current = requestAnimationFrame(animate);
+    };
+
+    animRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animRef.current);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", onMouseMove);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 pointer-events-none z-0"
+    />
+  );
+}
 
 // Hook to detect theme
 function useTheme() {
@@ -240,6 +381,8 @@ function ClientLogos() {
 export default function Hero() {
   const theme = useTheme();
   const isDark = theme === "dark";
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   return (
     <section
@@ -247,18 +390,12 @@ export default function Hero() {
         isDark ? "bg-[#050A0A]" : "bg-[#ffffff]"
       }`}
     >
+      {/* Neural network background */}
+      {mounted && <NeuralBackground />}
+
       {/* Ambient glow */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-teal-500/[0.03] rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-amber-500/[0.02] rounded-full blur-[100px] pointer-events-none" />
-
-      {/* Subtle grid */}
-      <div
-        className="absolute inset-0 opacity-[0.015] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)`,
-          backgroundSize: "80px 80px",
-        }}
-      />
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6">

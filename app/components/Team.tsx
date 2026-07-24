@@ -1,13 +1,10 @@
 "use client";
 
-import FadeIn, { StaggerFadeIn } from "./FadeIn";
+import FadeIn from "./FadeIn";
 import { WordReveal, GradientReveal } from "./TextReveal";
 
 const team = [
-  { name: "Dani", role: "Desarrollo", image: "/images/pixel-art/dani.png" },
-  { name: "Gabriel", role: "Desarrollo", image: "/images/pixel-art/gabriel.png" },
-  { name: "Alonso", role: "Backend", image: "/images/pixel-art/alonso.png" },
-  { name: "Michell", role: "Analista de datos", image: "/images/pixel-art/michell.png" },
+  { name: "Daniel", role: "Desarrollo", image: "/images/pixel-art/dani.png" },
   { name: "Josue", role: "Desarrollo", image: "/images/pixel-art/josue.png" },
 ];
 
@@ -33,35 +30,30 @@ export default function Team() {
               as="span"
               className="inline-block"
               delay={0.3}
-              gradientFrom="#3b82f6"
-              gradientTo="#8b5cf6"
+              gradientFrom="#14B8A6"
+              gradientTo="#2DD4BF"
             >
               construyen
             </GradientReveal>
           </h2>
         </div>
 
-        {/* Team grid - 3 top, 2 bottom */}
-        <div className="flex flex-col items-center gap-12 md:gap-16">
-          {/* First row - 3 members */}
-          <StaggerFadeIn className="flex flex-wrap justify-center gap-12 md:gap-16" stagger={0.12}>
-            {team.slice(0, 3).map((member, index) => (
-              <div key={index} className="group flex flex-col items-center">
-                {/* Pixel Art Avatar */}
+        {/* Team */}
+        <div className="flex flex-wrap justify-center gap-12 md:gap-16">
+          {team.map((member, index) => (
+            <FadeIn key={index} delay={index * 0.12}>
+              <div className="group flex flex-col items-center">
                 <div className="relative w-32 h-32 md:w-40 md:h-40">
                   <div className="w-full h-full rounded-2xl overflow-hidden border border-white/[0.08] bg-[#0f1015]">
                     <img
                       src={member.image}
                       alt={member.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      style={{ imageRendering: member.image.endsWith('.jpeg') ? 'auto' : 'pixelated' }}
+                      style={{ imageRendering: "pixelated" }}
                     />
                   </div>
-                  {/* Subtle glow on hover */}
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-blue-500/10 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-teal-500/10 to-transparent pointer-events-none" />
                 </div>
-
-                {/* Info */}
                 <div className="mt-5 text-center">
                   <p className="text-[17px] text-white/80 font-medium group-hover:text-white transition-colors duration-300">
                     {member.name}
@@ -71,42 +63,10 @@ export default function Team() {
                   </p>
                 </div>
               </div>
-            ))}
-          </StaggerFadeIn>
-
-          {/* Second row - 2 members */}
-          <StaggerFadeIn className="flex flex-wrap justify-center gap-12 md:gap-16" stagger={0.12}>
-            {team.slice(3).map((member, index) => (
-              <div key={index} className="group flex flex-col items-center">
-                {/* Pixel Art Avatar */}
-                <div className="relative w-32 h-32 md:w-40 md:h-40">
-                  <div className="w-full h-full rounded-2xl overflow-hidden border border-white/[0.08] bg-[#0f1015]">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      style={{ imageRendering: member.image.endsWith('.jpeg') ? 'auto' : 'pixelated' }}
-                    />
-                  </div>
-                  {/* Subtle glow on hover */}
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-blue-500/10 to-transparent pointer-events-none" />
-                </div>
-
-                {/* Info */}
-                <div className="mt-5 text-center">
-                  <p className="text-[17px] text-white/80 font-medium group-hover:text-white transition-colors duration-300">
-                    {member.name}
-                  </p>
-                  <p className="text-[13px] text-white/30 mt-1">
-                    {member.role}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </StaggerFadeIn>
+            </FadeIn>
+          ))}
         </div>
 
-        {/* Note */}
         <FadeIn delay={0.5}>
           <p className="text-center text-white/20 text-[13px] mt-20">
             Un equipo pequeño, enfocado y comprometido

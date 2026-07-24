@@ -67,7 +67,7 @@ export default function Process() {
                 {/* Number with dot */}
                 <div className="flex items-center gap-4 mb-8">
                   <div className="relative">
-                    <span className="text-4xl font-light text-white/10 tabular-nums">
+                    <span className="text-4xl font-light text-white/25 tabular-nums">
                       {step.number}
                     </span>
                     {/* Active dot on line */}

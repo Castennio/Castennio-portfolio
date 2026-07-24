@@ -82,7 +82,7 @@ export default function Challenges() {
                 className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 p-8 md:p-10 rounded-2xl border border-white/[0.06] bg-[#0D1414] hover:bg-[#152020] hover:border-teal-500/[0.2] transition-all duration-500"
               >
                 {/* Number */}
-                <div className="text-5xl md:text-6xl font-light text-teal-500/[0.15] tabular-nums">
+                <div className="text-5xl md:text-6xl font-light text-teal-500/30 tabular-nums">
                   {String(index + 1).padStart(2, "0")}
                 </div>
 

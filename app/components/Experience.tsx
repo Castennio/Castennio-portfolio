@@ -34,7 +34,7 @@ function useTheme() {
 const teamMembers = [
   {
     id: "dani",
-    name: "Dani",
+    name: "Daniel",
     role: "Desarrollo Frontend",
     image: "/images/pixel-art/dani.png",
     bio: "Desarrollador frontend con 2 años de experiencia creando interfaces modernas y responsivas. Apasionado por las animaciones y la experiencia de usuario.",
@@ -63,117 +63,12 @@ const teamMembers = [
     ],
   },
   {
-    id: "gabriel",
-    name: "Gabriel",
-    role: "Fullstack Developer",
-    image: "/images/pixel-art/gabriel.png",
-    bio: "Desarrollador fullstack con visión integral de productos digitales. Experiencia desde el diseño de bases de datos hasta interfaces de usuario.",
-    projects: [
-      {
-        title: "Lifeli - Plataforma de bienestar",
-        description: "Sitio web enfocado en promover un estilo de vida saludable con recursos y contenido sobre bienestar integral.",
-        image: "/images/projects/lifeli.png",
-        technologies: ["Google Sites", "SEO", "Content Design"],
-        link: "https://sites.google.com/view/lifeli/nosotros",
-      },
-      {
-        title: "D & S Full Deport",
-        description: "Tienda de artículos deportivos con catálogo de productos y sección de contacto para ventas.",
-        image: "/images/projects/fulldeport.png",
-        technologies: ["Google Sites", "E-commerce", "UX Design"],
-        link: "https://sites.google.com/view/dys-full-deport/nosotros",
-      },
-      {
-        title: "Multinet - Plataforma digital",
-        description: "Aplicación web moderna con interfaz interactiva y diseño responsive para múltiples dispositivos.",
-        image: "/images/projects/multinet.png",
-        technologies: ["React", "Next.js", "Vercel", "Tailwind"],
-        link: "https://multinet-lovat.vercel.app/",
-      },
-      {
-        title: "Explora - Portal educativo",
-        description: "Plataforma educativa interactiva diseñada para facilitar el aprendizaje y la exploración de contenidos.",
-        image: "/images/projects/explora.png",
-        technologies: ["Google Sites", "Education", "UX Research"],
-        link: "https://sites.google.com/view/capa-test/inicio?authuser=3",
-      },
-    ],
-  },
-  {
-    id: "alonso",
-    name: "Alonso",
-    role: "Fullstack Developer",
-    image: "/images/pixel-art/alonso.png",
-    bio: "Desarrollador fullstack especializado en arquitecturas escalables y experiencias de usuario. Enfocado en soluciones modernas con Next.js y Supabase.",
-    projects: [
-      {
-        title: "Habity - Gestor de Habitos",
-        description: "Aplicacion de gamificacion de productividad con monitoreo de rachas, visualizaciones de datos y generacion de reportes PDF.",
-        image: "/images/projects/habity.png",
-        technologies: ["Next.js 16", "TypeScript", "Tailwind", "Supabase", "jsPDF"],
-        link: "https://habity-jet.vercel.app",
-      },
-      {
-        title: "EduRate - Evaluacion Docente",
-        description: "Plataforma para centralizar y anonimizar retroalimentacion academica. Sistema de autenticacion por Magic Link y moderacion automatica de contenido.",
-        image: "/images/projects/edurate.png",
-        technologies: ["Next.js 15", "TypeScript", "Tailwind CSS", "Supabase"],
-        link: "https://edurate-zeta.vercel.app",
-      },
-      {
-        title: "Sabor Divino - Restaurante",
-        description: "Plataforma web para restaurante con carta digital interactiva, sistema de reservas en tiempo real y seccion de fidelizacion.",
-        image: "/images/projects/sabor-divino.png",
-        technologies: ["React 18", "Vite", "Supabase", "React Router"],
-        link: "https://github.com/alowincr/sabor-divino",
-      },
-    ],
-  },
-  {
-    id: "michell",
-    name: "Michell",
-    role: "Analista de datos",
-    image: "/images/pixel-art/michell.png",
-    bio: "Analista de datos con experiencia en visualización y análisis de información. Apasionado por transformar datos en insights accionables.",
-    projects: [
-      // {
-      //   title: "Sistema de Inventarios",
-      //   description: "Aplicación web para gestión de inventarios con reportes en tiempo real y alertas de stock.",
-      //   image: "/images/projects/placeholder-9.jpg",
-      //   technologies: ["React", "Node.js", "MySQL", "Chart.js"],
-      //   link: "#",
-      // },
-      // {
-      //   title: "Portal de Noticias",
-      //   description: "Plataforma de contenido con CMS personalizado y sistema de suscripciones.",
-      //   image: "/images/projects/placeholder-10.jpg",
-      //   technologies: ["Next.js", "Sanity", "Tailwind", "Vercel"],
-      //   link: "#",
-      // },
-    ],
-  },
-{
     id: "josue",
     name: "Josue",
     role: "Desarrollo",
     image: "/images/pixel-art/josue.png",
     bio: "Desarrollador fullstack con experiencia en tecnologías modernas. Apasionado por crear soluciones innovadoras y de alta calidad.",
-    projects: [
-      // {
-      //   title: "Sistema de Inventarios",
-      //   description: "Aplicación web para gestión de inventarios con reportes en tiempo real y alertas de stock.",
-      //   image: "/images/projects/placeholder-9.jpg",
-      //   technologies: ["React", "Node.js", "MySQL", "Chart.js"],
-      //   link: "#",
-      // },
-      // {
-      //   title: "Portal de Noticias",
-      //   description: "Plataforma de contenido con CMS personalizado y sistema de suscripciones.",
-      //   image: "/images/projects/placeholder-10.jpg",
-      //   technologies: ["Next.js", "Sanity", "Tailwind", "Vercel"],
-      //   link: "#",
-      // },
-    ],
+    projects: [],
   },
 ];
 
@@ -242,8 +137,8 @@ export default function Experience() {
               as="span"
               className="inline-block"
               delay={0.3}
-              gradientFrom="#3b82f6"
-              gradientTo="#8b5cf6"
+              gradientFrom="#14B8A6"
+              gradientTo="#2DD4BF"
             >
               experiencias
             </GradientReveal>
@@ -261,7 +156,7 @@ export default function Experience() {
             <button
               onClick={closeMemberView}
               className={`px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-300 ${!selectedMember
-                  ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                  ? "bg-gradient-to-r from-teal-500 to-teal-400 text-white"
                   : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white/80 border border-white/10"
                 }`}
             >
@@ -272,7 +167,7 @@ export default function Experience() {
                 key={member.id}
                 onClick={() => setSelectedMember(member.id)}
                 className={`px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-300 flex items-center gap-2 ${selectedMember === member.id
-                    ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                    ? "bg-gradient-to-r from-teal-500 to-teal-400 text-white"
                     : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white/80 border border-white/10"
                   }`}
               >
@@ -316,7 +211,7 @@ export default function Experience() {
                       style={{ imageRendering: "pixelated" }}
                     />
                   </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                  <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-r from-teal-500 to-teal-400 flex items-center justify-center">
                     <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -329,7 +224,7 @@ export default function Experience() {
                   >
                     {currentMember.name}
                   </h3>
-                  <p className="text-[13px] text-blue-500 mb-3">{currentMember.role}</p>
+                  <p className="text-[13px] text-teal-500 mb-3">{currentMember.role}</p>
                   <p
                     className="text-[14px] leading-relaxed max-w-xl"
                     style={{ color: isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)" }}
@@ -512,7 +407,7 @@ function ProjectCard({ project, index, isDark }: ProjectCardProps) {
           {/* Link */}
           <a
             href={project.link}
-            className="inline-flex items-center gap-1.5 text-[13px] text-blue-500 hover:text-blue-400 transition-colors group/link"
+            className="inline-flex items-center gap-1.5 text-[13px] text-teal-500 hover:text-blue-400 transition-colors group/link"
           >
             Ver proyecto
             <svg

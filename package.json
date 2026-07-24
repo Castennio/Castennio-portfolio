@@ -11,6 +11,9 @@
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
     "@react-pdf/renderer": "^4.5.1",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@types/three": "^0.185.1",
     "bcryptjs": "^3.0.3",
     "fluid-simulation-react": "^1.0.5",
     "gsap": "^3.14.2",
@@ -19,7 +22,8 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "resend": "^6.12.2",
-    "split-type": "^0.3.4"
+    "split-type": "^0.3.4",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
