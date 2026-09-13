@@ -52,19 +52,19 @@ export default function PreviewBubble() {
         onMouseLeave={() => setIsHovered(false)}
         className={`group relative flex items-center gap-3 px-4 py-3 rounded-2xl border transition-all duration-300 ${
           isHovered
-            ? "bg-[#152020] border-teal-500/30 shadow-[0_8px_32px_rgba(20,184,166,0.15)]"
-            : "bg-[#0D1414] border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+            ? "bg-[#1a2035] border-cyan-500/30 shadow-[0_8px_32px_rgba(34,211,238,0.15)]"
+            : "bg-[#111827] border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
         }`}
       >
         {/* Icon */}
         <div
           className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${
-            isHovered ? "bg-teal-500/20" : "bg-teal-500/10"
+            isHovered ? "bg-cyan-500/20" : "bg-cyan-500/10"
           }`}
         >
           <svg
             className={`w-5 h-5 transition-colors duration-300 ${
-              isHovered ? "text-teal-400" : "text-teal-500/70"
+              isHovered ? "text-cyan-400" : "text-cyan-500/70"
             }`}
             fill="none"
             viewBox="0 0 24 24"
@@ -92,7 +92,7 @@ export default function PreviewBubble() {
         {/* Arrow */}
         <svg
           className={`absolute right-3 w-4 h-4 transition-all duration-300 ${
-            isHovered ? "text-teal-400 translate-x-0.5" : "text-white/30"
+            isHovered ? "text-cyan-400 translate-x-0.5" : "text-white/30"
           }`}
           fill="none"
           viewBox="0 0 24 24"
@@ -114,7 +114,7 @@ export default function PreviewBubble() {
 
         {/* Subtle pulse on first appearance */}
         <div
-          className={`absolute inset-0 rounded-2xl border border-teal-500/20 transition-opacity duration-1000 ${
+          className={`absolute inset-0 rounded-2xl border border-cyan-500/20 transition-opacity duration-1000 ${
             isVisible && !isHovered ? "animate-pulse opacity-100" : "opacity-0"
           }`}
         />

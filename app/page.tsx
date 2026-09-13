@@ -8,12 +8,14 @@ import PreviewCTA from "./components/PreviewCTA";
 import Documentation from "./components/Documentation";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
+import NeuralBackground from "./components/NeuralBackground";
 
 export default function Home() {
   return (
     <>
+      <NeuralBackground />
       <Navbar />
-      <main className="bg-[#050A0A]">
+      <main className="relative z-[1]">
         <Hero />
         <Problems />
         <Process />

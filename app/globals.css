@@ -1,42 +1,42 @@
 @import "tailwindcss";
 
-/* Dark theme (default) — Teal + Amber */
+/* Dark theme (default) — Cyan + Amber */
 :root,
 html.dark {
-  /* Backgrounds - Negro con tinte teal */
-  --background: #050A0A;
-  --background-elevated: #0D1414;
-  --background-surface: #152020;
-  --background-overlay: #1E2A2A;
+  /* Backgrounds - Navy profundo */
+  --background: #0a0e1a;
+  --background-elevated: #111827;
+  --background-surface: #1a2035;
+  --background-overlay: #1e293b;
   --foreground: #F1F5F9;
 
   /* Legacy support */
-  --card-bg: #0D1414;
-  --card-bg-hover: #152020;
+  --card-bg: #111827;
+  --card-bg-hover: #1a2035;
 
-  /* Primary colors (Teal) */
-  --primary: #14B8A6;
-  --primary-light: #2DD4BF;
-  --primary-dark: #0D9488;
-  --primary-hover: #0D9488;
+  /* Primary colors (Cyan) */
+  --primary: #22d3ee;
+  --primary-light: #67e8f9;
+  --primary-dark: #0891b2;
+  --primary-hover: #0891b2;
 
   /* CTA (Amber) */
   --cta: #F59E0B;
   --cta-hover: #D97706;
 
-  /* Borders con tinte teal */
-  --border: #1E2A2A;
-  --border-hover: #2A3838;
-  --border-active: #3A4848;
+  /* Borders */
+  --border: #1e293b;
+  --border-hover: #334155;
+  --border-active: #475569;
 
   /* Textos */
   --text-muted: #94A3B8;
   --text-subtle: #64748B;
 
   /* Acentos sutiles */
-  --accent-glow: rgba(20, 184, 166, 0.08);
+  --accent-glow: rgba(34, 211, 238, 0.08);
   --accent-warm: rgba(245, 158, 11, 0.05);
-  --accent-teal: rgba(20, 184, 166, 0.06);
+  --accent-cyan: rgba(34, 211, 238, 0.06);
 
   /* Theme-specific */
   --text-primary: rgba(241, 245, 249, 0.9);
@@ -45,7 +45,7 @@ html.dark {
   --card-border: rgba(255, 255, 255, 0.06);
   --card-border-hover: rgba(255, 255, 255, 0.12);
   --button-bg: #F59E0B;
-  --button-text: #050A0A;
+  --button-text: #0a0e1a;
 
   /* Semantic */
   --success: #10B981;
@@ -62,7 +62,7 @@ html.light {
   --background-elevated: #ffffff;
   --background-surface: #f5f5f7;
   --background-overlay: #ebebed;
-  --foreground: #0a0a0f;
+  --foreground: #0a0e1a;
 
   /* Legacy support */
   --card-bg: #ffffff;
@@ -92,7 +92,7 @@ html.light {
   --text-tertiary: rgba(0, 0, 0, 0.4);
   --card-border: rgba(0, 0, 0, 0.06);
   --card-border-hover: rgba(0, 0, 0, 0.12);
-  --button-bg: #0a0a0f;
+  --button-bg: #0a0e1a;
   --button-text: #ffffff;
 
   color-scheme: light;
@@ -166,20 +166,20 @@ h1, h2, h3, .font-display {
   color: #fff;
 }
 
-/* Premium text gradient utility — Teal */
+/* Premium text gradient utility — Cyan */
 .text-gradient {
-  background: linear-gradient(135deg, #2DD4BF 0%, #14B8A6 50%, #0D9488 100%);
+  background: linear-gradient(135deg, #67e8f9 0%, #22d3ee 50%, #0891b2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Subtle glow effect — Teal */
+/* Subtle glow effect — Cyan */
 .glow {
-  box-shadow: 0 0 60px -15px rgba(20, 184, 166, 0.3);
+  box-shadow: 0 0 60px -15px rgba(34, 211, 238, 0.3);
 }
 
-/* Premium border gradient — Teal */
+/* Premium border gradient — Cyan */
 .border-gradient {
   position: relative;
 }
@@ -190,13 +190,14 @@ h1, h2, h3, .font-display {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(20, 184, 166, 0.3), transparent 50%);
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.3), transparent 50%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
 }
+
 
 /* Hide scrollbar utility */
 .scrollbar-hide {
@@ -292,7 +293,7 @@ html.light {
 
 html.light body {
   background-color: #ffffff !important;
-  color: #0a0a0f !important;
+  color: #0a0e1a !important;
 }
 
 html.light main {
@@ -348,7 +349,7 @@ html.light [class*="border-white"] {
 
 /* Button overrides - invert colors */
 html.light .bg-white {
-  background-color: #0a0a0f !important;
+  background-color: #0a0e1a !important;
 }
 
 html.light .bg-white.text-black,
@@ -358,13 +359,13 @@ html.light .bg-white [class*="text-black"] {
 
 html.light a.bg-white,
 html.light button.bg-white {
-  background-color: #0a0a0f !important;
+  background-color: #0a0e1a !important;
   color: #ffffff !important;
 }
 
 /* Gradients in light mode */
 html.light .text-gradient {
-  background: linear-gradient(135deg, #2DD4BF 0%, #14B8A6 50%, #0D9488 100%);
+  background: linear-gradient(135deg, #67e8f9 0%, #22d3ee 50%, #0891b2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -440,7 +441,7 @@ nav,
 .hero-btn,
 html.light .hero-btn,
 html.dark .hero-btn {
-  background-color: #0a0a0f !important;
+  background-color: #0a0e1a !important;
   color: #ffffff !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
 }

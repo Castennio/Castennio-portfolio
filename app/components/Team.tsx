@@ -10,7 +10,7 @@ const team = [
 
 export default function Team() {
   return (
-    <section className="py-32 px-6 bg-[#0a0a0f] relative">
+    <section className="py-32 px-6 bg-transparent relative">
       {/* Subtle top border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -30,8 +30,8 @@ export default function Team() {
               as="span"
               className="inline-block"
               delay={0.3}
-              gradientFrom="#14B8A6"
-              gradientTo="#2DD4BF"
+              gradientFrom="#22d3ee"
+              gradientTo="#67e8f9"
             >
               construyen
             </GradientReveal>
@@ -52,7 +52,7 @@ export default function Team() {
                       style={{ imageRendering: "pixelated" }}
                     />
                   </div>
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-teal-500/10 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-cyan-500/10 to-transparent pointer-events-none" />
                 </div>
                 <div className="mt-5 text-center">
                   <p className="text-[17px] text-white/80 font-medium group-hover:text-white transition-colors duration-300">

@@ -54,7 +54,7 @@ function ProcesoContent() {
     },
     {
       phase: "Post-lanzamiento",
-      duration: "30 días",
+      duration: "7 días",
       items: [
         "Soporte incluido para ajustes menores",
         "Monitoreo de performance",
@@ -75,21 +75,21 @@ function ProcesoContent() {
           <div
             className="absolute left-0 top-0 w-3 h-3 rounded-full -translate-x-1.5 border-2"
             style={{
-              borderColor: index === 0 ? "#14B8A6" : "#1E2A2A",
-              background: index === 0 ? "#14B8A6" : "#0D1414",
+              borderColor: index === 0 ? "#22d3ee" : "#1E2A2A",
+              background: index === 0 ? "#22d3ee" : "#111827",
             }}
           />
 
           <div className="flex flex-col md:flex-row md:items-start gap-4">
             <div className="md:w-48 flex-shrink-0">
               <h4 className="text-white/90 font-medium">{step.phase}</h4>
-              <p className="text-[12px] text-teal-500/70">{step.duration}</p>
+              <p className="text-[12px] text-cyan-500/70">{step.duration}</p>
             </div>
             <ul className="flex-1 space-y-2">
               {step.items.map((item, i) => (
                 <li key={i} className="text-sm text-white/50 flex items-start gap-2">
                   <svg
-                    className="w-4 h-4 text-teal-500/40 flex-shrink-0 mt-0.5"
+                    className="w-4 h-4 text-cyan-500/40 flex-shrink-0 mt-0.5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -115,7 +115,7 @@ function TecnologiasContent() {
       name: "Frontend",
       description: "Interfaces rápidas y modernas",
       techs: [
-        { name: "Next.js 14", desc: "Framework React con SSR y optimizaciones automáticas" },
+        { name: "Next.js", desc: "Framework React con SSR y optimizaciones automáticas" },
         { name: "React", desc: "Librería UI para interfaces interactivas" },
         { name: "Tailwind CSS", desc: "Estilos utilitarios para diseño consistente" },
         { name: "TypeScript", desc: "JavaScript tipado para código más robusto" },
@@ -158,14 +158,14 @@ function TecnologiasContent() {
       {categories.map((category) => (
         <div
           key={category.name}
-          className="bg-[#0D1414] border border-white/[0.06] rounded-xl p-5"
+          className="bg-[#111827] border border-white/[0.06] rounded-xl p-5"
         >
           <h4 className="text-white/90 font-medium mb-1">{category.name}</h4>
           <p className="text-[12px] text-white/40 mb-4">{category.description}</p>
           <ul className="space-y-3">
             {category.techs.map((tech) => (
               <li key={tech.name} className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-teal-500/50 mt-2 flex-shrink-0" />
+                <div className="w-1.5 h-1.5 rounded-full bg-cyan-500/50 mt-2 flex-shrink-0" />
                 <div>
                   <span className="text-sm text-white/70">{tech.name}</span>
                   <p className="text-[12px] text-white/35">{tech.desc}</p>
@@ -183,50 +183,46 @@ function TecnologiasContent() {
 function PreciosContent() {
   const tiers = [
     {
-      name: "Landing Page",
-      price: "desde S/. 1,500",
-      duration: "2-3 semanas",
-      description: "Página única de alto impacto para captar clientes",
+      name: "Express",
+      price: "desde S/. 49",
+      duration: "1 semana",
+      description: "Presencia básica para captar tus primeros clientes",
       features: [
-        "Diseño personalizado",
-        "Responsive (móvil, tablet, desktop)",
-        "Formulario de contacto",
-        "Integración WhatsApp",
-        "SEO básico",
-        "Hosting 1 año incluido",
-        "SSL gratuito",
+        "Landing page",
+        "Diseño responsive",
+        "WhatsApp directo",
+        "Redes sociales",
+        "Contacto básico",
       ],
       highlight: false,
     },
     {
-      name: "Web Profesional",
-      price: "desde S/. 3,500",
-      duration: "3-4 semanas",
-      description: "Sitio completo para negocios establecidos",
+      name: "Profesional",
+      price: "desde S/. 199",
+      duration: "2-3 semanas",
+      description: "Genera confianza y convierte visitas en clientes",
       features: [
-        "Todo lo de Landing Page",
-        "Hasta 5 páginas",
-        "Blog integrado",
-        "Google Analytics",
-        "Optimización de velocidad",
-        "Panel de administración",
-        "Soporte 30 días",
+        "Todo de Express",
+        "Google Maps integrado",
+        "SEO local optimizado",
+        "Testimonios reales",
+        "CTAs estratégicos",
+        "Soporte 7 días postentrega",
       ],
       highlight: true,
     },
     {
-      name: "E-commerce / Sistema",
-      price: "desde S/. 6,000",
-      duration: "4-6 semanas",
-      description: "Tienda online o sistema a medida",
+      name: "Empresarial",
+      price: "desde S/. 399",
+      duration: "3-4 semanas",
+      description: "Escala y automatiza tu negocio",
       features: [
-        "Todo lo de Web Profesional",
-        "Catálogo de productos",
-        "Carrito de compras",
-        "Pasarela de pagos",
-        "Gestión de inventario",
-        "Notificaciones email",
-        "Dashboard de métricas",
+        "Todo de Profesional",
+        "Página por servicio",
+        "Blog integrado",
+        "Reservas online",
+        "SEO + Analytics",
+        "Soporte 7 días postentrega",
       ],
       highlight: false,
     },
@@ -236,7 +232,7 @@ function PreciosContent() {
     <div className="space-y-6">
       <p className="text-sm text-white/50 mb-6">
         Precios referenciales en soles peruanos. Cada proyecto se cotiza según sus necesidades específicas.
-        <span className="text-teal-500/70"> El diagnóstico es gratuito y sin compromiso.</span>
+        <span className="text-cyan-500/70"> El diagnóstico es gratuito y sin compromiso.</span>
       </p>
 
       <div className="grid md:grid-cols-3 gap-4">
@@ -245,12 +241,12 @@ function PreciosContent() {
             key={tier.name}
             className={`rounded-xl p-5 border transition-all duration-300 ${
               tier.highlight
-                ? "bg-gradient-to-b from-teal-500/[0.08] to-transparent border-teal-500/20"
-                : "bg-[#0D1414] border-white/[0.06]"
+                ? "bg-gradient-to-b from-cyan-500/[0.08] to-transparent border-cyan-500/20"
+                : "bg-[#111827] border-white/[0.06]"
             }`}
           >
             {tier.highlight && (
-              <span className="inline-block text-[10px] text-teal-400 tracking-wider uppercase mb-3">
+              <span className="inline-block text-[10px] text-cyan-400 tracking-wider uppercase mb-3">
                 Más popular
               </span>
             )}
@@ -266,7 +262,7 @@ function PreciosContent() {
                 <li key={i} className="text-[13px] text-white/50 flex items-start gap-2">
                   <svg
                     className={`w-4 h-4 flex-shrink-0 mt-0.5 ${
-                      tier.highlight ? "text-teal-500/60" : "text-white/20"
+                      tier.highlight ? "text-cyan-500/60" : "text-white/20"
                     }`}
                     fill="none"
                     viewBox="0 0 24 24"
@@ -283,7 +279,7 @@ function PreciosContent() {
         ))}
       </div>
 
-      <div className="bg-[#0D1414] border border-white/[0.06] rounded-xl p-5 mt-6">
+      <div className="bg-[#111827] border border-white/[0.06] rounded-xl p-5 mt-6">
         <h4 className="text-white/70 font-medium mb-3">Mantenimiento mensual (opcional)</h4>
         <div className="grid md:grid-cols-3 gap-4 text-sm">
           <div>
@@ -326,9 +322,9 @@ function GarantiasContent() {
           <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
         </svg>
       ),
-      title: "30 días de soporte",
+      title: "7 días de soporte postentrega",
       description:
-        "Después del lanzamiento, tienes 30 días de soporte incluido para ajustes menores y resolución de dudas.",
+        "Después del lanzamiento, tienes 7 días de soporte incluido para ajustes menores y resolución de dudas.",
     },
     {
       icon: (
@@ -338,7 +334,7 @@ function GarantiasContent() {
       ),
       title: "Cumplimiento de plazos",
       description:
-        "Nos comprometemos con fechas concretas. Si nos retrasamos por nuestra responsabilidad, el soporte se extiende.",
+        "Nos comprometemos con fechas concretas. Si nos retrasamos por nuestra responsabilidad, compensamos el tiempo.",
     },
     {
       icon: (
@@ -377,9 +373,9 @@ function GarantiasContent() {
       {guarantees.map((guarantee) => (
         <div
           key={guarantee.title}
-          className="bg-[#0D1414] border border-white/[0.06] rounded-xl p-5 flex gap-4"
+          className="bg-[#111827] border border-white/[0.06] rounded-xl p-5 flex gap-4"
         >
-          <div className="text-teal-500/60 flex-shrink-0">{guarantee.icon}</div>
+          <div className="text-cyan-500/60 flex-shrink-0">{guarantee.icon}</div>
           <div>
             <h4 className="text-white/90 font-medium mb-1">{guarantee.title}</h4>
             <p className="text-sm text-white/45 leading-relaxed">{guarantee.description}</p>
@@ -405,7 +401,7 @@ export default function Documentation() {
   };
 
   return (
-    <section id="documentacion" className="py-16 lg:py-20 px-6 bg-[#050A0A] relative">
+    <section id="documentacion" className="py-16 lg:py-20 px-6 bg-transparent relative">
       {/* Subtle top border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -425,8 +421,8 @@ export default function Documentation() {
               as="span"
               className="inline-block"
               delay={0.3}
-              gradientFrom="#14B8A6"
-              gradientTo="#2DD4BF"
+              gradientFrom="#22d3ee"
+              gradientTo="#67e8f9"
             >
               necesitas saber
             </GradientReveal>
@@ -442,7 +438,7 @@ export default function Documentation() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-5 py-2.5 text-sm font-medium rounded-full transition-all duration-300 ${
                   activeTab === tab.id
-                    ? "bg-teal-500/10 text-teal-400 border border-teal-500/20"
+                    ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
                     : "text-white/50 hover:text-white/70 border border-transparent hover:border-white/[0.08]"
                 }`}
               >
@@ -465,7 +461,7 @@ export default function Documentation() {
             </p>
             <a
               href="#diagnostico"
-              className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-[#050A0A] font-semibold text-sm rounded-full transition-all duration-500 hover:shadow-[0_0_30px_rgba(245,158,11,0.25)] hover:scale-105"
+              className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-[#0a0e1a] font-semibold text-sm rounded-full transition-all duration-500 hover:shadow-[0_0_30px_rgba(245,158,11,0.25)] hover:scale-105"
             >
               <span>Agendar diagnóstico gratuito</span>
               <svg

@@ -18,7 +18,7 @@ const faqs = [
   {
     question: "¿Qué incluye el soporte post-lanzamiento?",
     answer:
-      "Ajustes menores, resolución de dudas y acompañamiento inicial. Para mantenimiento continuo, ofrecemos planes mensuales.",
+      "Incluye 7 días de soporte postentrega para ajustes menores, resolución de dudas y corrección de bugs. Para mantenimiento continuo, ofrecemos planes mensuales.",
   },
   {
     question: "¿Puedo ver avances durante el desarrollo?",
@@ -96,7 +96,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-16 lg:py-20 px-6 bg-[#050A0A] relative">
+    <section id="faq" className="py-16 lg:py-20 px-6 bg-transparent relative">
       {/* Subtle border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -116,8 +116,8 @@ export default function FAQ() {
               as="span"
               className="inline-block"
               delay={0.3}
-              gradientFrom="#14B8A6"
-              gradientTo="#2DD4BF"
+              gradientFrom="#22d3ee"
+              gradientTo="#67e8f9"
             >
               resueltas
             </GradientReveal>
@@ -141,7 +141,7 @@ export default function FAQ() {
         <div className="mt-16 text-center">
           <p className="text-white/50 text-[15px] mb-4">¿Otra pregunta?</p>
           <a
-            href="https://wa.me/51999999999"
+            href="https://wa.me/51998162677"
             target="_blank"
             rel="noopener noreferrer"
             data-cursor="Chat"

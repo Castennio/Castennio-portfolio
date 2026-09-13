@@ -63,7 +63,7 @@ function Globe() {
   const pointsMat = useMemo(
     () =>
       new THREE.PointsMaterial({
-        color: new THREE.Color("#2DD4BF"),
+        color: new THREE.Color("#67e8f9"),
         size: 0.06,
         transparent: true,
         opacity: 0.9,
@@ -84,13 +84,13 @@ function Globe() {
       {/* Wireframe sphere */}
       <lineSegments>
         <edgesGeometry args={[wireframeGeo]} />
-        <lineBasicMaterial color="#14B8A6" transparent opacity={0.08} />
+        <lineBasicMaterial color="#22d3ee" transparent opacity={0.08} />
       </lineSegments>
 
       {/* Solid dark sphere inside */}
       <mesh>
         <sphereGeometry args={[1.48, 36, 24]} />
-        <meshBasicMaterial color="#050A0A" transparent opacity={0.95} />
+        <meshBasicMaterial color="#0a0e1a" transparent opacity={0.95} />
       </mesh>
 
       {/* City points */}
@@ -99,7 +99,7 @@ function Globe() {
       {/* Glow */}
       <mesh ref={glowRef} scale={1.65}>
         <sphereGeometry args={[1, 32, 32]} />
-        <meshBasicMaterial color="#14B8A6" transparent opacity={0.03} side={THREE.BackSide} />
+        <meshBasicMaterial color="#22d3ee" transparent opacity={0.03} side={THREE.BackSide} />
       </mesh>
     </group>
   );
@@ -127,7 +127,7 @@ export default function GlobalReach() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <section id="alcance" className="py-16 lg:py-24 px-6 bg-[#050A0A] relative overflow-hidden">
+    <section id="alcance" className="py-16 lg:py-24 px-6 bg-transparent relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="max-w-6xl mx-auto">
@@ -147,8 +147,8 @@ export default function GlobalReach() {
                 as="span"
                 className="block"
                 delay={0.3}
-                gradientFrom="#14B8A6"
-                gradientTo="#2DD4BF"
+                gradientFrom="#22d3ee"
+                gradientTo="#67e8f9"
               >
                 en todo el mundo
               </GradientReveal>
@@ -165,8 +165,8 @@ export default function GlobalReach() {
                 { value: "100%", label: "Responsive & rápido" },
                 { value: "SEO", label: "Optimizado para Google" },
               ].map((stat) => (
-                <div key={stat.label} className="border border-white/[0.06] rounded-xl p-4 bg-[#0D1414]">
-                  <div className="text-2xl font-semibold text-teal-400 mb-1">
+                <div key={stat.label} className="border border-white/[0.06] rounded-xl p-4 bg-[#111827]">
+                  <div className="text-2xl font-semibold text-cyan-400 mb-1">
                     {stat.value}
                   </div>
                   <div className="text-[13px] text-white/50">{stat.label}</div>
@@ -188,7 +188,7 @@ export default function GlobalReach() {
             )}
             {/* Radial glow behind globe */}
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-teal-500/[0.06] rounded-full blur-[80px]" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-cyan-500/[0.06] rounded-full blur-[80px]" />
             </div>
           </div>
         </div>

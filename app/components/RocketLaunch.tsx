@@ -33,7 +33,7 @@ function CyclingBusiness() {
 
   return (
     <span
-      className="inline-block transition-all duration-300 bg-gradient-to-r from-[#14B8A6] to-[#2DD4BF] bg-clip-text text-transparent"
+      className="inline-block transition-all duration-300 bg-gradient-to-r from-[#22d3ee] to-[#67e8f9] bg-clip-text text-transparent"
       style={{
         opacity: fade ? 1 : 0,
         transform: fade ? "translateY(0)" : "translateY(8px)",
@@ -77,7 +77,7 @@ const ScreenFragmentShader = `
 
     float colorChoice = hash(lineIndex * 4.4);
     vec3 lineColor = mix(
-      vec3(0.08, 0.72, 0.65),
+      vec3(0.13, 0.83, 0.93),
       vec3(0.55, 0.65, 0.63),
       step(0.4, colorChoice)
     );
@@ -89,7 +89,7 @@ const ScreenFragmentShader = `
                    * step(abs(uv.x - 0.45), 0.004) * cursorBlink;
 
     vec3 col = bg + lineColor * isLine * isInLine * 0.8;
-    col += vec3(0.08, 0.72, 0.65) * isCursor;
+    col += vec3(0.13, 0.83, 0.93) * isCursor;
     col *= 0.95 + 0.05 * sin(uv.y * 400.0);
 
     float vig = 1.0 - length((uv - 0.5) * 1.2) * 0.3;
@@ -125,14 +125,14 @@ function DeskScene() {
       {/* Desk surface */}
       <mesh position={[0, -0.05, 0]}>
         <boxGeometry args={[3.5, 0.08, 2]} />
-        <meshStandardMaterial color="#1a1f1f" metalness={0.3} roughness={0.7} />
+        <meshStandardMaterial color="#1a1f2e" metalness={0.3} roughness={0.7} />
       </mesh>
 
       {/* Desk legs */}
       {[[-1.6, -0.6, -0.85], [1.6, -0.6, -0.85], [-1.6, -0.6, 0.85], [1.6, -0.6, 0.85]].map((pos, i) => (
         <mesh key={i} position={pos as [number, number, number]}>
           <boxGeometry args={[0.06, 1.1, 0.06]} />
-          <meshStandardMaterial color="#0f1414" metalness={0.4} roughness={0.5} />
+          <meshStandardMaterial color="#0f1424" metalness={0.4} roughness={0.5} />
         </mesh>
       ))}
 
@@ -149,7 +149,7 @@ function DeskScene() {
       {/* Monitor frame */}
       <mesh position={[0, 0.85, -0.55]}>
         <boxGeometry args={[2.2, 1.3, 0.06]} />
-        <meshStandardMaterial color="#0a0e0e" metalness={0.7} roughness={0.2} />
+        <meshStandardMaterial color="#0a0e1a" metalness={0.7} roughness={0.2} />
       </mesh>
 
       {/* Monitor screen with code */}
@@ -158,12 +158,12 @@ function DeskScene() {
       </mesh>
 
       {/* Screen glow */}
-      <pointLight position={[0, 0.85, 0.2]} color="#14B8A6" intensity={0.8} distance={3} />
+      <pointLight position={[0, 0.85, 0.2]} color="#22d3ee" intensity={0.8} distance={3} />
 
       {/* Keyboard */}
       <mesh position={[0, 0.02, 0.2]}>
         <boxGeometry args={[1.2, 0.04, 0.45]} />
-        <meshStandardMaterial color="#151a1a" metalness={0.5} roughness={0.4} />
+        <meshStandardMaterial color="#151a2a" metalness={0.5} roughness={0.4} />
       </mesh>
       {[0, 0.08, 0.16, -0.08].map((z, row) =>
         Array.from({ length: 10 + (row === 3 ? -2 : 0) }, (_, i) => {
@@ -171,7 +171,7 @@ function DeskScene() {
           return (
             <mesh key={`${row}-${i}`} position={[x, 0.05, 0.08 + z]}>
               <boxGeometry args={[0.07, 0.02, 0.06]} />
-              <meshStandardMaterial color="#1e2828" metalness={0.3} roughness={0.5} />
+              <meshStandardMaterial color="#1e2838" metalness={0.3} roughness={0.5} />
             </mesh>
           );
         })
@@ -180,18 +180,18 @@ function DeskScene() {
       {/* Mouse */}
       <mesh position={[0.9, 0.02, 0.25]}>
         <boxGeometry args={[0.15, 0.04, 0.25]} />
-        <meshStandardMaterial color="#151a1a" metalness={0.5} roughness={0.4} />
+        <meshStandardMaterial color="#151a2a" metalness={0.5} roughness={0.4} />
       </mesh>
 
       {/* Coffee cup */}
       <group position={[-1.2, 0.2, 0.3]}>
         <mesh>
           <cylinderGeometry args={[0.1, 0.08, 0.22, 16]} />
-          <meshStandardMaterial color="#1a2020" metalness={0.3} roughness={0.6} />
+          <meshStandardMaterial color="#1a2035" metalness={0.3} roughness={0.6} />
         </mesh>
         <mesh position={[0.12, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
           <torusGeometry args={[0.06, 0.015, 8, 16, Math.PI]} />
-          <meshStandardMaterial color="#1a2020" metalness={0.3} roughness={0.6} />
+          <meshStandardMaterial color="#1a2035" metalness={0.3} roughness={0.6} />
         </mesh>
         <pointLight position={[0, 0.2, 0]} color="#ffffff" intensity={0.15} distance={0.5} />
       </group>
@@ -205,15 +205,15 @@ function DeskScene() {
         {[0, 1.2, 2.4, 3.6, 4.8].map((angle, i) => (
           <mesh key={i} position={[Math.cos(angle) * 0.06, 0.15 + i * 0.04, Math.sin(angle) * 0.06]} rotation={[0.3, angle, 0.2]}>
             <sphereGeometry args={[0.05, 8, 6]} />
-            <meshStandardMaterial color="#14B8A6" transparent opacity={0.5 + i * 0.1} />
+            <meshStandardMaterial color="#22d3ee" transparent opacity={0.5 + i * 0.1} />
           </mesh>
         ))}
       </group>
 
-      {/* Teal accent strip on monitor */}
+      {/* Cyan accent strip on monitor */}
       <mesh position={[0, 0.21, -0.52]}>
         <boxGeometry args={[2.2, 0.015, 0.065]} />
-        <meshBasicMaterial color="#14B8A6" transparent opacity={0.6} />
+        <meshBasicMaterial color="#22d3ee" transparent opacity={0.6} />
       </mesh>
     </group>
   );
@@ -251,7 +251,7 @@ function Scene() {
     <>
       <ambientLight intensity={0.3} />
       <directionalLight position={[3, 5, 4]} intensity={0.7} />
-      <directionalLight position={[-2, 3, 2]} intensity={0.3} color="#14B8A6" />
+      <directionalLight position={[-2, 3, 2]} intensity={0.3} color="#22d3ee" />
       <Stars />
       <DeskScene />
     </>
@@ -294,7 +294,7 @@ export default function RocketLaunch() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#050A0A]"
+      className="relative bg-transparent"
       style={{ height: "300vh" }}
     >
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -331,9 +331,9 @@ export default function RocketLaunch() {
                     <div
                       className="mt-1.5 w-3 h-3 rounded-full border-2 flex-shrink-0 transition-all duration-500"
                       style={{
-                        borderColor: active ? "#14B8A6" : "#1E2A2A",
-                        background: isCurrent ? "#14B8A6" : "transparent",
-                        boxShadow: isCurrent ? "0 0 12px rgba(20,184,166,0.5)" : "none",
+                        borderColor: active ? "#22d3ee" : "#1e293b",
+                        background: isCurrent ? "#22d3ee" : "transparent",
+                        boxShadow: isCurrent ? "0 0 12px rgba(34,211,238,0.5)" : "none",
                       }}
                     />
                     <div>
@@ -349,7 +349,7 @@ export default function RocketLaunch() {
             <div className="mt-12 w-48">
               <div className="h-px bg-white/10 relative">
                 <div
-                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-teal-500 to-teal-400 transition-all duration-100"
+                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-cyan-500 to-cyan-400 transition-all duration-100"
                   style={{ width: `${progress * 100}%` }}
                 />
               </div>
@@ -370,7 +370,7 @@ export default function RocketLaunch() {
             <div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full blur-[100px] pointer-events-none"
               style={{
-                background: `radial-gradient(circle, rgba(20,184,166,${0.03 + progress * 0.06}), transparent 70%)`,
+                background: `radial-gradient(circle, rgba(34,211,238,${0.03 + progress * 0.06}), transparent 70%)`,
               }}
             />
           </div>

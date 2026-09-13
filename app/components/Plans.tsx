@@ -163,27 +163,27 @@ function ProfesionalCard({ plan }: { plan: typeof plans[0] }) {
       <div
         className="absolute -inset-[2px] rounded-3xl opacity-100"
         style={{
-          background: "linear-gradient(135deg, #7C3AED, #EC4899, #7C3AED, #3B82F6)",
+          background: "linear-gradient(135deg, #0891b2, #22d3ee, #0891b2, #22d3ee)",
           backgroundSize: "300% 300%",
           animation: "gradientFlow 6s ease infinite",
         }}
       />
 
       {/* Outer glow */}
-      <div className="absolute -inset-4 bg-[#7C3AED]/20 rounded-[2rem] blur-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
+      <div className="absolute -inset-4 bg-[#0891b2]/20 rounded-[2rem] blur-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
 
-      <div className="relative flex-1 flex flex-col p-7 lg:p-9 rounded-3xl bg-[#0c0c12]">
+      <div className="relative flex-1 flex flex-col p-7 lg:p-9 rounded-3xl bg-[#111827]">
         {/* Dynamic glow */}
         <div
           className="absolute inset-0 rounded-3xl opacity-30 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none"
           style={{
-            background: `radial-gradient(circle at ${glowPosition.x}% ${glowPosition.y}%, rgba(124, 58, 237, 0.4) 0%, transparent 60%)`,
+            background: `radial-gradient(circle at ${glowPosition.x}% ${glowPosition.y}%, rgba(34, 211, 238, 0.4) 0%, transparent 60%)`,
           }}
         />
 
         {/* Badge */}
         <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-          <span className="inline-flex items-center gap-2 px-5 py-2 text-xs font-semibold tracking-wider uppercase rounded-full bg-gradient-to-r from-[#7C3AED] via-[#EC4899] to-[#7C3AED] text-white shadow-lg shadow-[#7C3AED]/40"
+          <span className="inline-flex items-center gap-2 px-5 py-2 text-xs font-semibold tracking-wider uppercase rounded-full bg-gradient-to-r from-[#0891b2] via-[#22d3ee] to-[#0891b2] text-white shadow-lg shadow-[#0891b2]/40"
             style={{ backgroundSize: "200% 100%", animation: "gradientFlow 3s ease infinite" }}>
             <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
             {plan.badge}
@@ -192,7 +192,7 @@ function ProfesionalCard({ plan }: { plan: typeof plans[0] }) {
 
         {/* Header */}
         <div className="mt-4 mb-6">
-          <p className="text-xs uppercase tracking-[0.15em] text-[#A78BFA] mb-2 font-medium">{plan.idealFor}</p>
+          <p className="text-xs uppercase tracking-[0.15em] text-[#67e8f9] mb-2 font-medium">{plan.idealFor}</p>
           <h3 className="text-2xl font-semibold text-white tracking-tight">
             {plan.name}
           </h3>
@@ -217,7 +217,7 @@ function ProfesionalCard({ plan }: { plan: typeof plans[0] }) {
         <ul className="space-y-3 mb-8 flex-1">
           {plan.features.map((feature, idx) => (
             <li key={idx} className="flex items-start gap-3 text-sm text-white/80">
-              <div className="w-5 h-5 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#EC4899] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="w-5 h-5 rounded-full bg-gradient-to-br from-[#0891b2] to-[#22d3ee] flex items-center justify-center flex-shrink-0 mt-0.5">
                 <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
@@ -232,7 +232,7 @@ function ProfesionalCard({ plan }: { plan: typeof plans[0] }) {
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl font-semibold text-sm bg-gradient-to-r from-[#7C3AED] via-[#A855F7] to-[#EC4899] text-white shadow-xl shadow-[#7C3AED]/30 hover:shadow-[#7C3AED]/50 hover:scale-[1.02] transition-all duration-300"
+          className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl font-semibold text-sm bg-gradient-to-r from-[#0891b2] via-[#22d3ee] to-[#22d3ee] text-white shadow-xl shadow-[#0891b2]/30 hover:shadow-[#0891b2]/50 hover:scale-[1.02] transition-all duration-300"
           style={{ backgroundSize: "200% 100%", animation: "gradientFlow 4s ease infinite" }}
         >
           Empezar ahora
@@ -255,15 +255,15 @@ function EmpresarialCard({ plan }: { plan: typeof plans[0] }) {
   return (
     <div className="group relative flex flex-col h-full">
       {/* Geometric corner accents */}
-      <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-[#3B82F6]/30 rounded-tl-2xl pointer-events-none group-hover:border-[#3B82F6]/50 transition-colors" />
-      <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-[#3B82F6]/30 rounded-br-2xl pointer-events-none group-hover:border-[#3B82F6]/50 transition-colors" />
+      <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-[#22d3ee]/30 rounded-tl-2xl pointer-events-none group-hover:border-[#22d3ee]/50 transition-colors" />
+      <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-[#22d3ee]/30 rounded-br-2xl pointer-events-none group-hover:border-[#22d3ee]/50 transition-colors" />
 
-      <div className="relative flex-1 flex flex-col p-6 lg:p-7 rounded-2xl bg-[#0a0a10]/80 border border-[#3B82F6]/10 hover:border-[#3B82F6]/25 transition-all duration-500">
+      <div className="relative flex-1 flex flex-col p-6 lg:p-7 rounded-2xl bg-transparent/80 border border-[#22d3ee]/10 hover:border-[#22d3ee]/25 transition-all duration-500">
         {/* Grid pattern overlay */}
         <div
           className="absolute inset-0 rounded-2xl opacity-[0.03] pointer-events-none"
           style={{
-            backgroundImage: "linear-gradient(#3B82F6 1px, transparent 1px), linear-gradient(90deg, #3B82F6 1px, transparent 1px)",
+            backgroundImage: "linear-gradient(#22d3ee 1px, transparent 1px), linear-gradient(90deg, #22d3ee 1px, transparent 1px)",
             backgroundSize: "20px 20px",
           }}
         />
@@ -271,8 +271,8 @@ function EmpresarialCard({ plan }: { plan: typeof plans[0] }) {
         {/* Header - Structured */}
         <div className="mb-6 relative">
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-1.5 h-1.5 bg-[#3B82F6]" />
-            <p className="text-[10px] uppercase tracking-[0.2em] text-[#3B82F6]/70 font-medium">Escalable</p>
+            <div className="w-1.5 h-1.5 bg-[#22d3ee]" />
+            <p className="text-[10px] uppercase tracking-[0.2em] text-[#22d3ee]/70 font-medium">Escalable</p>
           </div>
           <h3 className="text-xl font-medium text-white/90 tracking-tight">
             {plan.name}
@@ -281,21 +281,21 @@ function EmpresarialCard({ plan }: { plan: typeof plans[0] }) {
         </div>
 
         {/* Price - Technical */}
-        <div className="mb-5 p-4 rounded-lg bg-[#3B82F6]/[0.05] border border-[#3B82F6]/10">
+        <div className="mb-5 p-4 rounded-lg bg-[#22d3ee]/[0.05] border border-[#22d3ee]/10">
           <div className="flex items-baseline gap-1.5">
-            <span className="text-xs text-[#3B82F6]/60 font-mono">S/.</span>
+            <span className="text-xs text-[#22d3ee]/60 font-mono">S/.</span>
             <span className="text-3xl font-semibold text-white/90 font-mono tracking-tight">{plan.price}</span>
             <span className="text-xs text-white/30 font-mono">+</span>
           </div>
-          <p className="text-[11px] text-[#3B82F6]/50 mt-1.5 font-mono">{plan.outcome}</p>
+          <p className="text-[11px] text-[#22d3ee]/50 mt-1.5 font-mono">{plan.outcome}</p>
         </div>
 
         {/* Features - Technical list */}
         <ul className="space-y-2 mb-8 flex-1">
           {plan.features.map((feature, idx) => (
             <li key={idx} className="flex items-center gap-2.5 text-[13px] text-white/60">
-              <div className="w-4 h-4 rounded border border-[#3B82F6]/30 flex items-center justify-center">
-                <svg className="w-2.5 h-2.5 text-[#3B82F6]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <div className="w-4 h-4 rounded border border-[#22d3ee]/30 flex items-center justify-center">
+                <svg className="w-2.5 h-2.5 text-[#22d3ee]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
@@ -309,7 +309,7 @@ function EmpresarialCard({ plan }: { plan: typeof plans[0] }) {
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-lg bg-[#3B82F6]/10 border border-[#3B82F6]/20 text-[#3B82F6] text-sm font-medium hover:bg-[#3B82F6]/20 hover:border-[#3B82F6]/40 transition-all duration-300"
+          className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-lg bg-[#22d3ee]/10 border border-[#22d3ee]/20 text-[#22d3ee] text-sm font-medium hover:bg-[#22d3ee]/20 hover:border-[#22d3ee]/40 transition-all duration-300"
         >
           Solicitar propuesta
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -418,10 +418,10 @@ function PlanCard({ plan }: { plan: typeof plans[0] }) {
 
 export default function Plans() {
   return (
-    <section id="planes" className="py-24 lg:py-32 px-4 sm:px-6 bg-[#0a0a0f] relative overflow-hidden">
+    <section id="planes" className="py-24 lg:py-32 px-4 sm:px-6 bg-transparent relative overflow-hidden">
       {/* Ambient background */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#7C3AED]/[0.04] rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#3B82F6]/[0.03] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#0891b2]/[0.04] rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#22d3ee]/[0.03] rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
       <div className="max-w-7xl mx-auto relative">
@@ -440,8 +440,8 @@ export default function Plans() {
               as="span"
               className="inline-block font-normal"
               delay={0.3}
-              gradientFrom="#7C3AED"
-              gradientTo="#EC4899"
+              gradientFrom="#0891b2"
+              gradientTo="#22d3ee"
             >
               empezar
             </GradientReveal>
@@ -472,7 +472,7 @@ export default function Plans() {
               <span className="w-1 h-1 rounded-full bg-white/10" />
               <span>Sin sorpresas</span>
               <span className="w-1 h-1 rounded-full bg-white/10" />
-              <span>Soporte 30 días</span>
+              <span>Soporte 7 días postentrega</span>
             </div>
 
             {/* CTA */}

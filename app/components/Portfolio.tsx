@@ -13,7 +13,7 @@ const projects = [
     image: "/images/portfolio/techstart.jpg",
     metrics: { label: "+120%", description: "conversiones" },
     tags: ["Next.js", "Tailwind", "Vercel"],
-    color: "#14B8A6",
+    color: "#22d3ee",
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const projects = [
     image: "/images/portfolio/ecommerce.jpg",
     metrics: { label: "3x", description: "ventas mensuales" },
     tags: ["Shopify", "Custom Theme", "SEO"],
-    color: "#2DD4BF",
+    color: "#67e8f9",
   },
   {
     id: 4,
@@ -43,7 +43,7 @@ const projects = [
     image: "/images/portfolio/contable.jpg",
     metrics: { label: "+200%", description: "tráfico orgánico" },
     tags: ["WordPress", "SEO", "Blog"],
-    color: "#14B8A6",
+    color: "#22d3ee",
   },
 ];
 
@@ -53,12 +53,12 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
   return (
     <FadeIn delay={index * 0.1}>
       <div
-        className="group relative rounded-2xl overflow-hidden bg-[#0D1414] border border-white/[0.06] hover:border-teal-500/20 transition-all duration-500"
+        className="group relative rounded-2xl overflow-hidden bg-[#111827] border border-white/[0.06] hover:border-cyan-500/20 transition-all duration-500"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         {/* Image container */}
-        <div className="relative aspect-[4/3] overflow-hidden bg-[#152020]">
+        <div className="relative aspect-[4/3] overflow-hidden bg-[#1a2035]">
           {/* Placeholder gradient - replace with actual images */}
           <div
             className="absolute inset-0 opacity-20"
@@ -71,7 +71,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-[80%] h-[70%] rounded-lg bg-[#1E2A2A] border border-white/[0.08] shadow-2xl overflow-hidden">
               {/* Browser chrome mockup */}
-              <div className="h-6 bg-[#152020] border-b border-white/[0.06] flex items-center px-3 gap-1.5">
+              <div className="h-6 bg-[#1a2035] border-b border-white/[0.06] flex items-center px-3 gap-1.5">
                 <div className="w-2 h-2 rounded-full bg-white/10" />
                 <div className="w-2 h-2 rounded-full bg-white/10" />
                 <div className="w-2 h-2 rounded-full bg-white/10" />
@@ -87,7 +87,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
           {/* Hover overlay with metrics */}
           <div
-            className={`absolute inset-0 bg-gradient-to-t from-[#050A0A] via-[#050A0A]/80 to-transparent flex items-end justify-center pb-8 transition-opacity duration-300 ${
+            className={`absolute inset-0 bg-gradient-to-t from-[#0a0e1a] via-[#0a0e1a]/80 to-transparent flex items-end justify-center pb-8 transition-opacity duration-300 ${
               isHovered ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -121,13 +121,13 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             <div
               className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${
                 isHovered
-                  ? "border-teal-500/30 bg-teal-500/10"
+                  ? "border-cyan-500/30 bg-cyan-500/10"
                   : "border-white/[0.08] bg-transparent"
               }`}
             >
               <svg
                 className={`w-4 h-4 transition-all duration-300 ${
-                  isHovered ? "text-teal-400 translate-x-0.5 -translate-y-0.5" : "text-white/30"
+                  isHovered ? "text-cyan-400 translate-x-0.5 -translate-y-0.5" : "text-white/30"
                 }`}
                 fill="none"
                 viewBox="0 0 24 24"
@@ -161,7 +161,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
 export default function Portfolio() {
   return (
-    <section id="portafolio" className="py-16 lg:py-20 px-6 bg-[#050A0A] relative">
+    <section id="portafolio" className="py-16 lg:py-20 px-6 bg-transparent relative">
       {/* Subtle top border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -182,8 +182,8 @@ export default function Portfolio() {
                 as="span"
                 className="inline-block"
                 delay={0.3}
-                gradientFrom="#14B8A6"
-                gradientTo="#2DD4BF"
+                gradientFrom="#22d3ee"
+                gradientTo="#67e8f9"
               >
                 que hablan
               </GradientReveal>
@@ -225,7 +225,7 @@ export default function Portfolio() {
             </p>
             <a
               href="#diagnostico"
-              className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-[#050A0A] font-semibold text-sm rounded-full transition-all duration-500 hover:shadow-[0_0_30px_rgba(245,158,11,0.25)] hover:scale-105"
+              className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-[#0a0e1a] font-semibold text-sm rounded-full transition-all duration-500 hover:shadow-[0_0_30px_rgba(245,158,11,0.25)] hover:scale-105"
             >
               <span>Empezar mi proyecto</span>
               <svg

@@ -101,7 +101,7 @@ export default function WhatsAppButton() {
         <div
           className="relative px-4 py-2.5 rounded-2xl rounded-br-sm max-w-[200px]"
           style={{
-            backgroundColor: isDark ? "#ffffff" : "#0a0a0f",
+            backgroundColor: isDark ? "#ffffff" : "#0a0e1a",
             boxShadow: isDark
               ? "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
               : "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
@@ -122,7 +122,7 @@ export default function WhatsAppButton() {
           {/* Arrow */}
           <div
             className="absolute -bottom-2 right-4 w-4 h-4 rotate-45"
-            style={{ backgroundColor: isDark ? "#ffffff" : "#0a0a0f" }}
+            style={{ backgroundColor: isDark ? "#ffffff" : "#0a0e1a" }}
           />
         </div>
       </div>

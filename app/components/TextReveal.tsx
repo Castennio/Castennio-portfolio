@@ -98,8 +98,8 @@ export function GradientReveal({
   children,
   className = "",
   as: Component = "div",
-  gradientFrom = "#3b82f6",
-  gradientTo = "#8b5cf6",
+  gradientFrom = "#0891b2",
+  gradientTo = "#22d3ee",
 }: GradientRevealProps) {
   return (
     <div className={className}>

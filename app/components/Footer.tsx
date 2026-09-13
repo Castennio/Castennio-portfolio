@@ -58,7 +58,7 @@ export default function Footer() {
   return (
     <footer ref={footerRef} className="relative bg-[#030606] overflow-hidden">
       {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(20,184,166,0.05)_0%,_transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(34,211,238,0.05)_0%,_transparent_50%)]" />
 
       {/* Top border gradient */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -75,7 +75,7 @@ export default function Footer() {
                 </p>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-[-0.02em] leading-[1.1]">
                   <span className="text-white/90">¿Listo para </span>
-                  <span className="bg-gradient-to-r from-teal-400 to-teal-300 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent">
                     transformar
                   </span>
                   <br />

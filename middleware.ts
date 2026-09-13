@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 const AUTH_COOKIE_NAME = 'castennio_session';
-const PROTECTED_ROUTES = ['/calculadora'];
+const PROTECTED_ROUTES = ['/calculadora', '/contrato'];
 const AUTH_ROUTES = ['/login'];
 
 function isSessionValid(token: string): boolean {
@@ -40,5 +40,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/calculadora/:path*', '/login'],
+  matcher: ['/calculadora/:path*', '/contrato/:path*', '/login'],
 };

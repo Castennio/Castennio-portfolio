@@ -37,7 +37,7 @@ const teamMembers = [
     name: "Daniel",
     role: "Desarrollo Frontend",
     image: "/images/pixel-art/dani.png",
-    bio: "Desarrollador frontend con 2 años de experiencia creando interfaces modernas y responsivas. Apasionado por las animaciones y la experiencia de usuario.",
+    bio: "Desarrollador frontend creando interfaces modernas y responsivas. Apasionado por las animaciones y la experiencia de usuario.",
     projects: [
       {
         title: "INK BUSINESS - Finanzas personales con escritura natural",
@@ -117,7 +117,7 @@ export default function Experience() {
   };
 
   return (
-    <section id="proyectos" className="py-32 px-6 bg-[#0a0a0f] relative">
+    <section id="proyectos" className="py-32 px-6 bg-transparent relative">
       {/* Subtle top border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -137,8 +137,8 @@ export default function Experience() {
               as="span"
               className="inline-block"
               delay={0.3}
-              gradientFrom="#14B8A6"
-              gradientTo="#2DD4BF"
+              gradientFrom="#22d3ee"
+              gradientTo="#67e8f9"
             >
               experiencias
             </GradientReveal>
@@ -156,7 +156,7 @@ export default function Experience() {
             <button
               onClick={closeMemberView}
               className={`px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-300 ${!selectedMember
-                  ? "bg-gradient-to-r from-teal-500 to-teal-400 text-white"
+                  ? "bg-gradient-to-r from-cyan-500 to-cyan-400 text-white"
                   : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white/80 border border-white/10"
                 }`}
             >
@@ -167,7 +167,7 @@ export default function Experience() {
                 key={member.id}
                 onClick={() => setSelectedMember(member.id)}
                 className={`px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-300 flex items-center gap-2 ${selectedMember === member.id
-                    ? "bg-gradient-to-r from-teal-500 to-teal-400 text-white"
+                    ? "bg-gradient-to-r from-cyan-500 to-cyan-400 text-white"
                     : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white/80 border border-white/10"
                   }`}
               >
@@ -211,7 +211,7 @@ export default function Experience() {
                       style={{ imageRendering: "pixelated" }}
                     />
                   </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-r from-teal-500 to-teal-400 flex items-center justify-center">
+                  <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-400 flex items-center justify-center">
                     <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -224,7 +224,7 @@ export default function Experience() {
                   >
                     {currentMember.name}
                   </h3>
-                  <p className="text-[13px] text-teal-500 mb-3">{currentMember.role}</p>
+                  <p className="text-[13px] text-cyan-500 mb-3">{currentMember.role}</p>
                   <p
                     className="text-[14px] leading-relaxed max-w-xl"
                     style={{ color: isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)" }}
@@ -346,7 +346,7 @@ function ProjectCard({ project, index, isDark }: ProjectCardProps) {
           {/* Hover overlay */}
           <div
             className="absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-60"
-            style={{ background: `linear-gradient(to top, ${isDark ? "#0a0a0f" : "#ffffff"}, transparent)` }}
+            style={{ background: `linear-gradient(to top, ${isDark ? "#0a0e1a" : "#ffffff"}, transparent)` }}
           />
 
           {/* Author badge */}
@@ -407,7 +407,7 @@ function ProjectCard({ project, index, isDark }: ProjectCardProps) {
           {/* Link */}
           <a
             href={project.link}
-            className="inline-flex items-center gap-1.5 text-[13px] text-teal-500 hover:text-blue-400 transition-colors group/link"
+            className="inline-flex items-center gap-1.5 text-[13px] text-cyan-500 hover:text-blue-400 transition-colors group/link"
           >
             Ver proyecto
             <svg
