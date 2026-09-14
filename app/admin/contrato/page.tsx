@@ -6,7 +6,7 @@ import { downloadWelcomePackPDF, generateWelcomePackBase64 } from '@/app/compone
 import type { ContractData } from '@/app/components/admin/contract/ContractPDF';
 
 const DEFAULT_DEV = {
-  nombre: 'Yoshua Daniel Castañeda Robles',
+  nombre: 'YOSHUA DANIEL CASTAÑEDA ROBLES',
   ruc: '10739934821',
 };
 
@@ -139,11 +139,12 @@ export default function ContratoPage() {
       .then((data: { nombre?: string }) => {
         if (data.nombre) {
           const isPersonaNatural = form.clienteRuc.startsWith('10');
+          const nombre = data.nombre!.toUpperCase();
           setForm((prev) => ({
             ...prev,
             ...(isPersonaNatural
-              ? { clienteRepresentante: data.nombre! }
-              : { clienteEmpresa: data.nombre!, }),
+              ? { clienteRepresentante: nombre }
+              : { clienteEmpresa: nombre }),
           }));
           setRucStatus('success');
         } else {
@@ -367,17 +368,17 @@ export default function ContratoPage() {
                     maxLength={120}
                     disabled={isPersonaNatural}
                     value={isPersonaNatural ? '' : form.clienteEmpresa}
-                    onChange={(e) => update('clienteEmpresa', e.target.value)}
+                    onChange={(e) => update('clienteEmpresa', e.target.value.toUpperCase())}
                   />
                 </div>
                 <div className="md:col-span-2">
                   <FieldLabel>Representante legal</FieldLabel>
                   <input
                     className={inputClass}
-                    placeholder="Nombre completo del representante"
+                    placeholder="NOMBRE COMPLETO DEL REPRESENTANTE"
                     maxLength={100}
                     value={form.clienteRepresentante}
-                    onChange={(e) => update('clienteRepresentante', e.target.value)}
+                    onChange={(e) => update('clienteRepresentante', e.target.value.toUpperCase())}
                   />
                 </div>
               </div>
@@ -392,7 +393,7 @@ export default function ContratoPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <FieldLabel>Nombre completo</FieldLabel>
-                  <input className={inputClass} maxLength={100} value={form.desarrolladorNombre} onChange={(e) => update('desarrolladorNombre', e.target.value)} />
+                  <input className={inputClass} maxLength={100} value={form.desarrolladorNombre} onChange={(e) => update('desarrolladorNombre', e.target.value.toUpperCase())} />
                 </div>
                 <div>
                   <FieldLabel>RUC</FieldLabel>
