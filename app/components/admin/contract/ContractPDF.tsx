@@ -325,7 +325,7 @@ function ContractDocument({ data, logoUrl, firmaUrl }: { data: ContractData; log
               <Text style={styles.tagline}>Creamos web, impulsamos negocios</Text>
             </View>
           </View>
-          <Text style={styles.headerDate}>{formatDate(data.fechaInicio)}</Text>
+          <Text style={styles.headerDate}>{formatDate(new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Lima' })).toISOString().slice(0, 10))}</Text>
         </View>
 
         {/* Title */}

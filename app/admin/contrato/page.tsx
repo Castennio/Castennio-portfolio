@@ -248,7 +248,7 @@ export default function ContratoPage() {
       if (res.ok) {
         const result = await res.json();
         setSavedProject(result);
-        const portalLink = `${window.location.origin}/portal/${result.slug}`;
+        const portalLink = `https://castennio.com/portal/${result.slug}`;
         update('portalUrl', portalLink);
       }
     } finally {
@@ -475,8 +475,8 @@ export default function ContratoPage() {
                   <FieldLabel>Portal del proyecto</FieldLabel>
                   {savedProject ? (
                     <div className="flex gap-2">
-                      <input className={`${inputClass} text-cyan-400`} readOnly value={`${window.location.origin}/portal/${savedProject.slug}`} />
-                      <button onClick={() => navigator.clipboard.writeText(`${window.location.origin}/portal/${savedProject.slug}`)}
+                      <input className={`${inputClass} text-cyan-400`} readOnly value={`https://castennio.com/portal/${savedProject.slug}`} />
+                      <button onClick={() => navigator.clipboard.writeText(`https://castennio.com/portal/${savedProject.slug}`)}
                         className="px-4 rounded-lg bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors cursor-pointer text-[13px] whitespace-nowrap">
                         Copiar
                       </button>

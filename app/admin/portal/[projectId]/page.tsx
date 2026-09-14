@@ -80,7 +80,7 @@ export default function ProjectDetailPage() {
 
   const copyLink = () => {
     if (!project) return;
-    navigator.clipboard.writeText(`${window.location.origin}/portal/${project.slug}`);
+    navigator.clipboard.writeText(`https://castennio.com/portal/${project.slug}`);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
