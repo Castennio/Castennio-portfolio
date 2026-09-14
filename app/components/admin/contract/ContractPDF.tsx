@@ -26,21 +26,21 @@ const colors = {
 const styles = StyleSheet.create({
   page: {
     backgroundColor: colors.white,
-    paddingTop: 45,
-    paddingBottom: 70,
+    paddingTop: 40,
+    paddingBottom: 65,
     paddingHorizontal: 50,
     fontFamily: 'Helvetica',
     fontSize: 10,
     color: colors.darkGray,
-    lineHeight: 1.6,
+    lineHeight: 1.45,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: 30,
-    paddingBottom: 20,
-    borderBottomWidth: 2,
+    alignItems: 'center',
+    marginBottom: 22,
+    paddingBottom: 14,
+    borderBottomWidth: 1.5,
     borderBottomColor: colors.primary,
   },
   logoContainer: {
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   logoIcon: {
     width: 48,
     height: 44,
-    marginRight: 12,
+    marginRight: 14,
   },
   logoText: {
     fontSize: 20,
@@ -61,58 +61,50 @@ const styles = StyleSheet.create({
   tagline: {
     fontSize: 7,
     color: colors.gray,
-    marginTop: 2,
+    marginTop: 4,
     letterSpacing: 0.5,
   },
-  docBadge: {
-    backgroundColor: colors.primary,
-    paddingVertical: 4,
-    paddingHorizontal: 12,
-    borderRadius: 4,
-  },
-  docBadgeText: {
+  headerDate: {
     fontSize: 8,
-    fontFamily: 'Helvetica-Bold',
-    color: colors.white,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
+    color: colors.gray,
+    textAlign: 'right',
   },
   title: {
-    fontSize: 13,
+    fontSize: 12,
     fontFamily: 'Helvetica-Bold',
     color: colors.dark,
     textAlign: 'center',
-    marginBottom: 15,
+    marginBottom: 12,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
   intro: {
     fontSize: 10,
     color: colors.darkGray,
-    marginBottom: 20,
-    lineHeight: 1.7,
+    marginBottom: 10,
+    lineHeight: 1.4,
     textAlign: 'justify',
   },
   sectionTitle: {
     fontSize: 11,
     fontFamily: 'Helvetica-Bold',
     color: colors.dark,
-    marginBottom: 8,
-    marginTop: 16,
+    marginBottom: 4,
+    marginTop: 10,
   },
   paragraph: {
     fontSize: 10,
     color: colors.darkGray,
-    marginBottom: 8,
-    lineHeight: 1.7,
+    marginBottom: 4,
+    lineHeight: 1.4,
     textAlign: 'justify',
   },
   bulletItem: {
     fontSize: 10,
     color: colors.darkGray,
-    marginBottom: 4,
+    marginBottom: 2,
     paddingLeft: 16,
-    lineHeight: 1.6,
+    lineHeight: 1.35,
   },
   priceBox: {
     backgroundColor: colors.offWhite,
@@ -157,7 +149,7 @@ const styles = StyleSheet.create({
   signatureArea: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 50,
+    marginTop: 35,
     gap: 40,
   },
   signatureBlock: {
@@ -231,9 +223,8 @@ function formatDate(dateStr: string): string {
   });
 }
 
-function formatDateFirma(dateStr: string): string {
-  if (!dateStr) return '[FECHA]';
-  const d = new Date(dateStr + 'T00:00:00');
+function formatDateFirma(): string {
+  const d = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Lima' }));
   const day = d.getDate();
   const month = d.toLocaleDateString('es-PE', { month: 'long' });
   const year = d.getFullYear();
@@ -317,7 +308,7 @@ function numberToWords(n: number): string {
   return result;
 }
 
-function ContractDocument({ data, logoUrl }: { data: ContractData; logoUrl: string }) {
+function ContractDocument({ data, logoUrl, firmaUrl }: { data: ContractData; logoUrl: string; firmaUrl: string }) {
   const igv = Math.round(data.precioSinIgv * 0.18 * 100) / 100;
   const total = Math.round((data.precioSinIgv + igv) * 100) / 100;
   const precioEnLetras = numberToWords(data.precioSinIgv);
@@ -334,14 +325,12 @@ function ContractDocument({ data, logoUrl }: { data: ContractData; logoUrl: stri
               <Text style={styles.tagline}>Creamos web, impulsamos negocios</Text>
             </View>
           </View>
-          <View style={styles.docBadge}>
-            <Text style={styles.docBadgeText}>Contrato</Text>
-          </View>
+          <Text style={styles.headerDate}>{formatDate(data.fechaInicio)}</Text>
         </View>
 
         {/* Title */}
         <Text style={styles.title}>
-          Contrato de Prestación de Servicios de Desarrollo Web
+          Contrato de Prestación de Servicios de Desarrollo de Software
         </Text>
 
         {/* Intro */}
@@ -358,7 +347,7 @@ function ContractDocument({ data, logoUrl }: { data: ContractData; logoUrl: stri
         {/* 1. OBJETO */}
         <Text style={styles.sectionTitle}>1. OBJETO</Text>
         <Text style={styles.paragraph}>
-          EL CLIENTE contrata a EL DESARROLLADOR para realizar {data.descripcion}.
+          EL CLIENTE contrata a EL DESARROLLADOR para realizar {data.descripcion}
         </Text>
 
         {/* 2. ALCANCE */}
@@ -458,20 +447,24 @@ function ContractDocument({ data, logoUrl }: { data: ContractData; logoUrl: stri
           Ambas partes manifiestan estar de acuerdo con las condiciones establecidas en el presente contrato.
         </Text>
         <Text style={styles.paragraph}>
-          En Lima, a los {formatDateFirma(data.fechaEntrega || data.fechaInicio)}.
+          En Lima, a los {formatDateFirma()}.
         </Text>
 
         {/* Firmas */}
         <View wrap={false} style={styles.signatureArea}>
           <View style={styles.signatureBlock}>
-            <View style={styles.signatureLine} />
+            <View style={{ height: 64, justifyContent: 'flex-end' }} />
+            <View style={{ width: '100%', borderBottomWidth: 1, borderBottomColor: colors.darkGray, marginBottom: 8 }} />
             <Text style={styles.signatureLabel}>EL CLIENTE</Text>
             <Text style={styles.signatureDetail}>{data.clienteEmpresa}</Text>
             <Text style={styles.signatureDetail}>RUC: {data.clienteRuc}</Text>
             <Text style={styles.signatureDetail}>{data.clienteRepresentante}</Text>
           </View>
           <View style={styles.signatureBlock}>
-            <View style={styles.signatureLine} />
+            <View style={{ height: 64, justifyContent: 'flex-end' }}>
+              <Image src={firmaUrl} style={{ width: 120, height: 60, objectFit: 'contain' }} />
+            </View>
+            <View style={{ width: '100%', borderBottomWidth: 1, borderBottomColor: colors.darkGray, marginBottom: 8 }} />
             <Text style={styles.signatureLabel}>EL DESARROLLADOR</Text>
             <Text style={styles.signatureDetail}>{data.desarrolladorNombre.toUpperCase()}</Text>
             <Text style={styles.signatureDetail}>RUC: {data.desarrolladorRuc}</Text>
@@ -481,7 +474,7 @@ function ContractDocument({ data, logoUrl }: { data: ContractData; logoUrl: stri
         {/* Footer */}
         <View style={styles.footer}>
           <Text style={styles.footerText}>
-            Contrato de prestación de servicios de desarrollo web
+            Contrato de prestación de servicios de desarrollo de software
           </Text>
           <Text style={styles.footerText}>
             <Text style={styles.footerBrand}>CASTENNIO</Text> | castennio.com
@@ -494,7 +487,8 @@ function ContractDocument({ data, logoUrl }: { data: ContractData; logoUrl: stri
 
 export async function downloadContractPDF(data: ContractData): Promise<void> {
   const logoUrl = `${window.location.origin}/images/logo-castennio-fondo-transparente-icono-negro.png`;
-  const blob = await pdf(<ContractDocument data={data} logoUrl={logoUrl} />).toBlob();
+  const firmaUrl = `${window.location.origin}/images/firma-digital.png`;
+  const blob = await pdf(<ContractDocument data={data} logoUrl={logoUrl} firmaUrl={firmaUrl} />).toBlob();
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
@@ -504,6 +498,17 @@ export async function downloadContractPDF(data: ContractData): Promise<void> {
   link.click();
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
+}
+
+export async function generateContractBase64(data: ContractData): Promise<string> {
+  const logoUrl = `${window.location.origin}/images/logo-castennio-fondo-transparente-icono-negro.png`;
+  const firmaUrl = `${window.location.origin}/images/firma-digital.png`;
+  const blob = await pdf(<ContractDocument data={data} logoUrl={logoUrl} firmaUrl={firmaUrl} />).toBlob();
+  const buffer = await blob.arrayBuffer();
+  const bytes = new Uint8Array(buffer);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary);
 }
 
 export default ContractDocument;

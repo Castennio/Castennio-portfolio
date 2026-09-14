@@ -1,11 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import AdminGuard from '@/app/components/admin/AdminGuard';
 import { downloadContractPDF, generateContractBase64 } from '@/app/components/admin/contract/ContractPDF';
 import { downloadWelcomePackPDF, generateWelcomePackBase64 } from '@/app/components/admin/contract/WelcomePackPDF';
 import type { ContractData } from '@/app/components/admin/contract/ContractPDF';
-import { logoutAction } from '@/app/actions/auth';
 
 const DEFAULT_DEV = {
   nombre: 'Yoshua Daniel Castañeda Robles',
@@ -94,7 +92,7 @@ function Chip({
   );
 }
 
-function ContratoContent() {
+export default function ContratoPage() {
   const [form, setForm] = useState({
     clienteEmpresa: '',
     clienteRuc: '',
@@ -112,6 +110,8 @@ function ContratoContent() {
   });
 
   const [generating, setGenerating] = useState<'contrato' | 'welcome' | null>(null);
+  const [savedProject, setSavedProject] = useState<{ id: number; slug: string } | null>(null);
+  const [saving, setSaving] = useState(false);
 
   const update = (field: string, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -170,10 +170,7 @@ function ContratoContent() {
 
   const toggleFuncChip = (chip: string) => {
     if (funcLines.includes(chip)) {
-      update(
-        'funcionalidades',
-        funcLines.filter((l) => l !== chip).join('\n')
-      );
+      update('funcionalidades', funcLines.filter((l) => l !== chip).join('\n'));
     } else {
       update('funcionalidades', [...funcLines, chip].join('\n'));
     }
@@ -186,10 +183,7 @@ function ContratoContent() {
 
   const toggleServicioChip = (chip: string) => {
     if (serviciosList.includes(chip)) {
-      update(
-        'serviciosAccesos',
-        serviciosList.filter((s) => s !== chip).join(', ')
-      );
+      update('serviciosAccesos', serviciosList.filter((s) => s !== chip).join(', '));
     } else {
       update('serviciosAccesos', [...serviciosList, chip].join(', '));
     }
@@ -228,6 +222,40 @@ function ContratoContent() {
     precioSinIgv: precio,
   });
 
+  const handleSave = async () => {
+    if (!canGenerate) return;
+    setSaving(true);
+    try {
+      const data = buildData();
+      const res = await fetch('/api/projects', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          clienteEmpresa: data.clienteEmpresa,
+          clienteRuc: data.clienteRuc,
+          clienteRepresentante: data.clienteRepresentante,
+          devEmpresa: 'CASTENNIO',
+          devRuc: data.desarrolladorRuc,
+          devRepresentante: data.desarrolladorNombre,
+          descripcion: data.descripcion,
+          precio: data.precioSinIgv,
+          moneda: 'PEN',
+          fechaInicio: form.fechaInicio,
+          fechaEntrega: form.fechaEntrega,
+          formaPago: data.formaPago,
+        }),
+      });
+      if (res.ok) {
+        const result = await res.json();
+        setSavedProject(result);
+        const portalLink = `${window.location.origin}/portal/${result.slug}`;
+        update('portalUrl', portalLink);
+      }
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const handleContrato = async () => {
     if (!canGenerate) return;
     setGenerating('contrato');
@@ -261,10 +289,10 @@ function ContratoContent() {
       const pdfBase64 = emailModal === 'welcome'
         ? await generateWelcomePackBase64(data)
         : await generateContractBase64(data);
-      const slug = data.clienteEmpresa.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      const fileSlug = data.clienteEmpresa.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
       const fileName = emailModal === 'welcome'
-        ? `welcome-pack-${slug}.pdf`
-        : `contrato-${slug}.pdf`;
+        ? `welcome-pack-${fileSlug}.pdf`
+        : `contrato-${fileSlug}.pdf`;
       const res = await fetch('/api/send-pdf', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -289,50 +317,13 @@ function ContratoContent() {
     'w-full bg-white/[0.04] border border-white/[0.10] rounded-lg px-4 py-2.5 text-white/90 text-[14px] placeholder:text-white/30 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 focus:bg-white/[0.06] transition-all';
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f]">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-[#7C3AED]/20">
-        <div className="max-w-5xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <a
-                href="/calculadora"
-                className="w-10 h-10 rounded-xl bg-[#7C3AED]/10 flex items-center justify-center hover:bg-[#7C3AED]/20 transition-colors"
-              >
-                <svg className="w-5 h-5 text-[#7C3AED]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-              </a>
-              <div>
-                <h1 className="text-xl font-semibold text-white/90">
-                  Generador de Contratos
-                </h1>
-                <p className="text-[13px] text-white/40">
-                  Panel administrativo CASTENNIO
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="px-3 py-1.5 text-[11px] font-medium tracking-wider uppercase bg-[#7C3AED]/10 text-[#A78BFA] rounded-full">
-                Admin
-              </span>
-              <form action={logoutAction}>
-                <button
-                  type="submit"
-                  className="p-2 rounded-lg text-white/40 hover:text-white/70 hover:bg-white/[0.04] transition-colors cursor-pointer"
-                  title="Cerrar sesión"
-                >
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                  </svg>
-                </button>
-              </form>
-            </div>
-          </div>
+    <>
+      <div className="max-w-5xl mx-auto px-6 py-8">
+        <div className="mb-6">
+          <h1 className="text-xl font-semibold text-white/90">Generador de Contratos</h1>
+          <p className="text-[13px] text-white/40 mt-1">Genera contratos de prestación de servicios</p>
         </div>
-      </header>
 
-      <main className="max-w-5xl mx-auto px-6 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Form */}
           <div className="lg:col-span-2 space-y-6">
@@ -401,22 +392,11 @@ function ContratoContent() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <FieldLabel>Nombre completo</FieldLabel>
-                  <input
-                    className={inputClass}
-                    maxLength={100}
-                    value={form.desarrolladorNombre}
-                    onChange={(e) => update('desarrolladorNombre', e.target.value)}
-                  />
+                  <input className={inputClass} maxLength={100} value={form.desarrolladorNombre} onChange={(e) => update('desarrolladorNombre', e.target.value)} />
                 </div>
                 <div>
                   <FieldLabel>RUC</FieldLabel>
-                  <input
-                    className={inputClass}
-                    inputMode="numeric"
-                    maxLength={11}
-                    value={form.desarrolladorRuc}
-                    onChange={(e) => updateRuc('desarrolladorRuc', e.target.value)}
-                  />
+                  <input className={inputClass} inputMode="numeric" maxLength={11} value={form.desarrolladorRuc} onChange={(e) => updateRuc('desarrolladorRuc', e.target.value)} />
                 </div>
               </div>
             </section>
@@ -433,52 +413,25 @@ function ContratoContent() {
                   <p className="text-[13px] text-white/30 mb-2 italic">
                     EL CLIENTE contrata a EL DESARROLLADOR para realizar...
                   </p>
-                  <textarea
-                    className={`${inputClass} min-h-[80px] resize-y`}
-                    placeholder="el desarrollo e implementación de un sitio web corporativo para [nombre], incluyendo..."
-                    maxLength={500}
-                    value={form.descripcion}
-                    onChange={(e) => update('descripcion', e.target.value)}
-                  />
+                  <textarea className={`${inputClass} min-h-[80px] resize-y`} placeholder="el desarrollo e implementación de un sitio web corporativo para [nombre], incluyendo..." maxLength={500} value={form.descripcion} onChange={(e) => update('descripcion', e.target.value)} />
                 </div>
                 <div>
                   <FieldLabel>Funcionalidades</FieldLabel>
                   <div className="flex flex-wrap gap-2 mb-3">
                     {FUNCIONALIDADES_CHIPS.map((chip) => (
-                      <Chip
-                        key={chip}
-                        label={chip}
-                        active={funcLines.includes(chip)}
-                        onClick={() => toggleFuncChip(chip)}
-                      />
+                      <Chip key={chip} label={chip} active={funcLines.includes(chip)} onClick={() => toggleFuncChip(chip)} />
                     ))}
                   </div>
-                  <textarea
-                    className={`${inputClass} min-h-[120px] resize-y font-mono text-[13px]`}
-                    placeholder="Selecciona arriba o escribe una por línea"
-                    maxLength={2000}
-                    value={form.funcionalidades}
-                    onChange={(e) => update('funcionalidades', e.target.value)}
-                  />
+                  <textarea className={`${inputClass} min-h-[120px] resize-y font-mono text-[13px]`} placeholder="Selecciona arriba o escribe una por línea" maxLength={2000} value={form.funcionalidades} onChange={(e) => update('funcionalidades', e.target.value)} />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <FieldLabel>Fecha de inicio</FieldLabel>
-                    <input
-                      type="date"
-                      className={inputClass}
-                      value={form.fechaInicio}
-                      onChange={(e) => update('fechaInicio', e.target.value)}
-                    />
+                    <input type="date" className={inputClass} value={form.fechaInicio} onChange={(e) => update('fechaInicio', e.target.value)} />
                   </div>
                   <div>
                     <FieldLabel>Fecha de entrega</FieldLabel>
-                    <input
-                      type="date"
-                      className={inputClass}
-                      value={form.fechaEntrega}
-                      onChange={(e) => update('fechaEntrega', e.target.value)}
-                    />
+                    <input type="date" className={inputClass} value={form.fechaEntrega} onChange={(e) => update('fechaEntrega', e.target.value)} />
                   </div>
                 </div>
               </div>
@@ -493,14 +446,7 @@ function ContratoContent() {
               <div className="space-y-4">
                 <div>
                   <FieldLabel>Precio sin IGV (S/)</FieldLabel>
-                  <input
-                    type="number"
-                    className={inputClass}
-                    placeholder="1200"
-                    min={1}
-                    max={999999}
-                    step="0.01"
-                    value={form.precioSinIgv}
+                  <input type="number" className={inputClass} placeholder="1200" min={1} max={999999} step="0.01" value={form.precioSinIgv}
                     onChange={(e) => {
                       const v = e.target.value;
                       if (v === '' || (parseFloat(v) >= 0 && parseFloat(v) <= 999999)) update('precioSinIgv', v);
@@ -511,52 +457,33 @@ function ContratoContent() {
                   <FieldLabel>Forma de pago</FieldLabel>
                   <div className="flex flex-wrap gap-2 mb-3">
                     {FORMA_PAGO_TEMPLATES.map((t) => (
-                      <Chip
-                        key={t.label}
-                        label={t.label}
-                        active={false}
-                        onClick={() => applyFormaPago(t.template)}
-                      />
+                      <Chip key={t.label} label={t.label} active={false} onClick={() => applyFormaPago(t.template)} />
                     ))}
                   </div>
-                  <textarea
-                    className={`${inputClass} min-h-[60px] resize-y`}
-                    placeholder="Selecciona una opción arriba o escribe la forma de pago"
-                    maxLength={500}
-                    value={form.formaPago}
-                    onChange={(e) => update('formaPago', e.target.value)}
-                  />
+                  <textarea className={`${inputClass} min-h-[60px] resize-y`} placeholder="Selecciona una opción arriba o escribe la forma de pago" maxLength={500} value={form.formaPago} onChange={(e) => update('formaPago', e.target.value)} />
                 </div>
                 <div>
                   <FieldLabel>Servicios/accesos necesarios (opcional)</FieldLabel>
                   <div className="flex flex-wrap gap-2 mb-3">
                     {SERVICIOS_CHIPS.map((chip) => (
-                      <Chip
-                        key={chip}
-                        label={chip}
-                        active={serviciosList.includes(chip)}
-                        onClick={() => toggleServicioChip(chip)}
-                      />
+                      <Chip key={chip} label={chip} active={serviciosList.includes(chip)} onClick={() => toggleServicioChip(chip)} />
                     ))}
                   </div>
-                  <input
-                    className={inputClass}
-                    placeholder="Selecciona arriba o escribe manualmente"
-                    maxLength={200}
-                    value={form.serviciosAccesos}
-                    onChange={(e) => update('serviciosAccesos', e.target.value)}
-                  />
+                  <input className={inputClass} placeholder="Selecciona arriba o escribe manualmente" maxLength={200} value={form.serviciosAccesos} onChange={(e) => update('serviciosAccesos', e.target.value)} />
                 </div>
                 <div>
-                  <FieldLabel>Link del portal del proyecto (opcional)</FieldLabel>
-                  <input
-                    className={inputClass}
-                    placeholder="https://notion.so/mi-proyecto..."
-                    maxLength={200}
-                    value={form.portalUrl}
-                    onChange={(e) => update('portalUrl', e.target.value)}
-                  />
-                  <p className="text-[11px] text-white/25 mt-1">Aparece en el Welcome Pack. Si no lo tienes aún, se muestra como &quot;Próximamente&quot;.</p>
+                  <FieldLabel>Portal del proyecto</FieldLabel>
+                  {savedProject ? (
+                    <div className="flex gap-2">
+                      <input className={`${inputClass} text-cyan-400`} readOnly value={`${window.location.origin}/portal/${savedProject.slug}`} />
+                      <button onClick={() => navigator.clipboard.writeText(`${window.location.origin}/portal/${savedProject.slug}`)}
+                        className="px-4 rounded-lg bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors cursor-pointer text-[13px] whitespace-nowrap">
+                        Copiar
+                      </button>
+                    </div>
+                  ) : (
+                    <p className="text-[13px] text-white/30 py-2.5">Se genera automáticamente al guardar</p>
+                  )}
                 </div>
               </div>
             </section>
@@ -567,36 +494,26 @@ function ContratoContent() {
             <div className="sticky top-24 space-y-6">
               {/* Price summary */}
               <div className="bg-gradient-to-b from-[#7C3AED]/[0.06] to-[#0f1015] border border-[#7C3AED]/20 rounded-2xl p-6">
-                <h3 className="text-[13px] font-semibold text-[#A78BFA] uppercase tracking-wider mb-4">
-                  Resumen de Precios
-                </h3>
+                <h3 className="text-[13px] font-semibold text-[#A78BFA] uppercase tracking-wider mb-4">Resumen de Precios</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between text-[14px]">
                     <span className="text-white/50">Servicio</span>
-                    <span className="text-white/80 font-medium">
-                      S/ {precio.toFixed(2)}
-                    </span>
+                    <span className="text-white/80 font-medium">S/ {precio.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-[14px]">
                     <span className="text-white/50">IGV (18%)</span>
-                    <span className="text-white/80 font-medium">
-                      S/ {igv.toFixed(2)}
-                    </span>
+                    <span className="text-white/80 font-medium">S/ {igv.toFixed(2)}</span>
                   </div>
                   <div className="border-t border-white/[0.06] pt-3 flex justify-between text-[16px]">
                     <span className="text-white/70 font-semibold">Total</span>
-                    <span className="text-[#A78BFA] font-bold">
-                      S/ {total.toFixed(2)}
-                    </span>
+                    <span className="text-[#A78BFA] font-bold">S/ {total.toFixed(2)}</span>
                   </div>
                 </div>
               </div>
 
               {/* Checklist */}
               <div className="bg-[#0f1015] border border-white/[0.08] rounded-2xl p-6">
-                <h3 className="text-[13px] font-semibold text-cyan-400/80 uppercase tracking-wider mb-4">
-                  Campos requeridos
-                </h3>
+                <h3 className="text-[13px] font-semibold text-cyan-400/80 uppercase tracking-wider mb-4">Campos requeridos</h3>
                 <div className="space-y-2 text-[13px]">
                   {[
                     ['Razón social', isPersonaNatural || !!form.clienteEmpresa],
@@ -610,74 +527,70 @@ function ContratoContent() {
                     ['Forma de pago', !!form.formaPago],
                   ].map(([label, ok]) => (
                     <div key={label as string} className="flex items-center gap-2">
-                      <span
-                        className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] ${
-                          ok
-                            ? 'bg-emerald-500/20 text-emerald-400'
-                            : 'bg-white/[0.04] text-white/20'
-                        }`}
-                      >
+                      <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] ${ok ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/[0.04] text-white/20'}`}>
                         {ok ? '✓' : '·'}
                       </span>
-                      <span className={ok ? 'text-white/60' : 'text-white/30'}>
-                        {label as string}
-                      </span>
+                      <span className={ok ? 'text-white/60' : 'text-white/30'}>{label as string}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Generate buttons */}
+              {/* Save + Generate buttons */}
               <div className="space-y-3">
+                <button onClick={handleSave}
+                  disabled={!canGenerate || saving || !!savedProject}
+                  className={`w-full py-3.5 rounded-xl text-[14px] font-semibold transition-all cursor-pointer ${
+                    canGenerate && !saving && !savedProject
+                      ? 'bg-cyan-600 text-white hover:bg-cyan-700 active:scale-[0.98]'
+                      : savedProject
+                        ? 'bg-emerald-500/10 text-emerald-400 cursor-default'
+                        : 'bg-white/[0.04] text-white/20 cursor-not-allowed'
+                  }`}>
+                  {saving ? 'Guardando...' : savedProject ? '✓ Proyecto guardado' : 'Guardar proyecto'}
+                </button>
+
                 <div className="flex gap-2">
-                  <button
-                    onClick={handleContrato}
-                    disabled={!canGenerate || !!generating}
+                  <button onClick={handleContrato}
+                    disabled={!canGenerate || !!generating || !savedProject}
                     className={`flex-1 py-3.5 rounded-xl text-[14px] font-semibold transition-all cursor-pointer ${
-                      canGenerate && !generating
+                      canGenerate && !generating && savedProject
                         ? 'bg-[#7C3AED] text-white hover:bg-[#6D28D9] active:scale-[0.98]'
                         : 'bg-white/[0.04] text-white/20 cursor-not-allowed'
-                    }`}
-                  >
+                    }`}>
                     {generating === 'contrato' ? 'Generando...' : 'Descargar Contrato'}
                   </button>
-                  <button
-                    onClick={() => openEmailModal('contrato')}
-                    disabled={!canGenerate || !!generating}
+                  <button onClick={() => openEmailModal('contrato')}
+                    disabled={!canGenerate || !!generating || !savedProject}
                     className={`w-12 rounded-xl flex items-center justify-center transition-all cursor-pointer ${
-                      canGenerate && !generating
+                      canGenerate && !generating && savedProject
                         ? 'bg-[#7C3AED]/20 text-[#A78BFA] hover:bg-[#7C3AED]/30 active:scale-95'
                         : 'bg-white/[0.02] text-white/15 cursor-not-allowed'
                     }`}
-                    title="Enviar por correo"
-                  >
+                    title="Enviar por correo">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                     </svg>
                   </button>
                 </div>
                 <div className="flex gap-2">
-                  <button
-                    onClick={handleWelcomePack}
-                    disabled={!canGenerate || !!generating}
+                  <button onClick={handleWelcomePack}
+                    disabled={!canGenerate || !!generating || !savedProject}
                     className={`flex-1 py-3.5 rounded-xl text-[14px] font-semibold transition-all cursor-pointer ${
-                      canGenerate && !generating
+                      canGenerate && !generating && savedProject
                         ? 'bg-[#0d9488] text-white hover:bg-[#0f766e] active:scale-[0.98]'
                         : 'bg-white/[0.04] text-white/20 cursor-not-allowed'
-                    }`}
-                  >
+                    }`}>
                     {generating === 'welcome' ? 'Generando...' : 'Descargar Welcome Pack'}
                   </button>
-                  <button
-                    onClick={() => openEmailModal('welcome')}
-                    disabled={!canGenerate || !!generating}
+                  <button onClick={() => openEmailModal('welcome')}
+                    disabled={!canGenerate || !!generating || !savedProject}
                     className={`w-12 rounded-xl flex items-center justify-center transition-all cursor-pointer ${
-                      canGenerate && !generating
+                      canGenerate && !generating && savedProject
                         ? 'bg-teal-500/20 text-teal-400 hover:bg-teal-500/30 active:scale-95'
                         : 'bg-white/[0.02] text-white/15 cursor-not-allowed'
                     }`}
-                    title="Enviar por correo"
-                  >
+                    title="Enviar por correo">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                     </svg>
@@ -691,7 +604,7 @@ function ContratoContent() {
         <p className="text-center text-white/30 text-[12px] mt-12">
           Herramienta interna. Los contratos generados son borradores y deben ser revisados antes de su firma.
         </p>
-      </main>
+      </div>
 
       {/* Email Modal */}
       {emailModal && (
@@ -711,22 +624,11 @@ function ContratoContent() {
             <div className="space-y-2 mb-4">
               {emailList.map((email, i) => (
                 <div key={i} className="flex gap-2">
-                  <input
-                    type="email"
-                    className={inputClass}
-                    placeholder="correo@ejemplo.com"
-                    value={email}
-                    onChange={(e) => {
-                      const updated = [...emailList];
-                      updated[i] = e.target.value;
-                      setEmailList(updated);
-                    }}
-                  />
+                  <input type="email" className={inputClass} placeholder="correo@ejemplo.com" value={email}
+                    onChange={(e) => { const updated = [...emailList]; updated[i] = e.target.value; setEmailList(updated); }} />
                   {emailList.length > 1 && (
-                    <button
-                      onClick={() => setEmailList(emailList.filter((_, j) => j !== i))}
-                      className="w-10 flex-shrink-0 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 flex items-center justify-center transition-colors cursor-pointer"
-                    >
+                    <button onClick={() => setEmailList(emailList.filter((_, j) => j !== i))}
+                      className="w-10 flex-shrink-0 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 flex items-center justify-center transition-colors cursor-pointer">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                       </svg>
@@ -736,25 +638,18 @@ function ContratoContent() {
               ))}
             </div>
 
-            <button
-              onClick={() => setEmailList([...emailList, ''])}
-              className="w-full py-2 rounded-lg border border-dashed border-white/[0.10] text-white/40 hover:text-white/60 hover:border-white/20 text-[13px] transition-colors mb-5 cursor-pointer flex items-center justify-center gap-2"
-            >
+            <button onClick={() => setEmailList([...emailList, ''])}
+              className="w-full py-2 rounded-lg border border-dashed border-white/[0.10] text-white/40 hover:text-white/60 hover:border-white/20 text-[13px] transition-colors mb-5 cursor-pointer flex items-center justify-center gap-2">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
               </svg>
               Agregar otro correo
             </button>
 
-            {sendResult === 'success' && (
-              <p className="text-[13px] text-emerald-400 text-center mb-4">Enviado correctamente</p>
-            )}
-            {sendResult === 'error' && (
-              <p className="text-[13px] text-red-400 text-center mb-4">Error al enviar, intenta de nuevo</p>
-            )}
+            {sendResult === 'success' && <p className="text-[13px] text-emerald-400 text-center mb-4">Enviado correctamente</p>}
+            {sendResult === 'error' && <p className="text-[13px] text-red-400 text-center mb-4">Error al enviar, intenta de nuevo</p>}
 
-            <button
-              onClick={handleSendEmail}
+            <button onClick={handleSendEmail}
               disabled={sending || !emailList.some((e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))}
               className={`w-full py-3.5 rounded-xl text-[14px] font-semibold transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 !sending && emailList.some((e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))
@@ -762,36 +657,16 @@ function ContratoContent() {
                     ? 'bg-teal-500 text-white hover:bg-teal-600 active:scale-[0.98]'
                     : 'bg-[#7C3AED] text-white hover:bg-[#6D28D9] active:scale-[0.98]'
                   : 'bg-white/[0.04] text-white/20 cursor-not-allowed'
-              }`}
-            >
+              }`}>
               {sending ? (
-                <>
-                  <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                  </svg>
-                  Enviando...
-                </>
+                <><svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>Enviando...</>
               ) : (
-                <>
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-                  </svg>
-                  Enviar
-                </>
+                <><svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>Enviar</>
               )}
             </button>
           </div>
         </div>
       )}
-    </div>
-  );
-}
-
-export default function ContratoPage() {
-  return (
-    <AdminGuard>
-      <ContratoContent />
-    </AdminGuard>
+    </>
   );
 }

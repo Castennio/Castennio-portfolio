@@ -271,7 +271,7 @@ function WelcomePage({ data }: { data: ContractData }) {
           Lo que vamos a construir
         </Text>
         <Text style={{ fontSize: 11, color: c.white, lineHeight: 1.7 }}>
-          {data.descripcion.charAt(0).toUpperCase() + data.descripcion.slice(1)}.
+          {data.descripcion.charAt(0).toUpperCase() + data.descripcion.slice(1)}
         </Text>
       </Card>
 
@@ -707,6 +707,16 @@ export async function downloadWelcomePackPDF(data: ContractData): Promise<void> 
   link.click();
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
+}
+
+export async function generateWelcomePackBase64(data: ContractData): Promise<string> {
+  const logoUrl = `${window.location.origin}/images/logo-castennio-fondo-transparente-icono-negro.png`;
+  const blob = await pdf(<WelcomePackDocument data={data} logoUrl={logoUrl} />).toBlob();
+  const buffer = await blob.arrayBuffer();
+  const bytes = new Uint8Array(buffer);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary);
 }
 
 export default WelcomePackDocument;

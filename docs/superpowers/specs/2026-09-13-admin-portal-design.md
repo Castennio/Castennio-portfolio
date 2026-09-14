@@ -8,8 +8,9 @@ Restructure Castennio's admin area into a unified layout with sidebar navigation
 
 ```
 app/
-  (admin)/
-    layout.tsx              # Shared sidebar + AdminGuard + logout
+  admin/
+    layout.tsx              # Auth gate: if not logged in → login form; if logged in → sidebar + children
+    page.tsx                # Redirects to /admin/cotizacion
     cotizacion/
       page.tsx              # Current /calculadora content (moved)
     contrato/
@@ -23,7 +24,9 @@ app/
       page.tsx              # Public client portal (no auth)
 ```
 
-Middleware updated: `PROTECTED_ROUTES = ['/cotizacion', '/contrato', '/portal']`. Excludes `/portal/[slug]` (public). Redirects `/calculadora` → `/cotizacion` for backwards compat.
+Entry point: `/admin`. If not authenticated, the layout renders the login form inline (no redirect to `/login`). After login, the sidebar appears with the admin sections.
+
+Middleware updated: `PROTECTED_ROUTES = ['/admin']`. The `/admin/layout.tsx` handles showing login vs sidebar — middleware just ensures the session cookie is checked. `/portal/[slug]` is public (no middleware). Old routes (`/calculadora`, `/contrato`, `/login`) redirect to `/admin/cotizacion`, `/admin/contrato`, `/admin` respectively.
 
 ## Sidebar Layout
 
@@ -169,13 +172,13 @@ Slug generation: `nanoid` (already available via npm, or custom implementation w
 
 ## Admin Portal Views
 
-### Project List (`/portal`)
+### Project List (`/admin/portal`)
 
 - Grid/list of saved projects
 - Each card shows: client name, company, creation date, progress bar (% phases completed)
-- Click → navigate to `/portal/[projectId]` (admin detail)
+- Click → navigate to `/admin/portal/[projectId]` (admin detail)
 
-### Project Detail (`/portal/[projectId]`)
+### Project Detail (`/admin/portal/[projectId]`)
 
 - Header: project name + "Copiar link del portal" button
 - Timeline section: vertical list of phases, each with a status dropdown (Pendiente / En progreso / Completado)

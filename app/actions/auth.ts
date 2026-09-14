@@ -25,12 +25,12 @@ export async function loginAction(
     return { error: result.error };
   }
 
-  redirect('/calculadora');
+  redirect('/admin/cotizacion');
 }
 
 export async function logoutAction(): Promise<void> {
   await logout();
-  redirect('/login');
+  redirect('/admin');
 }
 
 export async function registerAction(

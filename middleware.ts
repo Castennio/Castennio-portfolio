@@ -1,39 +1,17 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const AUTH_COOKIE_NAME = 'castennio_session';
-const PROTECTED_ROUTES = ['/calculadora', '/contrato'];
-const AUTH_ROUTES = ['/login'];
-
-function isSessionValid(token: string): boolean {
-  try {
-    const payload = JSON.parse(Buffer.from(token, 'base64').toString());
-    return payload.exp > Date.now();
-  } catch {
-    return false;
-  }
-}
-
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const sessionToken = request.cookies.get(AUTH_COOKIE_NAME)?.value;
-  const isAuthenticated = sessionToken ? isSessionValid(sessionToken) : false;
 
-  // Redirect authenticated users away from login
-  if (AUTH_ROUTES.some((route) => pathname.startsWith(route))) {
-    if (isAuthenticated) {
-      return NextResponse.redirect(new URL('/calculadora', request.url));
-    }
-    return NextResponse.next();
+  if (pathname === '/calculadora' || pathname.startsWith('/calculadora/')) {
+    return NextResponse.redirect(new URL('/admin/cotizacion', request.url));
   }
-
-  // Protect admin routes
-  if (PROTECTED_ROUTES.some((route) => pathname.startsWith(route))) {
-    if (!isAuthenticated) {
-      const loginUrl = new URL('/login', request.url);
-      loginUrl.searchParams.set('from', pathname);
-      return NextResponse.redirect(loginUrl);
-    }
+  if (pathname === '/contrato' || pathname.startsWith('/contrato/')) {
+    return NextResponse.redirect(new URL('/admin/contrato', request.url));
+  }
+  if (pathname === '/login') {
+    return NextResponse.redirect(new URL('/admin', request.url));
   }
 
   return NextResponse.next();
