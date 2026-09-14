@@ -6,7 +6,7 @@ import { downloadWelcomePackPDF, generateWelcomePackBase64 } from '@/app/compone
 import type { ContractData } from '@/app/components/admin/contract/ContractPDF';
 
 const DEFAULT_DEV = {
-  nombre: 'YOSHUA DANIEL CASTAÑEDA ROBLES',
+  nombre: 'CASTAÑEDA ROBLES YOSHUA DANIEL',
   ruc: '10739934821',
 };
 
