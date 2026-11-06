@@ -47,8 +47,8 @@ function ClientTypeCard({
         relative w-full text-left p-4 rounded-xl border transition-all duration-300
         ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
         ${isSelected
-          ? 'bg-[#7C3AED]/10 border-[#7C3AED]/50'
-          : 'bg-[#0f1015] border-white/[0.06] hover:border-white/[0.12] hover:bg-[#14151a]'
+          ? 'bg-foreground/10 border-foreground/50'
+          : 'bg-card border-border hover:border-border hover:bg-card'
         }
       `}
     >
@@ -58,8 +58,8 @@ function ClientTypeCard({
           className={`
             w-10 h-10 rounded-lg flex items-center justify-center transition-colors flex-shrink-0
             ${isSelected
-              ? 'bg-[#7C3AED]/20 text-[#A78BFA]'
-              : 'bg-white/[0.04] text-white/40'
+              ? 'bg-foreground/20 text-muted-foreground'
+              : 'bg-secondary text-muted-foreground'
             }
           `}
         >
@@ -72,7 +72,7 @@ function ClientTypeCard({
             <h3
               className={`
                 text-sm font-medium transition-colors truncate
-                ${isSelected ? 'text-white' : 'text-white/70'}
+                ${isSelected ? 'text-primary-foreground' : 'text-foreground/80'}
               `}
             >
               {config.name}
@@ -81,7 +81,7 @@ function ClientTypeCard({
               className={`
                 text-xs font-medium px-2 py-0.5 rounded-full flex-shrink-0
                 ${config.multiplier === 0
-                  ? 'bg-green-500/10 text-green-400'
+                  ? 'bg-green-500/10 text-foreground'
                   : 'bg-amber-500/10 text-amber-400'
                 }
               `}
@@ -89,7 +89,7 @@ function ClientTypeCard({
               {formatPercentage(config.multiplier)}
             </span>
           </div>
-          <p className="text-[12px] text-white/40 truncate">{config.description}</p>
+          <p className="text-[12px] text-muted-foreground truncate">{config.description}</p>
         </div>
 
         {/* Selection indicator */}
@@ -98,13 +98,13 @@ function ClientTypeCard({
             w-4 h-4 rounded-full border-2 transition-all duration-300 flex-shrink-0
             flex items-center justify-center mt-1
             ${isSelected
-              ? 'border-[#7C3AED] bg-[#7C3AED]'
-              : 'border-white/20'
+              ? 'border-foreground bg-foreground'
+              : 'border-border'
             }
           `}
         >
           {isSelected && (
-            <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-2.5 h-2.5 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
             </svg>
           )}
@@ -125,13 +125,13 @@ export default function ClientTypeSelector({
         <div
           className={`
             w-8 h-8 rounded-lg flex items-center justify-center transition-colors
-            ${disabled ? 'bg-white/[0.04]' : 'bg-[#7C3AED]/10'}
+            ${disabled ? 'bg-secondary' : 'bg-foreground/10'}
           `}
         >
           <span
             className={`
               font-semibold text-sm transition-colors
-              ${disabled ? 'text-white/30' : 'text-[#7C3AED]'}
+              ${disabled ? 'text-muted-foreground' : 'text-foreground'}
             `}
           >
             2
@@ -141,12 +141,12 @@ export default function ClientTypeSelector({
           <h2
             className={`
               text-lg font-medium transition-colors
-              ${disabled ? 'text-white/40' : 'text-white/90'}
+              ${disabled ? 'text-muted-foreground' : 'text-foreground'}
             `}
           >
             Tipo de cliente
           </h2>
-          <p className="text-[13px] text-white/40">Define el perfil del negocio</p>
+          <p className="text-[13px] text-muted-foreground">Define el perfil del negocio</p>
         </div>
       </div>
 

@@ -12,7 +12,7 @@ export default function PreviewLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#f8f9fc]">
+    <div className="min-h-screen bg-secondary">
       {children}
     </div>
   );

@@ -64,7 +64,7 @@ const FORMA_PAGO_TEMPLATES = [
 
 function FieldLabel({ children }: { children: React.ReactNode }) {
   return (
-    <label className="block text-[13px] font-medium text-white/60 mb-1.5">
+    <label className="block text-[13px] font-medium text-muted-foreground mb-1.5">
       {children}
     </label>
   );
@@ -85,8 +85,8 @@ function Chip({
       onClick={onClick}
       className={`px-3 py-1.5 rounded-lg text-[12px] font-medium transition-all cursor-pointer ${
         active
-          ? 'bg-[#7C3AED]/20 text-[#A78BFA] border border-[#7C3AED]/40'
-          : 'bg-white/[0.03] text-white/40 border border-white/[0.06] hover:bg-white/[0.06] hover:text-white/60'
+          ? 'bg-foreground/20 text-muted-foreground border border-foreground/40'
+          : 'bg-secondary text-muted-foreground border border-border hover:bg-secondary hover:text-muted-foreground'
       }`}
     >
       {label}
@@ -286,40 +286,40 @@ function ContratoContent() {
   };
 
   const inputClass =
-    'w-full bg-white/[0.04] border border-white/[0.10] rounded-lg px-4 py-2.5 text-white/90 text-[14px] placeholder:text-white/30 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 focus:bg-white/[0.06] transition-all';
+    'w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-foreground text-[14px] placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring  focus:bg-secondary transition-all';
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f]">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-[#7C3AED]/20">
+      <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-xl border-b border-border">
         <div className="max-w-5xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <a
                 href="/calculadora"
-                className="w-10 h-10 rounded-xl bg-[#7C3AED]/10 flex items-center justify-center hover:bg-[#7C3AED]/20 transition-colors"
+                className="w-10 h-10 rounded-xl bg-foreground/10 flex items-center justify-center hover:bg-foreground/20 transition-colors"
               >
-                <svg className="w-5 h-5 text-[#7C3AED]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 text-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
               </a>
               <div>
-                <h1 className="text-xl font-semibold text-white/90">
+                <h1 className="text-xl font-semibold text-foreground">
                   Generador de Contratos
                 </h1>
-                <p className="text-[13px] text-white/40">
+                <p className="text-[13px] text-muted-foreground">
                   Panel administrativo CASTENNIO
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <span className="px-3 py-1.5 text-[11px] font-medium tracking-wider uppercase bg-[#7C3AED]/10 text-[#A78BFA] rounded-full">
+              <span className="px-3 py-1.5 text-[11px] font-medium tracking-wider uppercase bg-foreground/10 text-muted-foreground rounded-full">
                 Admin
               </span>
               <form action={logoutAction}>
                 <button
                   type="submit"
-                  className="p-2 rounded-lg text-white/40 hover:text-white/70 hover:bg-white/[0.04] transition-colors cursor-pointer"
+                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground/80 hover:bg-secondary transition-colors cursor-pointer"
                   title="Cerrar sesión"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -337,9 +337,9 @@ function ContratoContent() {
           {/* Form */}
           <div className="lg:col-span-2 space-y-6">
             {/* Cliente */}
-            <section className="bg-[#0f1015] border border-white/[0.06] border-l-2 border-l-cyan-500/50 rounded-2xl p-6">
-              <h2 className="text-[15px] font-semibold text-white/80 mb-5 flex items-center gap-2">
-                <span className="w-6 h-6 rounded-md bg-cyan-500/15 text-cyan-400 text-[11px] font-bold flex items-center justify-center">C</span>
+            <section className="bg-card border border-border border-l-2 border-l-foreground rounded-2xl p-6">
+              <h2 className="text-[15px] font-semibold text-foreground mb-5 flex items-center gap-2">
+                <span className="w-6 h-6 rounded-md bg-foreground/15 text-foreground text-[11px] font-bold flex items-center justify-center">C</span>
                 Datos del Cliente
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -357,7 +357,7 @@ function ContratoContent() {
                     <p className="text-[11px] text-amber-400/60 mt-1">{form.clienteRuc.length}/11 dígitos</p>
                   )}
                   {rucStatus === 'loading' && (
-                    <p className="text-[11px] text-cyan-400/70 mt-1">Consultando SUNAT...</p>
+                    <p className="text-[11px] text-foreground/70 mt-1">Consultando SUNAT...</p>
                   )}
                   {rucStatus === 'success' && (
                     <p className="text-[11px] text-emerald-400/70 mt-1">
@@ -393,8 +393,8 @@ function ContratoContent() {
             </section>
 
             {/* Desarrollador */}
-            <section className="bg-[#0f1015] border border-white/[0.06] border-l-2 border-l-violet-500/50 rounded-2xl p-6">
-              <h2 className="text-[15px] font-semibold text-white/80 mb-5 flex items-center gap-2">
+            <section className="bg-card border border-border border-l-2 border-l-violet-500/50 rounded-2xl p-6">
+              <h2 className="text-[15px] font-semibold text-foreground mb-5 flex items-center gap-2">
                 <span className="w-6 h-6 rounded-md bg-violet-500/15 text-violet-400 text-[11px] font-bold flex items-center justify-center">D</span>
                 Datos del Desarrollador
               </h2>
@@ -422,15 +422,15 @@ function ContratoContent() {
             </section>
 
             {/* Proyecto */}
-            <section className="bg-[#0f1015] border border-white/[0.06] border-l-2 border-l-pink-500/50 rounded-2xl p-6">
-              <h2 className="text-[15px] font-semibold text-white/80 mb-5 flex items-center gap-2">
+            <section className="bg-card border border-border border-l-2 border-l-pink-500/50 rounded-2xl p-6">
+              <h2 className="text-[15px] font-semibold text-foreground mb-5 flex items-center gap-2">
                 <span className="w-6 h-6 rounded-md bg-pink-500/15 text-pink-400 text-[11px] font-bold flex items-center justify-center">P</span>
                 Proyecto
               </h2>
               <div className="space-y-4">
                 <div>
                   <FieldLabel>Descripción del proyecto</FieldLabel>
-                  <p className="text-[13px] text-white/30 mb-2 italic">
+                  <p className="text-[13px] text-muted-foreground mb-2 italic">
                     EL CLIENTE contrata a EL DESARROLLADOR para realizar...
                   </p>
                   <textarea
@@ -485,8 +485,8 @@ function ContratoContent() {
             </section>
 
             {/* Pago */}
-            <section className="bg-[#0f1015] border border-white/[0.06] border-l-2 border-l-amber-500/50 rounded-2xl p-6">
-              <h2 className="text-[15px] font-semibold text-white/80 mb-5 flex items-center gap-2">
+            <section className="bg-card border border-border border-l-2 border-l-amber-500/50 rounded-2xl p-6">
+              <h2 className="text-[15px] font-semibold text-foreground mb-5 flex items-center gap-2">
                 <span className="w-6 h-6 rounded-md bg-amber-500/15 text-amber-400 text-[11px] font-bold flex items-center justify-center">$</span>
                 Precio y Pago
               </h2>
@@ -556,7 +556,7 @@ function ContratoContent() {
                     value={form.portalUrl}
                     onChange={(e) => update('portalUrl', e.target.value)}
                   />
-                  <p className="text-[11px] text-white/25 mt-1">Aparece en el Welcome Pack. Si no lo tienes aún, se muestra como &quot;Próximamente&quot;.</p>
+                  <p className="text-[11px] text-muted-foreground mt-1">Aparece en el Welcome Pack. Si no lo tienes aún, se muestra como &quot;Próximamente&quot;.</p>
                 </div>
               </div>
             </section>
@@ -566,26 +566,26 @@ function ContratoContent() {
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
               {/* Price summary */}
-              <div className="bg-gradient-to-b from-[#7C3AED]/[0.06] to-[#0f1015] border border-[#7C3AED]/20 rounded-2xl p-6">
-                <h3 className="text-[13px] font-semibold text-[#A78BFA] uppercase tracking-wider mb-4">
+              <div className="bg-secondary border border-border rounded-2xl p-6">
+                <h3 className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wider mb-4">
                   Resumen de Precios
                 </h3>
                 <div className="space-y-3">
                   <div className="flex justify-between text-[14px]">
-                    <span className="text-white/50">Servicio</span>
-                    <span className="text-white/80 font-medium">
+                    <span className="text-muted-foreground">Servicio</span>
+                    <span className="text-foreground font-medium">
                       S/ {precio.toFixed(2)}
                     </span>
                   </div>
                   <div className="flex justify-between text-[14px]">
-                    <span className="text-white/50">IGV (18%)</span>
-                    <span className="text-white/80 font-medium">
+                    <span className="text-muted-foreground">IGV (18%)</span>
+                    <span className="text-foreground font-medium">
                       S/ {igv.toFixed(2)}
                     </span>
                   </div>
-                  <div className="border-t border-white/[0.06] pt-3 flex justify-between text-[16px]">
-                    <span className="text-white/70 font-semibold">Total</span>
-                    <span className="text-[#A78BFA] font-bold">
+                  <div className="border-t border-border pt-3 flex justify-between text-[16px]">
+                    <span className="text-foreground/80 font-semibold">Total</span>
+                    <span className="text-muted-foreground font-bold">
                       S/ {total.toFixed(2)}
                     </span>
                   </div>
@@ -593,8 +593,8 @@ function ContratoContent() {
               </div>
 
               {/* Checklist */}
-              <div className="bg-[#0f1015] border border-white/[0.08] rounded-2xl p-6">
-                <h3 className="text-[13px] font-semibold text-cyan-400/80 uppercase tracking-wider mb-4">
+              <div className="bg-card border border-border rounded-2xl p-6">
+                <h3 className="text-[13px] font-semibold text-foreground/80 uppercase tracking-wider mb-4">
                   Campos requeridos
                 </h3>
                 <div className="space-y-2 text-[13px]">
@@ -614,12 +614,12 @@ function ContratoContent() {
                         className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] ${
                           ok
                             ? 'bg-emerald-500/20 text-emerald-400'
-                            : 'bg-white/[0.04] text-white/20'
+                            : 'bg-secondary text-muted-foreground'
                         }`}
                       >
                         {ok ? '✓' : '·'}
                       </span>
-                      <span className={ok ? 'text-white/60' : 'text-white/30'}>
+                      <span className={ok ? 'text-muted-foreground' : 'text-muted-foreground'}>
                         {label as string}
                       </span>
                     </div>
@@ -635,8 +635,8 @@ function ContratoContent() {
                     disabled={!canGenerate || !!generating}
                     className={`flex-1 py-3.5 rounded-xl text-[14px] font-semibold transition-all cursor-pointer ${
                       canGenerate && !generating
-                        ? 'bg-[#7C3AED] text-white hover:bg-[#6D28D9] active:scale-[0.98]'
-                        : 'bg-white/[0.04] text-white/20 cursor-not-allowed'
+                        ? 'bg-foreground text-primary-foreground hover:bg-foreground/90 active:scale-[0.98]'
+                        : 'bg-secondary text-muted-foreground cursor-not-allowed'
                     }`}
                   >
                     {generating === 'contrato' ? 'Generando...' : 'Descargar Contrato'}
@@ -646,8 +646,8 @@ function ContratoContent() {
                     disabled={!canGenerate || !!generating}
                     className={`w-12 rounded-xl flex items-center justify-center transition-all cursor-pointer ${
                       canGenerate && !generating
-                        ? 'bg-[#7C3AED]/20 text-[#A78BFA] hover:bg-[#7C3AED]/30 active:scale-95'
-                        : 'bg-white/[0.02] text-white/15 cursor-not-allowed'
+                        ? 'bg-foreground/20 text-muted-foreground hover:bg-foreground/30 active:scale-95'
+                        : 'bg-card text-muted-foreground cursor-not-allowed'
                     }`}
                     title="Enviar por correo"
                   >
@@ -662,8 +662,8 @@ function ContratoContent() {
                     disabled={!canGenerate || !!generating}
                     className={`flex-1 py-3.5 rounded-xl text-[14px] font-semibold transition-all cursor-pointer ${
                       canGenerate && !generating
-                        ? 'bg-[#0d9488] text-white hover:bg-[#0f766e] active:scale-[0.98]'
-                        : 'bg-white/[0.04] text-white/20 cursor-not-allowed'
+                        ? 'bg-foreground text-primary-foreground hover:bg-foreground/90 active:scale-[0.98]'
+                        : 'bg-secondary text-muted-foreground cursor-not-allowed'
                     }`}
                   >
                     {generating === 'welcome' ? 'Generando...' : 'Descargar Welcome Pack'}
@@ -673,8 +673,8 @@ function ContratoContent() {
                     disabled={!canGenerate || !!generating}
                     className={`w-12 rounded-xl flex items-center justify-center transition-all cursor-pointer ${
                       canGenerate && !generating
-                        ? 'bg-teal-500/20 text-teal-400 hover:bg-teal-500/30 active:scale-95'
-                        : 'bg-white/[0.02] text-white/15 cursor-not-allowed'
+                        ? 'bg-foreground/20 text-teal-400 hover:bg-foreground/30 active:scale-95'
+                        : 'bg-card text-muted-foreground cursor-not-allowed'
                     }`}
                     title="Enviar por correo"
                   >
@@ -688,7 +688,7 @@ function ContratoContent() {
           </div>
         </div>
 
-        <p className="text-center text-white/30 text-[12px] mt-12">
+        <p className="text-center text-muted-foreground text-[12px] mt-12">
           Herramienta interna. Los contratos generados son borradores y deben ser revisados antes de su firma.
         </p>
       </main>
@@ -696,12 +696,12 @@ function ContratoContent() {
       {/* Email Modal */}
       {emailModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => !sending && setEmailModal(null)}>
-          <div className="bg-[#0f1015] border border-white/[0.10] rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-card border border-border rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-5">
-              <h3 className="text-[16px] font-semibold text-white/90">
+              <h3 className="text-[16px] font-semibold text-foreground">
                 Enviar {emailModal === 'welcome' ? 'Welcome Pack' : 'Contrato'}
               </h3>
-              <button onClick={() => !sending && setEmailModal(null)} className="text-white/30 hover:text-white/60 transition-colors cursor-pointer">
+              <button onClick={() => !sending && setEmailModal(null)} className="text-muted-foreground hover:text-muted-foreground transition-colors cursor-pointer">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -738,7 +738,7 @@ function ContratoContent() {
 
             <button
               onClick={() => setEmailList([...emailList, ''])}
-              className="w-full py-2 rounded-lg border border-dashed border-white/[0.10] text-white/40 hover:text-white/60 hover:border-white/20 text-[13px] transition-colors mb-5 cursor-pointer flex items-center justify-center gap-2"
+              className="w-full py-2 rounded-lg border border-dashed border-border text-muted-foreground hover:text-muted-foreground hover:border-border text-[13px] transition-colors mb-5 cursor-pointer flex items-center justify-center gap-2"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -759,9 +759,9 @@ function ContratoContent() {
               className={`w-full py-3.5 rounded-xl text-[14px] font-semibold transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 !sending && emailList.some((e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))
                   ? emailModal === 'welcome'
-                    ? 'bg-teal-500 text-white hover:bg-teal-600 active:scale-[0.98]'
-                    : 'bg-[#7C3AED] text-white hover:bg-[#6D28D9] active:scale-[0.98]'
-                  : 'bg-white/[0.04] text-white/20 cursor-not-allowed'
+                    ? 'bg-foreground text-primary-foreground hover:bg-foreground/90 active:scale-[0.98]'
+                    : 'bg-foreground text-primary-foreground hover:bg-foreground/90 active:scale-[0.98]'
+                  : 'bg-secondary text-muted-foreground cursor-not-allowed'
               }`}
             >
               {sending ? (

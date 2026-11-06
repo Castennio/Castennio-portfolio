@@ -1,488 +1,76 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-/* Dark theme (default) — Cyan + Amber */
-:root,
-html.dark {
-  /* Backgrounds - Navy profundo */
-  --background: #0a0e1a;
-  --background-elevated: #111827;
-  --background-surface: #1a2035;
-  --background-overlay: #1e293b;
-  --foreground: #F1F5F9;
+@custom-variant dark (&:is(.dark *));
 
-  /* Legacy support */
-  --card-bg: #111827;
-  --card-bg-hover: #1a2035;
-
-  /* Primary colors (Cyan) */
-  --primary: #22d3ee;
-  --primary-light: #67e8f9;
-  --primary-dark: #0891b2;
-  --primary-hover: #0891b2;
-
-  /* CTA (Amber) */
-  --cta: #F59E0B;
-  --cta-hover: #D97706;
-
-  /* Borders */
-  --border: #1e293b;
-  --border-hover: #334155;
-  --border-active: #475569;
-
-  /* Textos */
-  --text-muted: #94A3B8;
-  --text-subtle: #64748B;
-
-  /* Acentos sutiles */
-  --accent-glow: rgba(34, 211, 238, 0.08);
-  --accent-warm: rgba(245, 158, 11, 0.05);
-  --accent-cyan: rgba(34, 211, 238, 0.06);
-
-  /* Theme-specific */
-  --text-primary: rgba(241, 245, 249, 0.9);
-  --text-secondary: rgba(241, 245, 249, 0.6);
-  --text-tertiary: rgba(241, 245, 249, 0.4);
-  --card-border: rgba(255, 255, 255, 0.06);
-  --card-border-hover: rgba(255, 255, 255, 0.12);
-  --button-bg: #F59E0B;
-  --button-text: #0a0e1a;
-
-  /* Semantic */
-  --success: #10B981;
-  --error: #EF4444;
-  --warning: #F59E0B;
-
-  color-scheme: dark;
-}
-
-/* Light theme */
-html.light {
-  /* Backgrounds - Sistema de capas con profundidad */
-  --background: #ffffff;
-  --background-elevated: #ffffff;
-  --background-surface: #f5f5f7;
-  --background-overlay: #ebebed;
-  --foreground: #0a0e1a;
-
-  /* Legacy support */
-  --card-bg: #ffffff;
-  --card-bg-hover: #f5f5f7;
-
-  /* Primary colors */
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-
-  /* Borders con más presencia */
-  --border: #e5e5e7;
-  --border-hover: #d1d1d3;
-  --border-active: #b8b8ba;
-
-  /* Textos con mejor contraste */
-  --text-muted: #6b6d7a;
-  --text-subtle: #8b8d9a;
-
-  /* Acentos sutiles para dar vida */
-  --accent-glow: rgba(99, 102, 241, 0.12);
-  --accent-warm: rgba(251, 191, 36, 0.1);
-  --accent-blue: rgba(59, 130, 246, 0.1);
-
-  /* Theme-specific */
-  --text-primary: rgba(0, 0, 0, 0.9);
-  --text-secondary: rgba(0, 0, 0, 0.6);
-  --text-tertiary: rgba(0, 0, 0, 0.4);
-  --card-border: rgba(0, 0, 0, 0.06);
-  --card-border-hover: rgba(0, 0, 0, 0.12);
-  --button-bg: #0a0e1a;
-  --button-text: #ffffff;
-
-  color-scheme: light;
+:root {
+  --background: oklch(0.985 0.002 75);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --radius: 0.625rem;
 }
 
 @theme inline {
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-instrument-serif);
   --color-background: var(--background);
-  --color-background-elevated: var(--background-elevated);
-  --color-background-surface: var(--background-surface);
   --color-foreground: var(--foreground);
-  --color-card: var(--card-bg);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
-  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
-  --color-muted: var(--text-muted);
-  --font-display: var(--font-display);
-  --font-sans: var(--font-body);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-html.dark {
-  color-scheme: dark;
-}
-
-html.light {
-  color-scheme: light;
-}
-
-html.light ::selection {
-  background: rgba(59, 130, 246, 0.3);
-  color: #000;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Display font for headings */
-h1, h2, h3, .font-display {
-  font-family: var(--font-display), Georgia, serif;
-}
-
-/* Premium scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--border-hover);
-}
-
-/* Premium selection */
-::selection {
-  background: rgba(59, 130, 246, 0.2);
-  color: #fff;
-}
-
-/* Premium text gradient utility — Cyan */
-.text-gradient {
-  background: linear-gradient(135deg, #67e8f9 0%, #22d3ee 50%, #0891b2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Subtle glow effect — Cyan */
-.glow {
-  box-shadow: 0 0 60px -15px rgba(34, 211, 238, 0.3);
-}
-
-/* Premium border gradient — Cyan */
-.border-gradient {
-  position: relative;
-}
-
-.border-gradient::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.3), transparent 50%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-
-/* Hide scrollbar utility */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-/* Noise texture overlay */
-.noise::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-}
-
-/* Ambient lighting - glow sutil desde arriba */
-.ambient-glow {
-  position: relative;
-}
-
-.ambient-glow::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 400px;
-  background: radial-gradient(
-    ellipse 80% 50% at 50% -20%,
-    var(--accent-glow),
-    transparent
-  );
-  pointer-events: none;
-}
-
-/* Section with elevated background */
-.section-elevated {
-  background: linear-gradient(
-    180deg,
-    var(--background) 0%,
-    var(--background-elevated) 15%,
-    var(--background-elevated) 85%,
-    var(--background) 100%
-  );
-}
-
-/* Premium glass card */
-.glass-card {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.04) 0%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* backdrop-filter only on devices that can handle it (desktop) */
-@media (hover: hover) and (pointer: fine) {
-  .glass-card {
-    backdrop-filter: blur(20px);
-  }
-}
-
-.glass-card:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.06) 0%,
-    rgba(255, 255, 255, 0.02) 100%
-  );
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Warm accent glow */
-.warm-glow {
-  box-shadow: 0 0 80px -20px rgba(251, 191, 36, 0.15);
-}
-
 /* ============================================
-   LIGHT THEME OVERRIDES
+   ADMIN THEME STYLES (no tocar)
    ============================================ */
 
-html.light {
-  /* Force light backgrounds on body and main containers */
-  background-color: #ffffff !important;
-}
-
-html.light body {
-  background-color: #ffffff !important;
-  color: #0a0e1a !important;
-}
-
-html.light main {
-  background-color: #ffffff !important;
-}
-
-html.light section {
-  background-color: #ffffff !important;
-}
-
-html.light footer {
-  background-color: #f0f0f2 !important;
-}
-
-/* Text colors for light mode - exclude hero buttons */
-html.light [class*="text-white"]:not(.hero-btn):not(.hero-btn-gradient):not(.hero-btn *):not(.hero-btn-gradient *) {
-  color: rgba(10, 10, 15, 0.9) !important;
-}
-
-html.light [class*="text-white/9"],
-html.light [class*="text-white/8"] {
-  color: rgba(10, 10, 15, 0.9) !important;
-}
-
-html.light [class*="text-white/6"],
-html.light [class*="text-white/5"] {
-  color: rgba(10, 10, 15, 0.6) !important;
-}
-
-html.light [class*="text-white/4"],
-html.light [class*="text-white/3"],
-html.light [class*="text-white/2"] {
-  color: rgba(10, 10, 15, 0.45) !important;
-}
-
-/* Background overrides for cards and sections */
-html.light [class*="bg-[#0"] {
-  background-color: #ffffff !important;
-}
-
-html.light [class*="bg-[#1"] {
-  background-color: #f5f5f7 !important;
-}
-
-html.light [class*="bg-white/"] {
-  background-color: rgba(0, 0, 0, 0.03) !important;
-}
-
-/* Border colors */
-html.light [class*="border-white"] {
-  border-color: rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Button overrides - invert colors */
-html.light .bg-white {
-  background-color: #0a0e1a !important;
-}
-
-html.light .bg-white.text-black,
-html.light .bg-white [class*="text-black"] {
-  color: #ffffff !important;
-}
-
-html.light a.bg-white,
-html.light button.bg-white {
-  background-color: #0a0e1a !important;
-  color: #ffffff !important;
-}
-
-/* Gradients in light mode */
-html.light .text-gradient {
-  background: linear-gradient(135deg, #67e8f9 0%, #22d3ee 50%, #0891b2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Radial gradients for sections */
-html.light [style*="radial-gradient"] {
-  --tw-gradient-opacity: 0.15;
-}
-
-/* Red accent colors */
-html.light [class*="text-red"] {
-  color: #dc2626 !important;
-}
-
-html.light [class*="border-red"] {
-  border-color: rgba(220, 38, 38, 0.3) !important;
-}
-
-html.light [class*="bg-red"] {
-  background-color: rgba(220, 38, 38, 0.1) !important;
-}
-
-/* Blue accent colors */
-html.light [class*="text-blue"] {
-  color: #2563eb !important;
-}
-
-html.light [class*="bg-blue"] {
-  background-color: rgba(37, 99, 235, 0.1) !important;
-}
-
-/* Scrollbar for light mode */
-html.light ::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-}
-
-html.light ::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
-}
-
-html.light ::-webkit-scrollbar-track {
-  background: #f5f5f7;
-}
-
-/* Glass cards in light mode */
-html.light .glass-card {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.8) 0%,
-    rgba(255, 255, 255, 0.6) 100%
-  );
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-}
-
-/* SVG and icons */
-html.light svg {
-  color: inherit;
-}
-
-/* Theme transitions - only on specific elements, not global */
-body,
-main,
-section,
-footer,
-nav,
-.theme-transition {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-/* Hero buttons - protected from theme overrides */
-.hero-btn,
-html.light .hero-btn,
-html.dark .hero-btn {
-  background-color: #0a0e1a !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
-}
-
-.hero-btn:hover,
-html.light .hero-btn:hover,
-html.dark .hero-btn:hover {
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.35) !important;
-}
-
-.hero-btn-gradient,
-html.light .hero-btn-gradient,
-html.dark .hero-btn-gradient {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%) !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.35) !important;
-}
-
-.hero-btn-gradient:hover,
-html.light .hero-btn-gradient:hover,
-html.dark .hero-btn-gradient:hover {
-  box-shadow: 0 6px 30px rgba(59, 130, 246, 0.5) !important;
-}
-
-/* Ensure hero button text stays white */
-.hero-btn span,
-.hero-btn svg,
-.hero-btn-gradient span,
-.hero-btn-gradient svg,
-html.light .hero-btn span,
-html.light .hero-btn svg,
-html.light .hero-btn-gradient span,
-html.light .hero-btn-gradient svg {
-  color: #ffffff !important;
-}
-
-/* ============================================
-   ADMIN THEME STYLES
-   ============================================ */
-
-/* Admin primary color */
 :root {
   --admin-primary: #7C3AED;
   --admin-primary-hover: #6D28D9;
@@ -490,7 +78,6 @@ html.light .hero-btn-gradient svg {
   --admin-primary-glow: rgba(124, 58, 237, 0.3);
 }
 
-/* Admin gradient text */
 .admin-text-gradient {
   background: linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%);
   -webkit-background-clip: text;
@@ -498,7 +85,6 @@ html.light .hero-btn-gradient svg {
   background-clip: text;
 }
 
-/* Admin card hover effect */
 .admin-card {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -508,7 +94,6 @@ html.light .hero-btn-gradient svg {
   box-shadow: 0 10px 40px -15px rgba(124, 58, 237, 0.2);
 }
 
-/* Admin button glow */
 .admin-btn-glow {
   box-shadow: 0 0 30px -10px rgba(124, 58, 237, 0.5);
 }
@@ -517,20 +102,17 @@ html.light .hero-btn-gradient svg {
   box-shadow: 0 0 40px -8px rgba(124, 58, 237, 0.6);
 }
 
-/* Admin selection ring */
 .admin-ring {
   box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.3),
               0 0 20px -5px rgba(124, 58, 237, 0.3);
 }
 
-/* Admin focus styles */
 .admin-focus:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--admin-primary),
               0 0 0 4px rgba(124, 58, 237, 0.2);
 }
 
-/* Animate number changes */
 @keyframes pulse-number {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.7; }

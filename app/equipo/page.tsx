@@ -1,7 +1,7 @@
-import Navbar from "../components/Navbar";
+import { Header } from "@/components/landing/header";
+import { Footer } from "@/components/landing/footer";
 import Team from "../components/Team";
 import Experience from "../components/Experience";
-import Footer from "../components/Footer";
 
 export const metadata = {
   title: "Equipo | Castennio",
@@ -11,8 +11,8 @@ export const metadata = {
 export default function EquipoPage() {
   return (
     <>
-      <Navbar />
-      <main className="bg-[#0a0a0f] pt-24">
+      <Header />
+      <main className="pt-16">
         <Team />
         <Experience />
       </main>

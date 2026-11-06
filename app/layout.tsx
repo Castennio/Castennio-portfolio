@@ -1,37 +1,35 @@
 import type { Metadata } from "next";
-import { Fraunces, DM_Sans } from "next/font/google";
+import { Inter, Instrument_Serif } from "next/font/google";
 import "./globals.css";
-import WhatsAppButton from "./components/WhatsAppButton";
-import PreviewBubble from "./components/PreviewBubble";
 
-const fraunces = Fraunces({
-  variable: "--font-display",
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-body",
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  variable: "--font-instrument-serif",
+  weight: ["400"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Castennio | Páginas web que venden y sistemas que escalan",
+  title: "Castennio | Plataformas web administrables para tu negocio",
   description:
-    "Creamos páginas web que convierten y sistemas que impulsan tu negocio. Desarrollo web premium para startups y negocios en Perú.",
+    "Desarrollamos plataformas web donde gestionas tus productos, categorías e imágenes y compartes catálogos profesionales con tus clientes.",
   keywords: [
-    "desarrollo web",
-    "páginas web",
-    "sistemas web",
-    "Perú",
-    "startups",
-    "ecommerce",
-    "landing page",
+    "plataforma web administrable",
+    "catálogo digital",
+    "gestión de productos",
+    "CMS para pymes",
+    "desarrollo web Perú",
   ],
   openGraph: {
-    title: "Castennio | Páginas web que venden",
-    description: "Desde páginas web que convierten hasta sistemas que impulsan tu negocio",
+    title: "Castennio | Plataformas web administrables para tu negocio",
+    description:
+      "Gestiona tus productos y comparte catálogos profesionales. Sin depender de un desarrollador.",
     type: "website",
   },
 };
@@ -44,14 +42,9 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${fraunces.variable} ${dmSans.variable} h-full antialiased dark`}
-      suppressHydrationWarning
+      className={`${inter.variable} ${instrumentSerif.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background transition-colors duration-300">
-        {children}
-        <WhatsAppButton />
-        <PreviewBubble />
-      </body>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }
