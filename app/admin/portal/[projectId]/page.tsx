@@ -88,45 +88,45 @@ export default function ProjectDetailPage() {
   if (loading) {
     return (
       <div className="flex justify-center py-20">
-        <div className="w-8 h-8 border-2 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-border border-t-foreground rounded-full animate-spin" />
       </div>
     );
   }
 
   if (!project) {
-    return <div className="text-center py-20 text-white/40">Proyecto no encontrado</div>;
+    return <div className="text-center py-20 text-muted-foreground">Proyecto no encontrado</div>;
   }
 
-  const inputClass = 'w-full bg-white/[0.04] border border-white/[0.10] rounded-lg px-4 py-2.5 text-white/90 text-[14px] placeholder:text-white/30 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-all';
+  const inputClass = 'w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-foreground text-[14px] placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring  transition-all';
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-8">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-xl font-semibold text-white/90">{project.clienteEmpresa}</h1>
-          <p className="text-[13px] text-white/40 mt-1">Portal del proyecto</p>
+          <h1 className="text-xl font-semibold text-foreground">{project.clienteEmpresa}</h1>
+          <p className="text-[13px] text-muted-foreground mt-1">Portal del proyecto</p>
         </div>
         <button onClick={copyLink}
-          className="px-4 py-2 rounded-lg bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors cursor-pointer text-[13px]">
+          className="px-4 py-2 rounded-lg bg-primary/10 text-foreground hover:bg-foreground/20 transition-colors cursor-pointer text-[13px]">
           {copied ? '✓ Copiado' : 'Copiar link del portal'}
         </button>
       </div>
 
       {/* Phases */}
-      <section className="bg-[#0f1015] border border-white/[0.06] rounded-2xl p-6 mb-6">
-        <h2 className="text-[15px] font-semibold text-white/80 mb-5">Fases del proyecto</h2>
+      <section className="bg-card border border-border rounded-2xl p-6 mb-6">
+        <h2 className="text-[15px] font-semibold text-foreground mb-5">Fases del proyecto</h2>
         <div className="space-y-3">
           {project.phases.map((phase) => (
             <div key={phase.id} className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className={`w-3 h-3 rounded-full ${
                   phase.status === 'completed' ? 'bg-emerald-400' :
-                  phase.status === 'in_progress' ? 'bg-cyan-400 animate-pulse' : 'bg-white/20'
+                  phase.status === 'in_progress' ? 'bg-foreground animate-pulse' : 'bg-border'
                 }`} />
-                <span className="text-[14px] text-white/70">{phase.name}</span>
+                <span className="text-[14px] text-foreground/80">{phase.name}</span>
               </div>
               <select value={phase.status} onChange={(e) => handlePhaseChange(phase.id, e.target.value)}
-                className="bg-white/[0.04] border border-white/[0.10] rounded-lg px-3 py-1.5 text-[13px] text-white/70 focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+                className="bg-secondary border border-border rounded-lg px-3 py-1.5 text-[13px] text-foreground/80 focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer">
                 <option value="pending">Pendiente</option>
                 <option value="in_progress">En progreso</option>
                 <option value="completed">Completado</option>
@@ -137,16 +137,16 @@ export default function ProjectDetailPage() {
       </section>
 
       {/* Next delivery date */}
-      <section className="bg-[#0f1015] border border-white/[0.06] rounded-2xl p-6 mb-6">
-        <h2 className="text-[15px] font-semibold text-white/80 mb-3">Próxima entrega</h2>
+      <section className="bg-card border border-border rounded-2xl p-6 mb-6">
+        <h2 className="text-[15px] font-semibold text-foreground mb-3">Próxima entrega</h2>
         <input type="date" className={inputClass}
           value={project.nextDeliveryDate ?? ''}
           onChange={(e) => handleDeliveryDate(e.target.value)} />
       </section>
 
       {/* Notes */}
-      <section className="bg-[#0f1015] border border-white/[0.06] rounded-2xl p-6">
-        <h2 className="text-[15px] font-semibold text-white/80 mb-5">Notas</h2>
+      <section className="bg-card border border-border rounded-2xl p-6">
+        <h2 className="text-[15px] font-semibold text-foreground mb-5">Notas</h2>
         <div className="flex gap-2 mb-5">
           <textarea className={`${inputClass} min-h-[60px] resize-y`}
             placeholder="Escribe una actualización para el cliente..."
@@ -154,20 +154,20 @@ export default function ProjectDetailPage() {
           <button onClick={handleAddNote} disabled={!noteInput.trim() || addingNote}
             className={`px-4 self-end rounded-lg text-[13px] font-medium py-2.5 transition-all cursor-pointer ${
               noteInput.trim() && !addingNote
-                ? 'bg-cyan-600 text-white hover:bg-cyan-700'
-                : 'bg-white/[0.04] text-white/20 cursor-not-allowed'
+                ? 'bg-foreground text-primary-foreground hover:bg-foreground/90'
+                : 'bg-secondary text-muted-foreground cursor-not-allowed'
             }`}>
             {addingNote ? '...' : 'Agregar'}
           </button>
         </div>
         {project.notes.length === 0 ? (
-          <p className="text-white/30 text-[13px]">Sin notas aún</p>
+          <p className="text-muted-foreground text-[13px]">Sin notas aún</p>
         ) : (
           <div className="space-y-3">
             {project.notes.map((note) => (
-              <div key={note.id} className="bg-white/[0.02] border border-white/[0.04] rounded-xl p-4">
-                <p className="text-[14px] text-white/70 whitespace-pre-wrap">{note.content}</p>
-                <p className="text-[11px] text-white/30 mt-2">
+              <div key={note.id} className="bg-card border border-border rounded-xl p-4">
+                <p className="text-[14px] text-foreground/80 whitespace-pre-wrap">{note.content}</p>
+                <p className="text-[11px] text-muted-foreground mt-2">
                   {new Date(note.createdAt).toLocaleDateString('es-PE', {
                     year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
                   })}

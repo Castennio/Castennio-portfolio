@@ -62,7 +62,7 @@ const FORMA_PAGO_TEMPLATES = [
 
 function FieldLabel({ children }: { children: React.ReactNode }) {
   return (
-    <label className="block text-[13px] font-medium text-white/60 mb-1.5">
+    <label className="block text-[13px] font-medium text-muted-foreground mb-1.5">
       {children}
     </label>
   );
@@ -83,8 +83,8 @@ function Chip({
       onClick={onClick}
       className={`px-3 py-1.5 rounded-lg text-[12px] font-medium transition-all cursor-pointer ${
         active
-          ? 'bg-[#7C3AED]/20 text-[#A78BFA] border border-[#7C3AED]/40'
-          : 'bg-white/[0.03] text-white/40 border border-white/[0.06] hover:bg-white/[0.06] hover:text-white/60'
+          ? 'bg-foreground/20 text-muted-foreground border border-foreground/40'
+          : 'bg-secondary text-muted-foreground border border-border hover:bg-secondary hover:text-muted-foreground'
       }`}
     >
       {label}
@@ -315,23 +315,23 @@ export default function ContratoPage() {
   };
 
   const inputClass =
-    'w-full bg-white/[0.04] border border-white/[0.10] rounded-lg px-4 py-2.5 text-white/90 text-[14px] placeholder:text-white/30 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 focus:bg-white/[0.06] transition-all';
+    'w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-foreground text-[14px] placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring  focus:bg-secondary transition-all';
 
   return (
     <>
       <div className="max-w-5xl mx-auto px-6 py-8">
         <div className="mb-6">
-          <h1 className="text-xl font-semibold text-white/90">Generador de Contratos</h1>
-          <p className="text-[13px] text-white/40 mt-1">Genera contratos de prestación de servicios</p>
+          <h1 className="text-xl font-semibold text-foreground">Generador de Contratos</h1>
+          <p className="text-[13px] text-muted-foreground mt-1">Genera contratos de prestación de servicios</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Form */}
           <div className="lg:col-span-2 space-y-6">
             {/* Cliente */}
-            <section className="bg-[#0f1015] border border-white/[0.06] border-l-2 border-l-cyan-500/50 rounded-2xl p-6">
-              <h2 className="text-[15px] font-semibold text-white/80 mb-5 flex items-center gap-2">
-                <span className="w-6 h-6 rounded-md bg-cyan-500/15 text-cyan-400 text-[11px] font-bold flex items-center justify-center">C</span>
+            <section className="bg-card border border-border border-l-2 border-l-foreground rounded-2xl p-6">
+              <h2 className="text-[15px] font-semibold text-foreground mb-5 flex items-center gap-2">
+                <span className="w-6 h-6 rounded-md bg-foreground/15 text-foreground text-[11px] font-bold flex items-center justify-center">C</span>
                 Datos del Cliente
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -349,7 +349,7 @@ export default function ContratoPage() {
                     <p className="text-[11px] text-amber-400/60 mt-1">{form.clienteRuc.length}/11 dígitos</p>
                   )}
                   {rucStatus === 'loading' && (
-                    <p className="text-[11px] text-cyan-400/70 mt-1">Consultando SUNAT...</p>
+                    <p className="text-[11px] text-foreground/70 mt-1">Consultando SUNAT...</p>
                   )}
                   {rucStatus === 'success' && (
                     <p className="text-[11px] text-emerald-400/70 mt-1">
@@ -385,8 +385,8 @@ export default function ContratoPage() {
             </section>
 
             {/* Desarrollador */}
-            <section className="bg-[#0f1015] border border-white/[0.06] border-l-2 border-l-violet-500/50 rounded-2xl p-6">
-              <h2 className="text-[15px] font-semibold text-white/80 mb-5 flex items-center gap-2">
+            <section className="bg-card border border-border border-l-2 border-l-violet-500/50 rounded-2xl p-6">
+              <h2 className="text-[15px] font-semibold text-foreground mb-5 flex items-center gap-2">
                 <span className="w-6 h-6 rounded-md bg-violet-500/15 text-violet-400 text-[11px] font-bold flex items-center justify-center">D</span>
                 Datos del Desarrollador
               </h2>
@@ -403,15 +403,15 @@ export default function ContratoPage() {
             </section>
 
             {/* Proyecto */}
-            <section className="bg-[#0f1015] border border-white/[0.06] border-l-2 border-l-pink-500/50 rounded-2xl p-6">
-              <h2 className="text-[15px] font-semibold text-white/80 mb-5 flex items-center gap-2">
+            <section className="bg-card border border-border border-l-2 border-l-pink-500/50 rounded-2xl p-6">
+              <h2 className="text-[15px] font-semibold text-foreground mb-5 flex items-center gap-2">
                 <span className="w-6 h-6 rounded-md bg-pink-500/15 text-pink-400 text-[11px] font-bold flex items-center justify-center">P</span>
                 Proyecto
               </h2>
               <div className="space-y-4">
                 <div>
                   <FieldLabel>Descripción del proyecto</FieldLabel>
-                  <p className="text-[13px] text-white/30 mb-2 italic">
+                  <p className="text-[13px] text-muted-foreground mb-2 italic">
                     EL CLIENTE contrata a EL DESARROLLADOR para realizar...
                   </p>
                   <textarea className={`${inputClass} min-h-[80px] resize-y`} placeholder="el desarrollo e implementación de un sitio web corporativo para [nombre], incluyendo..." maxLength={500} value={form.descripcion} onChange={(e) => update('descripcion', e.target.value)} />
@@ -439,8 +439,8 @@ export default function ContratoPage() {
             </section>
 
             {/* Pago */}
-            <section className="bg-[#0f1015] border border-white/[0.06] border-l-2 border-l-amber-500/50 rounded-2xl p-6">
-              <h2 className="text-[15px] font-semibold text-white/80 mb-5 flex items-center gap-2">
+            <section className="bg-card border border-border border-l-2 border-l-amber-500/50 rounded-2xl p-6">
+              <h2 className="text-[15px] font-semibold text-foreground mb-5 flex items-center gap-2">
                 <span className="w-6 h-6 rounded-md bg-amber-500/15 text-amber-400 text-[11px] font-bold flex items-center justify-center">$</span>
                 Precio y Pago
               </h2>
@@ -476,14 +476,14 @@ export default function ContratoPage() {
                   <FieldLabel>Portal del proyecto</FieldLabel>
                   {savedProject ? (
                     <div className="flex gap-2">
-                      <input className={`${inputClass} text-cyan-400`} readOnly value={`https://castennio.com/portal/${savedProject.slug}`} />
+                      <input className={`${inputClass} text-foreground`} readOnly value={`https://castennio.com/portal/${savedProject.slug}`} />
                       <button onClick={() => navigator.clipboard.writeText(`https://castennio.com/portal/${savedProject.slug}`)}
-                        className="px-4 rounded-lg bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors cursor-pointer text-[13px] whitespace-nowrap">
+                        className="px-4 rounded-lg bg-primary/10 text-foreground hover:bg-foreground/20 transition-colors cursor-pointer text-[13px] whitespace-nowrap">
                         Copiar
                       </button>
                     </div>
                   ) : (
-                    <p className="text-[13px] text-white/30 py-2.5">Se genera automáticamente al guardar</p>
+                    <p className="text-[13px] text-muted-foreground py-2.5">Se genera automáticamente al guardar</p>
                   )}
                 </div>
               </div>
@@ -494,27 +494,27 @@ export default function ContratoPage() {
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
               {/* Price summary */}
-              <div className="bg-gradient-to-b from-[#7C3AED]/[0.06] to-[#0f1015] border border-[#7C3AED]/20 rounded-2xl p-6">
-                <h3 className="text-[13px] font-semibold text-[#A78BFA] uppercase tracking-wider mb-4">Resumen de Precios</h3>
+              <div className="bg-secondary border border-border rounded-2xl p-6">
+                <h3 className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wider mb-4">Resumen de Precios</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between text-[14px]">
-                    <span className="text-white/50">Servicio</span>
-                    <span className="text-white/80 font-medium">S/ {precio.toFixed(2)}</span>
+                    <span className="text-muted-foreground">Servicio</span>
+                    <span className="text-foreground font-medium">S/ {precio.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-[14px]">
-                    <span className="text-white/50">IGV (18%)</span>
-                    <span className="text-white/80 font-medium">S/ {igv.toFixed(2)}</span>
+                    <span className="text-muted-foreground">IGV (18%)</span>
+                    <span className="text-foreground font-medium">S/ {igv.toFixed(2)}</span>
                   </div>
-                  <div className="border-t border-white/[0.06] pt-3 flex justify-between text-[16px]">
-                    <span className="text-white/70 font-semibold">Total</span>
-                    <span className="text-[#A78BFA] font-bold">S/ {total.toFixed(2)}</span>
+                  <div className="border-t border-border pt-3 flex justify-between text-[16px]">
+                    <span className="text-foreground/80 font-semibold">Total</span>
+                    <span className="text-muted-foreground font-bold">S/ {total.toFixed(2)}</span>
                   </div>
                 </div>
               </div>
 
               {/* Checklist */}
-              <div className="bg-[#0f1015] border border-white/[0.08] rounded-2xl p-6">
-                <h3 className="text-[13px] font-semibold text-cyan-400/80 uppercase tracking-wider mb-4">Campos requeridos</h3>
+              <div className="bg-card border border-border rounded-2xl p-6">
+                <h3 className="text-[13px] font-semibold text-foreground/80 uppercase tracking-wider mb-4">Campos requeridos</h3>
                 <div className="space-y-2 text-[13px]">
                   {[
                     ['Razón social', isPersonaNatural || !!form.clienteEmpresa],
@@ -528,10 +528,10 @@ export default function ContratoPage() {
                     ['Forma de pago', !!form.formaPago],
                   ].map(([label, ok]) => (
                     <div key={label as string} className="flex items-center gap-2">
-                      <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] ${ok ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/[0.04] text-white/20'}`}>
+                      <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] ${ok ? 'bg-emerald-500/20 text-emerald-400' : 'bg-secondary text-muted-foreground'}`}>
                         {ok ? '✓' : '·'}
                       </span>
-                      <span className={ok ? 'text-white/60' : 'text-white/30'}>{label as string}</span>
+                      <span className={ok ? 'text-muted-foreground' : 'text-muted-foreground'}>{label as string}</span>
                     </div>
                   ))}
                 </div>
@@ -543,10 +543,10 @@ export default function ContratoPage() {
                   disabled={!canGenerate || saving || !!savedProject}
                   className={`w-full py-3.5 rounded-xl text-[14px] font-semibold transition-all cursor-pointer ${
                     canGenerate && !saving && !savedProject
-                      ? 'bg-cyan-600 text-white hover:bg-cyan-700 active:scale-[0.98]'
+                      ? 'bg-foreground text-primary-foreground hover:bg-foreground/90 active:scale-[0.98]'
                       : savedProject
                         ? 'bg-emerald-500/10 text-emerald-400 cursor-default'
-                        : 'bg-white/[0.04] text-white/20 cursor-not-allowed'
+                        : 'bg-secondary text-muted-foreground cursor-not-allowed'
                   }`}>
                   {saving ? 'Guardando...' : savedProject ? '✓ Proyecto guardado' : 'Guardar proyecto'}
                 </button>
@@ -556,8 +556,8 @@ export default function ContratoPage() {
                     disabled={!canGenerate || !!generating || !savedProject}
                     className={`flex-1 py-3.5 rounded-xl text-[14px] font-semibold transition-all cursor-pointer ${
                       canGenerate && !generating && savedProject
-                        ? 'bg-[#7C3AED] text-white hover:bg-[#6D28D9] active:scale-[0.98]'
-                        : 'bg-white/[0.04] text-white/20 cursor-not-allowed'
+                        ? 'bg-foreground text-primary-foreground hover:bg-foreground/90 active:scale-[0.98]'
+                        : 'bg-secondary text-muted-foreground cursor-not-allowed'
                     }`}>
                     {generating === 'contrato' ? 'Generando...' : 'Descargar Contrato'}
                   </button>
@@ -565,8 +565,8 @@ export default function ContratoPage() {
                     disabled={!canGenerate || !!generating || !savedProject}
                     className={`w-12 rounded-xl flex items-center justify-center transition-all cursor-pointer ${
                       canGenerate && !generating && savedProject
-                        ? 'bg-[#7C3AED]/20 text-[#A78BFA] hover:bg-[#7C3AED]/30 active:scale-95'
-                        : 'bg-white/[0.02] text-white/15 cursor-not-allowed'
+                        ? 'bg-foreground/20 text-muted-foreground hover:bg-foreground/30 active:scale-95'
+                        : 'bg-card text-muted-foreground cursor-not-allowed'
                     }`}
                     title="Enviar por correo">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -579,8 +579,8 @@ export default function ContratoPage() {
                     disabled={!canGenerate || !!generating || !savedProject}
                     className={`flex-1 py-3.5 rounded-xl text-[14px] font-semibold transition-all cursor-pointer ${
                       canGenerate && !generating && savedProject
-                        ? 'bg-[#0d9488] text-white hover:bg-[#0f766e] active:scale-[0.98]'
-                        : 'bg-white/[0.04] text-white/20 cursor-not-allowed'
+                        ? 'bg-foreground text-primary-foreground hover:bg-foreground/90 active:scale-[0.98]'
+                        : 'bg-secondary text-muted-foreground cursor-not-allowed'
                     }`}>
                     {generating === 'welcome' ? 'Generando...' : 'Descargar Welcome Pack'}
                   </button>
@@ -588,8 +588,8 @@ export default function ContratoPage() {
                     disabled={!canGenerate || !!generating || !savedProject}
                     className={`w-12 rounded-xl flex items-center justify-center transition-all cursor-pointer ${
                       canGenerate && !generating && savedProject
-                        ? 'bg-teal-500/20 text-teal-400 hover:bg-teal-500/30 active:scale-95'
-                        : 'bg-white/[0.02] text-white/15 cursor-not-allowed'
+                        ? 'bg-foreground/20 text-teal-400 hover:bg-foreground/30 active:scale-95'
+                        : 'bg-card text-muted-foreground cursor-not-allowed'
                     }`}
                     title="Enviar por correo">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -602,7 +602,7 @@ export default function ContratoPage() {
           </div>
         </div>
 
-        <p className="text-center text-white/30 text-[12px] mt-12">
+        <p className="text-center text-muted-foreground text-[12px] mt-12">
           Herramienta interna. Los contratos generados son borradores y deben ser revisados antes de su firma.
         </p>
       </div>
@@ -610,12 +610,12 @@ export default function ContratoPage() {
       {/* Email Modal */}
       {emailModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => !sending && setEmailModal(null)}>
-          <div className="bg-[#0f1015] border border-white/[0.10] rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-card border border-border rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-5">
-              <h3 className="text-[16px] font-semibold text-white/90">
+              <h3 className="text-[16px] font-semibold text-foreground">
                 Enviar {emailModal === 'welcome' ? 'Welcome Pack' : 'Contrato'}
               </h3>
-              <button onClick={() => !sending && setEmailModal(null)} className="text-white/30 hover:text-white/60 transition-colors cursor-pointer">
+              <button onClick={() => !sending && setEmailModal(null)} className="text-muted-foreground hover:text-muted-foreground transition-colors cursor-pointer">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -640,7 +640,7 @@ export default function ContratoPage() {
             </div>
 
             <button onClick={() => setEmailList([...emailList, ''])}
-              className="w-full py-2 rounded-lg border border-dashed border-white/[0.10] text-white/40 hover:text-white/60 hover:border-white/20 text-[13px] transition-colors mb-5 cursor-pointer flex items-center justify-center gap-2">
+              className="w-full py-2 rounded-lg border border-dashed border-border text-muted-foreground hover:text-muted-foreground hover:border-border text-[13px] transition-colors mb-5 cursor-pointer flex items-center justify-center gap-2">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
               </svg>
@@ -655,9 +655,9 @@ export default function ContratoPage() {
               className={`w-full py-3.5 rounded-xl text-[14px] font-semibold transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 !sending && emailList.some((e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))
                   ? emailModal === 'welcome'
-                    ? 'bg-teal-500 text-white hover:bg-teal-600 active:scale-[0.98]'
-                    : 'bg-[#7C3AED] text-white hover:bg-[#6D28D9] active:scale-[0.98]'
-                  : 'bg-white/[0.04] text-white/20 cursor-not-allowed'
+                    ? 'bg-foreground text-primary-foreground hover:bg-foreground/90 active:scale-[0.98]'
+                    : 'bg-foreground text-primary-foreground hover:bg-foreground/90 active:scale-[0.98]'
+                  : 'bg-secondary text-muted-foreground cursor-not-allowed'
               }`}>
               {sending ? (
                 <><svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>Enviando...</>

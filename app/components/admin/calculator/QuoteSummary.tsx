@@ -27,7 +27,7 @@ function SummaryRow({
       className={`
         flex items-center justify-between py-3
         ${variant === 'total'
-          ? 'border-t border-white/[0.08] pt-4 mt-2'
+          ? 'border-t border-border pt-4 mt-2'
           : ''
         }
       `}
@@ -35,10 +35,10 @@ function SummaryRow({
       <span
         className={`
           ${variant === 'total'
-            ? 'text-white/90 font-medium'
+            ? 'text-foreground font-medium'
             : variant === 'adjustment'
-              ? 'text-white/50 text-sm pl-4'
-              : 'text-white/60'
+              ? 'text-muted-foreground text-sm pl-4'
+              : 'text-muted-foreground'
           }
         `}
       >
@@ -48,10 +48,10 @@ function SummaryRow({
         className={`
           font-mono
           ${variant === 'total'
-            ? 'text-[#A78BFA] text-xl font-semibold'
+            ? 'text-muted-foreground text-xl font-semibold'
             : variant === 'adjustment'
               ? 'text-amber-400/80 text-sm'
-              : 'text-white/80'
+              : 'text-foreground'
           }
         `}
       >
@@ -64,9 +64,9 @@ function SummaryRow({
 function EmptyState() {
   return (
     <div className="text-center py-12">
-      <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/[0.02] flex items-center justify-center">
+      <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-card flex items-center justify-center">
         <svg
-          className="w-7 h-7 text-white/20"
+          className="w-7 h-7 text-muted-foreground"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -79,8 +79,8 @@ function EmptyState() {
           />
         </svg>
       </div>
-      <p className="text-white/40 text-sm mb-1">Sin cotización</p>
-      <p className="text-white/25 text-xs">
+      <p className="text-muted-foreground text-sm mb-1">Sin cotización</p>
+      <p className="text-muted-foreground text-xs">
         Selecciona las opciones para ver el resumen
       </p>
     </div>
@@ -110,13 +110,13 @@ export default function QuoteSummary({
   };
 
   return (
-    <div className="bg-[#0f1015] border border-white/[0.06] rounded-2xl overflow-hidden h-fit sticky top-6">
+    <div className="bg-card border border-border rounded-2xl overflow-hidden h-fit sticky top-6">
       {/* Header */}
-      <div className="px-6 py-5 border-b border-white/[0.06] bg-gradient-to-r from-[#7C3AED]/5 to-transparent">
+      <div className="px-6 py-5 border-b border-border bg-secondary">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#7C3AED]/10 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-foreground/10 flex items-center justify-center">
             <svg
-              className="w-5 h-5 text-[#7C3AED]"
+              className="w-5 h-5 text-foreground"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -130,8 +130,8 @@ export default function QuoteSummary({
             </svg>
           </div>
           <div>
-            <h3 className="text-lg font-medium text-white/90">Resumen</h3>
-            <p className="text-[12px] text-white/40">Cotización estimada</p>
+            <h3 className="text-lg font-medium text-foreground">Resumen</h3>
+            <p className="text-[12px] text-muted-foreground">Cotización estimada</p>
           </div>
         </div>
       </div>
@@ -143,27 +143,27 @@ export default function QuoteSummary({
         ) : (
           <div className="space-y-1">
             {/* Selected options */}
-            <div className="mb-6 p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+            <div className="mb-6 p-4 rounded-xl bg-card border border-border">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-[12px] text-white/40 uppercase tracking-wider">Plan</span>
-                  <span className="text-sm text-white/80 font-medium">{quote.plan.name}</span>
+                  <span className="text-[12px] text-muted-foreground uppercase tracking-wider">Plan</span>
+                  <span className="text-sm text-foreground font-medium">{quote.plan.name}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[12px] text-white/40 uppercase tracking-wider">Cliente</span>
-                  <span className="text-sm text-white/80">{quote.clientType.name}</span>
+                  <span className="text-[12px] text-muted-foreground uppercase tracking-wider">Cliente</span>
+                  <span className="text-sm text-foreground">{quote.clientType.name}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[12px] text-white/40 uppercase tracking-wider">Urgencia</span>
-                  <span className="text-sm text-white/80">{quote.urgency.name}</span>
+                  <span className="text-[12px] text-muted-foreground uppercase tracking-wider">Urgencia</span>
+                  <span className="text-sm text-foreground">{quote.urgency.name}</span>
                 </div>
               </div>
             </div>
 
             {/* Delivery time */}
-            <div className="flex items-center gap-3 p-4 rounded-xl bg-[#7C3AED]/5 border border-[#7C3AED]/10 mb-6">
+            <div className="flex items-center gap-3 p-4 rounded-xl bg-foreground/5 border border-foreground/10 mb-6">
               <svg
-                className="w-5 h-5 text-[#7C3AED] flex-shrink-0"
+                className="w-5 h-5 text-foreground flex-shrink-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -176,8 +176,8 @@ export default function QuoteSummary({
                 />
               </svg>
               <div>
-                <p className="text-[12px] text-white/40">Tiempo estimado</p>
-                <p className="text-[#A78BFA] font-medium">{quote.deliveryTime}</p>
+                <p className="text-[12px] text-muted-foreground">Tiempo estimado</p>
+                <p className="text-muted-foreground font-medium">{quote.deliveryTime}</p>
               </div>
             </div>
 
@@ -204,15 +204,15 @@ export default function QuoteSummary({
             {/* Included addons (free with plan) */}
             {quote.includedAddons.length > 0 && (
               <>
-                <div className="pt-3 mt-3 border-t border-white/[0.04]">
-                  <p className="text-[10px] text-white/30 uppercase tracking-wider mb-2">Incluido en el plan</p>
+                <div className="pt-3 mt-3 border-t border-border">
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-2">Incluido en el plan</p>
                 </div>
                 {quote.includedAddons.map((addonId) => {
                   const addon = quote.addons.find(a => a.id === addonId) || { name: addonId };
                   return (
                     <div key={addonId} className="flex items-center justify-between py-2">
-                      <span className="text-green-400/70 text-sm pl-4">✓ {addon.name || addonId}</span>
-                      <span className="font-mono text-green-400 text-sm">Gratis</span>
+                      <span className="text-foreground/70 text-sm pl-4">✓ {addon.name || addonId}</span>
+                      <span className="font-mono text-foreground text-sm">Gratis</span>
                     </div>
                   );
                 })}
@@ -222,24 +222,24 @@ export default function QuoteSummary({
             {/* Addons */}
             {quote.addons.filter(a => !quote.includedAddons.includes(a.id)).length > 0 && (
               <>
-                <div className="pt-3 mt-3 border-t border-white/[0.04]">
-                  <p className="text-[10px] text-white/30 uppercase tracking-wider mb-2">Servicios adicionales</p>
+                <div className="pt-3 mt-3 border-t border-border">
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-2">Servicios adicionales</p>
                 </div>
                 {/* Show bundles first */}
                 {quote.appliedBundles.map(({ bundle, savings }) => (
                   <div key={bundle.id} className="py-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="text-white/50 text-sm pl-4">+ {bundle.bundleName}</span>
-                        <span className="px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-400 rounded-full">
+                        <span className="text-muted-foreground text-sm pl-4">+ {bundle.bundleName}</span>
+                        <span className="px-1.5 py-0.5 text-[10px] bg-green-500/20 text-foreground rounded-full">
                           -{formatCurrency(savings)}
                         </span>
                       </div>
-                      <span className="font-mono text-green-400/80 text-sm">
+                      <span className="font-mono text-foreground/80 text-sm">
                         +{formatCurrency(bundle.bundlePrice)}
                       </span>
                     </div>
-                    <p className="text-[10px] text-white/30 pl-4 mt-0.5">
+                    <p className="text-[10px] text-muted-foreground pl-4 mt-0.5">
                       {bundle.addons.join(' + ')}
                     </p>
                   </div>
@@ -261,8 +261,8 @@ export default function QuoteSummary({
                 {/* Show total savings if any */}
                 {quote.addonsDiscount > 0 && (
                   <div className="flex items-center justify-between py-2 mt-2 px-3 rounded-lg bg-green-500/10 border border-green-500/20">
-                    <span className="text-green-400 text-sm">Ahorro total</span>
-                    <span className="font-mono text-green-400 font-medium">
+                    <span className="text-foreground text-sm">Ahorro total</span>
+                    <span className="font-mono text-foreground font-medium">
                       -{formatCurrency(quote.addonsDiscount)}
                     </span>
                   </div>
@@ -278,13 +278,13 @@ export default function QuoteSummary({
 
             {/* Notes */}
             {quote.notes.length > 0 && (
-              <div className="mt-6 pt-4 border-t border-white/[0.06]">
-                <p className="text-[11px] text-white/30 uppercase tracking-wider mb-3">Notas</p>
+              <div className="mt-6 pt-4 border-t border-border">
+                <p className="text-[11px] text-muted-foreground uppercase tracking-wider mb-3">Notas</p>
                 <ul className="space-y-2">
                   {quote.notes.map((note, index) => (
                     <li key={index} className="flex items-start gap-2">
-                      <span className="text-white/20 mt-1">-</span>
-                      <span className="text-[12px] text-white/40 leading-relaxed">{note}</span>
+                      <span className="text-muted-foreground mt-1">-</span>
+                      <span className="text-[12px] text-muted-foreground leading-relaxed">{note}</span>
                     </li>
                   ))}
                 </ul>
@@ -322,7 +322,7 @@ export default function QuoteSummary({
       <div className="px-6 pb-6 space-y-3">
         {/* Client name input */}
         <div>
-          <label className="block text-[11px] text-white/40 uppercase tracking-wider mb-2">
+          <label className="block text-[11px] text-muted-foreground uppercase tracking-wider mb-2">
             Empresa / Cliente (opcional)
           </label>
           <input
@@ -330,9 +330,9 @@ export default function QuoteSummary({
             value={clientName}
             onChange={(e) => onClientNameChange(e.target.value)}
             placeholder="Ej: Mi Empresa S.A.C."
-            className="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08]
-                       text-white/90 text-sm placeholder:text-white/30
-                       focus:outline-none focus:border-[#7C3AED]/50 focus:bg-white/[0.06]
+            className="w-full px-4 py-2.5 rounded-xl bg-secondary border border-border
+                       text-foreground text-sm placeholder:text-muted-foreground
+                       focus:outline-none focus:border-foreground/50 focus:bg-secondary
                        transition-all duration-200"
           />
         </div>
@@ -343,15 +343,15 @@ export default function QuoteSummary({
           className={`
             w-full py-3.5 rounded-xl font-medium text-sm transition-all duration-300
             ${isComplete && !isGenerating
-              ? 'bg-[#7C3AED] hover:bg-[#6D28D9] text-white shadow-[0_0_30px_-10px_rgba(124,58,237,0.5)]'
-              : 'bg-white/[0.04] text-white/30 cursor-not-allowed'
+              ? 'bg-foreground hover:bg-foreground/90 text-primary-foreground '
+              : 'bg-secondary text-muted-foreground cursor-not-allowed'
             }
           `}
         >
           <span className="flex items-center justify-center gap-2">
             {isGenerating ? (
               <>
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
                 Generando PDF...
               </>
             ) : (
@@ -369,10 +369,10 @@ export default function QuoteSummary({
           disabled={!quote}
           className={`
             w-full py-3 rounded-xl font-medium text-sm transition-all duration-300
-            border border-white/[0.06]
+            border border-border
             ${quote
-              ? 'text-white/60 hover:text-white hover:border-white/[0.12] hover:bg-white/[0.02]'
-              : 'text-white/20 cursor-not-allowed'
+              ? 'text-muted-foreground hover:text-foreground hover:border-border hover:bg-card'
+              : 'text-muted-foreground cursor-not-allowed'
             }
           `}
         >

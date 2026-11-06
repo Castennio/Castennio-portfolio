@@ -83,18 +83,18 @@ function CalculatorContent() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f]">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-white/[0.06]">
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <a
                 href="/"
-                className="w-10 h-10 rounded-xl bg-[#7C3AED]/10 flex items-center justify-center hover:bg-[#7C3AED]/20 transition-colors"
+                className="w-10 h-10 rounded-xl bg-foreground/10 flex items-center justify-center hover:bg-foreground/20 transition-colors"
               >
                 <svg
-                  className="w-5 h-5 text-[#7C3AED]"
+                  className="w-5 h-5 text-foreground"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -108,22 +108,22 @@ function CalculatorContent() {
                 </svg>
               </a>
               <div>
-                <h1 className="text-xl font-semibold text-white/90">
+                <h1 className="text-xl font-semibold text-foreground">
                   Calculadora de Cotizaciones
                 </h1>
-                <p className="text-[13px] text-white/40">
+                <p className="text-[13px] text-muted-foreground">
                   Panel administrativo CASTENNIO
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <span className="px-3 py-1.5 text-[11px] font-medium tracking-wider uppercase bg-[#7C3AED]/10 text-[#A78BFA] rounded-full">
+              <span className="px-3 py-1.5 text-[11px] font-medium tracking-wider uppercase bg-foreground/10 text-muted-foreground rounded-full">
                 Admin
               </span>
               <form action={logoutAction}>
                 <button
                   type="submit"
-                  className="p-2 rounded-lg text-white/40 hover:text-white/70 hover:bg-white/[0.04] transition-colors cursor-pointer"
+                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground/80 hover:bg-secondary transition-colors cursor-pointer"
                   title="Cerrar sesión"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -141,14 +141,14 @@ function CalculatorContent() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left column - Selectors */}
           <div className="lg:col-span-2 space-y-8">
-            <section className="bg-[#0f1015] border border-white/[0.06] rounded-2xl p-6">
+            <section className="bg-card border border-border rounded-2xl p-6">
               <PlanSelector
                 selected={formState.selectedPlan}
                 onSelect={handlePlanSelect}
               />
             </section>
 
-            <section className="bg-[#0f1015] border border-white/[0.06] rounded-2xl p-6">
+            <section className="bg-card border border-border rounded-2xl p-6">
               <ClientTypeSelector
                 selected={formState.selectedClientType}
                 onSelect={handleClientTypeSelect}
@@ -156,7 +156,7 @@ function CalculatorContent() {
               />
             </section>
 
-            <section className="bg-[#0f1015] border border-white/[0.06] rounded-2xl p-6">
+            <section className="bg-card border border-border rounded-2xl p-6">
               <UrgencySelector
                 selected={formState.selectedUrgency}
                 onSelect={handleUrgencySelect}
@@ -165,7 +165,7 @@ function CalculatorContent() {
               />
             </section>
 
-            <section className="bg-[#0f1015] border border-white/[0.06] rounded-2xl p-6">
+            <section className="bg-card border border-border rounded-2xl p-6">
               <AddonsSelector
                 selected={formState.selectedAddons}
                 onToggle={handleAddonToggle}
@@ -187,7 +187,7 @@ function CalculatorContent() {
           </div>
         </div>
 
-        <p className="text-center text-white/30 text-[12px] mt-12">
+        <p className="text-center text-muted-foreground text-[12px] mt-12">
           Herramienta interna de cotización. Los precios son estimados y pueden variar según el alcance final del proyecto.
         </p>
       </main>

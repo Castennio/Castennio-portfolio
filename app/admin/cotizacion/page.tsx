@@ -82,21 +82,21 @@ export default function CotizacionPage() {
   return (
     <div className="max-w-7xl mx-auto px-6 py-8">
       <div className="mb-6">
-        <h1 className="text-xl font-semibold text-white/90">Calculadora de Cotizaciones</h1>
-        <p className="text-[13px] text-white/40 mt-1">Genera cotizaciones para tus clientes</p>
+        <h1 className="text-xl font-semibold text-foreground">Calculadora de Cotizaciones</h1>
+        <p className="text-[13px] text-muted-foreground mt-1">Genera cotizaciones para tus clientes</p>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
-          <section className="bg-[#0f1015] border border-white/[0.06] rounded-2xl p-6">
+          <section className="bg-card border border-border rounded-2xl p-6">
             <PlanSelector selected={formState.selectedPlan} onSelect={handlePlanSelect} />
           </section>
-          <section className="bg-[#0f1015] border border-white/[0.06] rounded-2xl p-6">
+          <section className="bg-card border border-border rounded-2xl p-6">
             <ClientTypeSelector selected={formState.selectedClientType} onSelect={handleClientTypeSelect} disabled={!formState.selectedPlan} />
           </section>
-          <section className="bg-[#0f1015] border border-white/[0.06] rounded-2xl p-6">
+          <section className="bg-card border border-border rounded-2xl p-6">
             <UrgencySelector selected={formState.selectedUrgency} onSelect={handleUrgencySelect} selectedPlan={formState.selectedPlan} disabled={!formState.selectedClientType} />
           </section>
-          <section className="bg-[#0f1015] border border-white/[0.06] rounded-2xl p-6">
+          <section className="bg-card border border-border rounded-2xl p-6">
             <AddonsSelector selected={formState.selectedAddons} onToggle={handleAddonToggle} disabled={!formState.selectedUrgency} selectedPlan={formState.selectedPlan} />
           </section>
         </div>
@@ -104,7 +104,7 @@ export default function CotizacionPage() {
           <QuoteSummary quote={quote} onReset={handleReset} isComplete={isComplete} clientName={clientName} onClientNameChange={setClientName} />
         </div>
       </div>
-      <p className="text-center text-white/30 text-[12px] mt-12">
+      <p className="text-center text-muted-foreground text-[12px] mt-12">
         Herramienta interna de cotización. Los precios son estimados y pueden variar según el alcance final del proyecto.
       </p>
     </div>

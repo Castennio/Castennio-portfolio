@@ -114,14 +114,14 @@ function AddonCard({
         ${isIncluded
           ? 'bg-green-500/5 border-green-500/20'
           : isSelected
-            ? 'bg-[#7C3AED]/10 border-[#7C3AED]/50'
-            : 'bg-[#0f1015] border-white/[0.06] hover:border-white/[0.12] hover:bg-[#14151a]'
+            ? 'bg-foreground/10 border-foreground/50'
+            : 'bg-card border-border hover:border-border hover:bg-card'
         }
       `}
     >
       {/* Included badge */}
       {isIncluded && (
-        <div className="absolute -top-2 right-3 px-2 py-0.5 text-[9px] font-medium uppercase tracking-wider bg-green-500/20 text-green-400 rounded-full border border-green-500/30">
+        <div className="absolute -top-2 right-3 px-2 py-0.5 text-[9px] font-medium uppercase tracking-wider bg-green-500/20 text-foreground rounded-full border border-green-500/30">
           Incluido
         </div>
       )}
@@ -133,11 +133,11 @@ function AddonCard({
             Descuento
           </div>
           {/* Tooltip */}
-          <div className="absolute bottom-full right-0 mb-2 w-48 p-2 bg-[#1a1a1f] border border-white/10 rounded-lg shadow-xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-200 z-50">
-            <p className="text-[11px] text-white/70 leading-relaxed">
+          <div className="absolute bottom-full right-0 mb-2 w-48 p-2 bg-card border border-border rounded-lg shadow-xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-200 z-50">
+            <p className="text-[11px] text-foreground/80 leading-relaxed">
               Precio rebajado porque tu plan ya incluye la visualización. Solo pagas por el panel de gestión.
             </p>
-            <div className="absolute -bottom-1 right-4 w-2 h-2 bg-[#1a1a1f] border-r border-b border-white/10 transform rotate-45"></div>
+            <div className="absolute -bottom-1 right-4 w-2 h-2 bg-card border-r border-b border-border transform rotate-45"></div>
           </div>
         </div>
       )}
@@ -151,13 +151,13 @@ function AddonCard({
             ${isIncluded
               ? 'border-green-500 bg-green-500'
               : isSelected
-                ? 'border-[#7C3AED] bg-[#7C3AED]'
-                : 'border-white/20'
+                ? 'border-foreground bg-foreground'
+                : 'border-border'
             }
           `}
         >
           {(isSelected || isIncluded) && (
-            <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-3 h-3 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
             </svg>
           )}
@@ -168,10 +168,10 @@ function AddonCard({
           className={`
             w-9 h-9 rounded-lg flex items-center justify-center transition-colors flex-shrink-0
             ${isIncluded
-              ? 'bg-green-500/20 text-green-400'
+              ? 'bg-green-500/20 text-foreground'
               : isSelected
-                ? 'bg-[#7C3AED]/20 text-[#A78BFA]'
-                : 'bg-white/[0.04] text-white/40'
+                ? 'bg-foreground/20 text-muted-foreground'
+                : 'bg-secondary text-muted-foreground'
             }
           `}
         >
@@ -184,13 +184,13 @@ function AddonCard({
             <h4
               className={`
                 text-sm font-medium transition-colors truncate
-                ${isIncluded ? 'text-green-400' : isSelected ? 'text-white' : 'text-white/70'}
+                ${isIncluded ? 'text-foreground' : isSelected ? 'text-primary-foreground' : 'text-foreground/80'}
               `}
             >
               {addon.name}
             </h4>
           </div>
-          <p className="text-[11px] text-white/40 truncate">
+          <p className="text-[11px] text-muted-foreground truncate">
             {isIncluded ? 'Ya incluido en tu plan' : addon.description}
           </p>
           {addon.note && !isIncluded && (
@@ -201,17 +201,17 @@ function AddonCard({
         {/* Price */}
         <div className="text-right flex-shrink-0">
           {isIncluded ? (
-            <p className="text-[11px] text-green-400">Gratis</p>
+            <p className="text-[11px] text-foreground">Gratis</p>
           ) : hasDiscount ? (
             <div>
-              <p className="text-[10px] text-white/30 line-through">+{formatCurrency(addon.minPrice)}</p>
+              <p className="text-[10px] text-muted-foreground line-through">+{formatCurrency(addon.minPrice)}</p>
               <p className="text-[11px] text-amber-400">+{formatCurrency(displayPrice)}</p>
             </div>
           ) : (
             <p
               className={`
                 text-[11px] transition-colors
-                ${isSelected ? 'text-[#A78BFA]' : 'text-white/40'}
+                ${isSelected ? 'text-muted-foreground' : 'text-muted-foreground'}
               `}
             >
               +{formatCurrency(addon.minPrice)}
@@ -257,13 +257,13 @@ export default function AddonsSelector({
           <div
             className={`
               w-8 h-8 rounded-lg flex items-center justify-center transition-colors
-              ${disabled ? 'bg-white/[0.04]' : 'bg-[#7C3AED]/10'}
+              ${disabled ? 'bg-secondary' : 'bg-foreground/10'}
             `}
           >
             <span
               className={`
                 font-semibold text-sm transition-colors
-                ${disabled ? 'text-white/30' : 'text-[#7C3AED]'}
+                ${disabled ? 'text-muted-foreground' : 'text-foreground'}
               `}
             >
               4
@@ -273,16 +273,16 @@ export default function AddonsSelector({
             <h2
               className={`
                 text-lg font-medium transition-colors
-                ${disabled ? 'text-white/40' : 'text-white/90'}
+                ${disabled ? 'text-muted-foreground' : 'text-foreground'}
               `}
             >
               Servicios adicionales
             </h2>
-            <p className="text-[13px] text-white/40">Potencia tu proyecto (opcional)</p>
+            <p className="text-[13px] text-muted-foreground">Potencia tu proyecto (opcional)</p>
           </div>
         </div>
         {totalAddons > 0 && (
-          <span className="px-2.5 py-1 text-[11px] font-medium bg-[#7C3AED]/10 text-[#A78BFA] rounded-full">
+          <span className="px-2.5 py-1 text-[11px] font-medium bg-foreground/10 text-muted-foreground rounded-full">
             {totalAddons} seleccionado{totalAddons > 1 ? 's' : ''}
           </span>
         )}
@@ -291,10 +291,10 @@ export default function AddonsSelector({
       {/* Show included addons info */}
       {includedAddons.length > 0 && (
         <div className="flex items-center gap-2 p-3 rounded-lg bg-green-500/10 border border-green-500/20 mb-4">
-          <svg className="w-4 h-4 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-4 h-4 text-foreground flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
-          <p className="text-[12px] text-green-400">
+          <p className="text-[12px] text-foreground">
             Tu plan ya incluye: {includedAddons.map(id => ADDON_LIST.find(a => a.id === id)?.name).join(', ')}
           </p>
         </div>
@@ -321,7 +321,7 @@ export default function AddonsSelector({
       </div>
 
       {/* Info note */}
-      <p className="text-[11px] text-white/30 text-center mt-4">
+      <p className="text-[11px] text-muted-foreground text-center mt-4">
         Precios base. El costo final puede variar según la complejidad del proyecto.
       </p>
     </div>

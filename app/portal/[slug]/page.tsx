@@ -11,15 +11,15 @@ export default async function ClientPortalPage({ params }: { params: Promise<{ s
   const pct = data.phases.length > 0 ? Math.round((completedCount / data.phases.length) * 100) : 0;
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f]">
-      <header className="border-b border-white/[0.06] px-6 py-6">
+    <div className="min-h-screen bg-background">
+      <header className="border-b border-border px-6 py-6">
         <div className="max-w-2xl mx-auto flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-cyan-500/10 flex items-center justify-center">
-            <span className="text-cyan-400 font-bold text-sm">C</span>
+          <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
+            <span className="text-foreground font-bold text-sm">C</span>
           </div>
           <div>
-            <p className="text-white/90 font-semibold text-[15px]">{data.projectName}</p>
-            <p className="text-white/30 text-[12px]">Portal del proyecto</p>
+            <p className="text-foreground font-semibold text-[15px]">{data.projectName}</p>
+            <p className="text-muted-foreground text-[12px]">Portal del proyecto</p>
           </div>
         </div>
       </header>
@@ -28,24 +28,24 @@ export default async function ClientPortalPage({ params }: { params: Promise<{ s
         {/* Progress bar */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <span className="text-[13px] text-white/50">Progreso general</span>
-            <span className="text-[13px] text-cyan-400 font-medium tabular-nums">{pct}%</span>
+            <span className="text-[13px] text-muted-foreground">Progreso general</span>
+            <span className="text-[13px] text-foreground font-medium tabular-nums">{pct}%</span>
           </div>
-          <div className="h-2.5 bg-white/[0.06] rounded-full overflow-hidden">
-            <div className="h-full bg-cyan-500 rounded-full transition-all" style={{ width: `${pct}%` }} />
+          <div className="h-2.5 bg-secondary rounded-full overflow-hidden">
+            <div className="h-full bg-foreground rounded-full transition-all" style={{ width: `${pct}%` }} />
           </div>
         </div>
 
         {/* Timeline */}
         <section>
-          <h2 className="text-[15px] font-semibold text-white/80 mb-5">Fases</h2>
+          <h2 className="text-[15px] font-semibold text-foreground mb-5">Fases</h2>
           <div className="space-y-0">
             {data.phases.map((phase, i) => (
               <div key={i} className="flex gap-4">
                 <div className="flex flex-col items-center">
                   <div className={`w-4 h-4 rounded-full flex items-center justify-center ${
                     phase.status === 'completed' ? 'bg-emerald-400' :
-                    phase.status === 'in_progress' ? 'bg-cyan-400 animate-pulse' : 'bg-white/20'
+                    phase.status === 'in_progress' ? 'bg-foreground animate-pulse' : 'bg-border'
                   }`}>
                     {phase.status === 'completed' && (
                       <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
@@ -61,12 +61,12 @@ export default async function ClientPortalPage({ params }: { params: Promise<{ s
                 </div>
                 <div className="pb-6">
                   <p className={`text-[14px] font-medium ${
-                    phase.status === 'completed' ? 'text-white/70' :
-                    phase.status === 'in_progress' ? 'text-white/90' : 'text-white/40'
+                    phase.status === 'completed' ? 'text-foreground/80' :
+                    phase.status === 'in_progress' ? 'text-foreground' : 'text-muted-foreground'
                   }`}>{phase.name}</p>
                   <p className={`text-[12px] mt-0.5 ${
                     phase.status === 'completed' ? 'text-emerald-400/70' :
-                    phase.status === 'in_progress' ? 'text-cyan-400/70' : 'text-white/25'
+                    phase.status === 'in_progress' ? 'text-foreground/70' : 'text-muted-foreground'
                   }`}>
                     {phase.status === 'completed' ? 'Completado' :
                      phase.status === 'in_progress' ? 'En progreso' : 'Pendiente'}
@@ -79,9 +79,9 @@ export default async function ClientPortalPage({ params }: { params: Promise<{ s
 
         {/* Next delivery */}
         {data.nextDeliveryDate && (
-          <section className="bg-cyan-500/[0.06] border border-cyan-500/20 rounded-2xl p-5">
-            <p className="text-[13px] text-cyan-400/80 mb-1">Próxima entrega</p>
-            <p className="text-[16px] text-white/90 font-medium">
+          <section className="bg-foreground/[0.06] border border-cyan-500/20 rounded-2xl p-5">
+            <p className="text-[13px] text-foreground/80 mb-1">Próxima entrega</p>
+            <p className="text-[16px] text-foreground font-medium">
               {new Date(data.nextDeliveryDate + 'T00:00:00').toLocaleDateString('es-PE', {
                 year: 'numeric', month: 'long', day: 'numeric',
               })}
@@ -92,12 +92,12 @@ export default async function ClientPortalPage({ params }: { params: Promise<{ s
         {/* Notes */}
         {data.notes.length > 0 && (
           <section>
-            <h2 className="text-[15px] font-semibold text-white/80 mb-5">Actualizaciones</h2>
+            <h2 className="text-[15px] font-semibold text-foreground mb-5">Actualizaciones</h2>
             <div className="space-y-3">
               {data.notes.map((note, i) => (
-                <div key={i} className="bg-white/[0.02] border border-white/[0.04] rounded-xl p-4">
-                  <p className="text-[14px] text-white/70 whitespace-pre-wrap">{note.content}</p>
-                  <p className="text-[11px] text-white/30 mt-2">
+                <div key={i} className="bg-card border border-border rounded-xl p-4">
+                  <p className="text-[14px] text-foreground/80 whitespace-pre-wrap">{note.content}</p>
+                  <p className="text-[11px] text-muted-foreground mt-2">
                     {new Date(note.createdAt).toLocaleDateString('es-PE', {
                       year: 'numeric', month: 'short', day: 'numeric',
                     })}
@@ -109,10 +109,10 @@ export default async function ClientPortalPage({ params }: { params: Promise<{ s
         )}
       </main>
 
-      <footer className="border-t border-white/[0.06] px-6 py-6 mt-8">
-        <p className="text-center text-white/25 text-[12px]">
+      <footer className="border-t border-border px-6 py-6 mt-8">
+        <p className="text-center text-muted-foreground text-[12px]">
           Creado con{' '}
-          <a href="https://castennio.com" className="text-white/40 hover:text-white/60 transition-colors">
+          <a href="https://castennio.com" className="text-muted-foreground hover:text-muted-foreground transition-colors">
             Castennio
           </a>
         </p>

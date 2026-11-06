@@ -72,7 +72,7 @@ function UrgencyCard({
         ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
         ${isSelected
           ? `${colors.bg} ${colors.border}`
-          : 'bg-[#0f1015] border-white/[0.06] hover:border-white/[0.12] hover:bg-[#14151a]'
+          : 'bg-card border-border hover:border-border hover:bg-card'
         }
       `}
     >
@@ -83,7 +83,7 @@ function UrgencyCard({
             w-10 h-10 rounded-lg flex items-center justify-center transition-colors flex-shrink-0
             ${isSelected
               ? `${colors.bg} ${colors.text}`
-              : 'bg-white/[0.04] text-white/40'
+              : 'bg-secondary text-muted-foreground'
             }
           `}
         >
@@ -96,7 +96,7 @@ function UrgencyCard({
             <h3
               className={`
                 text-sm font-medium transition-colors
-                ${isSelected ? colors.text : 'text-white/70'}
+                ${isSelected ? colors.text : 'text-foreground/80'}
               `}
             >
               {config.name}
@@ -105,7 +105,7 @@ function UrgencyCard({
               className={`
                 text-[11px] font-medium px-2 py-0.5 rounded-full
                 ${config.multiplier === 0
-                  ? 'bg-white/[0.04] text-white/40'
+                  ? 'bg-secondary text-muted-foreground'
                   : `${colors.bg} ${colors.text}`
                 }
               `}
@@ -114,7 +114,7 @@ function UrgencyCard({
             </span>
           </div>
           {deliveryTime && (
-            <p className={`text-[12px] ${isSelected ? 'text-white/60' : 'text-white/40'}`}>
+            <p className={`text-[12px] ${isSelected ? 'text-muted-foreground' : 'text-muted-foreground'}`}>
               Entrega: {deliveryTime}
             </p>
           )}
@@ -127,7 +127,7 @@ function UrgencyCard({
             flex items-center justify-center
             ${isSelected
               ? `${colors.border} ${colors.bg}`
-              : 'border-white/20'
+              : 'border-border'
             }
           `}
         >
@@ -154,13 +154,13 @@ export default function UrgencySelector({
         <div
           className={`
             w-8 h-8 rounded-lg flex items-center justify-center transition-colors
-            ${disabled ? 'bg-white/[0.04]' : 'bg-[#7C3AED]/10'}
+            ${disabled ? 'bg-secondary' : 'bg-foreground/10'}
           `}
         >
           <span
             className={`
               font-semibold text-sm transition-colors
-              ${disabled ? 'text-white/30' : 'text-[#7C3AED]'}
+              ${disabled ? 'text-muted-foreground' : 'text-foreground'}
             `}
           >
             3
@@ -170,12 +170,12 @@ export default function UrgencySelector({
           <h2
             className={`
               text-lg font-medium transition-colors
-              ${disabled ? 'text-white/40' : 'text-white/90'}
+              ${disabled ? 'text-muted-foreground' : 'text-foreground'}
             `}
           >
             Nivel de urgencia
           </h2>
-          <p className="text-[13px] text-white/40">Define la prioridad de entrega</p>
+          <p className="text-[13px] text-muted-foreground">Define la prioridad de entrega</p>
         </div>
       </div>
 

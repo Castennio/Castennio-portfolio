@@ -1,29 +1,27 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Problems from "./components/Problems";
-import Process from "./components/Process";
-import GlobalReach from "./components/GlobalReach";
-import RocketLaunch from "./components/RocketLaunch";
-import PreviewCTA from "./components/PreviewCTA";
-import Documentation from "./components/Documentation";
-import FAQ from "./components/FAQ";
-import Footer from "./components/Footer";
-import NeuralBackground from "./components/NeuralBackground";
+import { Header } from "@/components/landing/header";
+import { Hero } from "@/components/landing/hero";
+import { FeaturesTabs } from "@/components/landing/features-tabs";
+import { Benefits } from "@/components/landing/benefits";
+import { Process } from "@/components/landing/process";
+import { Projects } from "@/components/landing/projects";
+import { Testimonial } from "@/components/landing/testimonial";
+import { FAQ } from "@/components/landing/faq";
+import { CTA } from "@/components/landing/cta";
+import { Footer } from "@/components/landing/footer";
 
 export default function Home() {
   return (
     <>
-      <NeuralBackground />
-      <Navbar />
-      <main className="relative z-[1]">
+      <Header />
+      <main>
         <Hero />
-        <Problems />
+        <FeaturesTabs />
+        <Benefits />
         <Process />
-        <GlobalReach />
-        <RocketLaunch />
-        <PreviewCTA />
-        <Documentation />
+        <Projects />
+        <Testimonial />
         <FAQ />
+        <CTA />
       </main>
       <Footer />
     </>

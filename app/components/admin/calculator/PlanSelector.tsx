@@ -24,8 +24,8 @@ function PlanCard({
       className={`
         relative w-full text-left p-5 rounded-xl border transition-all duration-300
         ${isSelected
-          ? 'bg-[#7C3AED]/10 border-[#7C3AED]/50 shadow-[0_0_30px_-10px_rgba(124,58,237,0.3)]'
-          : 'bg-[#0f1015] border-white/[0.06] hover:border-white/[0.12] hover:bg-[#14151a]'
+          ? 'bg-foreground/10 border-foreground/50 '
+          : 'bg-card border-border hover:border-border hover:bg-card'
         }
       `}
     >
@@ -35,13 +35,13 @@ function PlanCard({
           absolute top-4 right-4 w-5 h-5 rounded-full border-2 transition-all duration-300
           flex items-center justify-center
           ${isSelected
-            ? 'border-[#7C3AED] bg-[#7C3AED]'
-            : 'border-white/20'
+            ? 'border-foreground bg-foreground'
+            : 'border-border'
           }
         `}
       >
         {isSelected && (
-          <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-3 h-3 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
           </svg>
         )}
@@ -53,8 +53,8 @@ function PlanCard({
           className={`
             inline-block px-2.5 py-1 text-[10px] font-medium tracking-wider uppercase rounded-full mb-3
             ${isSelected
-              ? 'bg-[#7C3AED]/20 text-[#A78BFA]'
-              : 'bg-white/[0.04] text-white/40'
+              ? 'bg-foreground/20 text-muted-foreground'
+              : 'bg-secondary text-muted-foreground'
             }
           `}
         >
@@ -66,7 +66,7 @@ function PlanCard({
       <h3
         className={`
           text-lg font-medium mb-1 pr-8 transition-colors
-          ${isSelected ? 'text-white' : 'text-white/80'}
+          ${isSelected ? 'text-primary-foreground' : 'text-foreground'}
         `}
       >
         {plan.name}
@@ -76,14 +76,14 @@ function PlanCard({
       <p
         className={`
           text-2xl font-semibold mb-3 transition-colors
-          ${isSelected ? 'text-[#A78BFA]' : 'text-white/60'}
+          ${isSelected ? 'text-muted-foreground' : 'text-muted-foreground'}
         `}
       >
         {formatPriceWithPrefix(plan)}
       </p>
 
       {/* Description */}
-      <p className="text-[13px] text-white/40 leading-relaxed line-clamp-2">
+      <p className="text-[13px] text-muted-foreground leading-relaxed line-clamp-2">
         {plan.description}
       </p>
     </button>
@@ -94,12 +94,12 @@ export default function PlanSelector({ selected, onSelect }: PlanSelectorProps) 
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-8 h-8 rounded-lg bg-[#7C3AED]/10 flex items-center justify-center">
-          <span className="text-[#7C3AED] font-semibold text-sm">1</span>
+        <div className="w-8 h-8 rounded-lg bg-foreground/10 flex items-center justify-center">
+          <span className="text-foreground font-semibold text-sm">1</span>
         </div>
         <div>
-          <h2 className="text-lg font-medium text-white/90">Selecciona el plan</h2>
-          <p className="text-[13px] text-white/40">Elige el tipo de proyecto web</p>
+          <h2 className="text-lg font-medium text-foreground">Selecciona el plan</h2>
+          <p className="text-[13px] text-muted-foreground">Elige el tipo de proyecto web</p>
         </div>
       </div>
 

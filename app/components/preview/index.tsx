@@ -63,7 +63,7 @@ export default function PreviewConfigurator() {
   const isConfigComplete = Boolean(config.industry && config.style && config.palette);
 
   return (
-    <div className="min-h-screen bg-[#f8f9fc]">
+    <div className="min-h-screen bg-secondary">
       {/* Header */}
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
@@ -93,7 +93,7 @@ export default function PreviewConfigurator() {
 
         {/* Mobile: Preview first (sticky on top) */}
         <div className="lg:hidden mb-6">
-          <div className="sticky top-0 z-10 bg-[#f8f9fc] pb-4">
+          <div className="sticky top-0 z-10 bg-secondary pb-4">
             <div className="relative aspect-[16/10] group">
               <PreviewRenderer config={config} />
               {isConfigComplete && (
