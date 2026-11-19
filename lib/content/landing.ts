@@ -138,6 +138,15 @@ export const projects: Project[] = [
     imageAlt: "KingBrake — Sitio web y catálogo de sistemas de frenado",
   },
   {
+    client: "Ciruplástica - Dr. Manuel Sinchi",
+    url: "https://drmanuelsinchi.com",
+    type: "Sitio web + CMS administrable",
+    description:
+      "Plataforma para cirujano plástico en Miraflores con catálogo de procedimientos, casos reales, agendamiento de citas y panel de administración de contenido.",
+    image: "/images/projects/drmanuelsinchi.png",
+    imageAlt: "Ciruplástica - Sitio web del Dr. Manuel Sinchi",
+  },
+  {
     client: "VerifiCARLO",
     url: "https://verificarlo.com",
     type: "Plataforma web + blog administrable",
