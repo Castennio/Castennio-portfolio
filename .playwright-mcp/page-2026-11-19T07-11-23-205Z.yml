@@ -1,0 +1,178 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Castennio" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - navigation [ref=e5]:
+        - link "Funcionalidades" [ref=e6] [cursor=pointer]:
+          - /url: "#funcionalidades"
+        - link "Beneficios" [ref=e7] [cursor=pointer]:
+          - /url: "#beneficios"
+        - link "Proceso" [ref=e8] [cursor=pointer]:
+          - /url: "#proceso"
+        - link "Proyectos" [ref=e9] [cursor=pointer]:
+          - /url: "#proyectos"
+        - link "FAQ" [ref=e10] [cursor=pointer]:
+          - /url: "#faq"
+      - link "Solicitar cotización" [ref=e12] [cursor=pointer]:
+        - /url: https://wa.me/51998162677
+  - main [ref=e13]:
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - heading "Tu negocio merece más que un Excel y un grupo de WhatsApp" [level=1] [ref=e16]
+        - paragraph [ref=e17]: Desarrollamos plataformas web donde gestionas tus productos, categorías e imágenes, y compartes un catálogo profesional con tus clientes.
+        - generic [ref=e18]:
+          - link "Hablemos por WhatsApp" [ref=e19] [cursor=pointer]:
+            - /url: https://wa.me/51998162677
+          - link "Ver cómo funciona" [ref=e20] [cursor=pointer]:
+            - /url: "#funcionalidades"
+      - img "Panel administrable de KingBrake — gestión de productos" [ref=e23]
+    - generic [ref=e25]:
+      - paragraph [ref=e26]: Ganadores en los 3 desafíos del programa IMPULSA
+      - generic [ref=e27]:
+        - img "Apparka" [ref=e29]
+        - img "OXXO" [ref=e31]
+        - img "NTT DATA" [ref=e33]
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - img "Panel de gestión de productos — KingBrake" [ref=e38]
+        - generic:
+          - img "Gestión de blog y categorías — VerifiCARLO"
+        - generic:
+          - img "Catálogo digital público — KingBrake"
+      - generic [ref=e39]:
+        - button [ref=e40]:
+          - heading "Gestiona tus productos" [level=3] [ref=e42]
+          - paragraph [ref=e43]: Agrega, edita y organiza tus productos con fotos, descripciones y precios desde un panel sencillo. Sin necesidad de saber programar.
+        - button [ref=e44]:
+          - heading "Organiza categorías y contenido" [level=3] [ref=e45]
+          - paragraph [ref=e46]: Crea categorías, gestiona artículos de blog y mantén tu información ordenada. Todo desde un solo lugar, actualizado al instante.
+        - button [ref=e47]:
+          - heading "Comparte tu catálogo" [level=3] [ref=e48]
+          - paragraph [ref=e49]: Genera un catálogo digital profesional que puedes compartir por WhatsApp o redes sociales. Tus clientes ven siempre la información actualizada.
+    - generic [ref=e51]:
+      - generic [ref=e52]:
+        - heading "Por qué tu negocio lo necesita" [level=2] [ref=e53]
+        - paragraph [ref=e54]: Herramientas simples que resuelven problemas reales del día a día.
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - heading "Actualizas sin depender de nadie" [level=3] [ref=e57]
+          - paragraph [ref=e58]: Cambia precios, agrega productos o actualiza fotos cuando quieras. No necesitas llamar a un desarrollador cada vez.
+        - generic [ref=e59]:
+          - heading "Todo en un solo lugar" [level=3] [ref=e60]
+          - paragraph [ref=e61]: Olvídate de archivos sueltos, fotos en el celular y listas en Excel. Tu información vive en un solo sitio, siempre accesible.
+        - generic [ref=e62]:
+          - heading "Catálogo profesional para tus clientes" [level=3] [ref=e63]
+          - paragraph [ref=e64]: Comparte un enlace limpio y profesional en vez de fotos sueltas por WhatsApp. Tu negocio se ve como merece.
+        - generic [ref=e65]:
+          - heading "Funciona en cualquier dispositivo" [level=3] [ref=e66]
+          - paragraph [ref=e67]: Tu plataforma y catálogo se ven bien en celular, tablet y computadora. Tus clientes acceden desde donde sea.
+    - generic [ref=e69]:
+      - generic [ref=e70]:
+        - heading "Cómo trabajamos" [level=2] [ref=e71]
+        - paragraph [ref=e72]: Un proceso claro, sin sorpresas, pensado para que entiendas cada paso.
+      - generic [ref=e73]:
+        - generic [ref=e74]:
+          - generic [ref=e75]: "01"
+          - generic [ref=e76]:
+            - heading "Conversamos sobre tu negocio" [level=3] [ref=e77]
+            - paragraph [ref=e78]: Entendemos qué vendes, cómo trabajas hoy y qué necesitas gestionar. Sin lenguaje técnico, en una llamada o reunión corta.
+        - generic [ref=e79]:
+          - generic [ref=e80]: "02"
+          - generic [ref=e81]:
+            - heading "Diseñamos tu plataforma" [level=3] [ref=e82]
+            - paragraph [ref=e83]: Creamos la estructura y el diseño adaptados a tu tipo de negocio. Te mostramos cómo se verá antes de construirla.
+        - generic [ref=e84]:
+          - generic [ref=e85]: "03"
+          - generic [ref=e86]:
+            - heading "Desarrollamos y entregamos" [level=3] [ref=e87]
+            - paragraph [ref=e88]: Construimos tu plataforma, la probamos contigo y te enseñamos a usarla. Queda lista para que la administres tú mismo.
+        - generic [ref=e89]:
+          - generic [ref=e90]: "04"
+          - generic [ref=e91]:
+            - heading "Te acompañamos después" [level=3] [ref=e92]
+            - paragraph [ref=e93]: No te dejamos solo. Si tienes dudas o necesitas ajustes, estamos disponibles. Tu plataforma crece contigo.
+    - generic [ref=e95]:
+      - generic [ref=e96]:
+        - heading "Proyectos" [level=2] [ref=e97]
+        - paragraph [ref=e98]: Plataformas que hemos construido para negocios reales.
+      - generic [ref=e99]:
+        - link "KingBrake — Sitio web y catálogo de sistemas de frenado Catálogo digital + panel administrable KingBrake Plataforma completa para gestionar su catálogo de pastillas de freno, categorías, distribuidores y contenido multimedia. Incluye panel de administración y catálogo público." [ref=e100] [cursor=pointer]:
+          - /url: https://kingbrake.com
+          - img "KingBrake — Sitio web y catálogo de sistemas de frenado" [ref=e102]
+          - generic [ref=e103]:
+            - generic [ref=e104]: Catálogo digital + panel administrable
+            - heading "KingBrake" [level=3] [ref=e105]
+            - paragraph [ref=e106]: Plataforma completa para gestionar su catálogo de pastillas de freno, categorías, distribuidores y contenido multimedia. Incluye panel de administración y catálogo público.
+        - link "VerifiCARLO — Plataforma de verificación vehicular Plataforma web + blog administrable VerifiCARLO Plataforma de verificación vehicular con consulta de placas, blog con artículos por categoría, newsletter y panel de administración completo." [ref=e107] [cursor=pointer]:
+          - /url: https://verificarlo.com
+          - img "VerifiCARLO — Plataforma de verificación vehicular" [ref=e109]
+          - generic [ref=e110]:
+            - generic [ref=e111]: Plataforma web + blog administrable
+            - heading "VerifiCARLO" [level=3] [ref=e112]
+            - paragraph [ref=e113]: Plataforma de verificación vehicular con consulta de placas, blog con artículos por categoría, newsletter y panel de administración completo.
+        - link "ICI Lima — Sitio web institucional de comunidad de iglesias Sitio web institucional Iglesia Cristiana Internacional Lima Sitio web para comunidad de iglesias en Lima con gestión de sedes, eventos, ministerios, estudios bíblicos y sistema de reservas con login." [ref=e114] [cursor=pointer]:
+          - /url: https://limaicc.org
+          - img "ICI Lima — Sitio web institucional de comunidad de iglesias" [ref=e116]
+          - generic [ref=e117]:
+            - generic [ref=e118]: Sitio web institucional
+            - heading "Iglesia Cristiana Internacional Lima" [level=3] [ref=e119]
+            - paragraph [ref=e120]: Sitio web para comunidad de iglesias en Lima con gestión de sedes, eventos, ministerios, estudios bíblicos y sistema de reservas con login.
+    - generic [ref=e122]:
+      - generic [ref=e123]:
+        - heading "Preguntas frecuentes" [level=2] [ref=e124]
+        - paragraph [ref=e125]: Lo que nuestros clientes suelen preguntarnos antes de empezar.
+      - generic [ref=e126]:
+        - heading [level=3] [ref=e128]:
+          - button "¿Cuánto tiempo toma tener mi plataforma lista?" [ref=e129]
+        - heading [level=3] [ref=e131]:
+          - button "¿Puedo actualizar los productos yo mismo?" [ref=e132]
+        - heading [level=3] [ref=e134]:
+          - button "¿Qué pasa si necesito cambios después de la entrega?" [ref=e135]
+        - heading [level=3] [ref=e137]:
+          - button "¿Mis clientes necesitan instalar algo para ver el catálogo?" [ref=e138]
+        - heading [level=3] [ref=e140]:
+          - button "¿Incluye hosting y dominio?" [ref=e141]
+        - heading [level=3] [ref=e143]:
+          - button "¿Puedo ver un ejemplo antes de decidirme?" [ref=e144]
+    - generic [ref=e146]:
+      - heading "¿Listo para profesionalizar tu negocio?" [level=2] [ref=e147]
+      - paragraph [ref=e148]: Cuéntanos qué necesitas y te proponemos una solución a tu medida. Sin compromiso, sin lenguaje técnico.
+      - generic [ref=e149]:
+        - link "Hablemos por WhatsApp" [ref=e150] [cursor=pointer]:
+          - /url: https://wa.me/51998162677
+        - link "Escríbenos un correo" [ref=e151] [cursor=pointer]:
+          - /url: mailto:f4r3ver@gmail.com
+      - paragraph [ref=e152]: Sin compromiso · Respuesta en 24 h · Presupuesto sin costo
+  - contentinfo [ref=e153]:
+    - generic [ref=e154]:
+      - generic [ref=e155]:
+        - generic [ref=e156]:
+          - generic [ref=e157]: Castennio
+          - paragraph [ref=e158]: Desarrollo de plataformas web administrables para pequeñas y medianas empresas en Perú.
+        - generic [ref=e159]:
+          - generic [ref=e160]:
+            - generic [ref=e161]: Servicios
+            - list [ref=e162]:
+              - listitem [ref=e163]:
+                - link "Catálogos digitales" [ref=e164] [cursor=pointer]:
+                  - /url: "#funcionalidades"
+              - listitem [ref=e165]:
+                - link "Plataformas administrables" [ref=e166] [cursor=pointer]:
+                  - /url: "#funcionalidades"
+              - listitem [ref=e167]:
+                - link "Sitios web a medida" [ref=e168] [cursor=pointer]:
+                  - /url: "#funcionalidades"
+          - generic [ref=e169]:
+            - generic [ref=e170]: Empresa
+            - list [ref=e171]:
+              - listitem [ref=e172]:
+                - link "Proceso de trabajo" [ref=e173] [cursor=pointer]:
+                  - /url: "#proceso"
+              - listitem [ref=e174]:
+                - link "Proyectos" [ref=e175] [cursor=pointer]:
+                  - /url: "#proyectos"
+              - listitem [ref=e176]:
+                - link "Preguntas frecuentes" [ref=e177] [cursor=pointer]:
+                  - /url: "#faq"
+      - generic [ref=e178]: © 2026 Castennio. Todos los derechos reservados.
